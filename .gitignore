@@ -26,6 +26,9 @@
 # Visual Studio cache directory
 .vs/
 
+#VsCode config
+/Assets/Script/.vscode
+
 # Gradle cache directory
 .gradle/
 
