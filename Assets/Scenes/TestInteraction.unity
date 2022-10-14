@@ -904,7 +904,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba25f9363017e654695a7184e3c3e946, type: 3}
   m_Name: 
@@ -1669,11 +1669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfbd94dd4d002249b01d2c03f67bd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _topObj: {fileID: 40076341}
-  _botObj: {fileID: 40076341}
-  _leftObj: {fileID: 1224814493}
-  _rightObj: {fileID: 786858466}
-  _camera: {fileID: 0}
+  _grid: {fileID: 0}
 --- !u!114 &811676012
 MonoBehaviour:
   m_ObjectHideFlags: 0
