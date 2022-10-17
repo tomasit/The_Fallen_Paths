@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 118797630}
   - component: {fileID: 118797631}
   - component: {fileID: 118797632}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Player Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 242388376}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
