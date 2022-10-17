@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _goingLeft = false;
 
+    private float _magnitudeForFloorCollision = 0.7f;
     private bool _canJump;
 
     private Animator _animator;
@@ -31,8 +32,8 @@ public class PlayerController : MonoBehaviour
     bool canJump() {
         const int playerMask = (1 << 3);
         int everythingExpectPlayerMask = ~playerMask;
-        _canJump = Physics2D.Raycast(transform.position, Vector2.down, 0.7f, everythingExpectPlayerMask);
-        Debug.DrawRay(transform.position, Vector2.down * 0.7f, Color.red);
+        _canJump = Physics2D.Raycast(transform.position, Vector2.down, _magnitudeForFloorCollision, everythingExpectPlayerMask);
+        Debug.DrawRay(transform.position, Vector2.down * _magnitudeForFloorCollision, Color.red);
         return _canJump;
     }
 
