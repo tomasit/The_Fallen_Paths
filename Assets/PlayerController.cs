@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         _goingLeft = !_goingLeft;
     }
 
-    void Animate(bool idle) {
+    void AnimateMovement(bool idle) {
         if (_rigidBody.velocity.y > 0  && !_canJump) {
             _animator.Play("Jump");
         } else if (_rigidBody.velocity.y < 0 && !_canJump) {
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Animate(input == 0);
+        AnimateMovement(input == 0);
 
         _rigidBody.velocity = new Vector2(playerSpeed * Time.deltaTime, _rigidBody.velocity.y);
     }
