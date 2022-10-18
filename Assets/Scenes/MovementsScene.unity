@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 210105441}
   - component: {fileID: 210105445}
   - component: {fileID: 210105446}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ MonoBehaviour:
   maxPlayerSpeed: 175
   playerSpeed: 0
   acceleration: 140
-  jumpPower: 3.5
+  jumpPower: 5
 --- !u!95 &210105446
 Animator:
   serializedVersion: 4

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool _goingLeft = false;
 
     private float _magnitudeForFloorCollision = 0.7f;
-    private bool _canJump;
+    private bool _isGrounded;
 
     private Animator _animator;
 
@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        if (_rigidBody == null)
-            Debug.LogError("please add a Rigidbody2D component");
         deceleration = acceleration * 5;
         _animator = GetComponent<Animator>();
     }
@@ -32,9 +30,9 @@ public class PlayerController : MonoBehaviour
     bool canJump() {
         const int playerMask = (1 << 7);
         int everythingExpectPlayerMask = ~playerMask;
-        _canJump = Physics2D.Raycast(transform.position, Vector2.down, _magnitudeForFloorCollision, everythingExpectPlayerMask);
-        Debug.DrawRay(transform.position, Vector2.down * _magnitudeForFloorCollision, Color.red);
-        return _canJump;
+        _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, _magnitudeForFloorCollision, everythingExpectPlayerMask);
+        Debug.DrawRay(transform.position, Vector2.down * _magnitudeForFloorCollision, _isGrounded ? Color.red : Color.green);
+        return _isGrounded;
     }
 
     void FlipPlayerHorizontally() {
@@ -45,19 +43,13 @@ public class PlayerController : MonoBehaviour
     }
 
     void AnimateMovement(bool idle) {
-        if (_rigidBody.velocity.y > 0  && !_canJump) {
-            _animator.Play("Jump");
-        } else if (_rigidBody.velocity.y < 0 && !_canJump) {
-            _animator.Play("Fall");
-        } else if (idle) {
-            _animator.Play("Idle");
-        } else
-            _animator.Play("Walking");
+        _animator.SetFloat("Y Velocity", _rigidBody.velocity.y);
+        _animator.SetBool("Jumping", !_isGrounded);
+        _animator.SetBool("Walking", _isGrounded && !idle);
     }
 
-    void Move()
+    void Move(float input)
     {
-        float input = Input.GetAxisRaw("Horizontal");
         bool oppositeDirection = _goingLeft && input < 0 || !_goingLeft && input > 0;
         bool oppositeVelocity = _goingLeft && _rigidBody.velocity.x < 0 || !_goingLeft && _rigidBody.velocity.x > 0;
 
@@ -77,9 +69,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        AnimateMovement(input == 0);
-
-        _rigidBody.velocity = new Vector2(playerSpeed * Time.deltaTime, _rigidBody.velocity.y);
     }
     private void Jump() {
         _rigidBody.velocity = new Vector2(0, jumpPower);
@@ -87,9 +76,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
-
         if (canJump() && Input.GetButtonDown("Jump"))
             Jump();
+
+        float input = Input.GetAxisRaw("Horizontal");
+
+        if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "PlayerHit")
+            Move(input);
+        AnimateMovement(input == 0);
+
+
+        if (Input.GetButtonDown("Fire1")) {
+            playerSpeed = 0;
+            _animator.SetTrigger("Hit");
+        }
+        _rigidBody.velocity = new Vector2(playerSpeed * Time.deltaTime, _rigidBody.velocity.y);
     }
 }
