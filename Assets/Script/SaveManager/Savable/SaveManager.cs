@@ -7,6 +7,7 @@ using ObjectData = System.Collections.Generic.Dictionary<string, System.Collecti
 public class SaveManager : MonoBehaviour
 {
     private static SaveManager _dataInstance = null;
+
     public static SaveManager DataInstance {
         get {
             if (_dataInstance == null) {
