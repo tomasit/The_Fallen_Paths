@@ -137,6 +137,8 @@ GameObject:
   - component: {fileID: 210105441}
   - component: {fileID: 210105445}
   - component: {fileID: 210105446}
+  - component: {fileID: 210105447}
+  - component: {fileID: 210105448}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -270,9 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0d5b4c2a4f1cd08a369a6f7b88ffcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerSpeed: 175
+  maxPlayerSpeed: 4.5
   playerSpeed: 0
-  acceleration: 140
+  acceleration: 6
   jumpPower: 5
 --- !u!95 &210105446
 Animator:
@@ -294,6 +296,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &210105447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210105440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df070cf56d3d304e7aff868775bd4ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 2
+  maxHealth: 2
+--- !u!114 &210105448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210105440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9a25d059abab1488e0759235ee76e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &651083605
 GameObject:
   m_ObjectHideFlags: 0
