@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D _collider;
 
-    private int _everythingExpectPlayerLayerMask = 0; 
+    private int _everythingExpectPlayerLayerMask = 0;
+
+    private const float _groundedRayMagnitude = 0.075f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,28 +36,32 @@ public class PlayerController : MonoBehaviour
         _everythingExpectPlayerLayerMask = ~(1 << 7);
     }
 
-    bool canJump() {
-        var rayPosition = transform.position;
-        
-        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;
-        rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - 0.075f;
+    bool isGrounded()
+    {
+        Vector2 rayPosition = transform.position;
 
-        _isGrounded = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _everythingExpectPlayerLayerMask);
-        
+        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;
+        rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _groundedRayMagnitude;
+
+        RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _everythingExpectPlayerLayerMask);
+        _isGrounded = hit;
+
         Debug.DrawRay(rayPosition, Vector2.right * _collider.size.x * transform.localScale.x, _isGrounded ? Color.red : Color.green);
         // Adapt position
-        
+        PositionHotfix(rayPosition, hit);
         return _isGrounded;
     }
 
-    void FlipPlayerHorizontally() {
+    void FlipPlayerHorizontally()
+    {
         var tempScale = transform.localScale;
         tempScale.x *= -1;
         transform.localScale = tempScale;
         _goingLeft = !_goingLeft;
     }
 
-    void AnimateMovement(bool idle) {
+    void AnimateMovement(bool idle)
+    {
         _animator.SetFloat("Y Velocity", _rigidBody.velocity.y);
         _animator.SetBool("Jumping", !_isGrounded);
         _animator.SetBool("Walking", _isGrounded && !idle);
@@ -66,47 +72,61 @@ public class PlayerController : MonoBehaviour
         bool oppositeDirection = _goingLeft && input < 0 || !_goingLeft && input > 0;
         bool oppositeVelocity = _goingLeft && _rigidBody.velocity.x < 0 || !_goingLeft && _rigidBody.velocity.x > 0;
 
-        if (oppositeDirection) {
+        if (oppositeDirection)
+        {
             FlipPlayerHorizontally();
         }
 
-        if ((input > 0 && playerSpeed < maxPlayerSpeed) || (input < 0 && playerSpeed > -maxPlayerSpeed)) {
+        if ((input > 0 && playerSpeed < maxPlayerSpeed) || (input < 0 && playerSpeed > -maxPlayerSpeed))
+        {
             if (oppositeDirection)
                 playerSpeed = -playerSpeed * 0.8f;
-            else 
+            else
                 playerSpeed += acceleration * input * Time.deltaTime;
-        } else {
-            if(playerSpeed > deceleration * Time.deltaTime)
+        }
+        else
+        {
+            if (playerSpeed > deceleration * Time.deltaTime)
                 playerSpeed = playerSpeed - deceleration * Time.deltaTime;
-            else if(playerSpeed < -deceleration * Time.deltaTime)
+            else if (playerSpeed < -deceleration * Time.deltaTime)
                 playerSpeed = playerSpeed + deceleration * Time.deltaTime;
-            else {
+            else
                 playerSpeed = 0;
-            }
         }
 
     }
 
-    private void PositionHotfix()
+    private void PositionHotfix(Vector2 rayPosition, RaycastHit2D hit)
     {
         if (_isGrounded == false)
             return;
-        var hit = Physics2D.Raycast(transform.position, Vector2.down, (_collider.size.y * transform.localScale.y) / 2 + 1f, _everythingExpectPlayerLayerMask);
+        var halfColliderHeight = (_collider.size.y * transform.localScale.y) / 2;
+
+        // TODO: Do only one time per frame the calculation of colliders (size.x * localScale.x) / 2
+        var safeRayPosition = transform.position;
+        safeRayPosition.x = Mathf.Clamp(hit.point.x, transform.position.x - (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f, transform.position.x + (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f);
+        var verticalHit = Physics2D.Raycast(safeRayPosition, Vector2.down, halfColliderHeight + _groundedRayMagnitude, _everythingExpectPlayerLayerMask);
+
+        if (!verticalHit)
+            return;
         var fixedPosition = transform.position;
-        fixedPosition.y -= (transform.position.y - (_collider.size.y * transform.localScale.y) / 2) - hit.point.y;
+        fixedPosition.y -= (transform.position.y - (halfColliderHeight) - verticalHit.point.y);
         transform.position = fixedPosition;
+        Debug.DrawRay(safeRayPosition, Vector2.down * (halfColliderHeight + _groundedRayMagnitude), _isGrounded ? Color.red : Color.green);
     }
 
-    private void Jump() {
+    private void Jump()
+    {
         _rigidBody.velocity = new Vector2(0, jumpPower);
     }
     // Update is called once per frame
     void Update()
     {
-        if (_animator.GetBool("Dead")) {
+        if (_animator.GetBool("Dead"))
             playerSpeed = 0;
-        } else {
-            if (canJump() && Input.GetButtonDown("Jump"))
+        else
+        {
+            if (isGrounded() && Input.GetButtonDown("Jump"))
                 Jump();
 
             float input = Input.GetAxisRaw("Horizontal");
@@ -116,15 +136,16 @@ public class PlayerController : MonoBehaviour
             AnimateMovement(input == 0);
 
             // NOTE: For test purposes
-            if (Input.GetButtonDown("Fire1")) {
+            if (Input.GetButtonDown("Debug Fire"))
+            {
                 GetComponent<BasicHealthWrapper>().Hit(1);
                 playerSpeed = 0;
             }
         }
-        PositionHotfix();
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         _rigidBody.velocity = new Vector2(playerSpeed, _rigidBody.velocity.y);
     }
 }
