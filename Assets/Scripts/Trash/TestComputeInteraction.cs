@@ -27,7 +27,7 @@ public class TestComputeInteraction : MonoBehaviour
     {
         if (_interactor != null)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 _interactor.Trigger();
             }

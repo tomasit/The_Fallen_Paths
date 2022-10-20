@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public int health = 2;
+    [SerializeField] public int health;
     [SerializeField] public int maxHealth = 2;
+
+    private void Start()
+    {
+        if (health == 0)
+            health = maxHealth;
+    }
 
     public void Hit(uint damage, System.Action actionWhenHit = null, System.Action actionIfDead = null)
     {
@@ -22,8 +28,8 @@ public class Health : MonoBehaviour
         health = Mathf.Min(health + (int)healValue, maxHealth);
     }
 
-    public bool isDead() 
+    public bool isDead()
     {
-        return health <= 0;       
+        return health <= 0;
     }
 }
