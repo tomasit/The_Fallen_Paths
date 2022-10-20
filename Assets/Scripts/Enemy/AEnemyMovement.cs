@@ -4,11 +4,17 @@ using UnityEngine;
 
 public abstract class AEnemyMovement : MonoBehaviour
 {
-    public int direction = 1; // right : 1, left : -1
+    // NOTE : right : 1, left : -1
+    public int direction = 1;
     public float speed = 1f;
-    public float distanceToAttack = 2f;
-    public bool isAtdistanceToAttack = false;
-    [HideInInspector]public EnenmyDectionManager detectionManager;
+    [HideInInspector]public AEnemyInteraction interactionManager;
+    [HideInInspector]public EnemyDetectionManager detectionManager;
+
+    public abstract void BasicMovement();
+
+    public abstract void AlertMovement();
+
+    public abstract void SpotMovement();
 
     public void Move()
     {
@@ -29,14 +35,41 @@ public abstract class AEnemyMovement : MonoBehaviour
         gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
-    public Vector3 FindTargetDirection(Transform target)
+    public float NoNegative(float value)
     {
-        return target.position - transform.position;
+        if (value < 0) {
+            return 0;
+        }
+        return value;
     }
 
-    public abstract void BasicMovement();
+    public Vector3 FindTargetDirection(Vector3 targetPosition)
+    {
+        return targetPosition - transform.position;
+    }
 
-    public abstract void AlertMovement();
+    //it's not the nearest, just the first he find
+    public Vector3 FindNearestEntityDirection(System.Type type)
+    {
+        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
+        
+        foreach(GameObject obj in allObjects) {
+            Vector3 positionObj = obj.transform.position;
+            return FindTargetDirection(positionObj);
+        }
+        Debug.Log("No Entity near");
+        return Vector3.zero;
+    }
 
-    public abstract void SpotMovement();
+    public (Vector3, GameObject) FindNearestEnemy(System.Type type)
+    {
+        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
+        
+        foreach(GameObject obj in allObjects) {
+            Vector3 positionObj = obj.transform.position;
+            return (FindTargetDirection(positionObj), obj);
+        }
+        Debug.Log("No enemy near");
+        return (Vector3.zero, null);
+    }
 }

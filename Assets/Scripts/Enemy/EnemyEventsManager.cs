@@ -11,13 +11,20 @@ public class EnemyEventsManager : MonoBehaviour
 
     void Start()
     {
-        
+        foreach(var enemy in Enemies) {
+            enemy.interactionManager.damage = Damage[enemy.type];
+            enemy.interactionManager.coolDown = CoolDown[enemy.type];
+        }
     }
 
     void Update()
     {
         foreach(var enemy in Enemies) {
-            RoomMovement(enemy);
+            //si il est desactivé
+            //if (enemy.activeSelf == false)
+            //    continue;
+            if (enemy.dectionManager.detectionState == DetectionState.None)
+                RoomMovement(enemy);
             DetectionEventState(enemy);
         }
     }

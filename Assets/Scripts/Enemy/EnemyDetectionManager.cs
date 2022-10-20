@@ -13,7 +13,7 @@ using UnityEngine;
 //si le player est en tenue de garde ne rien faire, sinon le detecter
 
 
-public class EnenmyDectionManager : MonoBehaviour
+public class EnemyDetectionManager : MonoBehaviour
 {
     [Header("Debug")]
     public bool debug = false;
