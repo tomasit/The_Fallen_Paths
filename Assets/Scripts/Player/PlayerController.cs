@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(rayPosition, Vector2.right * _collider.size.x * transform.localScale.x, _isGrounded ? Color.red : Color.green);
         // Adapt position
-        PositionHotfix(rayPosition, hit);
+    //    PositionHotfix(rayPosition, hit);
         return _isGrounded;
     }
 

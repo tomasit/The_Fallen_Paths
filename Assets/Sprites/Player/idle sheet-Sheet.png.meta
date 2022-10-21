@@ -120,12 +120,12 @@ TextureImporter:
       name: idle sheet-Sheet_0
       rect:
         serializedVersion: 2
-        x: 43
+        x: 12
         y: 21
-        width: 18
-        height: 31
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,12 +141,12 @@ TextureImporter:
       name: idle sheet-Sheet_1
       rect:
         serializedVersion: 2
-        x: 122
+        x: 92
         y: 21
-        width: 21
-        height: 29
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: idle sheet-Sheet_2
       rect:
         serializedVersion: 2
-        x: 202
+        x: 172
         y: 21
-        width: 21
-        height: 28
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,12 +183,12 @@ TextureImporter:
       name: idle sheet-Sheet_3
       rect:
         serializedVersion: 2
-        x: 282
+        x: 252
         y: 21
-        width: 21
-        height: 28
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,12 +204,12 @@ TextureImporter:
       name: idle sheet-Sheet_4
       rect:
         serializedVersion: 2
-        x: 364
+        x: 332
         y: 21
-        width: 18
-        height: 30
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -225,12 +225,12 @@ TextureImporter:
       name: idle sheet-Sheet_5
       rect:
         serializedVersion: 2
-        x: 444
+        x: 412
         y: 21
-        width: 17
-        height: 31
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,12 +246,12 @@ TextureImporter:
       name: idle sheet-Sheet_6
       rect:
         serializedVersion: 2
-        x: 524
+        x: 492
         y: 21
-        width: 17
-        height: 32
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -267,12 +267,12 @@ TextureImporter:
       name: idle sheet-Sheet_7
       rect:
         serializedVersion: 2
-        x: 603
+        x: 572
         y: 21
-        width: 17
-        height: 32
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,12 +288,12 @@ TextureImporter:
       name: idle sheet-Sheet_8
       rect:
         serializedVersion: 2
-        x: 682
+        x: 652
         y: 21
-        width: 19
-        height: 31
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -309,12 +309,12 @@ TextureImporter:
       name: idle sheet-Sheet_9
       rect:
         serializedVersion: 2
-        x: 761
+        x: 732
         y: 21
-        width: 20
-        height: 31
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -330,12 +330,12 @@ TextureImporter:
       name: idle sheet-Sheet_10
       rect:
         serializedVersion: 2
-        x: 839
+        x: 812
         y: 21
-        width: 23
-        height: 29
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -351,12 +351,12 @@ TextureImporter:
       name: idle sheet-Sheet_11
       rect:
         serializedVersion: 2
-        x: 919
+        x: 892
         y: 21
-        width: 23
-        height: 28
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -372,12 +372,12 @@ TextureImporter:
       name: idle sheet-Sheet_12
       rect:
         serializedVersion: 2
-        x: 999
+        x: 972
         y: 21
-        width: 22
-        height: 29
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -393,12 +393,12 @@ TextureImporter:
       name: idle sheet-Sheet_13
       rect:
         serializedVersion: 2
-        x: 1081
+        x: 1052
         y: 21
-        width: 19
-        height: 30
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -414,12 +414,12 @@ TextureImporter:
       name: idle sheet-Sheet_14
       rect:
         serializedVersion: 2
-        x: 1161
+        x: 1132
         y: 21
-        width: 19
-        height: 31
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -435,12 +435,12 @@ TextureImporter:
       name: idle sheet-Sheet_15
       rect:
         serializedVersion: 2
-        x: 1243
+        x: 1212
         y: 21
-        width: 16
-        height: 32
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -456,12 +456,12 @@ TextureImporter:
       name: idle sheet-Sheet_16
       rect:
         serializedVersion: 2
-        x: 1324
+        x: 1292
         y: 21
-        width: 16
-        height: 32
+        width: 80
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -477,12 +477,12 @@ TextureImporter:
       name: idle sheet-Sheet_17
       rect:
         serializedVersion: 2
-        x: 1404
+        x: 1386
         y: 21
-        width: 16
-        height: 31
+        width: 50
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
