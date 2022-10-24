@@ -4,11 +4,12 @@ using UnityEngine;
 
 public abstract class AEnemyMovement : MonoBehaviour
 {
-    // NOTE : right : 1, left : -1
-    public int direction = 1;
+    public Transform target;
     public float speed = 1f;
-    [HideInInspector]public AEnemyInteraction interactionManager;
-    [HideInInspector]public EnemyDetectionManager detectionManager;
+    [HideInInspector] public Agent agentMovement;
+    //[HideInInspector] public GameObject enemy;
+    [HideInInspector] public AEnemyInteraction interactionManager;
+    [HideInInspector] public EnemyDetectionManager detectionManager;
 
     public abstract void BasicMovement();
 
@@ -18,21 +19,13 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public void Move()
     {
-        Vector3 movement = new Vector3(speed * direction, 0, 0);
-
-        movement *= Time.deltaTime;
-        //Debug.Log("Movement : " + movement);
-
-        if (movement == Vector3.zero) {
-            return;
-        }
-
-        transform.Translate(movement);
+        agentMovement.SetTarget(target/*, enemy.transform*/);
+        agentMovement.SetSpeed(speed);
     }
 
     public void AllowedMovement() 
     {
-        gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+        //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
     public float NoNegative(float value)
@@ -60,7 +53,8 @@ public abstract class AEnemyMovement : MonoBehaviour
         Debug.Log("No Entity near");
         return Vector3.zero;
     }
-
+    
+    //it's not the nearest, just the first he find
     public (Vector3, GameObject) FindNearestEnemy(System.Type type)
     {
         GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);

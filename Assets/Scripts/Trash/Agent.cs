@@ -5,22 +5,43 @@ using UnityEngine.AI;
 
 public class Agent : MonoBehaviour
 {
-    [SerializeField] Transform target;
-
-    private UnityEngine.AI.NavMeshAgent agent;
+    [SerializeField] Transform _target;
+    [SerializeField] Vector3 _targetPosition;
+    [HideInInspector] private NavMeshAgent agent;
+    [HideInInspector] private GameObject AgentSprite;
 
     void Start()
     {
-        target = GameObject.FindWithTag("Player").transform;
+        _targetPosition = gameObject.transform.position;
 
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
 
     void Update()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(_targetPosition);
+    }
+
+    public void SetSpeed(float speed)
+    {
+        agent.speed = speed;
+    }
+
+    public void SetTarget(Transform target/*, Transform destination*/)
+    {
+        /*
+        //float height = destination.gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
+        //Debug.Log("height = " + height);
+
+        Vector3 adjustedTarget = new Vector3(target.position.x, target.position.y (height / 2f), target.position.z);
+
+        _target = target;
+        _targetPosition = adjustedTarget;
+        */
+
+        _targetPosition = target.position;
     }
 
 }

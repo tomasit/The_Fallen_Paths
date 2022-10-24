@@ -30,6 +30,7 @@ public class PlayerMovementTEST : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P)) {
             Debug.Log("Position x : " + transform.position.x);
+            Debug.Log("Position y : " + transform.position.y);
         }
     }
 

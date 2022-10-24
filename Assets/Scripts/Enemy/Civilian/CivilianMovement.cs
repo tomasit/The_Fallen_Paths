@@ -13,6 +13,8 @@ public class CivilianMovement : AEnemyMovement
         player = ((PlayerMovementTEST)FindObjectOfType(typeof(PlayerMovementTEST))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();
         interactionManager = GetComponent<AEnemyInteraction>();
+        agentMovement = GetComponent<Agent>();
+        //enemy = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -28,55 +30,56 @@ public class CivilianMovement : AEnemyMovement
     public override void AlertMovement()
     {
         Vector3 targetDirection = FindTargetDirection(player.position);
+        target = player;
         
-        NoNegative(speed = Speed[EnemyType.Random] - 0.5f);
+        NoNegative(speed = Speed[EnemyType.Random] - (Speed[EnemyType.Random] * 0.5f));
         if (targetDirection.x > 0) {
-            if (targetDirection.x < DistanceToInteract[EnemyType.Random]) {
+            if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
+                targetDirection.y == 0) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
-            direction = 1;
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -DistanceToInteract[EnemyType.Random]) {
+            if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
+                targetDirection.y == 0) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
-            direction = -1;
         }
     }
 
     public override void SpotMovement()
     {
         (Vector3 targetDirection, GameObject enemy) = FindNearestEnemy(typeof(GuardMovement));
+        target = enemy.transform;
 
         if (enemy == null) {
             targetDirection = -1 * FindTargetDirection(player.position);
+            target = player;
             //Debug.Log("oposé du player");
         } else {
             //Debug.Log("va alert 'autre enemi");
         }
 
         if (targetDirection.x > 0) {
-            direction = 1;
-            // et que le Y est le meme
-            if (targetDirection.x < DistanceToInteract[EnemyType.Random] && enemy != null) {
+            if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
+                targetDirection.y == 0 && 
+                enemy != null) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
-                //après je sais pas ce que le random peux faire...
             } else {
                 interactionManager.isAtdistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Random] + 4f);
+                NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
             }
         }
         if (targetDirection.x < 0) {
-            direction = -1;
-            // et que le Y est le meme
-            if (targetDirection.x > -DistanceToInteract[EnemyType.Random] && enemy != null) {
+            if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
+                targetDirection.y == 0 && 
+                enemy != null) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
-                //après je sais pas ce que le random peux faire...
             } else {
                 interactionManager.isAtdistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Random] + 4f);
+                NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
             }
         }
     }

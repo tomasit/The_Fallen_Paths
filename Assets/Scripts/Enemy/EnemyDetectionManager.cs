@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // COMPORTEMENTS : 
-// alerteur : si il detect le player partir vers le sortie
-// guard : si il detect le player inscrease sa speed et aller vers lui -> (le suivre peux importe sa room)
-
-//plus le player est lourd il est detecté loin
 
 //le manque de lumière emepeche l'enemy de voir
 
 //si le player est en tenue de garde ne rien faire, sinon le detecter
-
 
 public class EnemyDetectionManager : MonoBehaviour
 {
@@ -21,7 +16,8 @@ public class EnemyDetectionManager : MonoBehaviour
     [Header("Raycast")]
     public float detectionDistanceFront = 5f;
     public float detectionDistanceBack = 2f;
-    public Vector2 direction = Vector2.right;
+    public Vector2 _direction = Vector2.right;
+    public Transform colliderTransform;
 
     [Header("States")]
     public bool playerDetected = false;
@@ -37,20 +33,23 @@ public class EnemyDetectionManager : MonoBehaviour
 
     void Start()
     {
-        
+        colliderTransform = transform.GetChild(0).transform;
     }
 
     void Update()
     {
-        if (!ThrowRay(direction, detectionDistanceFront) && !ThrowRay(-direction, detectionDistanceBack)) {
+        if (!ThrowRay(_direction, detectionDistanceFront) && !ThrowRay(-_direction, detectionDistanceBack)) {
             playerDetected = false;
         } else {
             playerDetected = true;
         }
 
-        //check distance to player
-
         ModifyDetectionState();
+    }
+
+    public void SetRayCastDirection(Vector2 direction)
+    {
+        _direction = direction;
     }
 
     public void SetState(DetectionState state)
@@ -99,16 +98,17 @@ public class EnemyDetectionManager : MonoBehaviour
 
     private bool ThrowRay(Vector2 directionRay, float distance)
     {
-        RaycastHit2D raycastDetection = Physics2D.Raycast(transform.position, directionRay, float.PositiveInfinity, LayerMask.GetMask("Player"));
+        //si y a un collider de type wall, areter le raycast a sa distance
+        RaycastHit2D raycastDetection = Physics2D.Raycast(colliderTransform.position, directionRay, float.PositiveInfinity, LayerMask.GetMask("Player"));
 
         if (debug) {
-            Debug.DrawRay(transform.position, directionRay * distance, Color.green);
+            Debug.DrawRay(colliderTransform.position, directionRay * distance, Color.green);
         }
         
         if (raycastDetection.collider != null)
         {
             if (LayerMask.NameToLayer("Player") == raycastDetection.collider.gameObject.layer) {
-                if (Vector2.Distance(raycastDetection.point, transform.position) <=  distance) {
+                if (Vector2.Distance(raycastDetection.point, colliderTransform.position) <=  distance) {
                     return true;
                 }
             }

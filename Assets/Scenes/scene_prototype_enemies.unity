@@ -3547,14 +3547,14 @@ MonoBehaviour:
     sprite: {fileID: 1396290841}
     roomProprieties: {fileID: 726901336}
     movementManager: {fileID: 1396290842}
-    dectionManager: {fileID: 1396290837}
+    detectionManager: {fileID: 1396290837}
     interactionManager: {fileID: 1396290843}
   - uuid: 
     type: 2
     sprite: {fileID: 2007885640}
     roomProprieties: {fileID: 1936986341}
     movementManager: {fileID: 2007885645}
-    dectionManager: {fileID: 2007885643}
+    detectionManager: {fileID: 2007885643}
     interactionManager: {fileID: 2007885646}
 --- !u!1 &1606246056
 GameObject:

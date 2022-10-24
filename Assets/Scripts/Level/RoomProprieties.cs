@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomProprieties : MonoBehaviour
 {
-    public Vector2 rooomCoordonates;
+    public Transform[] targets;
 
     void Start()
     {

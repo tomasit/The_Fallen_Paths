@@ -13,6 +13,8 @@ public class GuardMovement : AEnemyMovement
         player = ((PlayerMovementTEST)FindObjectOfType(typeof(PlayerMovementTEST))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();
         interactionManager = GetComponent<AEnemyInteraction>();
+        agentMovement = GetComponent<Agent>();
+        //enemy = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -28,47 +30,46 @@ public class GuardMovement : AEnemyMovement
     public override void AlertMovement()
     {
         Vector3 targetDirection = FindTargetDirection(player.position);
+        target = player;
         
-        NoNegative(speed = Speed[EnemyType.Guard] - 2f);
+        NoNegative(speed = Speed[EnemyType.Guard] - (Speed[EnemyType.Guard] * 0.5f));
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard]) {
+            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
+                targetDirection.y == 0) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
-            direction = 1;
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard]) {
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
+                targetDirection.y == 0) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
-            direction = -1;
         }
-
-        //si le player est en haut chercher l'echelle la plus proche
-        //si il est en bas pareil
     }
 
     public override void SpotMovement()
     {
         Vector3 targetDirection = FindTargetDirection(player.position);
+        target = player;
 
         if (targetDirection.x > 0) {
-            direction = 1;
-            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard]) {// et que le Y est le meme
+            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
+                targetDirection.y == 0) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
                 interactionManager.isAtdistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Guard] + 2f);
+                NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
             }
         }
         if (targetDirection.x < 0) {
-            direction = -1;
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard]) {// et que le Y est le meme
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] && 
+                targetDirection.y == 0) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
                 interactionManager.isAtdistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Guard] + 2f);
+                NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
             }
         }
     }
