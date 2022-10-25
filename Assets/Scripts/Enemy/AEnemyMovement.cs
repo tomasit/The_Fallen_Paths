@@ -4,39 +4,75 @@ using UnityEngine;
 
 public abstract class AEnemyMovement : MonoBehaviour
 {
-    public int direction = 1; // right : 1, left : -1
+    public Transform target;
     public float speed = 1f;
-    public float distanceToAttack = 2f;
-    public bool isAtdistanceToAttack = false;
-    [HideInInspector]public EnenmyDectionManager detectionManager;
-
-    public void Move()
-    {
-        Vector3 movement = new Vector3(speed * direction, 0, 0);
-
-        movement *= Time.deltaTime;
-        //Debug.Log("Movement : " + movement);
-
-        if (movement == Vector3.zero) {
-            return;
-        }
-
-        transform.Translate(movement);
-    }
-
-    public void AllowedMovement() 
-    {
-        gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
-    }
-
-    public Vector3 FindTargetDirection(Transform target)
-    {
-        return target.position - transform.position;
-    }
+    [HideInInspector] public Agent agentMovement;
+    //[HideInInspector] public GameObject enemy;
+    [HideInInspector] public AEnemyInteraction interactionManager;
+    [HideInInspector] public EnemyDetectionManager detectionManager;
 
     public abstract void BasicMovement();
 
     public abstract void AlertMovement();
 
     public abstract void SpotMovement();
+
+    public void Move()
+    {
+        if (speed == 0f) {
+            agentMovement.SetTarget(gameObject.transform/*, enemy.transform*/);
+        } else {
+            agentMovement.SetTarget(target/*, enemy.transform*/);
+        }
+        agentMovement.SetSpeed(speed);
+    }
+
+    public void AllowedMovement() 
+    {
+        //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+    }
+
+    public bool ApproximateCoordinates(float pointSrc, float pointDest, float range)
+    {
+        return (pointDest - range < pointSrc && pointSrc < pointDest + range);
+    }
+
+    public float NoNegative(float value)
+    {
+        if (value < 0) {
+            return 0;
+        }
+        return value;
+    }
+
+    public Vector3 FindTargetDirection(Vector3 targetPosition)
+    {
+        return targetPosition - transform.position;
+    }
+
+    //it's not the nearest, just the first he find
+    public Vector3 FindNearestEntityDirection(System.Type type)
+    {
+        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
+        
+        foreach(GameObject obj in allObjects) {
+            Vector3 positionObj = obj.transform.position;
+            return FindTargetDirection(positionObj);
+        }
+        Debug.Log("No Entity near");
+        return Vector3.zero;
+    }
+    
+    //it's not the nearest, just the first he find
+    public (Vector3, GameObject) FindNearestEnemy(System.Type type)
+    {
+        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
+        
+        foreach(GameObject obj in allObjects) {
+            Vector3 positionObj = obj.transform.position;
+            return (FindTargetDirection(positionObj), obj);
+        }
+        Debug.Log("No enemy near");
+        return (Vector3.zero, null);
+    }
 }

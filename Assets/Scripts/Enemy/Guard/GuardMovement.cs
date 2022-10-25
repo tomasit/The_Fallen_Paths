@@ -11,7 +11,10 @@ public class GuardMovement : AEnemyMovement
     void Start() 
     {
         player = ((PlayerMovementTEST)FindObjectOfType(typeof(PlayerMovementTEST))).transform;
-        detectionManager = GetComponent<EnenmyDectionManager>();
+        detectionManager = GetComponent<EnemyDetectionManager>();
+        interactionManager = GetComponent<AEnemyInteraction>();
+        agentMovement = GetComponent<Agent>();
+        //enemy = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -21,55 +24,53 @@ public class GuardMovement : AEnemyMovement
     }
     public override void BasicMovement()
     {
-        speed = EnemySpeed[EnemyType.Guard];
+        NoNegative(speed = Speed[EnemyType.Guard]);
     }
 
     public override void AlertMovement()
     {
-        Vector3 targetDirection = FindTargetDirection(player);
+        Vector3 targetDirection = FindTargetDirection(player.position);
+        target = player;
         
-        speed = EnemySpeed[EnemyType.Guard] - 2f;
+        NoNegative(speed = Speed[EnemyType.Guard] - (Speed[EnemyType.Guard] * 0.5f));
         if (targetDirection.x > 0) {
-            if (targetDirection.x < distanceToAttack) {
+            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
+                //targetDirection.y == 0) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
-            Debug.Log("droite : " + targetDirection);
-            direction = 1;
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -distanceToAttack) {
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
-            Debug.Log("gauche : " + targetDirection);
-            direction = -1;
         }
-
-        //si le player est en haut chercher l'echelle la plus proche
-        //si il est en bas pareil
     }
 
     public override void SpotMovement()
     {
-        Vector3 targetDirection = FindTargetDirection(player);
+        Vector3 targetDirection = FindTargetDirection(player.position);
+        target = player;
 
         if (targetDirection.x > 0) {
-            direction = 1;
-            if (targetDirection.x < distanceToAttack) {
-                isAtdistanceToAttack = true;
+            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
+                interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
-                isAtdistanceToAttack = false;
-                speed = EnemySpeed[EnemyType.Guard] + 2f;
+                interactionManager.isAtdistanceToInteract = false;
+                NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
             }
         }
         if (targetDirection.x < 0) {
-            direction = -1;
-            if (targetDirection.x > -distanceToAttack) {
-                isAtdistanceToAttack = true;
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] && 
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
+                interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
-                isAtdistanceToAttack = false;
-                speed = EnemySpeed[EnemyType.Guard] + 2f;
+                interactionManager.isAtdistanceToInteract = false;
+                NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
             }
         }
     }
