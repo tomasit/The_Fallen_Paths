@@ -35,13 +35,13 @@ public class CivilianMovement : AEnemyMovement
         NoNegative(speed = Speed[EnemyType.Random] - (Speed[EnemyType.Random] * 0.5f));
         if (targetDirection.x > 0) {
             if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
-                targetDirection.y == 0) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
         if (targetDirection.x < 0) {
             if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
-                targetDirection.y == 0) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
@@ -62,7 +62,7 @@ public class CivilianMovement : AEnemyMovement
 
         if (targetDirection.x > 0) {
             if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
-                targetDirection.y == 0 && 
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f) && 
                 enemy != null) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
@@ -73,7 +73,7 @@ public class CivilianMovement : AEnemyMovement
         }
         if (targetDirection.x < 0) {
             if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
-                targetDirection.y == 0 && 
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f) && 
                 enemy != null) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;

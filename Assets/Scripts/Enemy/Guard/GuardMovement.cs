@@ -35,13 +35,14 @@ public class GuardMovement : AEnemyMovement
         NoNegative(speed = Speed[EnemyType.Guard] - (Speed[EnemyType.Guard] * 0.5f));
         if (targetDirection.x > 0) {
             if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                targetDirection.y == 0) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
+                //targetDirection.y == 0) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
         if (targetDirection.x < 0) {
             if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                targetDirection.y == 0) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
@@ -54,7 +55,7 @@ public class GuardMovement : AEnemyMovement
 
         if (targetDirection.x > 0) {
             if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                targetDirection.y == 0) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
@@ -64,7 +65,7 @@ public class GuardMovement : AEnemyMovement
         }
         if (targetDirection.x < 0) {
             if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] && 
-                targetDirection.y == 0) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
