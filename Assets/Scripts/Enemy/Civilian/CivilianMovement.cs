@@ -10,7 +10,7 @@ public class CivilianMovement : AEnemyMovement
 
     void Start() 
     {
-        player = ((PlayerMovementTEST)FindObjectOfType(typeof(PlayerMovementTEST))).transform;
+        player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();
         interactionManager = GetComponent<AEnemyInteraction>();
         agentMovement = GetComponent<Agent>();
