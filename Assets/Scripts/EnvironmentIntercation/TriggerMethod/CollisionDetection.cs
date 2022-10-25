@@ -9,6 +9,7 @@ public class CollisionDetection : TriggerProcessor
     [SerializeField] private bool _isTrigger = true;
     [SerializeField] private Vector3 _textOffset;
     [HideInInspector] public string _displayedText;
+    [SerializeField] private LayerMask _triggerLayer;
     private InteractionDisplayText _UIDisplayedText = null;
 
     private void Awake()
@@ -65,7 +66,7 @@ public class CollisionDetection : TriggerProcessor
     {
         if (!_isDisable)
         {
-            if (hit.gameObject.layer == LayerMask.NameToLayer("MainCharacter"))
+            if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(true);
                 if (_UIDisplayedText != null)
@@ -81,7 +82,7 @@ public class CollisionDetection : TriggerProcessor
     {
         if (!_isDisable)
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("MainCharacter"))
+            if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(true);
                 if (_UIDisplayedText != null)
@@ -97,7 +98,7 @@ public class CollisionDetection : TriggerProcessor
     {
         if (!_isDisable)
         {
-            if (hit.gameObject.layer == LayerMask.NameToLayer("MainCharacter"))
+            if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(false);
                 if (_UIDisplayedText != null)
@@ -113,7 +114,7 @@ public class CollisionDetection : TriggerProcessor
     {
         if (!_isDisable)
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("MainCharacter"))
+            if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(false);
                 if (_UIDisplayedText != null)
