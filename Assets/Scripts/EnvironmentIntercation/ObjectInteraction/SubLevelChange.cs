@@ -33,13 +33,15 @@ public class SubLevelChange : AInteractable
     // }
 
     [SerializeField] private Tilemap _grid;
+    [SerializeField] private bool _interactOnStart = false;
     private Camera _camera = null;
 
     private void Start()
     {
         if (!_camera)
             _camera = Camera.main;
-        Interact();
+        if (_interactOnStart)
+            Interact();
     }
 
 
@@ -55,7 +57,6 @@ public class SubLevelChange : AInteractable
             // camResize.SetPosition(GetPosition());
             Vector3Int bounds = _grid.cellBounds.size;
             camResize.FitLevelSize(bounds.x, bounds.y);
-            Debug.Log(bounds);
             camResize.SetPosition(_grid.transform.position + _grid.cellBounds.center);
         }
     }
