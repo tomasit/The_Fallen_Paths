@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider2D _collider;
 
-    private int _everythingExpectPlayerLayerMask = 0;
+    private int _levelLayerMask = 0;
 
     private const float _groundedRayMagnitude = 0.075f;
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
         deceleration = acceleration * 3.5f;
-        _everythingExpectPlayerLayerMask = ~(1 << 7);
+        _levelLayerMask = (1 << 11);
     }
 
     public bool isGrounded()
@@ -43,12 +43,12 @@ public class PlayerController : MonoBehaviour
         rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;
         rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _groundedRayMagnitude;
 
-        RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _everythingExpectPlayerLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _levelLayerMask);
         _isGrounded = hit;
 
         Debug.DrawRay(rayPosition, Vector2.right * _collider.size.x * transform.localScale.x, _isGrounded ? Color.red : Color.green);
         // Adapt position
-    //    PositionHotfix(rayPosition, hit);
+        //    PositionHotfix(rayPosition, hit);
         return _isGrounded;
     }
 
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         // TODO: Do only one time per frame the calculation of colliders (size.x * localScale.x) / 2
         var safeRayPosition = transform.position;
         safeRayPosition.x = Mathf.Clamp(hit.point.x, transform.position.x - (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f, transform.position.x + (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f);
-        var verticalHit = Physics2D.Raycast(safeRayPosition, Vector2.down, halfColliderHeight + _groundedRayMagnitude, _everythingExpectPlayerLayerMask);
+        var verticalHit = Physics2D.Raycast(safeRayPosition, Vector2.down, halfColliderHeight + _groundedRayMagnitude, _levelLayerMask);
 
         if (!verticalHit)
             return;
@@ -122,6 +122,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("Debug Fire"))
+            GetComponent<BasicHealthWrapper>().Hit(1);
+
         if (_animator.GetBool("Dead"))
             playerSpeed = 0;
         else
@@ -131,16 +134,12 @@ public class PlayerController : MonoBehaviour
 
             float input = Input.GetAxisRaw("Horizontal");
 
-            if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "PlayerHit")
-                Move(input);
-            AnimateMovement(input == 0);
-
-            // NOTE: For test purposes
-            if (Input.GetButtonDown("Debug Fire"))
-            {
-                GetComponent<BasicHealthWrapper>().Hit(1);
+            if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerHit")
                 playerSpeed = 0;
-            }
+            else
+                Move(input);
+
+            AnimateMovement(input == 0);
         }
     }
 

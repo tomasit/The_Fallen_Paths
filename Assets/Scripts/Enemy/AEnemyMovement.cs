@@ -7,7 +7,7 @@ public abstract class AEnemyMovement : MonoBehaviour
     public Transform target;
     public float speed = 1f;
     [HideInInspector] public Agent agentMovement;
-    //[HideInInspector] public GameObject enemy;
+    [HideInInspector] public GameObject enemy;
     [HideInInspector] public AEnemyInteraction interactionManager;
     [HideInInspector] public EnemyDetectionManager detectionManager;
 
@@ -19,15 +19,15 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public void Move()
     {
-        if (speed == 0f) {
-            agentMovement.SetTarget(gameObject.transform/*, enemy.transform*/);
-        } else {
-            agentMovement.SetTarget(target/*, enemy.transform*/);
-        }
+        //if (speed == 0f) {
+            //agentMovement.SetTarget(gameObject.transform, enemy.transform);
+        //} else {
+            agentMovement.SetTarget(target, enemy.transform);
+        //}
         agentMovement.SetSpeed(speed);
     }
 
-    public void AllowedMovement() 
+    public void AllowedMovement()
     {
         //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
