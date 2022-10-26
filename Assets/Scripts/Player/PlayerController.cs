@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         _everythingExpectPlayerLayerMask = ~(1 << 7);
     }
 
-    bool isGrounded()
+    public bool isGrounded()
     {
         Vector2 rayPosition = transform.position;
 
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidBody.velocity = new Vector2(0, jumpPower);
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (_animator.GetBool("Dead"))
