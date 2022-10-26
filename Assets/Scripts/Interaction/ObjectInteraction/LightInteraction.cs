@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(UnityEngine.Rendering.Universal.Light2D))]
 public class LightInteraction : AInteractable
 {
+    [SerializeField] private GameObject _objectToActive = null;
     [SerializeField] private bool _isAlight;
     [SerializeField] private float _alightDuration;
     [SerializeField] private Vector2 _intensityRange;
@@ -27,9 +28,17 @@ public class LightInteraction : AInteractable
         _light.pointLightInnerRadius = _innerRange.x;
         _light.pointLightOuterRadius = _outerRange.x;
         if (_isAlight)
+        {
             _light.intensity = 1.0f;
+            if (_objectToActive != null)
+                _objectToActive.SetActive(true);
+        }
         else
+        {
             _light.enabled = false;
+            if (_objectToActive != null)
+                _objectToActive.SetActive(false);
+        }
     }
 
     public override void Save()
@@ -60,7 +69,11 @@ public class LightInteraction : AInteractable
         }
 
         if (!_isAlight)
+        {
             _light.enabled = false;
+            if (_objectToActive != null)
+                _objectToActive.SetActive(false);
+        }
         _alightCoroutine = null;
     }
 
@@ -71,7 +84,11 @@ public class LightInteraction : AInteractable
         
         _alightTime = 0.0f;
         if (_isAlight)
+        {
+            if (_objectToActive != null)
+                _objectToActive.SetActive(true);
             _light.enabled = true;
+        }
         _alightCoroutine = StartCoroutine(AlightCoroutine(Time.deltaTime));
     }
 

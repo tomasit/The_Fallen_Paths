@@ -129,6 +129,12 @@ public class PlayerController : MonoBehaviour
             playerSpeed = 0;
         else
         {
+            if (_animator.GetBool("HideVisible"))
+            {
+                playerSpeed = 0;
+                return;
+            }
+
             if (isGrounded() && Input.GetButtonDown("Jump"))
                 Jump();
 

@@ -38,13 +38,10 @@ public class InteractionSelectorEnable : AInteractable
 
     public override void Interact()
     {
-        if (_unlock)
-            return;
-
-        _unlock = true;
+        _unlock = !_unlock;
         GetComponent<InteractionProcessor>()._enabled = _unlock;
         GetComponent<GlowOnTouch>().SetOutlineColor(_lockedColor, _unlock);
-        _descriptionHeight = AInteractable.DescriptionHeight.NONE;
+        _descriptionHeight = _unlock ? AInteractable.DescriptionHeight.NONE : DescriptionHeight.LOCK;
         Save();
     }
 }
