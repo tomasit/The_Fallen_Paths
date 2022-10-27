@@ -8,12 +8,16 @@ public class RemoteObjectControl : MonoBehaviour
     [SerializeField] private GameObject _particlePrefab;
     [SerializeField] private float _particleXOffset;
     [SerializeField] private float _powerDuration;
+    [SerializeField] private float _triggerDistance;
+    private RemoteControllableObject[] _triggerableObjects;
     private List<GameObject> _instantiatedParticles;
     private float _durationCounter;
     private Coroutine _powerCoroutine = null;
+    private RemoteControllableObject _objectInTouch = null;
 
     private void Start()
     {
+        _triggerableObjects = FindObjectsOfType<RemoteControllableObject>(true);
         _durationCounter = 0.0f;
         _instantiatedParticles = new List<GameObject>();
     }
@@ -61,17 +65,92 @@ public class RemoteObjectControl : MonoBehaviour
         _instantiatedParticles.Clear();
     }
 
+    private void CheckObjectInTouch()
+    {
+        if (_objectInTouch != null)
+            _objectInTouch.ActiveOutline(false);
+    }
+
+    private void CheckCollision()
+    {
+        RaycastHit2D hit;
+        if ((hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity)).collider != null)
+        {
+            var remote = hit.collider.gameObject.GetComponent<RemoteControllableObject>();
+            if (remote != null)
+            {
+                if (GetDistance(hit.collider.transform.position) <= _triggerDistance)
+                {
+                    if (_objectInTouch != null && _objectInTouch != remote)
+                        _objectInTouch.ActiveOutline(false);
+                    _objectInTouch = remote;
+                    _objectInTouch.ActiveOutline(true);
+                }
+                else
+                {
+                    CheckObjectInTouch();
+                }
+            }
+            else
+            {
+                CheckObjectInTouch();
+            }
+        }
+        else
+        {
+            CheckObjectInTouch();
+        }
+    }
+
+    private float GetDistance(Vector3 position)
+    {
+        return Vector2.Distance(position, transform.position);
+    }
+
+    private void CheckDistance()
+    {
+        foreach (var triggerable in _triggerableObjects)
+        {
+            if (!triggerable.transform.gameObject.activeSelf)
+                continue;
+            if (GetDistance(triggerable.transform.position) <= _triggerDistance)
+            {
+                triggerable.RateUpParticle();
+            }
+            else
+            {
+                triggerable.RateDownParticle();
+            }
+        }
+    }
+
+    private void UnactiveRemoteObjectParticle()
+    {
+        foreach (var triggerable in _triggerableObjects)
+        {
+            triggerable.UnactiveParticle();
+        }
+    }
+
+
     private IEnumerator RemoteObjectCoroutine()
     {
         SetupParticles();
 
         while (_durationCounter < _powerDuration)
         {
+            CheckCollision();
+            CheckDistance();
             _durationCounter += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
         DestroyParticles();
+        UnactiveRemoteObjectParticle();
+        if (_objectInTouch != null)
+            _objectInTouch.ActiveOutline(false);
+
+        _objectInTouch = null;
         _durationCounter = 0.0f;
         _powerCoroutine = null;
     }
