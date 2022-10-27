@@ -14,7 +14,7 @@ public class CivilianMovement : AEnemyMovement
         detectionManager = GetComponent<EnemyDetectionManager>();
         interactionManager = GetComponent<AEnemyInteraction>();
         agentMovement = GetComponent<Agent>();
-        //enemy = transform.GetChild(0).gameObject;
+        enemy = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -35,13 +35,13 @@ public class CivilianMovement : AEnemyMovement
         NoNegative(speed = Speed[EnemyType.Random] - (Speed[EnemyType.Random] * 0.5f));
         if (targetDirection.x > 0) {
             if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
         if (targetDirection.x < 0) {
             if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.20f)) {
+                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
@@ -62,7 +62,7 @@ public class CivilianMovement : AEnemyMovement
 
         if (targetDirection.x > 0) {
             if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.20f) && 
+                ApproximateCoordinates(targetDirection.y, 0f, 0.80f) && 
                 enemy != null) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
@@ -73,7 +73,7 @@ public class CivilianMovement : AEnemyMovement
         }
         if (targetDirection.x < 0) {
             if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.20f) && 
+                ApproximateCoordinates(targetDirection.y, 0f, 0.80f) && 
                 enemy != null) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;

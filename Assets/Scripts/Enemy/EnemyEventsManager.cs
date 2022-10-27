@@ -27,6 +27,7 @@ public class EnemyEventsManager : MonoBehaviour
         foreach(var enemy in Enemies) {
             if (enemy.detectionManager.detectionState == DetectionState.None) {
                 RoomTargetPoints(enemy);
+                enemy.movementManager.target = enemy.roomProprieties.targets[targetIndex];
             }
             RaycastDirection(enemy);
             DetectionEventState(enemy);
@@ -52,13 +53,13 @@ public class EnemyEventsManager : MonoBehaviour
     private void RoomTargetPoints(Enemy enemy)
     {
         if (enemy.movementManager.transform.position.x == enemy.roomProprieties.targets[targetIndex].position.x &&
-            RangeOf(enemy.movementManager.transform.position.y, enemy.roomProprieties.targets[targetIndex].position.y, 0.5f)) {
+            RangeOf(enemy.movementManager.transform.position.y, enemy.roomProprieties.targets[targetIndex].position.y, 0.75f)) {
             if ((enemy.roomProprieties.targets.Length - 1) == targetIndex) {
                 targetIndex = 0;
             } else {
                 targetIndex += 1;
             }
-            enemy.movementManager.target = enemy.roomProprieties.targets[targetIndex];
+            //enemy.movementManager.target = enemy.roomProprieties.targets[targetIndex];
         }
     }
 

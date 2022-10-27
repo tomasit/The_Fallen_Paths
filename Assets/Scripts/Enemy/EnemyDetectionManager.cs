@@ -38,6 +38,10 @@ public class EnemyDetectionManager : MonoBehaviour
 
     void Update()
     {
+        //if le mec est pas sneak check derere
+        //if le mec est sneak pas check derière
+
+        //si le player est sneak diminuer : distance (detectionDistance)
         if (!ThrowRay(_direction, detectionDistanceFront) && !ThrowRay(-_direction, detectionDistanceBack)) {
             playerDetected = false;
         } else {
@@ -96,19 +100,31 @@ public class EnemyDetectionManager : MonoBehaviour
         return false;
     }
 
+    private void DebugRay(bool draw, float dist, Vector2 direction, Color color)
+    {
+        if (draw) {
+            Debug.DrawRay(colliderTransform.position, direction * dist, color);
+        }
+    }
+
     private bool ThrowRay(Vector2 directionRay, float distance)
     {
-        //si y a un collider de type wall, areter le raycast a sa distance
-        RaycastHit2D raycastDetection = Physics2D.Raycast(colliderTransform.position, directionRay, float.PositiveInfinity, LayerMask.GetMask("Player"));
+        RaycastHit2D raycastDetection = Physics2D.Raycast(
+            colliderTransform.position, 
+            directionRay, 
+            float.PositiveInfinity, 
+            (1 << LayerMask.NameToLayer("Player") | (1 << LayerMask.NameToLayer("Wall"))));
 
-        if (debug) {
-            Debug.DrawRay(colliderTransform.position, directionRay * distance, Color.green);
-        }
-        
         if (raycastDetection.collider != null)
         {
+            if (Vector2.Distance(raycastDetection.point, colliderTransform.position) <=  distance) {
+                distance = raycastDetection.distance;
+            }
+            DebugRay(debug, distance, directionRay, Color.green);
+
             if (LayerMask.NameToLayer("Player") == raycastDetection.collider.gameObject.layer) {
                 if (Vector2.Distance(raycastDetection.point, colliderTransform.position) <=  distance) {
+                    DebugRay(debug, distance, directionRay, Color.red);
                     return true;
                 }
             }
