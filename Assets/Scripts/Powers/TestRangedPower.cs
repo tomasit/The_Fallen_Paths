@@ -8,4 +8,9 @@ public class TestRangedPower : ARangedPower
     {
         return;
     }
+
+    protected override void Preview()
+    {
+        return;
+    }
 }
