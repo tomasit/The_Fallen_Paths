@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float playerSpeed = 0.0f;
     [SerializeField] private float acceleration = 25.0f;
     [SerializeField] public float jumpPower = 5.0f;
+    [SerializeField] private Transform[] _particles;
 
     private float deceleration = 0.0f;
 
@@ -57,6 +58,15 @@ public class PlayerController : MonoBehaviour
         var tempScale = transform.localScale;
         tempScale.x *= -1;
         transform.localScale = tempScale;
+
+        foreach (var particle in _particles)
+        {
+            var scale = particle.localScale;
+            scale.x *= -1;
+            particle.localScale = scale;
+
+        }
+        
         _goingLeft = !_goingLeft;
     }
 
