@@ -50,7 +50,7 @@ public class CollisionDetection : TriggerProcessor
         if (processor != null)
         {
             processor.Interact();
-            SetDescription(GetDescription(transform.gameObject));
+//            SetDescription(GetDescription(transform.gameObject));
         }
     }
 
@@ -58,7 +58,7 @@ public class CollisionDetection : TriggerProcessor
     {
         if (_UIDisplayedText != null)
         {
-            _UIDisplayedText.SetText(description);
+//            _UIDisplayedText.SetText(description);
         }
     }
 
@@ -71,8 +71,8 @@ public class CollisionDetection : TriggerProcessor
                 GetComponent<GlowOnTouch>().Trigger(true);
                 if (_UIDisplayedText != null)
                 {
-                    SetDescription(GetDescription(transform.gameObject));
-                    _UIDisplayedText.SetLayout(gameObject, _textOffset, true);
+//                    SetDescription(GetDescription(transform.gameObject));
+//                    _UIDisplayedText.SetLayout(gameObject, _textOffset, true);
                 }
             }
         }
@@ -87,8 +87,8 @@ public class CollisionDetection : TriggerProcessor
                 GetComponent<GlowOnTouch>().Trigger(true);
                 if (_UIDisplayedText != null)
                 {
-                    SetDescription(GetDescription(transform.gameObject));
-                    _UIDisplayedText.SetLayout(gameObject, _textOffset, true);
+//                    SetDescription(GetDescription(transform.gameObject));
+//                    _UIDisplayedText.SetLayout(gameObject, _textOffset, true);
                 }
             }
         }
@@ -103,8 +103,8 @@ public class CollisionDetection : TriggerProcessor
                 GetComponent<GlowOnTouch>().Trigger(false);
                 if (_UIDisplayedText != null)
                 {
-                    SetDescription("");
-                    _UIDisplayedText.SetLayout(null, Vector3.zero, false);
+//                    SetDescription("");
+//                    _UIDisplayedText.SetLayout(null, Vector3.zero, false);
                 }
             }
         }
@@ -119,8 +119,8 @@ public class CollisionDetection : TriggerProcessor
                 GetComponent<GlowOnTouch>().Trigger(false);
                 if (_UIDisplayedText != null)
                 {
-                    SetDescription("");
-                    _UIDisplayedText.SetLayout(null, Vector3.zero, false);
+//                    SetDescription("");
+//                    _UIDisplayedText.SetLayout(null, Vector3.zero, false);
                 }
             }
         }

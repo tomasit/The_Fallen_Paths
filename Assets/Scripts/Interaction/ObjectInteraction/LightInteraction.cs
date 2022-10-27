@@ -29,7 +29,7 @@ public class LightInteraction : AInteractable
         _light.pointLightOuterRadius = _outerRange.x;
         if (_isAlight)
         {
-            _light.intensity = 1.0f;
+            _light.intensity = _intensityRange.x;
             if (_objectToActive != null)
                 _objectToActive.SetActive(true);
         }
@@ -58,11 +58,11 @@ public class LightInteraction : AInteractable
         {
             if (_isAlight)
             {
-                _light.intensity = _alightTime / _alightDuration;
+                _light.intensity = _intensityRange.x * _alightTime / _alightDuration;
             }
             else
             {
-                _light.intensity = 1.0f - (_alightTime / _alightDuration);
+                _light.intensity = _intensityRange.x - _intensityRange.x * (_alightTime / _alightDuration);
             }
             _alightTime += deltaTime;
             yield return new WaitForSeconds(deltaTime);
