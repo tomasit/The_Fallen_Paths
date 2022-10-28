@@ -19071,7 +19071,7 @@ MonoBehaviour:
   activated: 0
   _rangePrefab: {fileID: 1990342430478220552, guid: f96e6c13c4aa9ba1eaae5c5236807c5f, type: 3}
   _rangeColor:
-    m_Mode: 0
+    m_Mode: 2
     m_GradientMin:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19130,8 +19130,8 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
-    m_ColorMax: {r: 1, g: 0, b: 0, a: 1}
+    m_ColorMin: {r: 0.09375158, g: 0.06541474, b: 0.6603774, a: 1}
+    m_ColorMax: {r: 0.4056604, g: 0.0133944545, b: 0.3377582, a: 1}
   previewPrefab: {fileID: 3483225076850325768, guid: c311c0c5fd3fef33cbfbdf6428018d58, type: 3}
 --- !u!1 &1882812735
 GameObject:

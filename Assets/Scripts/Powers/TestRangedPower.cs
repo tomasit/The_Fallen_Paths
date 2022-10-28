@@ -10,6 +10,8 @@ public class TestRangedPower : AVisualCircleRangedPower
 
     private Vector2 _calculatedPosition;
 
+    [SerializeField] private ParticleSystem _teleportationEffectPrefab = null;
+    private bool _canCast = false;
     private BoxCollider2D _collider = null;
     private void Start()
     {
@@ -18,9 +20,10 @@ public class TestRangedPower : AVisualCircleRangedPower
 
     public override void Fire()
     {
-        // var newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // newPosition.z = 0;
-        // transform.position = preview.transform.position;
+        transform.position = _calculatedPosition;
+        var tempParticles = Instantiate(_teleportationEffectPrefab, _calculatedPosition, Quaternion.identity);
+        var tempMain = tempParticles.main;
+        tempMain.startColor = _rangeColor;
         firingPower = false;
     }
 
@@ -34,32 +37,21 @@ public class TestRangedPower : AVisualCircleRangedPower
             preview.transform.parent = transform.parent;
             preview.transform.localScale = transform.localScale;
         }
-        Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var previewSpriteRenderer = preview.GetComponent<SpriteRenderer>();
 
-        Debug.Log(transform.localScale);
-
-        var yColliderOffset = new Vector2(0, (_collider.size.y * transform.localScale.y) / 2);
-
-        var ray = Physics2D.Raycast(newPosition - yColliderOffset, Vector3.down, 1.5f, (1 << 11));
-
-        if (ray)
+        if (Mathf.Sign(preview.transform.localScale.x) != Mathf.Sign(transform.localScale.x))
         {
-            preview.transform.position = (ray.point + yColliderOffset);
-            Debug.DrawLine(newPosition - yColliderOffset, ray.point, Color.red);
-            // var box = Physics2D.BoxCast(preview.transform.position, _collider.size, 0, Vector2.zero, 1, (1 << 11));
+            var tempScale = preview.transform.localScale;
+            tempScale.x *= -1;
+            preview.transform.localScale = tempScale;
         }
-        var box = BoxCastDrawer.BoxCastAndDraw(preview.transform.position, _collider.size * transform.localScale, 0, Vector2.zero, -0.1f, (1 << 11));
-
-        if (box)
-        {
-            preview.GetComponent<SpriteRenderer>().color = Color.red;
-            preview.transform.position = newPosition;
-        }
+        previewSpriteRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
+        if (_canCast)
+            previewSpriteRenderer.material.color = Color.blue;
         else
-            preview.GetComponent<SpriteRenderer>().color = Color.blue;
+            previewSpriteRenderer.material.color = Color.red;
 
-        // else
-        //     preview.transform.position = newPosition;
+        preview.transform.position = _calculatedPosition;
     }
 
     protected override void UnPreview()
@@ -74,6 +66,30 @@ public class TestRangedPower : AVisualCircleRangedPower
 
     protected override bool canCastPower()
     {
-        return true;
+        Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Debug.Log(transform.localScale);
+
+        var yColliderOffset = new Vector2(0, (_collider.size.y * transform.localScale.y) / 2);
+
+        var ray = Physics2D.Raycast(newPosition - yColliderOffset, Vector3.down, 1.5f, (1 << 11));
+
+        if (ray)
+        {
+            _calculatedPosition = (ray.point + yColliderOffset);
+            Debug.DrawLine(newPosition - yColliderOffset, ray.point, Color.red);
+        }
+        else
+            _calculatedPosition = newPosition;
+
+        var _colliderTempSize = _collider.size * transform.localScale;
+        _colliderTempSize.y -= 0.1f;
+        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, -0.1f, (1 << 11));
+
+        _canCast = !box;
+        if (!_canCast)
+            _calculatedPosition = newPosition;
+
+        return (_canCast);
     }
 }

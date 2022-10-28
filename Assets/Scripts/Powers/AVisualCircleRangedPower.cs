@@ -10,7 +10,7 @@ public abstract class AVisualCircleRangedPower : ARangedPower
     [SerializeField] private ParticleSystem _rangePrefab = null;
     private ParticleSystem _rangeObject = null;
 
-    [SerializeField] private ParticleSystem.MinMaxGradient _rangeColor = Color.white;
+    [SerializeField] protected ParticleSystem.MinMaxGradient _rangeColor = Color.white;
     // Update is called once per frame
 
     public override void Use()
@@ -50,7 +50,6 @@ public abstract class AVisualCircleRangedPower : ARangedPower
         {
             if (mouseDistranceIsCorrect())
             {
-                Preview();
                 if (canCastPower() && Input.GetMouseButtonDown(0))
                 {
                     StopAndDetachRangeObject();
@@ -58,6 +57,8 @@ public abstract class AVisualCircleRangedPower : ARangedPower
                     activated = false;
                     firingPower = true;
                 }
+                else
+                    Preview();
             }
             else
                 UnPreview();
