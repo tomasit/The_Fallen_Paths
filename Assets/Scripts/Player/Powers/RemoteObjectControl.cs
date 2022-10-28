@@ -159,7 +159,6 @@ public class RemoteObjectControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Debug.Log(CanUse());
             if (CanUse())
                 Use();
         }

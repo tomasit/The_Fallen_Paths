@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float acceleration = 25.0f;
     [SerializeField] public float jumpPower = 5.0f;
     [SerializeField] private Transform[] _particles;
+    
+    private bool _blockInput;
 
     private float deceleration = 0.0f;
 
@@ -130,21 +132,26 @@ public class PlayerController : MonoBehaviour
         _rigidBody.velocity = new Vector2(0, jumpPower);
     }
 
+    // public void BlockInput(bool block)
+    // {
+    //     _blockInput = block;
+    //     if (!_blockInput)
+    //         _playerSpeed = 0;
+    // }
+
     void Update()
     {
+        
         if (Input.GetButtonDown("Debug Fire"))
             GetComponent<BasicHealthWrapper>().Hit(1);
+
+        if (_blockInput)
+            return;
 
         if (_animator.GetBool("Dead"))
             playerSpeed = 0;
         else
         {
-            if (_animator.GetBool("HideVisible"))
-            {
-                playerSpeed = 0;
-                return;
-            }
-
             if (isGrounded() && Input.GetButtonDown("Jump"))
                 Jump();
 

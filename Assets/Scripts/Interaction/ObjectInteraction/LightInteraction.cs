@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(UnityEngine.Rendering.Universal.Light2D))]
 public class LightInteraction : AInteractable
@@ -11,6 +12,7 @@ public class LightInteraction : AInteractable
     [SerializeField] private Vector2 _intensityRange;
     [SerializeField] private Vector2 _innerRange;
     [SerializeField] private Vector2 _outerRange;
+    [SerializeField] private UnityEvent<bool> _event;
     private UnityEngine.Rendering.Universal.Light2D _light;
     private Coroutine _alightCoroutine;
     private float _alightTime;
@@ -39,6 +41,8 @@ public class LightInteraction : AInteractable
             if (_objectToActive != null)
                 _objectToActive.SetActive(false);
         }
+        Debug.Log("Is this light (" + gameObject.name + ") alight : " + _isAlight);
+        _event.Invoke(_isAlight);
     }
 
     public override void Save()
@@ -96,6 +100,7 @@ public class LightInteraction : AInteractable
     {
         _isAlight = !_isAlight;
         ComputeLight();
+        _event.Invoke(_isAlight);
         Save();
     }
 

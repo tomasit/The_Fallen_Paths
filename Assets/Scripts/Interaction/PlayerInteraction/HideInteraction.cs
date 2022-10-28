@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideInteraction : AInteractable
+public class HideInteraction : MonoBehaviour
 {
     private PlayerController _controller;
     private Animator _animator;
@@ -18,7 +18,7 @@ public class HideInteraction : AInteractable
         return true;
     }
 
-    public override void Interact()
+    public void Hide()
     {
         if (_animator.GetBool("Dead"))
             return;
@@ -27,14 +27,11 @@ public class HideInteraction : AInteractable
         if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerHit")
             return;
 
-        _animator.SetBool("HideVisible", !_animator.GetBool("HideVisible"));
+        // _controller.BlockInput(true);
+        // _animator.SetBool("HideVisible", !_animator.GetBool("HideVisible"));
     }
 
-    public override void Load()
-    {
-    }
-
-    public override void Save()
+    public void LitPlaceAlight(bool isAlight)
     {
     }
 }
