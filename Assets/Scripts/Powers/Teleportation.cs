@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class TestRangedPower : AVisualCircleRangedPower
+public class Teleportation : AVisualCircleRangedPower
 {
     private GameObject preview = null;
     [SerializeField] private GameObject previewPrefab = null;
