@@ -26,6 +26,11 @@ public class InteractionProcessor : AInteractable
         _triggerInteractor.DisableTrigger();
     }
 
+    public bool IsAvailable()
+    {
+        return (!_interact && _enabled) ? true : false;
+    }
+
     public override void Interact()
     {
         if (_interact || !_enabled)
