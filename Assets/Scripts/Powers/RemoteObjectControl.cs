@@ -159,11 +159,11 @@ public class RemoteObjectControl : ARangedPower
                 UnPreview();
         }
         
-        if (Input.GetKey(KeyCode.A) && !activated) // NOTE: Remove this else if when power manager is done
+        if (Input.GetKeyDown(KeyCode.A) && !activated) // NOTE: Remove this else if when power manager is done
         {
             Use();
         }
-        else if (Input.GetKey(KeyCode.A) && activated)
+        else if (Input.GetKeyDown(KeyCode.A) && activated)
         {
             Cancel();
         }
