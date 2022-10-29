@@ -29250,7 +29250,6 @@ MonoBehaviour:
   _playerParticleParent: {fileID: 758453424}
   _particlePrefab: {fileID: 8522045220849915101, guid: a8d3b1881a3ef16408caf5dd8f003827, type: 3}
   _particleXOffset: 0.07
-  _triggerDistance: 4
 --- !u!4 &1779172052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3483225076850325772, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
@@ -29268,7 +29267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c8b66da370378e3b59be9a256a41aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeRadius: 16
+  rangeRadius: 4
   activated: 0
   _rangePrefab: {fileID: 1990342430478220552, guid: f96e6c13c4aa9ba1eaae5c5236807c5f, type: 3}
   _rangeColor:
@@ -29333,8 +29332,8 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 1, g: 0, b: 0, a: 1}
-  previewPrefab: {fileID: 0}
-  _teleportationEffectPrefab: {fileID: 0}
+  previewPrefab: {fileID: 3483225076850325768, guid: c311c0c5fd3fef33cbfbdf6428018d58, type: 3}
+  _teleportationEffectPrefab: {fileID: 7645451373510355043, guid: d9e5e01690ca6164b9084080c23f2cae, type: 3}
 --- !u!1 &1817899352
 GameObject:
   m_ObjectHideFlags: 0

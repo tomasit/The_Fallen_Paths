@@ -60,18 +60,13 @@ public class RemoteObjectControl : ARangedPower
         _instantiatedParticles.Clear();
     }
 
-    private float GetDistance(Vector3 position)
-    {
-        return Vector2.Distance(position, transform.position);
-    }
-
     private void CheckDistance()
     {
         foreach (var triggerable in _triggerableObjects)
         {
             if (!triggerable.transform.gameObject.activeSelf)
                 continue;
-            if (GetDistance(triggerable.transform.position) <= rangeRadius)
+            if (Vector2.Distance(triggerable.transform.position, transform.position) <= rangeRadius)
             {
                 triggerable.RateUpParticle();
             }
@@ -105,7 +100,6 @@ public class RemoteObjectControl : ARangedPower
     protected override bool canCastPower()
     {
         RaycastHit2D hit;
-        bool retValue = false;
 
         if ((hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity)).collider != null)
         {
@@ -115,19 +109,10 @@ public class RemoteObjectControl : ARangedPower
                 if (_objectInTouch != null && _objectInTouch != remote)
                     UnPreview();
                 _objectInTouch = remote;
-                retValue = true;
-            }
-            else
-            {
-                retValue = false;
+                return true;
             }
         }
-        else
-        {
-            retValue = false;
-        }
-
-        return retValue;
+        return false;
     }
 
     public override void Fire()
@@ -158,8 +143,10 @@ public class RemoteObjectControl : ARangedPower
             else
                 UnPreview();
         }
-        
-        if (Input.GetKeyDown(KeyCode.A) && !activated) // NOTE: Remove this else if when power manager is done
+
+        // NOTE: Remove this block when power manager is done
+
+        if (Input.GetKeyDown(KeyCode.A) && !activated)
         {
             Use();
         }
