@@ -41,7 +41,6 @@ public class LightInteraction : AInteractable
             if (_objectToActive != null)
                 _objectToActive.SetActive(false);
         }
-        Debug.Log("Is this light (" + gameObject.name + ") alight : " + _isAlight);
         _event.Invoke(_isAlight);
     }
 

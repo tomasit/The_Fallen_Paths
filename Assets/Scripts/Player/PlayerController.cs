@@ -132,12 +132,13 @@ public class PlayerController : MonoBehaviour
         _rigidBody.velocity = new Vector2(0, jumpPower);
     }
 
-    // public void BlockInput(bool block)
-    // {
-    //     _blockInput = block;
-    //     if (!_blockInput)
-    //         _playerSpeed = 0;
-    // }
+    public void BlockInput(bool block)
+    {
+        _blockInput = block;
+
+        if (_blockInput)
+            playerSpeed = 0;
+    }
 
     void Update()
     {
@@ -145,24 +146,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Debug Fire"))
             GetComponent<BasicHealthWrapper>().Hit(1);
 
-        if (_blockInput)
-            return;
-
         if (_animator.GetBool("Dead"))
             playerSpeed = 0;
         else
         {
-            if (isGrounded() && Input.GetButtonDown("Jump"))
+            bool grounded = isGrounded();
+            if (!_blockInput && grounded && Input.GetButtonDown("Jump"))
                 Jump();
 
             float input = Input.GetAxisRaw("Horizontal");
 
             if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerHit")
                 playerSpeed = 0;
-            else
+            else if (!_blockInput)
                 Move(input);
 
-            AnimateMovement(input == 0);
+            AnimateMovement(input == 0 | _blockInput);
         }
     }
 

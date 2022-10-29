@@ -2,39 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RemoteObjectControl : MonoBehaviour
+public class RemoteObjectControl : ARangedPower
 {
     [SerializeField] private Transform _playerParticleParent;
     [SerializeField] private GameObject _particlePrefab;
     [SerializeField] private float _particleXOffset;
-    [SerializeField] private float _powerDuration;
-    [SerializeField] private float _triggerDistance;
     private RemoteControllableObject[] _triggerableObjects;
     private List<GameObject> _instantiatedParticles;
-    private float _durationCounter;
-    private Coroutine _powerCoroutine = null;
     private RemoteControllableObject _objectInTouch = null;
 
     private void Start()
     {
         _triggerableObjects = FindObjectsOfType<RemoteControllableObject>(true);
-        _durationCounter = 0.0f;
         _instantiatedParticles = new List<GameObject>();
     }
 
-    public bool CanUse()
+    public override void Use()
     {
-        return _powerCoroutine == null ? true : false;
-    }
-
-    public void Use()
-    {
-        _powerCoroutine = StartCoroutine(RemoteObjectCoroutine());
-    }
-
-    public void Fire()
-    {
-
+        activated = true;
+        SetupParticles();
     }
 
     private void SetupParticles()
@@ -58,48 +44,20 @@ public class RemoteObjectControl : MonoBehaviour
         shape2.alignToDirection = false;
     }
 
+    public override void Cancel()
+    {
+        base.Cancel();
+        DestroyParticles();
+        UnactiveRemoteObjectParticle();
+        UnPreview();
+        _objectInTouch = null;
+    }
+
     private void DestroyParticles()
     {
         foreach (var particle in _instantiatedParticles)
             Destroy(particle);
         _instantiatedParticles.Clear();
-    }
-
-    private void CheckObjectInTouch()
-    {
-        if (_objectInTouch != null)
-            _objectInTouch.ActiveOutline(false);
-    }
-
-    private void CheckCollision()
-    {
-        RaycastHit2D hit;
-        if ((hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity)).collider != null)
-        {
-            var remote = hit.collider.gameObject.GetComponent<RemoteControllableObject>();
-            if (remote != null)
-            {
-                if (GetDistance(hit.collider.transform.position) <= _triggerDistance)
-                {
-                    if (_objectInTouch != null && _objectInTouch != remote)
-                        _objectInTouch.ActiveOutline(false);
-                    _objectInTouch = remote;
-                    _objectInTouch.ActiveOutline(true);
-                }
-                else
-                {
-                    CheckObjectInTouch();
-                }
-            }
-            else
-            {
-                CheckObjectInTouch();
-            }
-        }
-        else
-        {
-            CheckObjectInTouch();
-        }
     }
 
     private float GetDistance(Vector3 position)
@@ -113,7 +71,7 @@ public class RemoteObjectControl : MonoBehaviour
         {
             if (!triggerable.transform.gameObject.activeSelf)
                 continue;
-            if (GetDistance(triggerable.transform.position) <= _triggerDistance)
+            if (GetDistance(triggerable.transform.position) <= rangeRadius)
             {
                 triggerable.RateUpParticle();
             }
@@ -132,35 +90,83 @@ public class RemoteObjectControl : MonoBehaviour
         }
     }
 
-
-    private IEnumerator RemoteObjectCoroutine()
+    protected override void Preview()
     {
-        SetupParticles();
+        if (_objectInTouch != null)
+            _objectInTouch.ActiveOutline(true);
+    }
 
-        while (_durationCounter < _powerDuration)
-        {
-            CheckCollision();
-            CheckDistance();
-            _durationCounter += Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-
-        DestroyParticles();
-        UnactiveRemoteObjectParticle();
+    protected override void UnPreview()
+    {
         if (_objectInTouch != null)
             _objectInTouch.ActiveOutline(false);
+    }
 
-        _objectInTouch = null;
-        _durationCounter = 0.0f;
-        _powerCoroutine = null;
+    protected override bool canCastPower()
+    {
+        RaycastHit2D hit;
+        bool retValue = false;
+
+        if ((hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity)).collider != null)
+        {
+            var remote = hit.collider.gameObject.GetComponent<RemoteControllableObject>();
+            if (remote != null)
+            {
+                if (_objectInTouch != null && _objectInTouch != remote)
+                    UnPreview();
+                _objectInTouch = remote;
+                retValue = true;
+            }
+            else
+            {
+                retValue = false;
+            }
+        }
+        else
+        {
+            retValue = false;
+        }
+
+        return retValue;
+    }
+
+    public override void Fire()
+    {
+        _objectInTouch.Trigger();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        
+        if (activated)
         {
-            if (CanUse())
-                Use();
+            CheckDistance();
+            if (mouseDistranceIsCorrect())
+            {
+                if (canCastPower())
+                {
+                    Preview();
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Fire();
+                        Cancel();
+                    }
+                }
+                else
+                    UnPreview();
+            }
+            else
+                UnPreview();
         }
+        
+        if (Input.GetKey(KeyCode.A) && !activated) // NOTE: Remove this else if when power manager is done
+        {
+            Use();
+        }
+        else if (Input.GetKey(KeyCode.A) && activated)
+        {
+            Cancel();
+        }
+        
     }
 }
