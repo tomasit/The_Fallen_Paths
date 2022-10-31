@@ -14,7 +14,7 @@ public class GuardMovement : AEnemyMovement
         detectionManager = GetComponent<EnemyDetectionManager>();
         interactionManager = GetComponent<AEnemyInteraction>();
         agentMovement = GetComponent<Agent>();
-        enemy = transform.GetChild(0).gameObject;
+        detectionTrigger = GetComponent<TriggerCoroutineProcessor>();
     }
 
     void Update()
@@ -34,14 +34,14 @@ public class GuardMovement : AEnemyMovement
         
         NoNegative(speed = Speed[EnemyType.Guard] - (Speed[EnemyType.Guard] * 0.5f));
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
+            if (targetDirection.x < EnemyInfo.DistanceToInteract &&
+                RangeOf(targetDirection.y, 0f, 0.80f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract &&
+                RangeOf(targetDirection.y, 0f, 0.80f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
@@ -57,8 +57,8 @@ public class GuardMovement : AEnemyMovement
         //Debug.Log("----------------------");
 
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 1f)) {
+            if (targetDirection.x < EnemyInfo.DistanceToInteract &&
+                RangeOf(targetDirection.y, 0f, 1f)) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {
@@ -67,8 +67,8 @@ public class GuardMovement : AEnemyMovement
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] && 
-                ApproximateCoordinates(targetDirection.y, 0f, 1f)) {
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract && 
+                RangeOf(targetDirection.y, 0f, 1f)) {
                 interactionManager.isAtdistanceToInteract = true;
                 speed = 0f;
             } else {

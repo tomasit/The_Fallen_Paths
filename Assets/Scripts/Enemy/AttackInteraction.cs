@@ -16,7 +16,7 @@ public class AttackInteraction : AEnemyInteraction
     {
         if (isAtdistanceToInteract) {
             if (clockCoolDown >= coolDown) {
-                Debug.Log("Hit ! of : " + damage);
+                //Debug.Log("Hit ! of : " + damage);
                 clockCoolDown = 0f;
             }
             clockCoolDown += Time.deltaTime;

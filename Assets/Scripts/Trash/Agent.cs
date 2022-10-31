@@ -29,22 +29,25 @@ public class Agent : MonoBehaviour
         agent.speed = speed;
     }
 
-    public void SetTarget(Transform target, Transform destination)
+    public void SetTarget(Transform target, Vector3 offset)
     {
-        float height = destination.gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
+        //float height = destination.gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
 
-        var adjust = 0f;
+        //var adjust = 0f;
+        //if (target.gameObject.name == "Player") {
+        //    adjust = destination.localPosition.y;
+        //}
+        
+        Vector3 adjustedTarget = Vector3.zero;
         if (target.gameObject.name == "Player") {
-            adjust = destination.localPosition.y;
+            adjustedTarget = target.position - offset;
+        } else {
+            adjustedTarget = target.position;
         }
-
-        Vector3 adjustedTarget = new Vector3(
-            target.position.x, 
-            target.position.y - (height / 2f) - adjust,
-            target.position.z);
-
+        
         _target = target;
         _targetPosition = adjustedTarget;
+        //_targetPosition = target.position;
     }
 
 }

@@ -8,13 +8,13 @@ public class CivilianMovement : AEnemyMovement
 {
     private Transform player;
 
-    void Start() 
+    void Start()
     {
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();
         interactionManager = GetComponent<AEnemyInteraction>();
         agentMovement = GetComponent<Agent>();
-        enemy = transform.GetChild(0).gameObject;
+        detectionTrigger = GetComponent<TriggerCoroutineProcessor>();
     }
 
     void Update()
@@ -24,24 +24,28 @@ public class CivilianMovement : AEnemyMovement
     }
     public override void BasicMovement()
     {
+        detectionTrigger.SetDisabling(true);
+
         NoNegative(speed = Speed[EnemyType.Random]);
     }
 
     public override void AlertMovement()
     {
+        detectionTrigger.SetDisabling(true);
+
         Vector3 targetDirection = FindTargetDirection(player.position);
         target = player;
         
         NoNegative(speed = Speed[EnemyType.Random] - (Speed[EnemyType.Random] * 0.5f));
         if (targetDirection.x > 0) {
-            if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
+            if (targetDirection.x < DistanceToInteract &&
+                RangeOf(targetDirection.y, 0f, 0.80f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
+            if (targetDirection.x > -DistanceToInteract &&
+                RangeOf(targetDirection.y, 0f, 0.80f)) {
                 detectionManager.SetState(DetectionState.Spoted);
             }
         }
@@ -49,38 +53,11 @@ public class CivilianMovement : AEnemyMovement
 
     public override void SpotMovement()
     {
-        (Vector3 targetDirection, GameObject enemy) = FindNearestEnemy(typeof(GuardMovement));
-        target = enemy.transform;
+        detectionTrigger.SetState(EnemyEventState.SeenPlayer);
+        detectionTrigger.SetDisabling(false);
+        NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
 
-        if (enemy == null) {
-            targetDirection = -1 * FindTargetDirection(player.position);
-            target = player;
-            //Debug.Log("oposé du player");
-        } else {
-            //Debug.Log("va alert 'autre enemi");
-        }
-
-        if (targetDirection.x > 0) {
-            if (targetDirection.x < DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f) && 
-                enemy != null) {
-                interactionManager.isAtdistanceToInteract = true;
-                speed = 0f;
-            } else {
-                interactionManager.isAtdistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
-            }
-        }
-        if (targetDirection.x < 0) {
-            if (targetDirection.x > -DistanceToInteract[EnemyType.Random] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f) && 
-                enemy != null) {
-                interactionManager.isAtdistanceToInteract = true;
-                speed = 0f;
-            } else {
-                interactionManager.isAtdistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
-            }
-        }
+        //Il faut pas que ce soit le AenemyMovement qui lance le trigger 
+        // mais que ce soit le detectionManager
     }
 }

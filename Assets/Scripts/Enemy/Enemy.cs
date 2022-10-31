@@ -7,17 +7,12 @@ public class EnemyInfo
 {
     public static Dictionary<EnemyType, float> Speed = new Dictionary<EnemyType, float>()
     {
-        { EnemyType.Guard, 0.5f },
+        { EnemyType.Guard, 1.5f },
         { EnemyType.RoyalGuard, 3f },
-        { EnemyType.Random, 0.5f }
+        { EnemyType.Random, 1f }
     };
-
-    public static Dictionary<EnemyType, float> DistanceToInteract = new Dictionary<EnemyType, float>()
-    {
-        { EnemyType.Guard, 1f },
-        { EnemyType.RoyalGuard, 1.5f },
-        { EnemyType.Random, 0.5f }
-    };
+    
+    public static float DistanceToInteract = 1f;
 
     public static Dictionary<EnemyType, float> CoolDown = new Dictionary<EnemyType, float>()
     {
@@ -32,6 +27,12 @@ public class EnemyInfo
         { EnemyType.RoyalGuard, 2f },
         { EnemyType.Random, 0.5f }
     };
+
+
+    public static bool RangeOf(float posAim, float posCompare, float range)
+    {
+        return (posCompare - range < posAim) && (posAim < posCompare + range);
+    }
 }
 
 public enum EnemyType
@@ -64,7 +65,7 @@ public struct Enemy {
     public RoomProprieties roomProprieties;
     public Agent agentMovement;
     public AEnemyMovement movementManager;
-
     public EnemyDetectionManager detectionManager;
+
     public AEnemyInteraction interactionManager;
 }

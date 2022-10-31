@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static EnemyInfo;
+
 public abstract class AEnemyMovement : MonoBehaviour
 {
     public Transform target;
     public float speed = 1f;
     [HideInInspector] public Agent agentMovement;
-    [HideInInspector] public GameObject enemy;
     [HideInInspector] public AEnemyInteraction interactionManager;
     [HideInInspector] public EnemyDetectionManager detectionManager;
+    [HideInInspector] public TriggerCoroutineProcessor detectionTrigger;
 
     public abstract void BasicMovement();
 
@@ -20,9 +22,9 @@ public abstract class AEnemyMovement : MonoBehaviour
     public void Move()
     {
         //if (speed == 0f) {
-            //agentMovement.SetTarget(gameObject.transform, enemy.transform);
+            //agentMovement.SetTarget(gameObject.transform, transform.position);
         //} else {
-            agentMovement.SetTarget(target, enemy.transform);
+            agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         //}
         agentMovement.SetSpeed(speed);
     }
@@ -30,11 +32,6 @@ public abstract class AEnemyMovement : MonoBehaviour
     public void AllowedMovement()
     {
         //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
-    }
-
-    public bool ApproximateCoordinates(float pointSrc, float pointDest, float range)
-    {
-        return (pointDest - range < pointSrc && pointSrc < pointDest + range);
     }
 
     public float NoNegative(float value)
