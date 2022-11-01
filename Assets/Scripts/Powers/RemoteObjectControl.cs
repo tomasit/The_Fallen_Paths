@@ -122,7 +122,6 @@ public class RemoteObjectControl : ARangedPower
 
     private void Update()
     {
-        
         if (activated)
         {
             CheckDistance();

@@ -41,12 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI
-    uniqueID: 1161798753
-    locked: 0
   - name: LightHide
     uniqueID: 989546703
     locked: 0
   - name: Player
     uniqueID: 3311460339
+    locked: 0
+  - name: UI
+    uniqueID: 1161798753
     locked: 0
