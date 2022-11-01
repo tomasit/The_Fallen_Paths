@@ -12,7 +12,6 @@ public abstract class AInteractable : MonoBehaviour
         LOCK = 2
     }
     protected DescriptionHeight _descriptionHeight = DescriptionHeight.NONE;
-
     public DescriptionHeight GetDescriptionHeight() { return _descriptionHeight; }
     public abstract void Interact();
     public abstract void Save();

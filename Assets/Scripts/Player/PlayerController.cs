@@ -1,16 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+public enum PlayerType : int
+{
+    PLAYER = 0,
+    RAT = 1
+}
+
+// 4.5, 0, 6, 5.5
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public float maxPlayerSpeed = 125.0f;
-    [SerializeField] public float playerSpeed = 0.0f;
-    [SerializeField] private float acceleration = 25.0f;
-    [SerializeField] public float jumpPower = 5.0f;
+    [Serializable]
+    public struct MovementValues {
+        public float maxPlayerSpeed;
+        public float playerSpeed;
+        public float acceleration;
+        public float jumpPower;
+    }
     [SerializeField] private Transform[] _particles;
-    
+    [SerializeField] private MovementValues _playerValues;
+    [SerializeField] private MovementValues _ratValues;
+    private MovementValues[] _movementValues;
     private bool _blockInput;
 
     private float deceleration = 0.0f;
@@ -26,32 +39,37 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D _collider;
 
     private int _levelLayerMask = 0;
-
+    private int _currentValueIndex = 0;
     private const float _groundedRayMagnitude = 0.075f;
 
-    // Start is called before the first frame update
     void Start()
     {
+        _movementValues = new MovementValues[2];
+        _movementValues[0] = _playerValues;
+        _movementValues[1] = _ratValues;
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
-        deceleration = acceleration * 3.5f;
+        deceleration = _movementValues[_currentValueIndex].acceleration * 3.5f;
         _levelLayerMask = (1 << 11);
+    }
+
+    public void ChangeValueIndex(PlayerType type)
+    {
+        _currentValueIndex = (int)type;
     }
 
     public bool isGrounded()
     {
         Vector2 rayPosition = transform.position;
 
-        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;
-        rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _groundedRayMagnitude;
+        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2 + _collider.offset.x;
+        rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _groundedRayMagnitude + _collider.offset.y;
 
         RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _levelLayerMask);
         _isGrounded = hit;
 
         Debug.DrawRay(rayPosition, Vector2.right * _collider.size.x * transform.localScale.x, _isGrounded ? Color.red : Color.green);
-        // Adapt position
-        //    PositionHotfix(rayPosition, hit);
         return _isGrounded;
     }
 
@@ -66,7 +84,6 @@ public class PlayerController : MonoBehaviour
             var scale = particle.localScale;
             scale.x *= -1;
             particle.localScale = scale;
-
         }
         
         _goingLeft = !_goingLeft;
@@ -89,21 +106,22 @@ public class PlayerController : MonoBehaviour
             FlipPlayerHorizontally();
         }
 
-        if ((input > 0 && playerSpeed < maxPlayerSpeed) || (input < 0 && playerSpeed > -maxPlayerSpeed))
+        if ((input > 0 && _movementValues[_currentValueIndex].playerSpeed < _movementValues[_currentValueIndex].maxPlayerSpeed)
+            || (input < 0 && _movementValues[_currentValueIndex].playerSpeed > -_movementValues[_currentValueIndex].maxPlayerSpeed))
         {
             if (oppositeDirection)
-                playerSpeed = -playerSpeed * 0.8f;
+                _movementValues[_currentValueIndex].playerSpeed = -_movementValues[_currentValueIndex].playerSpeed * 0.8f;
             else
-                playerSpeed += acceleration * input * Time.deltaTime;
+                _movementValues[_currentValueIndex].playerSpeed += _movementValues[_currentValueIndex].acceleration * input * Time.deltaTime;
         }
         else
         {
-            if (playerSpeed > deceleration * Time.deltaTime)
-                playerSpeed = playerSpeed - deceleration * Time.deltaTime;
-            else if (playerSpeed < -deceleration * Time.deltaTime)
-                playerSpeed = playerSpeed + deceleration * Time.deltaTime;
+            if (_movementValues[_currentValueIndex].playerSpeed > deceleration * Time.deltaTime)
+                _movementValues[_currentValueIndex].playerSpeed = _movementValues[_currentValueIndex].playerSpeed - deceleration * Time.deltaTime;
+            else if (_movementValues[_currentValueIndex].playerSpeed < -deceleration * Time.deltaTime)
+                _movementValues[_currentValueIndex].playerSpeed = _movementValues[_currentValueIndex].playerSpeed + deceleration * Time.deltaTime;
             else
-                playerSpeed = 0;
+                _movementValues[_currentValueIndex].playerSpeed = 0;
         }
 
     }
@@ -129,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        _rigidBody.velocity = new Vector2(0, jumpPower);
+        _rigidBody.velocity = new Vector2(0, _movementValues[_currentValueIndex].jumpPower);
     }
 
     public void BlockInput(bool block)
@@ -137,7 +155,7 @@ public class PlayerController : MonoBehaviour
         _blockInput = block;
 
         if (_blockInput)
-            playerSpeed = 0;
+            _movementValues[_currentValueIndex].playerSpeed = 0;
     }
 
     void Update()
@@ -147,7 +165,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<BasicHealthWrapper>().Hit(1);
 
         if (_animator.GetBool("Dead"))
-            playerSpeed = 0;
+            _movementValues[_currentValueIndex].playerSpeed = 0;
         else
         {
             bool grounded = isGrounded();
@@ -157,7 +175,7 @@ public class PlayerController : MonoBehaviour
             float input = Input.GetAxisRaw("Horizontal");
 
             if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerHit")
-                playerSpeed = 0;
+                _movementValues[_currentValueIndex].playerSpeed = 0;
             else if (!_blockInput)
                 Move(input);
 
@@ -167,6 +185,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidBody.velocity = new Vector2(playerSpeed, _rigidBody.velocity.y);
+        _rigidBody.velocity = new Vector2(_movementValues[_currentValueIndex].playerSpeed, _rigidBody.velocity.y);
     }
 }
