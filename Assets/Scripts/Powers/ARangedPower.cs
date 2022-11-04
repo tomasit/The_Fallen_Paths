@@ -21,7 +21,7 @@ public abstract class ARangedPower : APower
         activated = true;
     }
 
-    public virtual void Cancel()
+    public virtual void CancelRange()
     {
         activated = false;
     }

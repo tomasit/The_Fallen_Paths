@@ -44,13 +44,18 @@ public class RemoteObjectControl : ARangedPower
         shape2.alignToDirection = false;
     }
 
-    public override void Cancel()
+    public override void CancelRange()
     {
-        base.Cancel();
+        base.CancelRange();
         DestroyParticles();
         UnactiveRemoteObjectParticle();
         UnPreview();
         _objectInTouch = null;
+    }
+
+    public override void Cancel()
+    {
+        return;
     }
 
     private void DestroyParticles()
@@ -145,14 +150,14 @@ public class RemoteObjectControl : ARangedPower
 
         // NOTE: Remove this block when power manager is done
 
-        if (Input.GetKeyDown(KeyCode.A) && !activated)
-        {
-            Use();
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && activated)
-        {
-            Cancel();
-        }
-        
+        // if (Input.GetKeyDown(KeyCode.A) && !activated)
+        // {
+        //     Use();
+        // }
+        // else if (Input.GetKeyDown(KeyCode.A) && activated)
+        // {
+        //     Cancel();
+        // }
+
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(BoxCollider2D))]
 public class Teleportation : AVisualCircleRangedPower
 {
@@ -61,6 +62,11 @@ public class Teleportation : AVisualCircleRangedPower
             Destroy(preview.gameObject);
             preview = null;
         }
+    }
+
+    public override void Cancel()
+    {
+        return;
     }
 
 

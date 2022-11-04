@@ -2168,7 +2168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 54091027}
+  _fadeImage: {fileID: 0}
+  _tmproUGUI: {fileID: 0}
   _interactOnStart: 1
+  _translateChange: 0
+  _translateSpeed: 1
+  _fadeChange: 0
+  _fadeDescription: 
+  _fadeDuration: 1
+  _descriptionDuration: 1
 --- !u!114 &185300763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2619,7 +2627,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 989546703
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300514, guid: b79c5c1c2647f3f40835d6e9578a1ada, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2937,7 +2945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325771, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325771, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_SortingLayerID
@@ -19028,6 +19036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09540c9da50cdbb44a6b65af5a44e8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _litDuration: 0.3
 --- !u!114 &1779172035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19054,11 +19063,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a979efca22eb82340a159a08cbf7bfb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPower: 0
+  rangeRadius: 0
+  activated: 0
   _playerParticleParent: {fileID: 758453424}
   _particlePrefab: {fileID: 8522045220849915101, guid: a8d3b1881a3ef16408caf5dd8f003827, type: 3}
   _particleXOffset: 0.07
-  _powerDuration: 3
-  _triggerDistance: 0
 --- !u!114 &1779172053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19071,6 +19081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c8b66da370378e3b59be9a256a41aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPower: 0
   rangeRadius: 4
   activated: 0
   _rangePrefab: {fileID: 1990342430478220552, guid: f96e6c13c4aa9ba1eaae5c5236807c5f, type: 3}
@@ -19138,6 +19149,27 @@ MonoBehaviour:
     m_ColorMax: {r: 0.4056604, g: 0.0133944545, b: 0.3377582, a: 1}
   previewPrefab: {fileID: 3483225076850325768, guid: c311c0c5fd3fef33cbfbdf6428018d58, type: 3}
   _teleportationEffectPrefab: {fileID: 7645451373510355043, guid: d9e5e01690ca6164b9084080c23f2cae, type: 3}
+--- !u!114 &1779172054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779172024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fc8bc73d443e75fb63dadd3e2e1e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powers:
+  - power: {fileID: 1779172053}
+    cooldownDuration: 5
+    maxDuration: -1
+  - power: {fileID: 1779172044}
+    cooldownDuration: 5
+    maxDuration: -1
+  _currentPowerIndex: -1
+  canUseAnyPower: 1
 --- !u!1 &1882812735
 GameObject:
   m_ObjectHideFlags: 0
@@ -21844,7 +21876,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 1720151120}
+  _fadeImage: {fileID: 0}
+  _tmproUGUI: {fileID: 0}
   _interactOnStart: 0
+  _translateChange: 0
+  _translateSpeed: 1
+  _fadeChange: 0
+  _fadeDescription: 
+  _fadeDuration: 1
+  _descriptionDuration: 1
 --- !u!114 &2109167458
 MonoBehaviour:
   m_ObjectHideFlags: 0
