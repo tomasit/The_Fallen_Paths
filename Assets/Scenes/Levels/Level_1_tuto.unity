@@ -9348,17 +9348,17 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Tkt
+  - dialogueName: ActivePowerReminder
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: 'Click on the object with your '
+      - _text: 'Press '
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 0
+          rgba: 4294967295
         _gradientColor:
           serializedVersion: 2
           rgba: 0
@@ -9366,25 +9366,25 @@ MonoBehaviour:
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
-      - _text: '[mouse] '
+      - _text: '[A] '
         _textModifier: 4
         _colorModifier: 2
         _solidColor:
           serializedVersion: 2
-          rgba: 0
+          rgba: 4278221823
         _gradientColor:
           serializedVersion: 2
-          rgba: 0
+          rgba: 4278251263
         _colorSpeedRandomness: 0
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
-      - _text: to activate it.\n
+      - _text: to activate power.
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 0
+          rgba: 4294967295
         _gradientColor:
           serializedVersion: 2
           rgba: 0

@@ -125,10 +125,28 @@ public class TutorialManager : MonoBehaviour
             yield return null;
     }
 
-    // private IEnumerator WaitForPower()
-    // {
-    //     yield 
-    // }
+    private IEnumerator WaitForPower()
+    {
+        bool isComplete = false;
+        bool isPowerActive = false;
+        float timer = 0.0f;
+        while (!isComplete)
+        {
+            if (!isPowerActive) // !IsPowerActive
+            {
+                if (_dialogue.IsFinish())
+                {
+                    timer += Time.deltaTime;
+                    if (timer >= 5.0f)
+                    {
+                        _dialogue.StartDialogue("ActivePowerReminder");
+                        timer = 0.0f;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
 
     private IEnumerator TutorialCoroutine()
     {
@@ -173,6 +191,7 @@ public class TutorialManager : MonoBehaviour
         yield return WaitForDialogueToFinish();
         _controller.BlockInput(false);
         _interactor.BlockInput(false);
+        yield return WaitForPower();
     }
 
     private void Update()
