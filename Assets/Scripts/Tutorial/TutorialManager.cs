@@ -18,6 +18,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Image _fadeImage;
     [SerializeField] private TextMeshProUGUI _tmproUGUI;
     [SerializeField] private float _fadeDuration;
+    [SerializeField] private RemoteObjectControl _power; // replace by power manager
     private TMPDialogue _dialogue;
     private Coroutine _tutorialCoroutine;
     private bool _startTutorial;
@@ -42,24 +43,34 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForJump()
+    private IEnumerator ReminderOffset(string dialogueName)
     {
         float timer = 0.0f;
-        while (!Input.GetButtonDown("Jump"))
+        float remindOffset = 5.0f;
+        while (true)
         {
             if (_dialogue.IsFinish())
             {
-                if (timer >= 5.0f)
+                if (timer >= remindOffset)
                 {
                     timer = 0.0f;
-                    _dialogue.StartDialogue("JumpReminder");
+                    _dialogue.StartDialogue(dialogueName);
                 }
                 else
                     timer += Time.deltaTime;
             }
-
             yield return new WaitForSeconds(Time.deltaTime);
         }
+    }
+
+    private IEnumerator WaitForJump()
+    {
+        Coroutine reminder = StartCoroutine(ReminderOffset("JumpReminder"));
+        while (!Input.GetButtonDown("Jump"))
+        {
+            yield return null;
+        }
+        StopCoroutine(reminder);
     }
 
     private IEnumerator WaitForInput()
@@ -98,25 +109,17 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator WaitForDestroy()
     {
-        float time = 0.0f;
+        Coroutine reminder = StartCoroutine(ReminderOffset("InteractionReminder"));
         while (!_cageInteraction.IsObjectDestroy())
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                time = 0.0f;
+                StopCoroutine(reminder);
+                reminder = StartCoroutine(ReminderOffset("InteractionReminder"));
             }
-            if (_dialogue.IsFinish())
-            {
-                if (time >= 5.0f)
-                {
-                    time = 0.0f;
-                    _dialogue.StartDialogue("InteractionReminder");
-                }
-                else
-                    time += Time.deltaTime;
-            }
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
+        StopCoroutine(reminder);
     }
 
     private IEnumerator WaitForDialogueToFinish()
@@ -127,25 +130,37 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator WaitForPower()
     {
-        bool isComplete = false;
-        bool isPowerActive = false;
-        float timer = 0.0f;
-        while (!isComplete)
+        Coroutine reminder = StartCoroutine(ReminderOffset("ActivePowerReminder"));
+        while (!_power.HasObjectInRange())
         {
-            if (!isPowerActive) // !IsPowerActive
+            if (!_power.activated)
             {
-                if (_dialogue.IsFinish())
+                if (reminder == null)
                 {
-                    timer += Time.deltaTime;
-                    if (timer >= 5.0f)
-                    {
-                        _dialogue.StartDialogue("ActivePowerReminder");
-                        timer = 0.0f;
-                    }
+                    reminder = StartCoroutine(ReminderOffset("ActivePowerReminder"));
                 }
             }
-            yield return new WaitForSeconds(Time.deltaTime);
+            else
+            {
+                if (reminder != null)
+                    StopCoroutine(reminder);
+                reminder = null;
+            }
+            yield return null;
         }
+        if (reminder != null)
+            StopCoroutine(reminder);
+    }
+
+    private IEnumerator WaitForClick()
+    {
+        Coroutine reminder = StartCoroutine(ReminderOffset("ClickReminder"));
+        while (_power.activated)
+        {
+            yield return null;
+        }
+        StopCoroutine(reminder);
+        _controller.BlockInput(false);
     }
 
     private IEnumerator TutorialCoroutine()
@@ -160,20 +175,20 @@ public class TutorialManager : MonoBehaviour
         if (_nameBoxRef != null)
             Destroy(_nameBoxRef);
         _dialogue.StartDialogue("Welcome");
-        yield return WaitForDialogueToFinish();
+        yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
         _interactor.BlockInput(false);
-        yield return WaitForDestroy();
+        yield return StartCoroutine(WaitForDestroy());
         _controller.BlockInput(true);
         _dialogue.StartDialogue("KeyInstruction");
-        yield return WaitForDialogueToFinish();
+        yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
-        yield return WaitForInput();
+        yield return StartCoroutine(WaitForInput());
         _controller.BlockInput(true);
         _dialogue.StartDialogue("JumpInstruction");
-        yield return WaitForDialogueToFinish();
+        yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
-        yield return WaitForJump();
+        yield return StartCoroutine(WaitForJump());
         _firstDoorEnabler.Interact();
         _dialogue.StartDialogue("GoToPowerLevel");
         while (!_door1.IsInTransition())
@@ -185,13 +200,20 @@ public class TutorialManager : MonoBehaviour
         _dialogue.StartDialogue("PowerExplanation");
         _controller.BlockInput(true);
         _interactor.BlockInput(true);
-        yield return WaitForDialogueToFinish();
+        yield return StartCoroutine(WaitForDialogueToFinish());
         yield return new WaitForSeconds(2); // replace by unlock power animation
         _dialogue.StartDialogue("PowerInstruction");
-        yield return WaitForDialogueToFinish();
+        yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
         _interactor.BlockInput(false);
-        yield return WaitForPower();
+        yield return StartCoroutine(WaitForPower());
+        _controller.BlockInput(true);
+        _dialogue.StartDialogue("ClickToInteract");
+        yield return StartCoroutine(WaitForDialogueToFinish());
+        yield return StartCoroutine(WaitForClick());
+        _dialogue.StartDialogue("CongratPower");
+        yield return StartCoroutine(WaitForDialogueToFinish());
+        _controller.BlockInput(false);
     }
 
     private void Update()

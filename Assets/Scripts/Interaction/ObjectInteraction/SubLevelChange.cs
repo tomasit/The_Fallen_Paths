@@ -79,7 +79,7 @@ public class SubLevelChange : AInteractable
 
         yield return new WaitForSeconds(Time.deltaTime);
 
-        for (float t = 0; t < 1.0f; t += Time.deltaTime / _fadeDuration)
+        for (float t = 0; _fadeImage.color != nextImgColor && _tmproUGUI.color != nextTxtColor; t += Time.deltaTime / _fadeDuration)
         {
             _fadeImage.color = Color.Lerp(baseImgColor, nextImgColor, t);
             _tmproUGUI.color = Color.Lerp(baseTxtColor, nextTxtColor, t);

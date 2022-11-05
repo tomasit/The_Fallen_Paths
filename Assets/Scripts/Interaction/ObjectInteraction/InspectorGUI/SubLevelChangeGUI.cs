@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Tilemaps;
 
+#if (UNITY_EDITOR)
 [CustomEditor(typeof(SubLevelChange))]
 public class SubLevelChangeGUI : Editor
 {
@@ -53,3 +54,4 @@ public class SubLevelChangeGUI : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

@@ -2758,7 +2758,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -9393,6 +9393,147 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
+  - dialogueName: ClickToInteract
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: 'Look at this torch, if you manage to extinguish it you will be able
+          to hide yourself more effectively '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+    - _modifiableText:
+      - _text: 'and make sure that the guard does not see you in order to reach the
+          next door  '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+    - _modifiableText:
+      - _text: 'Put your mouse on the torch and use '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: '[left click] '
+        _textModifier: 4
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278221823
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278251263
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: to activate it
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: ClickReminder
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: 'Use your '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: '[left click] '
+        _textModifier: 4
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278221823
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278251263
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: to activate the object
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278251263
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: CongratPower
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Well done, now reach the next door without getting caught
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
   _dialogueBox: {fileID: 2293967979908483698, guid: 889ee7ab36dc04c43ba433753dbb0a78, type: 3}
   _canvasTransform: {fileID: 501055652}
   _waveSpeed: 5
@@ -9441,6 +9582,7 @@ MonoBehaviour:
   _fadeImage: {fileID: 1392080640}
   _tmproUGUI: {fileID: 1314461604}
   _fadeDuration: 2
+  _power: {fileID: 2313984763137598549}
 --- !u!4 &861000918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4348182967783644, guid: f95ce332b14a44d40be36f6a8bc63d2d, type: 3}

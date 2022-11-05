@@ -22,6 +22,10 @@ public class AskForName : MonoBehaviour
             name = name.Replace("gabriel", "DongDong-$dev$", StringComparison.OrdinalIgnoreCase);
         else if (name.Contains("nicolas", StringComparison.OrdinalIgnoreCase))
             name = name.Replace("nicolas", "UIMaster-$dev$", StringComparison.OrdinalIgnoreCase);
+        else if (name.Contains("balthazar", StringComparison.OrdinalIgnoreCase))
+            name = name.Replace("balthazar", "LaPoutreGuadeloupeenne-$dev$", StringComparison.OrdinalIgnoreCase);
+        else if (name.Contains("link", StringComparison.OrdinalIgnoreCase))
+            name = name.Replace("link", "Zelda ;)", StringComparison.OrdinalIgnoreCase);
         SaveManager.DataInstance.GetPlayerInfo()._playerName = name;
     }
 

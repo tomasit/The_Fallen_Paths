@@ -10,6 +10,7 @@ public class RemoteObjectControl : ARangedPower
     private RemoteControllableObject[] _triggerableObjects;
     private List<GameObject> _instantiatedParticles;
     private RemoteControllableObject _objectInTouch = null;
+    private bool _hasObjectInRange = false;
 
     private void Start()
     {
@@ -62,12 +63,14 @@ public class RemoteObjectControl : ARangedPower
 
     private void CheckDistance()
     {
+        bool tmp = false;
         foreach (var triggerable in _triggerableObjects)
         {
             if (!triggerable.transform.gameObject.activeSelf)
                 continue;
             if (Vector2.Distance(triggerable.transform.position, transform.position) <= rangeRadius)
             {
+                tmp = true;
                 triggerable.RateUpParticle();
             }
             else
@@ -75,6 +78,12 @@ public class RemoteObjectControl : ARangedPower
                 triggerable.RateDownParticle();
             }
         }
+        _hasObjectInRange = tmp;
+    }
+
+    public bool HasObjectInRange()
+    {
+        return _hasObjectInRange;
     }
 
     private void UnactiveRemoteObjectParticle()
