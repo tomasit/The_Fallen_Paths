@@ -10,9 +10,11 @@ public class SubLevelChangeGUI : Editor
     private SerializedProperty _tilemap;
     private SerializedProperty _image;
     private SerializedProperty _text;
+    private SerializedProperty _player;
 
     private void OnEnable()
     {
+        _player = serializedObject.FindProperty("_player");
         _tilemap = serializedObject.FindProperty("_grid");
         _image = serializedObject.FindProperty("_fadeImage");
         _text = serializedObject.FindProperty("_tmproUGUI");
@@ -23,6 +25,7 @@ public class SubLevelChangeGUI : Editor
         SubLevelChange place = (SubLevelChange)target;
 
         EditorGUILayout.PropertyField(_tilemap);
+        EditorGUILayout.PropertyField(_player);
 
         place._interactOnStart = GUILayout.Toggle(place._interactOnStart, "Interact on start");
 

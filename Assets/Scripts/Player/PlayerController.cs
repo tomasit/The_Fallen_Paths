@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MovementValues _playerValues;
     [SerializeField] private MovementValues _ratValues;
     private MovementValues[] _movementValues;
-    private bool _blockInput;
+    private bool _blockInput = false;
 
     private float deceleration = 0.0f;
 

@@ -68,7 +68,7 @@ public class Teleportation : AVisualCircleRangedPower
     {
         Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Debug.Log(transform.localScale);
+        // Debug.Log(transform.localScale);
 
         var yColliderOffset = new Vector2(0, (_collider.size.y * transform.localScale.y) / 2);
 

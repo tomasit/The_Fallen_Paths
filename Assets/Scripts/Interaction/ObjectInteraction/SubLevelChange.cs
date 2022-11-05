@@ -7,6 +7,7 @@ using TMPro;
 
 public class SubLevelChange : AInteractable
 {
+    public GameObject _player;
     public Tilemap _grid;
     public Image _fadeImage;
     public TextMeshProUGUI _tmproUGUI;
@@ -18,6 +19,7 @@ public class SubLevelChange : AInteractable
     public float _fadeDuration = 1.0f;
     public float _descriptionDuration = 1.0f;
     private Camera _camera = null;
+    private bool _isTransitionning = false;
 
     private void Start()
     {
@@ -37,8 +39,22 @@ public class SubLevelChange : AInteractable
         camResize.SetPosition(_grid.transform.position + _grid.cellBounds.center);
     }
 
+    private void BlockInput(bool block)
+    {
+        PlayerController ctrl = _player.GetComponent<PlayerController>();
+        TestComputeInteraction itrct = _player.GetComponent<TestComputeInteraction>();
+
+        if (ctrl)
+            ctrl.BlockInput(block);
+        if (itrct)
+            itrct.BlockInput(block);
+    }
+
     private IEnumerator TranslateTo(Tilemap grid)
     {
+        BlockInput(true);
+        _isTransitionning = true;
+
         Vector3 target = _grid.transform.position + _grid.cellBounds.center;
         target.z = _camera.transform.position.z;
 
@@ -47,6 +63,9 @@ public class SubLevelChange : AInteractable
             _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, target, _translateSpeed * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
+
+        _isTransitionning = false;
+        BlockInput(false);
     }
 
     private IEnumerator BlackFade(bool fadeIn)
@@ -70,10 +89,19 @@ public class SubLevelChange : AInteractable
 
     private IEnumerator Fade()
     {
+        _isTransitionning = true;
+        BlockInput(true);
         yield return StartCoroutine(BlackFade(true));
         MoveAndResizeCamera();
         yield return new WaitForSeconds(_descriptionDuration);
         yield return StartCoroutine(BlackFade(false));
+        BlockInput(false);
+        _isTransitionning = false;
+    }
+
+    public bool IsInTransition()
+    {
+        return _isTransitionning;
     }
 
     public override void Interact()
