@@ -35,7 +35,7 @@ public class TutorialManager : MonoBehaviour
 
         yield return (new WaitForSeconds(3.0f));
 
-        for (float t = 0; t < 1.0f; t += Time.deltaTime / _fadeDuration)
+        for (float t = 0; _fadeImage.color != nextImgColor && _tmproUGUI.color != nextTxtColor; t += Time.deltaTime / _fadeDuration)
         {
             _fadeImage.color = Color.Lerp(baseImgColor, nextImgColor, t);
             _tmproUGUI.color = Color.Lerp(baseTxtColor, nextTxtColor, t);
@@ -130,9 +130,12 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator WaitForPower()
     {
+        bool condition = false;
         Coroutine reminder = StartCoroutine(ReminderOffset("ActivePowerReminder"));
-        while (!_power.HasObjectInRange())
+        while (!condition)
         {
+            condition = _power.HasObjectInRange() & _controller.isGrounded();
+
             if (!_power.activated)
             {
                 if (reminder == null)
