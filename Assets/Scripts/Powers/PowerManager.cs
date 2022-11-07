@@ -16,7 +16,7 @@ public class PowerManager : MonoBehaviour
     }
     [SerializeField]
     private List<PowerData> _powers;
-    public int _currentPowerIndex = -1;
+    private int _currentPowerIndex = -1;
 
     public bool canUseAnyPower = true;
 
@@ -62,16 +62,13 @@ public class PowerManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A + i))
             {
-                Debug.Log("key: " + i);
                 ChoosePower(i);
             }
         }
-        Debug.Log("first:" + _currentPowerIndex);
         if (_currentPowerIndex >= 0)
         {
             var currentPowerData = _powers[_currentPowerIndex];
             var currentPower = currentPowerData.power;
-            Debug.Log("mood: " + currentPower.GetType().Name);
             if (currentPower.firingPower == false)
             {
                 if (currentPower is ARangedPower)
@@ -81,9 +78,9 @@ public class PowerManager : MonoBehaviour
                 }
                 else
                 {
-                    currentPowerData.duration = 0;
                     _currentPowerIndex = -1;
                 }
+                currentPowerData.duration = 0;
             }
             else if (currentPowerData.maxDuration != -1)
             {
@@ -98,7 +95,6 @@ public class PowerManager : MonoBehaviour
         }
         foreach (var power in _powers)
             if (power.cooldown > 0)
-                power.cooldown -= Time.deltaTime;
-        Debug.Log("at the end:" + _currentPowerIndex);
+                power.cooldown = Mathf.Max(power.cooldown - Time.deltaTime, 0);
     }
 }
