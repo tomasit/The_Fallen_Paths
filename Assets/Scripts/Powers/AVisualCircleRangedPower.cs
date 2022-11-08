@@ -15,7 +15,6 @@ public abstract class AVisualCircleRangedPower : ARangedPower
 
     public override void Use()
     {
-        // powerActivated = true
         activated = true;
         showRange();
     }
@@ -68,10 +67,6 @@ public abstract class AVisualCircleRangedPower : ARangedPower
             else
                 UnPreview();
         }
-        // else if (Input.GetKey(KeyCode.R)) // NOTE: Remove this else if when power manager is done
-        // {
-        //     Use();
-        // }
         else if (_rangeObject != null && _rangeObject.particleCount == 0)
         {
             Destroy(_rangeObject.gameObject);
