@@ -26,9 +26,11 @@ public class PowerManager : MonoBehaviour
 
     }
 
-    void ChoosePower(int powerIndex)
+    public void ChoosePower(string powerName)
     {
-        if (powerIndex < 0 || powerIndex > _powers.Count - 1)
+        int powerIndex = _powers.FindIndex(x => x.power.GetType() == System.Type.GetType(powerName));
+
+        if (powerIndex < 0)
             return;
         if (powerIndex == _currentPowerIndex)
         {
@@ -57,12 +59,13 @@ public class PowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        List<string> a = new List<string> { "Teleportation", "RemoteObjectControl" };
         // NOTE: best debug ever
-        for (int i = 0; i < _powers.Count; ++i)
+        for (int i = 0; i < a.Count; ++i)
         {
             if (Input.GetKeyDown(KeyCode.A + i))
             {
-                ChoosePower(i);
+                ChoosePower(a[i]);
             }
         }
         if (_currentPowerIndex >= 0)

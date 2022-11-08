@@ -74,8 +74,6 @@ public class Teleportation : AVisualCircleRangedPower
     {
         Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Debug.Log(transform.localScale);
-
         var yColliderOffset = new Vector2(0, (_collider.size.y * transform.localScale.y) / 2);
 
         var ray = Physics2D.Raycast(newPosition - yColliderOffset, Vector3.down, 1.5f, (1 << 11));
@@ -90,7 +88,7 @@ public class Teleportation : AVisualCircleRangedPower
 
         var _colliderTempSize = _collider.size * transform.localScale;
         _colliderTempSize.y -= 0.1f;
-        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, -0.1f, (1 << 11));
+        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, 0f, (1 << 11));
 
         _canCast = !box;
         if (!_canCast)
