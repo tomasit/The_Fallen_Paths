@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaycastDetection : TriggerProcessor
 {
-    private enum Direction
+    public enum Direction
     {
         LEFT,
         RIGHT,
@@ -12,10 +12,10 @@ public class RaycastDetection : TriggerProcessor
         DOWN,
     }
 
-    [SerializeField] private Vector2 _offset;
-    [SerializeField] private Direction _rayDirection;
+    [SerializeField] public Vector2 _offset;
+    [SerializeField] public Direction _rayDirection;
     [SerializeField] private LayerMask _triggerLayer;
-    [SerializeField] private float _rayLenght;
+    [SerializeField] public float _rayLenght;
     private RaycastHit2D _hit;
     private Vector2 _vecDirection;
 
