@@ -58,11 +58,11 @@ public class CoroutineProcessor : ACoroutine
                     yield return coroutine.Interact();
                 }
                 if (enemyState == EnemyEventState.FightPlayer && coroutine.eventType == EnemyEventState.FightPlayer) {
-                    Debug.Log("------------guard is going to hagar le PLAYER");
+                    //Debug.Log("------------guard is going to hagar le PLAYER");
                     yield return coroutine.Interact(objArg);
                 }
                 if (enemyState == EnemyEventState.SeenRandomSpoted && coroutine.eventType == EnemyEventState.SeenRandomSpoted) {
-                    Debug.Log("------------guard is running for hagar le PLAYER");
+                    //Debug.Log("------------guard is running for hagar le PLAYER");
                     yield return coroutine.Interact(objArg);
                 }
                 if (enemyState == EnemyEventState.SeenDeadBody && coroutine.eventType == EnemyEventState.SeenDeadBody) {

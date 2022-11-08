@@ -51,32 +51,58 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void AnimationController(Enemy enemy)
     {
-        if (enemy.movementManager.isAtDistanceToInteract && 
-            enemy.detectionManager.detectionState == DetectionState.None ||
-            enemy.detectionManager.detectionState == DetectionState.Freeze) {
+        Vector3 targetDistance = FindTargetDirection(
+            enemy.movementManager.spritePos.position, 
+            enemy.movementManager.target.position);
+
+        bool isAtDistanceToInteract = false;
+        
+        if (targetDistance.x > 0) {
+            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
+            }
+        } else if (targetDistance.x < 0) {
+            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
+            }
+        }
+
+        if (isAtDistanceToInteract && 
+            (enemy.detectionManager.detectionState == DetectionState.None ||
+            enemy.detectionManager.detectionState == DetectionState.Freeze) &&
+            enemy.movementManager.collisionObj == null
+            ) {
             enemy.animator.SetTrigger("Idle");
         }
-        if (enemy.movementManager.isAtDistanceToInteract && 
+        if (isAtDistanceToInteract && 
             (enemy.detectionManager.detectionState == DetectionState.Alert || 
-            enemy.detectionManager.detectionState == DetectionState.Spoted)) {
+            enemy.detectionManager.detectionState == DetectionState.Spoted) &&
+            enemy.movementManager.collisionObj == null
+            ) {
             enemy.animator.SetTrigger("Ready");
         }
-        if (enemy.movementManager.isAtDistanceToInteract && 
-            enemy.detectionManager.detectionState == DetectionState.Flee) {
+        if (isAtDistanceToInteract && 
+            enemy.detectionManager.detectionState == DetectionState.Flee &&
+            enemy.movementManager.collisionObj == null) {
             enemy.animator.SetTrigger("Scared");
         }
-        if (!enemy.movementManager.isAtDistanceToInteract  &&
+        if (!isAtDistanceToInteract  &&
             (enemy.detectionManager.detectionState == DetectionState.Alert ||
-            enemy.detectionManager.detectionState == DetectionState.None)
+            enemy.detectionManager.detectionState == DetectionState.None) &&
+            enemy.movementManager.collisionObj == null
             /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Walking");
         }
-        if (!enemy.movementManager.isAtDistanceToInteract &&
+        if (!isAtDistanceToInteract &&
             (enemy.detectionManager.detectionState == DetectionState.Spoted ||
-            enemy.detectionManager.detectionState == DetectionState.Flee)
+            enemy.detectionManager.detectionState == DetectionState.Flee) &&
+            enemy.movementManager.collisionObj == null
             /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Running");
         }
+
+        //faire des conditions pour les lader ici
+
         /*
         if (//il s'est fait hit, savedHealth <= Health
         ) {
@@ -174,19 +200,14 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void DetectionEventState(Enemy enemy) {
         if (enemy.detectionManager.detectionState == DetectionState.None) {
-            enemy.sprite.color = Color.green;
             enemy.movementManager.BasicMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
-            enemy.sprite.color = Color.yellow;
             enemy.movementManager.AlertMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Spoted) {
-            enemy.sprite.color = Color.red;
             enemy.movementManager.SpotMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Flee) {
-            enemy.sprite.color = Color.blue;
             enemy.movementManager.FleeMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Freeze) {
-            enemy.sprite.color = Color.black;
             enemy.movementManager.FreezeMovement();
         } else {
             Debug.Log("error : enemy has no detection state");
