@@ -31,12 +31,10 @@ public class Agent : MonoBehaviour
 
     public void SetTarget(Transform target, Vector3 offset)
     {
-        //float height = destination.gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
-
-        //var adjust = 0f;
-        //if (target.gameObject.name == "Player") {
-        //    adjust = destination.localPosition.y;
-        //}
+        if (target == null) {
+            //Debug.Log("Agent target is null");
+            return;
+        }
         
         Vector3 adjustedTarget = Vector3.zero;
         if (target.gameObject.name == "Player") {
@@ -47,7 +45,6 @@ public class Agent : MonoBehaviour
         
         _target = target;
         _targetPosition = adjustedTarget;
-        //_targetPosition = target.position;
     }
 
 }

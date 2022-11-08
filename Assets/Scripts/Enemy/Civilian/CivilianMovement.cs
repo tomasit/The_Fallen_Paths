@@ -12,9 +12,9 @@ public class CivilianMovement : AEnemyMovement
     {
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();
-        interactionManager = GetComponent<AEnemyInteraction>();
         agentMovement = GetComponent<Agent>();
         detectionTrigger = GetComponent<TriggerCoroutineProcessor>();
+        spritePos = transform.GetChild(0).GetComponent<SpriteRenderer>().transform;
     }
 
     void Update()
@@ -24,17 +24,34 @@ public class CivilianMovement : AEnemyMovement
     }
     public override void BasicMovement()
     {
-        detectionTrigger.SetDisabling(true);
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, target.position);
 
+        if (targetDirection.x > 0) {
+            if (targetDirection.x < EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
+            } else {
+                isAtDistanceToInteract = false;
+            }
+        }
+        if (targetDirection.x < 0) {
+            if (targetDirection.x > -EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
+            } else {
+                isAtDistanceToInteract = false;
+            }
+        }
+
+        _targetPosition.localPosition = Vector3.zero;
+        detectionTrigger.SetDisabling(true);
         NoNegative(speed = Speed[EnemyType.Random]);
     }
 
     public override void AlertMovement()
     {
         detectionTrigger.SetDisabling(true);
-
-        Vector3 targetDirection = FindTargetDirection(player.position);
-        target = player;
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, detectionManager.lastEventPosition);
+        _targetPosition.position = detectionManager.lastEventPosition;
+        target = _targetPosition;
         
         NoNegative(speed = Speed[EnemyType.Random] - (Speed[EnemyType.Random] * 0.5f));
         if (targetDirection.x > 0) {
@@ -53,11 +70,17 @@ public class CivilianMovement : AEnemyMovement
 
     public override void SpotMovement()
     {
+        _targetPosition.localPosition = Vector3.zero;
         detectionTrigger.SetState(EnemyEventState.SeenPlayer);
         detectionTrigger.SetDisabling(false);
         NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
+    }
 
-        //Il faut pas que ce soit le AenemyMovement qui lance le trigger 
-        // mais que ce soit le detectionManager
+    public override void FleeMovement()
+    {
+        _targetPosition.localPosition = Vector3.zero;
+        //detectionTrigger.SetState(EnemyEventState.NoGuardAround);
+        //detectionTrigger.SetDisabling(false);
+        NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
     }
 }

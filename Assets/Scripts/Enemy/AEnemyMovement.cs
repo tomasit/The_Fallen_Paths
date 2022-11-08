@@ -7,11 +7,13 @@ using static EnemyInfo;
 public abstract class AEnemyMovement : MonoBehaviour
 {
     public Transform target;
+    public bool isAtDistanceToInteract = false;
     public float speed = 1f;
-    [HideInInspector] public Agent agentMovement;
-    [HideInInspector] public AEnemyInteraction interactionManager;
-    [HideInInspector] public EnemyDetectionManager detectionManager;
-    [HideInInspector] public TriggerCoroutineProcessor detectionTrigger;
+    protected Transform spritePos;
+    [SerializeField] protected Transform _targetPosition;
+    [HideInInspector] protected Agent agentMovement;
+    [HideInInspector] protected EnemyDetectionManager detectionManager;
+    [HideInInspector] protected TriggerCoroutineProcessor detectionTrigger;
 
     public abstract void BasicMovement();
 
@@ -19,14 +21,24 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public abstract void SpotMovement();
 
+    public abstract void FleeMovement();
+
+    public void FreezeMovement()
+    {
+        target = transform;
+    }
+
     public void Move()
     {
+        //if isAtDistanceToInteract => stop
+
         //if (speed == 0f) {
             //agentMovement.SetTarget(gameObject.transform, transform.position);
         //} else {
             agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         //}
         agentMovement.SetSpeed(speed);
+        RotateAxis();
     }
 
     public void AllowedMovement()
@@ -42,34 +54,12 @@ public abstract class AEnemyMovement : MonoBehaviour
         return value;
     }
 
-    public Vector3 FindTargetDirection(Vector3 targetPosition)
+    private void RotateAxis()
     {
-        return targetPosition - transform.position;
-    }
-
-    //it's not the nearest, just the first he find
-    public Vector3 FindNearestEntityDirection(System.Type type)
-    {
-        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
-        
-        foreach(GameObject obj in allObjects) {
-            Vector3 positionObj = obj.transform.position;
-            return FindTargetDirection(positionObj);
+        if (detectionManager.direction == Vector2.right) {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        } else if (detectionManager.direction == Vector2.left) {
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        Debug.Log("No Entity near");
-        return Vector3.zero;
-    }
-    
-    //it's not the nearest, just the first he find
-    public (Vector3, GameObject) FindNearestEnemy(System.Type type)
-    {
-        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
-        
-        foreach(GameObject obj in allObjects) {
-            Vector3 positionObj = obj.transform.position;
-            return (FindTargetDirection(positionObj), obj);
-        }
-        Debug.Log("No enemy near");
-        return (Vector3.zero, null);
     }
 }

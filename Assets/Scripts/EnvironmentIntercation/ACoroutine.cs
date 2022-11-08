@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PersistentId))]
 public abstract class ACoroutine : MonoBehaviour
 {
+    [HideInInspector] public EnemyEventState eventType;
+    
     public enum DescriptionHeight : int
     {
         NONE = 0,

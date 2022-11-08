@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum EnemyEventState {
-    None,
-    SeenPlayer,
-    NoGuardAround,
-    SeenRandomSpoted,
-    SeenDeadBody,
-    SeenOffLight,
-}
-
-[RequireComponent(typeof(TriggerCoroutineProcessor))]
+//[RequireComponent(typeof(TriggerCoroutineProcessor))]
 public class CoroutineProcessor : ACoroutine
 {
     public bool crRunning = false;
     public EnemyEventState enemyState = EnemyEventState.None;
-    public List<GameObject> enemiesDiscovered;
+    //public List<GameObject> enemiesDiscovered;
     [SerializeField] private ACoroutine[] _coroutines;
     [SerializeField] private bool _execAllCoroutines = false;
     [SerializeField] private bool _stopOnInteract;
@@ -49,36 +40,38 @@ public class CoroutineProcessor : ACoroutine
             if (_execAllCoroutines) {
                 StartCoroutine(coroutine.Interact(objArg));
             } else {
-                if (enemyState == EnemyEventState.None) {
-                    yield return StartCoroutine(coroutine.Interact(objArg));
+                if (enemyState == EnemyEventState.None && coroutine.eventType == EnemyEventState.None) {
+                    yield return coroutine.Interact(objArg);
                 }
-                if (enemyState == EnemyEventState.SeenPlayer) {
+                if (enemyState == EnemyEventState.SeenPlayer && coroutine.eventType == EnemyEventState.SeenPlayer) {
+                    Debug.Log("------------random is going to alert guard");
                     var enemy = FindNearestEnemy();
                     if (enemy != null) {
-                        enemiesDiscovered.Add(enemy.gameObject);
-                        yield return StartCoroutine(coroutine.Interact(enemy));
+                        yield return coroutine.Interact(enemy);
                     } else {
+                        Debug.Log("No enemy found, new state for flee");
                         enemyState = EnemyEventState.NoGuardAround;
-                        enemiesDiscovered.Clear();
                     }
                 }
-                if (enemyState == EnemyEventState.NoGuardAround) {
+                if (enemyState == EnemyEventState.NoGuardAround && coroutine.eventType == EnemyEventState.NoGuardAround) {
                     Debug.Log("------------random is going to do run away");
-                    //run oposite dir than player
-                    yield return StartCoroutine(coroutine.Interact());
+                    yield return coroutine.Interact();
                 }
-                if (enemyState == EnemyEventState.SeenRandomSpoted) {
+                if (enemyState == EnemyEventState.FightPlayer && coroutine.eventType == EnemyEventState.FightPlayer) {
                     Debug.Log("------------guard is going to hagar le PLAYER");
-                    //go to last player pos
-                    yield return StartCoroutine(coroutine.Interact(objArg));
+                    yield return coroutine.Interact(objArg);
                 }
-                if (enemyState == EnemyEventState.SeenDeadBody) {
+                if (enemyState == EnemyEventState.SeenRandomSpoted && coroutine.eventType == EnemyEventState.SeenRandomSpoted) {
+                    Debug.Log("------------guard is running for hagar le PLAYER");
+                    yield return coroutine.Interact(objArg);
+                }
+                if (enemyState == EnemyEventState.SeenDeadBody && coroutine.eventType == EnemyEventState.SeenDeadBody) {
                     //be alerted
-                    yield return StartCoroutine(coroutine.Interact());
+                    yield return coroutine.Interact();
                 }
-                if (enemyState == EnemyEventState.SeenOffLight) {
+                if (enemyState == EnemyEventState.SeenOffLight && coroutine.eventType == EnemyEventState.SeenOffLight) {
                     //turn on the light
-                    yield return StartCoroutine(coroutine.Interact(objArg));                    
+                    yield return coroutine.Interact(objArg);                    
                 }
             }
         }
@@ -87,10 +80,11 @@ public class CoroutineProcessor : ACoroutine
             _interact = true;
             DisableTriggerInteractor();
         }
+        enemyState = EnemyEventState.None;
         crRunning = false;
     }
     
-    public bool enemyAlreadyDiscovered(GameObject enemyFound)
+    /*public bool enemyAlreadyDiscovered(GameObject enemyFound)
     {
         foreach (var enemy in enemiesDiscovered) {
             if (enemy == enemyFound) {
@@ -98,34 +92,44 @@ public class CoroutineProcessor : ACoroutine
             }
         }
         return false;
-    }
+    }*/
 
     public Transform FindNearestEnemy()
     {
         GuardMovement[] allObjects = (GuardMovement[])GameObject.FindObjectsOfType(typeof(GuardMovement));
-
+        if (allObjects.Length == 0)
+            return null;
         (Vector3 pos, GameObject obj) enemySaved = (allObjects[0].gameObject.transform.position, allObjects[0].gameObject);
         bool newEnemyFound = false;
 
         foreach(GuardMovement obj in allObjects) {
+            //Debug.Log("Guard remaining : " + obj.gameObject.name);
             Vector3 enemyPosIte = ComparePosition(obj.gameObject.transform.position, transform.position);
             
-            if (enemyAlreadyDiscovered(obj.gameObject) || 
-                obj.gameObject.GetComponent<EnemyDetectionManager>().detectionState == DetectionState.Spoted) {
+            if (obj.gameObject.GetComponent<EnemyDetectionManager>().detectionState == DetectionState.Spoted ||
+                obj.gameObject.GetComponent<EnemyDetectionManager>().detectionState == DetectionState.Alert) {
+                //Debug.Log(obj.gameObject.name + " is knowed or arleady alerted");
                 continue;
             }
+
+            if (!newEnemyFound) {
+                enemySaved = (enemyPosIte, obj.gameObject);
+            }
+
+            newEnemyFound = true;
 
             if (Mathf.Abs(enemyPosIte.y) < Mathf.Abs(enemySaved.pos.y)) {
                 if (Mathf.Abs(enemyPosIte.y) < Mathf.Abs(enemySaved.pos.x)) {
                     enemySaved = (enemyPosIte, obj.gameObject);
-                    newEnemyFound = true;
                 }
             }
+
             if (Mathf.Abs(enemyPosIte.x) < Mathf.Abs(enemySaved.pos.x)) {
                 enemySaved = (enemyPosIte, obj.gameObject);
-                newEnemyFound = true;
             }
         }
+
+        //Debug.Log("NewEnemyFound : " + newEnemyFound);
 
         return newEnemyFound ? enemySaved.obj.gameObject.transform : null;
     }

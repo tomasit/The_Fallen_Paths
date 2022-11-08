@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ou alors faire un trigger qui lance un raycats juste pour l'enemmy
-
 public class TriggerCoroutineProcessor : MonoBehaviour
 {
     protected bool _isDisable = true;
     protected CoroutineProcessor _processor;
     protected Coroutine _coroutine;
+    protected Transform _interact;
 
     public void Start()
     {
@@ -21,7 +20,7 @@ public class TriggerCoroutineProcessor : MonoBehaviour
         if (!_isDisable)
         {
             if (!_processor.crRunning && _coroutine == null) {
-                _coroutine = StartCoroutine(Trigger());
+                _coroutine = StartCoroutine(Trigger(_interact));
             }
         } else {
             if (_coroutine != null) {
@@ -30,11 +29,17 @@ public class TriggerCoroutineProcessor : MonoBehaviour
         }
     }
     
-    public IEnumerator Trigger()
+    public IEnumerator Trigger(Transform obj = null)
     {
-        Debug.Log("Trigger");
         if (_processor != null) {
-            yield return StartCoroutine(_processor.Interact());
+            yield return StartCoroutine(_processor.Interact(obj));
+        }
+    }
+
+    public void SetInteractionObj(Transform interact)
+    {
+        if (interact != null) {
+            _interact = interact;
         }
     }
 

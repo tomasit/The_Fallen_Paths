@@ -11,12 +11,12 @@ public class EnemyDetectionManager : MonoBehaviour
     
     [Header("Raycast")]
     public float detectionDistance = 5f;
-    public Vector2 _direction = Vector2.right;
+    public Vector2 direction = Vector2.right;
     public Vector3 rayCastOffset;
 
     [Header("States")]
     public bool playerDetected = false;
-    public DetectionState detectionState = DetectionState.None;
+    public DetectionState detectionState = DetectionState.None;//faire un state undefined ou alors faire en sorte qu'il aille pqas forcement vers le playeer quanfd il est alert
     public RaycastHit2D raycast;
     
     [Header("Clocks")]
@@ -33,7 +33,7 @@ public class EnemyDetectionManager : MonoBehaviour
     void Update()
     {
         //si il est hide dans un truc ne pas le detecter
-        playerDetected = ThrowRay(_direction, detectionDistance);
+        playerDetected = ThrowRay(direction, detectionDistance);
 
         ModifyDetectionState();
     }
@@ -75,9 +75,9 @@ public class EnemyDetectionManager : MonoBehaviour
         return false;
     }
 
-    public void SetRayCastDirection(Vector2 direction)
+    public void SetRayCastDirection(Vector2 directionToSet)
     {
-        _direction = direction;
+        direction = directionToSet;
     }
 
     public void SetState(DetectionState state)
