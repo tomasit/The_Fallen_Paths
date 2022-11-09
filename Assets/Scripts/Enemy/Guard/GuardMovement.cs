@@ -85,7 +85,10 @@ public class GuardMovement : AEnemyMovement
 
         if (targetDirection.x > 0) {
             if (targetDirection.x < EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                
+                //il faut pas qu'il soit sur une echelle
                 Attack(player.transform);
+                
                 isAtDistanceToInteract = true;
                 speed = 0f;
             } else {

@@ -180,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &112446884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +274,9 @@ MonoBehaviour:
   target: {fileID: 713517810}
   _targetPosition: {fileID: 713517810}
   isAtDistanceToInteract: 0
-  collisionObj: {fileID: 0}
   speed: 0.75
+  collisionObj: {fileID: 0}
+  isClimbing: 0
   spritePos: {fileID: 0}
 --- !u!114 &112446892
 MonoBehaviour:
@@ -893,7 +894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &587825569
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -973,8 +974,9 @@ MonoBehaviour:
   target: {fileID: 1011273085}
   _targetPosition: {fileID: 1011273085}
   isAtDistanceToInteract: 0
-  collisionObj: {fileID: 0}
   speed: 1
+  collisionObj: {fileID: 0}
+  isClimbing: 0
   spritePos: {fileID: 0}
 --- !u!114 &587825573
 MonoBehaviour:
@@ -2419,7 +2421,7 @@ MonoBehaviour:
   debug: 1
   detectionDistance: 5
   direction: {x: 1, y: 0}
-  rayCastOffset: {x: 0, y: 0.63, z: 0}
+  rayCastOffset: {x: 0.36, y: 0.63, z: 0}
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 2
@@ -2444,8 +2446,9 @@ MonoBehaviour:
   target: {fileID: 1599854753}
   _targetPosition: {fileID: 1599854753}
   isAtDistanceToInteract: 0
-  collisionObj: {fileID: 0}
   speed: 0.75
+  collisionObj: {fileID: 0}
+  isClimbing: 0
   spritePos: {fileID: 0}
 --- !u!114 &921948018
 MonoBehaviour:
@@ -2633,7 +2636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1020517151
 Transform:
   m_ObjectHideFlags: 0
@@ -2691,8 +2694,9 @@ MonoBehaviour:
   target: {fileID: 1598241254}
   _targetPosition: {fileID: 1598241254}
   isAtDistanceToInteract: 0
-  collisionObj: {fileID: 0}
   speed: 1
+  collisionObj: {fileID: 0}
+  isClimbing: 0
   spritePos: {fileID: 0}
 --- !u!195 &1020517154
 NavMeshAgent:
@@ -11131,7 +11135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - uuid: 
-    enabled: 1
+    enabled: 0
     type: 0
     sprite: {fileID: 325399963}
     animator: {fileID: 325399962}
@@ -11141,7 +11145,7 @@ MonoBehaviour:
     movementManager: {fileID: 112446891}
     detectionManager: {fileID: 112446890}
   - uuid: 
-    enabled: 1
+    enabled: 0
     type: 2
     sprite: {fileID: 1865925092}
     animator: {fileID: 1865925091}
@@ -11151,7 +11155,7 @@ MonoBehaviour:
     movementManager: {fileID: 1020517153}
     detectionManager: {fileID: 1020517152}
   - uuid: 
-    enabled: 1
+    enabled: 0
     type: 2
     sprite: {fileID: 363212764}
     animator: {fileID: 363212763}

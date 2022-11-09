@@ -20,6 +20,9 @@ public class Attack : ACoroutine
     public override IEnumerator Interact(Transform obj = null)
     {
         //Debug.Log("----Attack");
+        
+        //il faut pas qu'il soit sur une echelle
+        
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(2f);

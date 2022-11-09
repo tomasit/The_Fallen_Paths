@@ -101,10 +101,20 @@ public class EnemyEventsManager : MonoBehaviour
                 enemy.animator.SetTrigger("Running");
         }
 
-        //faire des conditions pour les lader ici
+        var currentAnimationName = enemy.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
-        /*
-        if (//il s'est fait hit, savedHealth <= Health
+        if (isAtDistanceToInteract &&
+            currentAnimationName == "sword_climbing") {
+            Debug.Log("stop anim");
+            enemy.animator.speed = 0;
+        } else {
+            enemy.animator.speed = 1;
+        }
+
+        //faire des conditions pour les lader ici
+        
+        //health manager sur les enemies
+        /*if (//il s'est fait hit, savedHealth <= Health
         ) {
             enemy.animator.SetTrigger("Hit");
         }
@@ -115,7 +125,7 @@ public class EnemyEventsManager : MonoBehaviour
         if (//son collider trigger avec un collider lader
         ) {
             //enemy.animator.SetTrigger("Climbing");
-        } */       
+        }*/       
     }
 
     private void IgnoreLayers(Enemy enemy)

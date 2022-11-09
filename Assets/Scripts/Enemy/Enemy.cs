@@ -91,7 +91,4 @@ public struct Enemy {
     public Agent agentMovement;
     public AEnemyMovement movementManager;
     public EnemyDetectionManager detectionManager;
-
-    // to switch with AInteraction
-    //public AEnemyInteraction interactionManager;
 }

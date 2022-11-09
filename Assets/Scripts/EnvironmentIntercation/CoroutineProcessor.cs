@@ -44,17 +44,17 @@ public class CoroutineProcessor : ACoroutine
                     yield return coroutine.Interact(objArg);
                 }
                 if (enemyState == EnemyEventState.SeenPlayer && coroutine.eventType == EnemyEventState.SeenPlayer) {
-                    Debug.Log("------------random is going to alert guard");
+                    //Debug.Log("------------random is going to alert guard");
                     var enemy = FindNearestEnemy();
                     if (enemy != null) {
                         yield return coroutine.Interact(enemy);
                     } else {
-                        Debug.Log("No enemy found, new state for flee");
+                        //Debug.Log("No enemy found, new state for flee");
                         enemyState = EnemyEventState.NoGuardAround;
                     }
                 }
                 if (enemyState == EnemyEventState.NoGuardAround && coroutine.eventType == EnemyEventState.NoGuardAround) {
-                    Debug.Log("------------random is going to do run away");
+                    //Debug.Log("------------random is going to do run away");
                     yield return coroutine.Interact();
                 }
                 if (enemyState == EnemyEventState.FightPlayer && coroutine.eventType == EnemyEventState.FightPlayer) {
@@ -65,6 +65,7 @@ public class CoroutineProcessor : ACoroutine
                     //Debug.Log("------------guard is running for hagar le PLAYER");
                     yield return coroutine.Interact(objArg);
                 }
+                // implem ca aussi
                 if (enemyState == EnemyEventState.SeenDeadBody && coroutine.eventType == EnemyEventState.SeenDeadBody) {
                     //be alerted
                     yield return coroutine.Interact();
@@ -73,6 +74,7 @@ public class CoroutineProcessor : ACoroutine
                     //turn on the light
                     yield return coroutine.Interact(objArg);                    
                 }
+                //si le player peut faire du bruit aussi implem
             }
         }
 

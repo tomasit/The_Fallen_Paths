@@ -9,8 +9,11 @@ public abstract class AEnemyMovement : MonoBehaviour
     public Transform target;
     [SerializeField] protected Transform _targetPosition;
     public bool isAtDistanceToInteract = false;
-    public Transform collisionObj = null;
     public float speed = 1f;
+
+    public Transform collisionObj = null;
+    public bool isClimbing = false;
+
     [HideInInspector] public Transform spritePos;
     [HideInInspector] protected Agent agentMovement;
     [HideInInspector] protected EnemyDetectionManager detectionManager;
@@ -89,13 +92,12 @@ public abstract class AEnemyMovement : MonoBehaviour
             transform.GetChild(0).GetComponent<Animator>().SetBool("Climbing", false);
         }
         ////
-        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader") && 
-            
+        /*if (other.gameObject.layer == LayerMask.NameToLayer("LastLader") && 
             collisionObj == null &&
             targetDirection.y < -1f) {//sa target est en dessous
-            Debug.Log("SitDown Bitch !!!");
+            Debug.Log("SitDown Bitch !!! / layer = " + other.gameObject.layer + " collisionObj == null ?" + (collisionObj == null) + " targetDirection.y = " + targetDirection.y);
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("SitDown");
-        }
+        }*/
     }
     
     void OnTriggerExit2D(Collider2D other)
