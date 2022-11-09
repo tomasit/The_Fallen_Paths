@@ -55,56 +55,82 @@ public class EnemyEventsManager : MonoBehaviour
             enemy.movementManager.spritePos.position, 
             enemy.movementManager.target.position);
 
-        bool isAtDistanceToInteract = false;
+        bool isAtTargetPosition = false;
+        bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
         
+        Debug.Log("targetDistance.x = " + targetDistance.x);
+        Debug.Log("targetDistance.y = " + targetDistance.y);
         if (targetDistance.x > 0) {
             if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
-                isAtDistanceToInteract = true;
+                isAtTargetPosition = true;
             }
         } else if (targetDistance.x < 0) {
             if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
-                isAtDistanceToInteract = true;
+                isAtTargetPosition = true;
             }
         }
 
-        if (isAtDistanceToInteract && 
+        if (isAtTargetPosition && 
             (enemy.detectionManager.detectionState == DetectionState.None ||
             enemy.detectionManager.detectionState == DetectionState.Freeze) &&
-            enemy.movementManager.collisionObj == null
+            !isClimbing
             ) {
             enemy.animator.SetTrigger("Idle");
         }
-        if (isAtDistanceToInteract && 
+        if (enemy.movementManager.isAtDistanceToInteract && 
             (enemy.detectionManager.detectionState == DetectionState.Alert || 
             enemy.detectionManager.detectionState == DetectionState.Spoted) &&
-            enemy.movementManager.collisionObj == null
+            !isClimbing
             ) {
             enemy.animator.SetTrigger("Ready");
         }
-        if (isAtDistanceToInteract && 
+        if (isAtTargetPosition && 
             enemy.detectionManager.detectionState == DetectionState.Flee &&
-            enemy.movementManager.collisionObj == null) {
+            !isClimbing) {
             enemy.animator.SetTrigger("Scared");
         }
-        if (!isAtDistanceToInteract  &&
+        if (!isAtTargetPosition &&
             (enemy.detectionManager.detectionState == DetectionState.Alert ||
             enemy.detectionManager.detectionState == DetectionState.None) &&
-            enemy.movementManager.collisionObj == null
-            /*il a pas pris de hit*/) {
+            !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Walking");
         }
-        if (!isAtDistanceToInteract &&
+        if (!enemy.movementManager.isAtDistanceToInteract &&
             (enemy.detectionManager.detectionState == DetectionState.Spoted ||
             enemy.detectionManager.detectionState == DetectionState.Flee) &&
-            enemy.movementManager.collisionObj == null
-            /*il a pas pris de hit*/) {
+            !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Running");
+                //sinon il doit être en mode ready to nicker des mères
+        }
+        
+        if (enemy.movementManager.collisionObj != null) {
+            if (enemy.movementManager.isEndClimbing && (targetDistance.y < -1f)) {
+                enemy.animator.SetTrigger("SitDown");
+            }
+            if (enemy.movementManager.collisionObj.gameObject.layer == LayerMask.NameToLayer("Lader") && 
+            enemy.movementManager.isClimbing && !RangeOf(targetDistance.y, 0f, 1f) && 
+            !enemy.movementManager.isEndClimbing) {
+                enemy.animator.SetBool("Climbing", true);
+            }
+            if (enemy.movementManager.isEndClimbing && enemy.movementManager.isClimbing && 
+            !(targetDistance.y < -1f)) {
+                enemy.animator.SetTrigger("StandUp");
+                enemy.animator.SetBool("Climbing", false);
+                enemy.movementManager.isClimbing = false;
+            }
+        } else {
+            enemy.animator.SetBool("Climbing", false);
+            if (!enemy.movementManager.isEndClimbing) {
+                enemy.movementManager.isClimbing = false;
+            }
         }
 
         var currentAnimationName = enemy.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
-        if (isAtDistanceToInteract &&
-            currentAnimationName == "sword_climbing") {
+        //Debug.Log("isAtTargetPosition = " + isAtTargetPosition);
+        
+        //si c le player faut soustraire l'offset en X de l'attaque
+        if (isAtTargetPosition && (currentAnimationName == "sword_climbing")) {
             Debug.Log("stop anim");
             enemy.animator.speed = 0;
         } else {

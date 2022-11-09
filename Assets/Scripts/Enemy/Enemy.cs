@@ -26,15 +26,14 @@ public class EnemyInfo
         { EnemyType.Random, 0.5f }
     };
 
-    public static float DistanceToInteract = 1f;
+    public static Vector3 DistanceToInteract = new Vector3(1f, 0f, 0f);
 
     public static bool RangeOfPosition(Vector3 posAim, Vector3 posCompare, float range) 
     {
         //Debug.Log(posCompare.x - range + " < " + posAim.x + " && " + posAim.x + " < " + posCompare.x + range);
         //Debug.Log(posCompare.y - range + " < " + posAim.y + " && " + posAim.y + " < " + posCompare.y + range);
-        return (
-            (posCompare.x - range <= posAim.x) && (posAim.x <= posCompare.x + range) && 
-            (posCompare.y - range <= posAim.y) && (posAim.y <= posCompare.y + range)
+        return ((posCompare.x - range <= posAim.x) && (posAim.x <= posCompare.x + range) && 
+                (posCompare.y - range <= posAim.y) && (posAim.y <= posCompare.y + range)
         );
     }
 

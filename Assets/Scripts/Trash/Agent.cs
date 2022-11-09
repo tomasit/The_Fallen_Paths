@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+using static EnemyInfo;
+
 public class Agent : MonoBehaviour
 {
     [SerializeField] Transform _target;
-    [SerializeField] Vector3 _targetPosition;
-    [HideInInspector] private NavMeshAgent agent;
-    [HideInInspector] private GameObject AgentSprite;
+    [SerializeField] public Vector3 targetPosition;
+    [HideInInspector] private NavMeshAgent _agent;
+    [HideInInspector] private Transform _agentSprite;
 
     void Start()
     {
-        _targetPosition = gameObject.transform.position;
+        targetPosition = gameObject.transform.position;
 
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        _agent = GetComponent<NavMeshAgent>();
+        _agentSprite = transform.GetChild(0).GetComponent<SpriteRenderer>().transform;
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
 
     void Update()
     {
-        agent.SetDestination(_targetPosition);
+        _agent.SetDestination(targetPosition);
     }
 
     public void SetSpeed(float speed)
     {
-        agent.speed = speed;
+        _agent.speed = speed;
     }
 
+    //offest : use it for sprite Y offset (between agent & real sprite pos)
     public void SetTarget(Transform target, Vector3 offset)
     {
         if (target == null) {
@@ -37,14 +41,22 @@ public class Agent : MonoBehaviour
         }
         
         Vector3 adjustedTarget = Vector3.zero;
+
         if (target.gameObject.name == "Player") {
-            adjustedTarget = target.position - offset;
+            
+            Vector3 targetDirection = FindTargetDirection(_agentSprite.position, target.position);
+            
+            Vector3 distanceToPlayer = new Vector3(
+                target.position.x + (DistanceToInteract.x * (targetDirection.x > 0 ? -1 : 1)), 
+                target.position.y + (DistanceToInteract.y * (targetDirection.y > 0 ? 1 : -1)), 
+                target.position.z);
+            adjustedTarget = distanceToPlayer - new Vector3(0f, offset.y, 0f);
         } else {
             adjustedTarget = target.position;
         }
         
         _target = target;
-        _targetPosition = adjustedTarget;
+        targetPosition = adjustedTarget;
     }
 
 }

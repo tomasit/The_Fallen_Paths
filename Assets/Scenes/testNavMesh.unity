@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &112446885
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -277,6 +277,7 @@ MonoBehaviour:
   speed: 0.75
   collisionObj: {fileID: 0}
   isClimbing: 0
+  isEndClimbing: 0
   spritePos: {fileID: 0}
 --- !u!114 &112446892
 MonoBehaviour:
@@ -396,11 +397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325772, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.34
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325772, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.19
+      value: -1.65
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325772, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -977,6 +978,7 @@ MonoBehaviour:
   speed: 1
   collisionObj: {fileID: 0}
   isClimbing: 0
+  isEndClimbing: 0
   spritePos: {fileID: 0}
 --- !u!114 &587825573
 MonoBehaviour:
@@ -991,7 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &587825574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1095,7 @@ GameObject:
   - component: {fileID: 615068080}
   - component: {fileID: 615068081}
   m_Layer: 0
-  m_Name: SubRoom 3
+  m_Name: Patern 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1143,7 +1145,7 @@ GameObject:
   - component: {fileID: 656821532}
   - component: {fileID: 656821533}
   m_Layer: 0
-  m_Name: SubRoom 4
+  m_Name: Patern 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1179,8 +1181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 1578975141}
   - {fileID: 898221194}
+  - {fileID: 1578975141}
   targetIndex: 0
 --- !u!1 &705291911
 GameObject:
@@ -1194,7 +1196,7 @@ GameObject:
   - component: {fileID: 705291914}
   - component: {fileID: 705291913}
   - component: {fileID: 705291915}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Ground Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1547,8 +1549,8 @@ Tilemap:
   - first: {x: -13, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1557,8 +1559,8 @@ Tilemap:
   - first: {x: -12, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1567,8 +1569,8 @@ Tilemap:
   - first: {x: -11, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1587,8 +1589,8 @@ Tilemap:
   - first: {x: -9, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1597,8 +1599,8 @@ Tilemap:
   - first: {x: -8, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1617,8 +1619,8 @@ Tilemap:
   - first: {x: -6, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1627,8 +1629,8 @@ Tilemap:
   - first: {x: -5, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1812,11 +1814,11 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 33
+  - m_RefCount: 28
     m_Data: {fileID: 11400000, guid: c3a2dab9dd3ef324990eae93fa176608, type: 2}
-  - m_RefCount: 10
+  - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: 7cbb48734bab5a040a5c33be6b994c5f, type: 2}
-  - m_RefCount: 10
+  - m_RefCount: 17
     m_Data: {fileID: 11400000, guid: ecbbfceed8da8fd4983d92417e25ce59, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -1825,11 +1827,11 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 33
+  - m_RefCount: 28
     m_Data: {fileID: 21300000, guid: 81e545624413cbe449498ea2e891e259, type: 3}
-  - m_RefCount: 10
+  - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: 8895500f4adb28b498551990eb5ac811, type: 3}
-  - m_RefCount: 10
+  - m_RefCount: 17
     m_Data: {fileID: 21300000, guid: 83ffa80a814fa274dae3118762815a90, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 53
@@ -1999,6 +2001,7 @@ GameObject:
   - component: {fileID: 773279207}
   - component: {fileID: 773279206}
   - component: {fileID: 773279205}
+  - component: {fileID: 773279209}
   m_Layer: 13
   m_Name: Last lader
   m_TagString: Untagged
@@ -2243,6 +2246,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &773279209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773279202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &888310101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,7 +2416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921948009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.049999, y: -5.04, z: 0}
+  m_LocalPosition: {x: -14.7, y: -4.71, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2449,6 +2468,7 @@ MonoBehaviour:
   speed: 0.75
   collisionObj: {fileID: 0}
   isClimbing: 0
+  isEndClimbing: 0
   spritePos: {fileID: 0}
 --- !u!114 &921948018
 MonoBehaviour:
@@ -2463,7 +2483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!70 &921948019
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2697,6 +2717,7 @@ MonoBehaviour:
   speed: 1
   collisionObj: {fileID: 0}
   isClimbing: 0
+  isEndClimbing: 0
   spritePos: {fileID: 0}
 --- !u!195 &1020517154
 NavMeshAgent:
@@ -2733,7 +2754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1020517156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10260,7 +10281,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 7167
+    m_Bits: 2147483647
   m_UseGeometry: 0
   m_OverrideByGrid: 0
   m_UseMeshPrefab: {fileID: 0}
@@ -11015,7 +11036,7 @@ GameObject:
   - component: {fileID: 1707895967}
   - component: {fileID: 1707895968}
   m_Layer: 0
-  m_Name: SubRoom 1
+  m_Name: Patern 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11065,7 +11086,7 @@ GameObject:
   - component: {fileID: 1775536128}
   - component: {fileID: 1775536129}
   m_Layer: 0
-  m_Name: SubRoom 2
+  m_Name: Patern 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11209,7 +11230,7 @@ GameObject:
   - component: {fileID: 1858210151}
   - component: {fileID: 1858210150}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: NavMeshTileMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11363,7 +11384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1887692316}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Enemy PathPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12159,7 +12180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1974511172}
   m_Layer: 0
-  m_Name: SubRooms
+  m_Name: PaternPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,8 +11,11 @@ public abstract class AEnemyMovement : MonoBehaviour
     public bool isAtDistanceToInteract = false;
     public float speed = 1f;
 
-    public Transform collisionObj = null;
+    public Transform collisionObj = null;//pour moi ca sert a rien
     public bool isClimbing = false;
+    public bool isEndClimbing = false;
+    
+    protected Transform player;
 
     [HideInInspector] public Transform spritePos;
     [HideInInspector] protected Agent agentMovement;
@@ -34,13 +37,7 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public void Move()
     {
-        //if isAtDistanceToInteract => stop
-
-        //if (speed == 0f) {
-            //agentMovement.SetTarget(gameObject.transform, transform.position);
-        //} else {
-            agentMovement.SetTarget(target, detectionManager.rayCastOffset);
-        //}
+        agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         agentMovement.SetSpeed(speed);
         RotateAxis();
     }
@@ -58,6 +55,17 @@ public abstract class AEnemyMovement : MonoBehaviour
         return value;
     }
 
+    protected Vector3 FindDistanceToAttack(Transform t)
+    {
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, t.position);
+            
+        Vector3 distanceToPlayer = new Vector3(
+            t.position.x + (DistanceToInteract.x * (targetDirection.x > 0 ? -1 : 1)), 
+            t.position.y + (DistanceToInteract.y * (targetDirection.y > 0 ? 1 : -1)), 
+            t.position.z);
+        return distanceToPlayer - new Vector3(0f, detectionManager.rayCastOffset.y, 0f);
+    }
+
     private void RotateAxis()
     {
         if (detectionManager.direction == Vector2.right) {
@@ -67,37 +75,21 @@ public abstract class AEnemyMovement : MonoBehaviour
         }
     }
 
-    //si il bouge pas sur une echelle stop la vitesse de l'animation
-    //si il est DetectionState == Spoted acceler la vitesse de l'animation de stand_up
-
-    //lader animations triggers
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other == null) {
+        if (other == null)
             return;
-        }
         Vector3 targetDirection = FindTargetDirection(spritePos.position, target.position);
-        ///
-        if (other.gameObject.layer == LayerMask.NameToLayer("Lader") &&
-            !RangeOf(targetDirection.y, 0f, 1f)) {//sa target est pas a son niveau en Y
-            
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Lader") && 
+        !RangeOf(targetDirection.y, 0f, 1f)) {
+                isClimbing = true;
+                collisionObj = other.gameObject.transform;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader")) {
+            isEndClimbing = true;
             collisionObj = other.gameObject.transform;
-            transform.GetChild(0).GetComponent<Animator>().SetBool("Climbing", true);
         }
-        ///
-        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader") && collisionObj != null) {
-            
-            collisionObj = null;
-            transform.GetChild(0).GetComponent<Animator>().SetTrigger("StandUp");
-            transform.GetChild(0).GetComponent<Animator>().SetBool("Climbing", false);
-        }
-        ////
-        /*if (other.gameObject.layer == LayerMask.NameToLayer("LastLader") && 
-            collisionObj == null &&
-            targetDirection.y < -1f) {//sa target est en dessous
-            Debug.Log("SitDown Bitch !!! / layer = " + other.gameObject.layer + " collisionObj == null ?" + (collisionObj == null) + " targetDirection.y = " + targetDirection.y);
-            transform.GetChild(0).GetComponent<Animator>().SetTrigger("SitDown");
-        }*/
     }
     
     void OnTriggerExit2D(Collider2D other)
@@ -105,10 +97,11 @@ public abstract class AEnemyMovement : MonoBehaviour
         if (other == null) {
             return;
         }
-        ///
         if (other.gameObject.layer == LayerMask.NameToLayer("Lader")) {
-            transform.GetChild(0).GetComponent<Animator>().SetBool("Climbing", false);
             collisionObj = null;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader")) {
+            isEndClimbing = false;
         }
     }
 }
