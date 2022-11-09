@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
         deceleration = _movementValues[_currentValueIndex].acceleration * 3.5f;
+        
     }
 
     public void ChangeValueIndex(PlayerType type)
@@ -61,13 +62,13 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 rayPosition = transform.position;
 
-        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2 + _collider.offset.x;
+        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;// + (_collider.offset.x * transform.localScale.x);
         rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _runtimeGroundedRayMagnitude + (_collider.offset.y * transform.localScale.y);
 
         RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _levelLayerMask);
         _isGrounded = hit;
 
-        Debug.DrawRay(rayPosition, Vector2.right * _collider.size.x * transform.localScale.x, _isGrounded ? Color.red : Color.green);
+        Debug.DrawRay(rayPosition, Vector2.right * (_collider.size.x * transform.localScale.x), _isGrounded ? Color.red : Color.green);
         return _isGrounded;
     }
 
@@ -120,25 +121,6 @@ public class PlayerController : MonoBehaviour
         HorizontalMovement(input, oppositeDirection);
     }
 
-    private void PositionHotfix(Vector2 rayPosition, RaycastHit2D hit)
-    {
-        if (_isGrounded == false)
-            return;
-        var halfColliderHeight = (_collider.size.y * transform.localScale.y) / 2;
-
-        // TODO: Do only one time per frame the calculation of colliders (size.x * localScale.x) / 2
-        var safeRayPosition = transform.position;
-        safeRayPosition.x = Mathf.Clamp(hit.point.x, transform.position.x - (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f, transform.position.x + (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f);
-        var verticalHit = Physics2D.Raycast(safeRayPosition, Vector2.down, halfColliderHeight + _groundedRayMagnitude, _levelLayerMask);
-
-        if (!verticalHit)
-            return;
-        var fixedPosition = transform.position;
-        fixedPosition.y -= (transform.position.y - (halfColliderHeight) - verticalHit.point.y);
-        transform.position = fixedPosition;
-        Debug.DrawRay(safeRayPosition, Vector2.down * (halfColliderHeight + _groundedRayMagnitude), _isGrounded ? Color.red : Color.green);
-    }
-
     private void Jump()
     {
         _rigidBody.velocity = new Vector2(0, _movementValues[_currentValueIndex].jumpPower);
@@ -168,19 +150,19 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (isGrounded())
+            if (_isGrounded)
                 _runtimeGroundedRayMagnitude = 0.0f;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D hit)
     {
-        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("Ladder"));
+        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("Lader"));
     }
 
     private void OnTriggerExit2D(Collider2D hit)
     {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Lader"))
         {
             _collideWithLadder = false;
             if (_isClimbing)
