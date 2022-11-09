@@ -6,8 +6,6 @@ using static EnemyInfo;
 
 public class GuardMovement : AEnemyMovement
 {
-    private Transform player;
-
     void Start() 
     {
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
@@ -19,6 +17,9 @@ public class GuardMovement : AEnemyMovement
 
     void Update()
     {
+        if (isClimbing || isEndClimbing) {
+            speed = Speed[EnemyType.Guard];
+        }
         Move();
         AllowedMovement();
 
@@ -29,14 +30,14 @@ public class GuardMovement : AEnemyMovement
         Vector3 targetDirection = FindTargetDirection(spritePos.position, target.position);
 
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 isAtDistanceToInteract = true;
             } else {
                 isAtDistanceToInteract = false;
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 isAtDistanceToInteract = true;
             } else {
                 isAtDistanceToInteract = false;
@@ -57,7 +58,7 @@ public class GuardMovement : AEnemyMovement
         
         NoNegative(speed = Speed[EnemyType.Guard]);
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 isAtDistanceToInteract = true;
                 detectionManager.SetState(DetectionState.Spoted);
             } else {
@@ -65,7 +66,7 @@ public class GuardMovement : AEnemyMovement
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 isAtDistanceToInteract = true;
                 detectionManager.SetState(DetectionState.Spoted);
             } else {
@@ -84,7 +85,7 @@ public class GuardMovement : AEnemyMovement
         target = player;
 
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 Attack(player.transform);
                 isAtDistanceToInteract = true;
                 speed = 0f;
@@ -94,7 +95,7 @@ public class GuardMovement : AEnemyMovement
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 Attack(player.transform);
                 isAtDistanceToInteract = true;
                 speed = 0f;

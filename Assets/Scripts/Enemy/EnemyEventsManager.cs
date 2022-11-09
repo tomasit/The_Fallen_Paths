@@ -51,34 +51,96 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void AnimationController(Enemy enemy)
     {
-        if (enemy.movementManager.isAtDistanceToInteract && 
-            enemy.detectionManager.detectionState == DetectionState.None ||
-            enemy.detectionManager.detectionState == DetectionState.Freeze) {
+        Vector3 targetDistance = FindTargetDirection(
+            enemy.movementManager.spritePos.position, 
+            enemy.movementManager.target.position);
+
+        bool isAtTargetPosition = false;
+        bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
+        
+        Debug.Log("targetDistance.x = " + targetDistance.x);
+        Debug.Log("targetDistance.y = " + targetDistance.y);
+        if (targetDistance.x > 0) {
+            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+                isAtTargetPosition = true;
+            }
+        } else if (targetDistance.x < 0) {
+            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+                isAtTargetPosition = true;
+            }
+        }
+
+        if (isAtTargetPosition && 
+            (enemy.detectionManager.detectionState == DetectionState.None ||
+            enemy.detectionManager.detectionState == DetectionState.Freeze) &&
+            !isClimbing
+            ) {
             enemy.animator.SetTrigger("Idle");
         }
         if (enemy.movementManager.isAtDistanceToInteract && 
             (enemy.detectionManager.detectionState == DetectionState.Alert || 
-            enemy.detectionManager.detectionState == DetectionState.Spoted)) {
+            enemy.detectionManager.detectionState == DetectionState.Spoted) &&
+            !isClimbing
+            ) {
             enemy.animator.SetTrigger("Ready");
         }
-        if (enemy.movementManager.isAtDistanceToInteract && 
-            enemy.detectionManager.detectionState == DetectionState.Flee) {
+        if (isAtTargetPosition && 
+            enemy.detectionManager.detectionState == DetectionState.Flee &&
+            !isClimbing) {
             enemy.animator.SetTrigger("Scared");
         }
-        if (!enemy.movementManager.isAtDistanceToInteract  &&
+        if (!isAtTargetPosition &&
             (enemy.detectionManager.detectionState == DetectionState.Alert ||
-            enemy.detectionManager.detectionState == DetectionState.None)
-            /*il a pas pris de hit*/) {
+            enemy.detectionManager.detectionState == DetectionState.None) &&
+            !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Walking");
         }
         if (!enemy.movementManager.isAtDistanceToInteract &&
             (enemy.detectionManager.detectionState == DetectionState.Spoted ||
-            enemy.detectionManager.detectionState == DetectionState.Flee)
-            /*il a pas pris de hit*/) {
+            enemy.detectionManager.detectionState == DetectionState.Flee) &&
+            !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Running");
+                //sinon il doit être en mode ready to nicker des mères
         }
-        /*
-        if (//il s'est fait hit, savedHealth <= Health
+        
+        if (enemy.movementManager.collisionObj != null) {
+            if (enemy.movementManager.isEndClimbing && (targetDistance.y < -1f)) {
+                enemy.animator.SetTrigger("SitDown");
+            }
+            if (enemy.movementManager.collisionObj.gameObject.layer == LayerMask.NameToLayer("Lader") && 
+            enemy.movementManager.isClimbing && !RangeOf(targetDistance.y, 0f, 1f) && 
+            !enemy.movementManager.isEndClimbing) {
+                enemy.animator.SetBool("Climbing", true);
+            }
+            if (enemy.movementManager.isEndClimbing && enemy.movementManager.isClimbing && 
+            !(targetDistance.y < -1f)) {
+                enemy.animator.SetTrigger("StandUp");
+                enemy.animator.SetBool("Climbing", false);
+                enemy.movementManager.isClimbing = false;
+            }
+        } else {
+            enemy.animator.SetBool("Climbing", false);
+            if (!enemy.movementManager.isEndClimbing) {
+                enemy.movementManager.isClimbing = false;
+            }
+        }
+
+        var currentAnimationName = enemy.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+
+        //Debug.Log("isAtTargetPosition = " + isAtTargetPosition);
+        
+        //si c le player faut soustraire l'offset en X de l'attaque
+        if (isAtTargetPosition && (currentAnimationName == "sword_climbing")) {
+            Debug.Log("stop anim");
+            enemy.animator.speed = 0;
+        } else {
+            enemy.animator.speed = 1;
+        }
+
+        //faire des conditions pour les lader ici
+        
+        //health manager sur les enemies
+        /*if (//il s'est fait hit, savedHealth <= Health
         ) {
             enemy.animator.SetTrigger("Hit");
         }
@@ -89,7 +151,7 @@ public class EnemyEventsManager : MonoBehaviour
         if (//son collider trigger avec un collider lader
         ) {
             //enemy.animator.SetTrigger("Climbing");
-        } */       
+        }*/       
     }
 
     private void IgnoreLayers(Enemy enemy)
@@ -174,19 +236,14 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void DetectionEventState(Enemy enemy) {
         if (enemy.detectionManager.detectionState == DetectionState.None) {
-            enemy.sprite.color = Color.green;
             enemy.movementManager.BasicMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
-            enemy.sprite.color = Color.yellow;
             enemy.movementManager.AlertMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Spoted) {
-            enemy.sprite.color = Color.red;
             enemy.movementManager.SpotMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Flee) {
-            enemy.sprite.color = Color.blue;
             enemy.movementManager.FleeMovement();
         } else if (enemy.detectionManager.detectionState == DetectionState.Freeze) {
-            enemy.sprite.color = Color.black;
             enemy.movementManager.FreezeMovement();
         } else {
             Debug.Log("error : enemy has no detection state");
