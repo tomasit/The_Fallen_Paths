@@ -15,7 +15,7 @@ public class PowerManager : MonoBehaviour
         public float maxDuration = -1;
     }
     [SerializeField]
-    private List<PowerData> _powers;
+    public List<PowerData> _powers;
     private int _currentPowerIndex = -1;
 
     public bool canUseAnyPower = true;
