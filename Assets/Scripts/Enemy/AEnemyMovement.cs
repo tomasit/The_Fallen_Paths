@@ -2,14 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static EnemyInfo;
+
 public abstract class AEnemyMovement : MonoBehaviour
 {
     public Transform target;
+    [SerializeField] protected Transform _targetPosition;
+    public bool isAtDistanceToInteract = false;
     public float speed = 1f;
-    [HideInInspector] public Agent agentMovement;
-    [HideInInspector] public GameObject enemy;
-    [HideInInspector] public AEnemyInteraction interactionManager;
-    [HideInInspector] public EnemyDetectionManager detectionManager;
+
+    public Transform collisionObj = null;//pour moi ca sert a rien
+    public bool isClimbing = false;
+    public bool isEndClimbing = false;
+    
+    protected Transform player;
+
+    [HideInInspector] public Transform spritePos;
+    [HideInInspector] protected Agent agentMovement;
+    [HideInInspector] protected EnemyDetectionManager detectionManager;
+    [HideInInspector] protected TriggerCoroutineProcessor detectionTrigger;
 
     public abstract void BasicMovement();
 
@@ -17,24 +28,23 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public abstract void SpotMovement();
 
+    public abstract void FleeMovement();
+
+    public void FreezeMovement()
+    {
+        target = transform;
+    }
+
     public void Move()
     {
-        //if (speed == 0f) {
-            //agentMovement.SetTarget(gameObject.transform, enemy.transform);
-        //} else {
-            agentMovement.SetTarget(target, enemy.transform);
-        //}
+        agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         agentMovement.SetSpeed(speed);
+        RotateAxis();
     }
 
     public void AllowedMovement()
     {
         //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
-    }
-
-    public bool ApproximateCoordinates(float pointSrc, float pointDest, float range)
-    {
-        return (pointDest - range < pointSrc && pointSrc < pointDest + range);
     }
 
     public float NoNegative(float value)
@@ -45,34 +55,53 @@ public abstract class AEnemyMovement : MonoBehaviour
         return value;
     }
 
-    public Vector3 FindTargetDirection(Vector3 targetPosition)
+    protected Vector3 FindDistanceToAttack(Transform t)
     {
-        return targetPosition - transform.position;
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, t.position);
+            
+        Vector3 distanceToPlayer = new Vector3(
+            t.position.x + (DistanceToInteract.x * (targetDirection.x > 0 ? -1 : 1)), 
+            t.position.y + (DistanceToInteract.y * (targetDirection.y > 0 ? 1 : -1)), 
+            t.position.z);
+        return distanceToPlayer - new Vector3(0f, detectionManager.rayCastOffset.y, 0f);
     }
 
-    //it's not the nearest, just the first he find
-    public Vector3 FindNearestEntityDirection(System.Type type)
+    private void RotateAxis()
     {
-        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
-        
-        foreach(GameObject obj in allObjects) {
-            Vector3 positionObj = obj.transform.position;
-            return FindTargetDirection(positionObj);
+        if (detectionManager.direction == Vector2.right) {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        } else if (detectionManager.direction == Vector2.left) {
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        Debug.Log("No Entity near");
-        return Vector3.zero;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other == null)
+            return;
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, target.position);
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Lader") && 
+        !RangeOf(targetDirection.y, 0f, 1f)) {
+                isClimbing = true;
+                collisionObj = other.gameObject.transform;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader")) {
+            isEndClimbing = true;
+            collisionObj = other.gameObject.transform;
+        }
     }
     
-    //it's not the nearest, just the first he find
-    public (Vector3, GameObject) FindNearestEnemy(System.Type type)
+    void OnTriggerExit2D(Collider2D other)
     {
-        GameObject[] allObjects = (GameObject[])Object.FindObjectsOfType(type);
-        
-        foreach(GameObject obj in allObjects) {
-            Vector3 positionObj = obj.transform.position;
-            return (FindTargetDirection(positionObj), obj);
+        if (other == null) {
+            return;
         }
-        Debug.Log("No enemy near");
-        return (Vector3.zero, null);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Lader")) {
+            collisionObj = null;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader")) {
+            isEndClimbing = false;
+        }
     }
 }

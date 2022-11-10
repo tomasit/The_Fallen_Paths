@@ -1,57 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+public enum PlayerType : int
+{
+    PLAYER = 0,
+    RAT = 1
+}
+
+// 4.5, 0, 6, 5.5
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public float maxPlayerSpeed = 125.0f;
-    [SerializeField] public float playerSpeed = 0.0f;
-    [SerializeField] private float acceleration = 25.0f;
-    [SerializeField] public float jumpPower = 5.0f;
+    [Serializable]
+    public struct MovementValues {
+        public float maxPlayerSpeed;
+        public float playerSpeed;
+        public float acceleration;
+        public float jumpPower;
+    }
     [SerializeField] private Transform[] _particles;
-    
-    private bool _blockInput;
-
+    [SerializeField] private MovementValues _playerValues;
+    [SerializeField] private MovementValues _ratValues;
+    [SerializeField] private LayerMask _levelLayerMask;
+    private MovementValues[] _movementValues;
+    private bool _blockInput = false;
     private float deceleration = 0.0f;
-
     private bool _goingLeft = false;
-
+    private bool _goingTop = false;
     private bool _isGrounded;
-
     private Rigidbody2D _rigidBody;
-
     private Animator _animator;
-
     private BoxCollider2D _collider;
-
-    private int _levelLayerMask = 0;
-
+    private int _currentValueIndex = 0;
     private const float _groundedRayMagnitude = 0.075f;
+    private float _runtimeGroundedRayMagnitude;
+    private bool _isClimbing = false;
+    private bool _collideWithLadder = false;
+    private float _verticalPlayerSpeed = 0.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
+        _runtimeGroundedRayMagnitude = _groundedRayMagnitude;
+        _movementValues = new MovementValues[2];
+        _movementValues[0] = _playerValues;
+        _movementValues[1] = _ratValues;
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
-        deceleration = acceleration * 3.5f;
-        _levelLayerMask = (1 << 11);
+        deceleration = _movementValues[_currentValueIndex].acceleration * 3.5f;
+        
+    }
+
+    public void ChangeValueIndex(PlayerType type)
+    {
+        _currentValueIndex = (int)type;
     }
 
     public bool isGrounded()
     {
         Vector2 rayPosition = transform.position;
 
-        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;
-        rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _groundedRayMagnitude;
+        rayPosition.x = rayPosition.x - (_collider.size.x * transform.localScale.x) / 2;// + (_collider.offset.x * transform.localScale.x);
+        rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _runtimeGroundedRayMagnitude + (_collider.offset.y * transform.localScale.y);
 
         RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _levelLayerMask);
         _isGrounded = hit;
 
-        Debug.DrawRay(rayPosition, Vector2.right * _collider.size.x * transform.localScale.x, _isGrounded ? Color.red : Color.green);
-        // Adapt position
-        //    PositionHotfix(rayPosition, hit);
+        Debug.DrawRay(rayPosition, Vector2.right * (_collider.size.x * transform.localScale.x), _isGrounded ? Color.red : Color.green);
         return _isGrounded;
     }
 
@@ -66,10 +83,23 @@ public class PlayerController : MonoBehaviour
             var scale = particle.localScale;
             scale.x *= -1;
             particle.localScale = scale;
-
         }
-        
+
         _goingLeft = !_goingLeft;
+    }
+
+    void FlipPlayerHorizontally(float mult)
+    {
+        var tempScale = transform.localScale;
+        tempScale.x = Mathf.Abs(tempScale.x) * mult;
+        transform.localScale = tempScale;
+
+        foreach (var particle in _particles)
+        {
+            var scale = particle.localScale;
+            scale.x = Mathf.Abs(scale.x) * mult;
+            particle.localScale = scale;
+        }
     }
 
     void AnimateMovement(bool idle)
@@ -82,54 +112,18 @@ public class PlayerController : MonoBehaviour
     void Move(float input)
     {
         bool oppositeDirection = _goingLeft && input < 0 || !_goingLeft && input > 0;
-        bool oppositeVelocity = _goingLeft && _rigidBody.velocity.x < 0 || !_goingLeft && _rigidBody.velocity.x > 0;
 
         if (oppositeDirection)
         {
             FlipPlayerHorizontally();
         }
 
-        if ((input > 0 && playerSpeed < maxPlayerSpeed) || (input < 0 && playerSpeed > -maxPlayerSpeed))
-        {
-            if (oppositeDirection)
-                playerSpeed = -playerSpeed * 0.8f;
-            else
-                playerSpeed += acceleration * input * Time.deltaTime;
-        }
-        else
-        {
-            if (playerSpeed > deceleration * Time.deltaTime)
-                playerSpeed = playerSpeed - deceleration * Time.deltaTime;
-            else if (playerSpeed < -deceleration * Time.deltaTime)
-                playerSpeed = playerSpeed + deceleration * Time.deltaTime;
-            else
-                playerSpeed = 0;
-        }
-
-    }
-
-    private void PositionHotfix(Vector2 rayPosition, RaycastHit2D hit)
-    {
-        if (_isGrounded == false)
-            return;
-        var halfColliderHeight = (_collider.size.y * transform.localScale.y) / 2;
-
-        // TODO: Do only one time per frame the calculation of colliders (size.x * localScale.x) / 2
-        var safeRayPosition = transform.position;
-        safeRayPosition.x = Mathf.Clamp(hit.point.x, transform.position.x - (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f, transform.position.x + (_collider.size.x * Mathf.Abs(transform.localScale.x)) / 2 * 0.6f);
-        var verticalHit = Physics2D.Raycast(safeRayPosition, Vector2.down, halfColliderHeight + _groundedRayMagnitude, _levelLayerMask);
-
-        if (!verticalHit)
-            return;
-        var fixedPosition = transform.position;
-        fixedPosition.y -= (transform.position.y - (halfColliderHeight) - verticalHit.point.y);
-        transform.position = fixedPosition;
-        Debug.DrawRay(safeRayPosition, Vector2.down * (halfColliderHeight + _groundedRayMagnitude), _isGrounded ? Color.red : Color.green);
+        HorizontalMovement(input, oppositeDirection);
     }
 
     private void Jump()
     {
-        _rigidBody.velocity = new Vector2(0, jumpPower);
+        _rigidBody.velocity = new Vector2(0, _movementValues[_currentValueIndex].jumpPower);
     }
 
     public void BlockInput(bool block)
@@ -137,7 +131,103 @@ public class PlayerController : MonoBehaviour
         _blockInput = block;
 
         if (_blockInput)
-            playerSpeed = 0;
+            _movementValues[_currentValueIndex].playerSpeed = 0;
+    }
+
+    private void ActiveLadder(bool active)
+    {
+        _isClimbing = active;
+        _rigidBody.gravityScale = active ? 0.0f : 1.0f;
+        _rigidBody.velocity = new Vector2(active ? 0 : _rigidBody.velocity.x,
+            active || _collideWithLadder ? 0 : 3.0f);
+        _movementValues[_currentValueIndex].playerSpeed = (active ? 0.0f : _movementValues[_currentValueIndex].playerSpeed);
+        _verticalPlayerSpeed = 0.0f;
+        _animator.SetBool("Climbing", _isClimbing);
+        if (!active)
+        {
+            FlipPlayerHorizontally(_goingLeft ? -1 : 1);
+            _runtimeGroundedRayMagnitude = _groundedRayMagnitude;
+        }
+        else
+        {
+            if (_isGrounded)
+                _runtimeGroundedRayMagnitude = 0.0f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D hit)
+    {
+        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("Lader"));
+    }
+
+    private void OnTriggerExit2D(Collider2D hit)
+    {
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Lader"))
+        {
+            _collideWithLadder = false;
+            if (_isClimbing)
+                ActiveLadder(false);
+        }
+    }
+
+    private void HorizontalMovement(float input, bool oppositeDirection)
+    {
+        if ((input > 0 && _movementValues[_currentValueIndex].playerSpeed < _movementValues[_currentValueIndex].maxPlayerSpeed)
+            || (input < 0 && _movementValues[_currentValueIndex].playerSpeed > -_movementValues[_currentValueIndex].maxPlayerSpeed))
+        {
+            if (oppositeDirection)
+                _movementValues[_currentValueIndex].playerSpeed = -_movementValues[_currentValueIndex].playerSpeed * 0.8f;
+            else
+                _movementValues[_currentValueIndex].playerSpeed += _movementValues[_currentValueIndex].acceleration * input * Time.deltaTime;
+        }
+        else
+        {
+            if (_movementValues[_currentValueIndex].playerSpeed > deceleration * Time.deltaTime)
+                _movementValues[_currentValueIndex].playerSpeed = _movementValues[_currentValueIndex].playerSpeed - deceleration * Time.deltaTime;
+            else if (_movementValues[_currentValueIndex].playerSpeed < -deceleration * Time.deltaTime)
+                _movementValues[_currentValueIndex].playerSpeed = _movementValues[_currentValueIndex].playerSpeed + deceleration * Time.deltaTime;
+            else
+                _movementValues[_currentValueIndex].playerSpeed = 0;
+        }
+    }
+
+    private void VerticalMovement(float input)
+    {
+        if ((input > 0 && _verticalPlayerSpeed < _movementValues[_currentValueIndex].maxPlayerSpeed)
+            || (input < 0 && _verticalPlayerSpeed > -_movementValues[_currentValueIndex].maxPlayerSpeed))
+        {
+            if (input > 0 && _rigidBody.velocity.y < 0)
+                _verticalPlayerSpeed = -_movementValues[_currentValueIndex].playerSpeed * 0.8f;
+            else
+                _verticalPlayerSpeed += _movementValues[_currentValueIndex].acceleration * input * Time.deltaTime;
+        }
+        else
+        {
+            if (_goingTop && input > 0)
+                _verticalPlayerSpeed = _movementValues[_currentValueIndex].maxPlayerSpeed;
+            else if (!_goingTop && input < 0)
+                _verticalPlayerSpeed = -_movementValues[_currentValueIndex].maxPlayerSpeed;
+            else if (input == 0)
+                _verticalPlayerSpeed = 0;
+        }
+    }
+
+    private void LadderMovement()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        bool oppositeDirection = _goingLeft && horizontalInput < 0 || !_goingLeft && horizontalInput > 0;
+        if (oppositeDirection)
+            _goingLeft = !_goingLeft;
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        _goingTop = (verticalInput > 0);
+
+        VerticalMovement(verticalInput);
+        HorizontalMovement(horizontalInput, oppositeDirection);
+
+        if (horizontalInput != 0.0f || verticalInput != 0.0f)
+            _animator.speed = 1.0f;
+        else
+            _animator.speed = 0.0f;
     }
 
     void Update()
@@ -147,26 +237,42 @@ public class PlayerController : MonoBehaviour
             GetComponent<BasicHealthWrapper>().Hit(1);
 
         if (_animator.GetBool("Dead"))
-            playerSpeed = 0;
+            _movementValues[_currentValueIndex].playerSpeed = 0;
         else
         {
             bool grounded = isGrounded();
-            if (!_blockInput && grounded && Input.GetButtonDown("Jump"))
-                Jump();
 
-            float input = Input.GetAxisRaw("Horizontal");
+            if (_collideWithLadder && !_isClimbing && Input.GetAxisRaw("Vertical") > 0.0f)
+                ActiveLadder(true);
+            else if ((grounded && _isClimbing) || (_isClimbing && Input.GetAxisRaw("Vertical") <= 0.0f))
+                ActiveLadder(false);
 
-            if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerHit")
-                playerSpeed = 0;
-            else if (!_blockInput)
-                Move(input);
+            if (_isClimbing)
+            {
+                LadderMovement();
+            }
+            else
+            {
+                if (!_blockInput && grounded && Input.GetButtonDown("Jump"))
+                    Jump();
 
-            AnimateMovement(input == 0 | _blockInput);
+                float input = Input.GetAxisRaw("Horizontal");
+
+                if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "PlayerHit")
+                    _movementValues[_currentValueIndex].playerSpeed = 0;
+                else if (!_blockInput)
+                    Move(input);
+
+                AnimateMovement(input == 0 | _blockInput);
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        _rigidBody.velocity = new Vector2(playerSpeed, _rigidBody.velocity.y);
+        if (_isClimbing)
+            _rigidBody.velocity = new Vector2(_movementValues[_currentValueIndex].playerSpeed, _verticalPlayerSpeed);
+        else
+            _rigidBody.velocity = new Vector2(_movementValues[_currentValueIndex].playerSpeed, _rigidBody.velocity.y);
     }
 }

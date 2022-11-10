@@ -8,6 +8,7 @@ public class RemoteControllableObject : TriggerProcessor
 {
     [SerializeField] private bool _isTrigger = true;
     [SerializeField] private GameObject _particle = null;
+    [ColorUsageAttribute(true, true)][SerializeField] private Color _glowColor;
     private InteractionProcessor _processor;
 
     private void Awake()
@@ -27,6 +28,7 @@ public class RemoteControllableObject : TriggerProcessor
 
     public void ActiveOutline(bool active)
     {
+        GetComponent<GlowOnTouch>().SetOutlineColor(_glowColor, !active);
         GetComponent<GlowOnTouch>().Trigger(active);
     }
 

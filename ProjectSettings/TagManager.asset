@@ -18,8 +18,8 @@ TagManager:
   - Enemy
   - Level
   - Wall
-  - 
-  - 
+  - LastLader
+  - Ground
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3311460339
+    locked: 0
+  - name: Foreground
+    uniqueID: 657912469
     locked: 0
   - name: UI
     uniqueID: 1161798753

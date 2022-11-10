@@ -6,75 +6,116 @@ using static EnemyInfo;
 
 public class GuardMovement : AEnemyMovement
 {
-    private Transform player;
-
     void Start() 
     {
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();
-        interactionManager = GetComponent<AEnemyInteraction>();
         agentMovement = GetComponent<Agent>();
-        enemy = transform.GetChild(0).gameObject;
+        detectionTrigger = GetComponent<TriggerCoroutineProcessor>();
+        spritePos = transform.GetChild(0).GetComponent<SpriteRenderer>().transform;
     }
 
     void Update()
     {
+        if (isClimbing || isEndClimbing) {
+            speed = Speed[EnemyType.Guard];
+        }
         Move();
         AllowedMovement();
+
+        //Spot ou Alert : si t a la position de destinationfaire des gauche droite de direction de la tête
     }
     public override void BasicMovement()
     {
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, target.position);
+
+        if (targetDirection.x > 0) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
+            } else {
+                isAtDistanceToInteract = false;
+            }
+        }
+        if (targetDirection.x < 0) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
+            } else {
+                isAtDistanceToInteract = false;
+            }
+        }
+
+        detectionTrigger.SetState(EnemyEventState.None);
+        detectionTrigger.SetDisabling(true);
+        _targetPosition.localPosition = Vector3.zero;
         NoNegative(speed = Speed[EnemyType.Guard]);
     }
 
     public override void AlertMovement()
     {
-        Vector3 targetDirection = FindTargetDirection(player.position);
-        target = player;
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, detectionManager.lastEventPosition);
+        _targetPosition.position = detectionManager.lastEventPosition;
+        target = _targetPosition;
         
-        NoNegative(speed = Speed[EnemyType.Guard] - (Speed[EnemyType.Guard] * 0.5f));
+        NoNegative(speed = Speed[EnemyType.Guard]);
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
                 detectionManager.SetState(DetectionState.Spoted);
+            } else {
+                isAtDistanceToInteract = false;
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 0.80f)) {
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                isAtDistanceToInteract = true;
                 detectionManager.SetState(DetectionState.Spoted);
+            } else {
+                isAtDistanceToInteract = false;
             }
         }
+
+        detectionTrigger.SetState(EnemyEventState.None);
+        detectionTrigger.SetDisabling(true);
     }
 
     public override void SpotMovement()
     {
-        Vector3 targetDirection = FindTargetDirection(player.position);
+        _targetPosition.localPosition = Vector3.zero;
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, player.position);
         target = player;
-        //Debug.Log("targetDirection.y = " + targetDirection.y);
-        //Debug.Log("player.position.y = " + player.position.y);
-        //Debug.Log("enemy.position.y = " + transform.position.y);
-        //Debug.Log("----------------------");
 
         if (targetDirection.x > 0) {
-            if (targetDirection.x < EnemyInfo.DistanceToInteract[EnemyType.Guard] &&
-                ApproximateCoordinates(targetDirection.y, 0f, 1f)) {
-                interactionManager.isAtdistanceToInteract = true;
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                Attack(player.transform);
+                isAtDistanceToInteract = true;
                 speed = 0f;
             } else {
-                interactionManager.isAtdistanceToInteract = false;
+                isAtDistanceToInteract = false;
                 NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
             }
         }
         if (targetDirection.x < 0) {
-            if (targetDirection.x > -EnemyInfo.DistanceToInteract[EnemyType.Guard] && 
-                ApproximateCoordinates(targetDirection.y, 0f, 1f)) {
-                interactionManager.isAtdistanceToInteract = true;
+            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
+                Attack(player.transform);
+                isAtDistanceToInteract = true;
                 speed = 0f;
             } else {
-                interactionManager.isAtdistanceToInteract = false;
+                isAtDistanceToInteract = false;
                 NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
             }
         }
+    }
+
+    private void Attack(Transform objToAttack)
+    {
+        detectionTrigger.SetState(EnemyEventState.FightPlayer);
+        detectionTrigger.SetInteractionObj(objToAttack);
+        detectionTrigger.SetDisabling(false);
+    }
+
+    public override void FleeMovement()
+    {
+        _targetPosition.localPosition = Vector3.zero;
+        NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
     }
 }

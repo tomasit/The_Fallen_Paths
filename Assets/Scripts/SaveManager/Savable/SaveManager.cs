@@ -22,6 +22,7 @@ public class SaveManager : MonoBehaviour
     }
 
     private List<ObjectData> _levelData;
+    private PlayerInfoSave _playerInfo;
     private int _currentLevel = 0;
 
     private void Awake() {
@@ -33,7 +34,13 @@ public class SaveManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
         _levelData = new List<ObjectData>();
+        _playerInfo = new PlayerInfoSave();
         Load();
+    }
+
+    public PlayerInfoSave GetPlayerInfo()
+    {
+        return _playerInfo;
     }
 
     public bool IsReferenced(string objectId, string valueName)

@@ -5,10 +5,16 @@ using UnityEngine;
 public class TestComputeInteraction : MonoBehaviour
 {
     private CollisionDetection _interactor;
+    private bool _blockInput = false;
 
     private void Start()
     {
         _interactor = null;
+    }
+
+    public void BlockInput(bool block)
+    {
+        _blockInput = block;
     }
 
     private void OnTriggerEnter2D(Collider2D hit)
@@ -25,7 +31,7 @@ public class TestComputeInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (_interactor != null)
+        if (_interactor != null && !_blockInput)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {

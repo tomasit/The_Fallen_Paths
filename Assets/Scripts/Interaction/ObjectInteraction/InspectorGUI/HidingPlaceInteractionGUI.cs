@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
 
+#if (UNITY_EDITOR)
 [CustomEditor(typeof(HidingPlaceInteraction))]
 public class HidingPlaceInteractionGUI : Editor
 {
@@ -31,3 +32,4 @@ public class HidingPlaceInteractionGUI : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

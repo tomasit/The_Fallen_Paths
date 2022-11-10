@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// COMPORTEMENTS : 
-
 //le manque de lumière emepeche l'enemy de voir
-
-//si le player est en tenue de garde ne rien faire, sinon le detecter
 
 public class EnemyDetectionManager : MonoBehaviour
 {
@@ -14,14 +10,14 @@ public class EnemyDetectionManager : MonoBehaviour
     public bool debug = false;
     
     [Header("Raycast")]
-    public float detectionDistanceFront = 5f;
-    public float detectionDistanceBack = 2f;
-    public Vector2 _direction = Vector2.right;
-    public Transform colliderTransform;
+    public float detectionDistance = 5f;
+    public Vector2 direction = Vector2.right;
+    public Vector3 rayCastOffset;
 
     [Header("States")]
     public bool playerDetected = false;
-    public DetectionState detectionState = DetectionState.None;
+    public DetectionState detectionState = DetectionState.None;//faire un state undefined ou alors faire en sorte qu'il aille pqas forcement vers le playeer quanfd il est alert
+    public RaycastHit2D raycast;
     
     [Header("Clocks")]
     public float timeToSpotPlayer = 1.5f;
@@ -31,47 +27,86 @@ public class EnemyDetectionManager : MonoBehaviour
     public float timeToForgetSpoted = 10f;
     public float forgetSpotClock = 0f;
 
-    void Start()
-    {
-        colliderTransform = transform.GetChild(0).transform;
-    }
+    [Header("Positions")]
+    public Vector3 lastEventPosition;
 
     void Update()
     {
-        //if le mec est pas sneak check derere
-        //if le mec est sneak pas check derière
-
-        //si le player est sneak diminuer : distance (detectionDistance)
-        if (!ThrowRay(_direction, detectionDistanceFront) && !ThrowRay(-_direction, detectionDistanceBack)) {
-            playerDetected = false;
-        } else {
-            playerDetected = true;
-        }
+        //si il est hide dans un truc ne pas le detecter
+        playerDetected = ThrowRay(direction, detectionDistance);
 
         ModifyDetectionState();
     }
 
-    public void SetRayCastDirection(Vector2 direction)
+    //si il voit un random qui est spoted, Trigger sa processCoroutine
+    private bool ThrowRay(Vector2 directionRay, float distance)
     {
-        _direction = direction;
+        UpdateOffsetRaycast();
+        RaycastHit2D raycast = Physics2D.Raycast(
+            transform.position + rayCastOffset,
+            directionRay, 
+            float.PositiveInfinity, 
+            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("Enemy")));
+
+        //faire un checkEnemy avec un bool detectedEnemy
+        //faire un checkPlayer avec un book detectedPlayer
+        if (raycast.collider != null)
+        {
+            if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
+                distance = raycast.distance;
+            }
+            DebugRay(debug, distance, directionRay, Color.green);
+
+            if (LayerMask.NameToLayer("Enemy") == raycast.collider.gameObject.layer) {
+                if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
+                    DebugRay(debug, distance, directionRay, Color.blue);
+                    //si il est mort : lastEventPosition = raycast.collider.gameObject.transform.position;
+                    //Debug.Log("Ca detect les enemy");
+                }
+            }
+
+            if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer) {
+                if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
+                    DebugRay(debug, distance, directionRay, Color.red);
+                    lastEventPosition = raycast.collider.gameObject.transform.position;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void UpdateOffsetRaycast()
+    {
+        if (direction == Vector2.right) {
+            rayCastOffset = new Vector3(Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
+        } else if (direction == Vector2.left) {
+            rayCastOffset = new Vector3(-Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
+        }
+    }
+
+
+    public void SetRayCastDirection(Vector2 directionToSet)
+    {
+        direction = directionToSet;
     }
 
     public void SetState(DetectionState state)
     {
         detectionState = state;
         var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};
-        ResetClocks(ref clocks);
+        ResetClocks(ref clocks, 3);
     }
 
     private void ModifyDetectionState()
     {
-        SetStateVariables();
+        InitStateVariables();
 
         if (playerDetected) {
             if (detectionState == DetectionState.None || detectionState == DetectionState.Alert) {
                 if (DetectionClock(timeToSpotPlayer, ref detectionClock, DetectionState.Spoted)) {
                     var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};
-                    ResetClocks(ref clocks);
+                    ResetClocks(ref clocks, 3);
                 }
             }
         } else if (!playerDetected) {
@@ -83,9 +118,9 @@ public class EnemyDetectionManager : MonoBehaviour
         }
     }
 
-    private void ResetClocks(ref float [] clocks)
+    private void ResetClocks(ref float [] clocks, int size)
     {
-        foreach (int index in clocks) {
+        for (int index = 0; index != size; ++index) {
             clocks[index] = 0f;
         }
     }
@@ -100,39 +135,7 @@ public class EnemyDetectionManager : MonoBehaviour
         return false;
     }
 
-    private void DebugRay(bool draw, float dist, Vector2 direction, Color color)
-    {
-        if (draw) {
-            Debug.DrawRay(colliderTransform.position, direction * dist, color);
-        }
-    }
-
-    private bool ThrowRay(Vector2 directionRay, float distance)
-    {
-        RaycastHit2D raycastDetection = Physics2D.Raycast(
-            colliderTransform.position, 
-            directionRay, 
-            float.PositiveInfinity, 
-            (1 << LayerMask.NameToLayer("Player") | (1 << LayerMask.NameToLayer("Wall"))));
-
-        if (raycastDetection.collider != null)
-        {
-            if (Vector2.Distance(raycastDetection.point, colliderTransform.position) <=  distance) {
-                distance = raycastDetection.distance;
-            }
-            DebugRay(debug, distance, directionRay, Color.green);
-
-            if (LayerMask.NameToLayer("Player") == raycastDetection.collider.gameObject.layer) {
-                if (Vector2.Distance(raycastDetection.point, colliderTransform.position) <=  distance) {
-                    DebugRay(debug, distance, directionRay, Color.red);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private void SetStateVariables()
+    private void InitStateVariables()
     {
         if (!playerDetected) {
             detectionClock = 0f;
@@ -148,6 +151,13 @@ public class EnemyDetectionManager : MonoBehaviour
                     forgetAlertClock = 0f;
                 }
             }
+        }
+    }
+
+    public void DebugRay(bool draw, float dist, Vector2 direction, Color color)
+    {
+        if (draw) {
+            Debug.DrawRay(transform.position + rayCastOffset, direction * dist, color);
         }
     }
 }
