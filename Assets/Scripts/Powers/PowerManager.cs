@@ -9,10 +9,11 @@ public class PowerManager : MonoBehaviour
     {
         foreach (var power in _powers)
         {
-            if (power is ARangedPower)
-                Debug.Log("range power");
-            else
-                Debug.Log("usual power");
+            if (power is ARangedPower) {
+                //Debug.Log("range power");
+            } else {
+                //Debug.Log("usual power");
+            }
         }
     } 
 }

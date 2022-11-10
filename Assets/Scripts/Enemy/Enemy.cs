@@ -26,6 +26,13 @@ public class EnemyInfo
         { EnemyType.Random, 0.5f }
     };
 
+    public static Dictionary<EnemyType, int> Health = new Dictionary<EnemyType, int>()
+    {
+        { EnemyType.Guard, 2 },
+        { EnemyType.RoyalGuard, 2 },
+        { EnemyType.Random, 1 }
+    };
+
     public static Vector3 DistanceToInteract = new Vector3(1f, 0f, 0f);
 
     public static bool RangeOfPosition(Vector3 posAim, Vector3 posCompare, float range) 
@@ -90,4 +97,5 @@ public struct Enemy {
     public Agent agentMovement;
     public AEnemyMovement movementManager;
     public EnemyDetectionManager detectionManager;
+    public BasicHealthWrapper healtWrapper;
 }
