@@ -46,7 +46,7 @@ public class EnemyDetectionManager : MonoBehaviour
             transform.position + rayCastOffset,
             directionRay, 
             float.PositiveInfinity, 
-            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("Enemy")));
+            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("Ground")));
 
         //faire un checkEnemy avec un bool detectedEnemy
         //faire un checkPlayer avec un book detectedPlayer
@@ -72,6 +72,8 @@ public class EnemyDetectionManager : MonoBehaviour
                     return true;
                 }
             }
+        } else {
+            DebugRay(debug, distance, directionRay, Color.green);
         }
         return false;
     }
