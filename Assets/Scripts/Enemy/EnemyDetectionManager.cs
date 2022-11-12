@@ -87,7 +87,6 @@ public class EnemyDetectionManager : MonoBehaviour
         }
     }
 
-
     public void SetRayCastDirection(Vector2 directionToSet)
     {
         direction = directionToSet;
@@ -115,7 +114,7 @@ public class EnemyDetectionManager : MonoBehaviour
             if (detectionState == DetectionState.Alert) {
                 DetectionClock(timeToForgetAlerted, ref forgetAlertClock, DetectionState.None);
             } else if (detectionState == DetectionState.Spoted) {
-                DetectionClock(timeToForgetSpoted, ref forgetSpotClock, DetectionState.None);
+                DetectionClock(timeToForgetSpoted, ref forgetSpotClock, DetectionState.Alert);
             }
         }
     }

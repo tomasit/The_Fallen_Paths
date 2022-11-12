@@ -20,7 +20,8 @@ public class EnemyEventsManager : MonoBehaviour
         foreach(var enemy in Enemies) {
             //enemy.uuid = Guid.NewGuid().ToString();
             IgnoreLayers(enemy);
-            enemy.movementManager.target = enemy.roomProprieties.targets[0];
+            if (enemy.roomProprieties != null)
+                enemy.movementManager.target = enemy.roomProprieties.targets[0];
             enemy.healtWrapper.SetAnimator(enemy.animator);
             enemy.healtWrapper.SetMaxHealth(EnemyInfo.Health[enemy.type]);
         }
@@ -35,17 +36,25 @@ public class EnemyEventsManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Y)) {
                 enemy.healtWrapper.Hit(1);
             }
-            if (enemy.detectionManager.detectionState == DetectionState.None) {
+            if (enemy.detectionManager.detectionState == DetectionState.None && enemy.roomProprieties != null) {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
             }
-            if (enemy.detectionManager.detectionState == DetectionState.Flee) {
+            if (enemy.detectionManager.detectionState == DetectionState.Flee && enemy.fleePoints != null) {
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
             RaycastDirection(enemy);
             DetectionEventState(enemy);
             AnimationStateMachine(enemy);
+            CheckResetState(enemy);
+        }
+    }
+
+    private void CheckResetState(Enemy enemy)
+    {
+        if (player.GetComponent<BasicHealthWrapper>().isDead()) {
+            enemy.detectionManager.SetState(DetectionState.None);
         }
     }
 
@@ -155,11 +164,11 @@ public class EnemyEventsManager : MonoBehaviour
         bool isAtTargetPosition = false;
         bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
         
-        if (targetDistance.x > 0) {
+        if (targetDistance.x >= 0) {
             if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
                 isAtTargetPosition = true;
             }
-        } else if (targetDistance.x < 0) {
+        } else if (targetDistance.x <= 0) {
             if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
                 isAtTargetPosition = true;
             }
@@ -170,6 +179,5 @@ public class EnemyEventsManager : MonoBehaviour
         animatorController.Scared(enemy, isAtTargetPosition, isClimbing);
         animatorController.Moving(enemy, isAtTargetPosition, isClimbing);
         animatorController.Climbing(enemy, targetDistance, isAtTargetPosition, isClimbing);
-        animatorController.Damages(enemy);
     }
 }
