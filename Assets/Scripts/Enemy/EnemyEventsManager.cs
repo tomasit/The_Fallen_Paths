@@ -47,6 +47,14 @@ public class EnemyEventsManager : MonoBehaviour
             RaycastDirection(enemy);
             DetectionEventState(enemy);
             AnimationStateMachine(enemy);
+            CheckResetState(enemy);
+        }
+    }
+
+    private void CheckResetState(Enemy enemy)
+    {
+        if (player.GetComponent<BasicHealthWrapper>().isDead()) {
+            enemy.detectionManager.SetState(DetectionState.None);
         }
     }
 
@@ -156,11 +164,11 @@ public class EnemyEventsManager : MonoBehaviour
         bool isAtTargetPosition = false;
         bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
         
-        if (targetDistance.x > 0) {
+        if (targetDistance.x >= 0) {
             if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
                 isAtTargetPosition = true;
             }
-        } else if (targetDistance.x < 0) {
+        } else if (targetDistance.x <= 0) {
             if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
                 isAtTargetPosition = true;
             }
@@ -171,6 +179,5 @@ public class EnemyEventsManager : MonoBehaviour
         animatorController.Scared(enemy, isAtTargetPosition, isClimbing);
         animatorController.Moving(enemy, isAtTargetPosition, isClimbing);
         animatorController.Climbing(enemy, targetDistance, isAtTargetPosition, isClimbing);
-        animatorController.Damages(enemy);
     }
 }
