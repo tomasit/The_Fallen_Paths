@@ -38,7 +38,7 @@ public class DetectionToSpotEnemy : MonoBehaviour
                 if (_interact == null)
                     return;
                 // added this
-                if (RangeOf(_interact.position.x, transform.position.x, DistanceToInteract) && 
+                if (RangeOf(_interact.position.x, transform.position.x, DistanceToInteract.x) && 
                     RangeOf(_interact.position.y, transform.position.y, 0.25f)) {
                     SetState(EnemyEventState.SeenRandomSpoted);
                     _coroutine = StartCoroutine(Trigger(_interact));

@@ -49,7 +49,7 @@ public class GoAlertEnemy : ACoroutine
 
     public bool isEnemyAtDistanceToInteract()
     {
-        if (RangeOf(aim.position.x, self.position.x, DistanceToInteract) && 
+        if (RangeOf(aim.position.x, self.position.x, DistanceToInteract.x) && 
             RangeOf(aim.position.y, self.position.y, 0.25f)) {
             return true;
         }
