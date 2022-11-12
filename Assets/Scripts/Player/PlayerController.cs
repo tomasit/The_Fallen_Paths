@@ -157,14 +157,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hit)
     {
-        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("Lader"));
+        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder"));
     }
 
     private void OnTriggerExit2D(Collider2D hit)
     {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Lader"))
+        if (hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder"))
         {
-            Debug.Log("Ladder exit");
             _collideWithLadder = false;
             if (_isClimbing)
                 ActiveLadder(false);
