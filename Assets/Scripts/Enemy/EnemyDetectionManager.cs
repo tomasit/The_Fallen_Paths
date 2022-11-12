@@ -101,6 +101,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     private void ModifyDetectionState()
     {
+        //au bout de 2s sur la forgetAlertClcok quand il te playerDetected == false. il va passer en spoted quand meme
         InitStateVariables();
 
         if (playerDetected) {
