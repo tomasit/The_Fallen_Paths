@@ -170,6 +170,5 @@ public class EnemyEventsManager : MonoBehaviour
         animatorController.Scared(enemy, isAtTargetPosition, isClimbing);
         animatorController.Moving(enemy, isAtTargetPosition, isClimbing);
         animatorController.Climbing(enemy, targetDistance, isAtTargetPosition, isClimbing);
-        animatorController.Damages(enemy);
     }
 }

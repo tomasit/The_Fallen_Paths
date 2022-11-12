@@ -335,7 +335,7 @@ MonoBehaviour:
   debug: 1
   detectionDistance: 5
   direction: {x: 1, y: 0}
-  rayCastOffset: {x: 0, y: 0.63, z: 0}
+  rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 2
@@ -3511,7 +3511,7 @@ MonoBehaviour:
   debug: 1
   detectionDistance: 5
   direction: {x: 1, y: 0}
-  rayCastOffset: {x: 0, y: 0.63, z: 0}
+  rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 2
@@ -6519,7 +6519,7 @@ MonoBehaviour:
   debug: 1
   detectionDistance: 5
   direction: {x: 1, y: 0}
-  rayCastOffset: {x: 0.36, y: 0.63, z: 0}
+  rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 2
@@ -26996,7 +26996,7 @@ MonoBehaviour:
   debug: 1
   detectionDistance: 5
   direction: {x: 1, y: 0}
-  rayCastOffset: {x: 0, y: 0.63, z: 0}
+  rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 2
