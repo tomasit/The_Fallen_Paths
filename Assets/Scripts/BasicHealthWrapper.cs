@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Health), typeof(Animator))]
+[RequireComponent(typeof(Health))]
 public class BasicHealthWrapper : MonoBehaviour
 {
     private Health _health;
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private bool externalAnimator = false;
 
     void Start()
     {
         _health = GetComponent<Health>();
-        _animator = GetComponent<Animator>();
+        if (!externalAnimator) {
+            _animator = GetComponent<Animator>();
+        }
     }
 
     public void Hit(uint damage)
@@ -31,5 +34,19 @@ public class BasicHealthWrapper : MonoBehaviour
     public bool isDead() 
     {
         return _health.isDead();
+    }
+
+    public void SetAnimator(Animator animator)
+    {
+        _animator = animator;
+    }
+
+    public void SetMaxHealth(int health)
+    {
+        if (_health == null) {
+            _health = GetComponent<Health>();
+        }
+        _health.health = health;
+        _health.maxHealth = health;
     }
 }

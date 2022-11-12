@@ -66,6 +66,8 @@ public abstract class AEnemyMovement : MonoBehaviour
         return distanceToPlayer - new Vector3(0f, detectionManager.rayCastOffset.y, 0f);
     }
 
+    //le faire rotate du coté ou sa vélocité est
+    //dans la direction ou il va... sans rigidbody...
     private void RotateAxis()
     {
         if (detectionManager.direction == Vector2.right) {
