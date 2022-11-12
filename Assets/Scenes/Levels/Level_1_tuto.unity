@@ -921,8 +921,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 989546703
+  m_SortingLayer: 1
   m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3080,7 +3080,7 @@ MonoBehaviour:
   _grid: {fileID: 1259068970}
   _fadeImage: {fileID: 0}
   _tmproUGUI: {fileID: 0}
-  _interactOnStart: 1
+  _interactOnStart: 0
   _translateChange: 0
   _translateSpeed: 1
   _fadeChange: 1
@@ -3602,7 +3602,7 @@ MonoBehaviour:
   _grid: {fileID: 54091027}
   _fadeImage: {fileID: 1392080640}
   _tmproUGUI: {fileID: 1314461604}
-  _interactOnStart: 0
+  _interactOnStart: 1
   _translateChange: 0
   _translateSpeed: 20
   _fadeChange: 1
@@ -4542,7 +4542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355643164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 101.62, y: 26.02, z: 0}
+  m_LocalPosition: {x: 101.62, y: 25.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15313,7 +15313,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -15334,8 +15334,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 989546703
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300514, guid: b79c5c1c2647f3f40835d6e9578a1ada, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -29635,7 +29635,7 @@ MonoBehaviour:
   direction: {x: -1, y: 0}
   rayCastOffset: {x: 0.36, y: 0.63, z: 0}
   playerDetected: 0
-  detectionState: 4
+  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 5
@@ -34166,7 +34166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336052581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.23, z: 0}
+  m_LocalPosition: {x: 0, y: 0.209, z: 0}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35131,7 +35131,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000cf48fb3a
+  m_ApplyToSortingLayers: 00000000f3df60c5
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -50093,11 +50093,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2313984762432693894, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 110.58
+      value: 60.61
       objectReference: {fileID: 0}
     - target: {fileID: 2313984762432693894, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33.55
+      value: 27.18
       objectReference: {fileID: 0}
     - target: {fileID: 2313984762432693894, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_LocalPosition.z
