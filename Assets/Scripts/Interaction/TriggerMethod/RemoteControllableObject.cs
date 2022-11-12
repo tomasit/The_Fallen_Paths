@@ -26,8 +26,15 @@ public class RemoteControllableObject : TriggerProcessor
         }
     }
 
+    public bool IsTriggerable()
+    {
+        return !_processor._interact;
+    }
+
     public void ActiveOutline(bool active)
     {
+        if (_processor._interact)
+            return;
         GetComponent<GlowOnTouch>().SetOutlineColor(_glowColor, !active);
         GetComponent<GlowOnTouch>().Trigger(active);
     }
@@ -40,7 +47,7 @@ public class RemoteControllableObject : TriggerProcessor
 
     public void RateUpParticle()
     {
-        if (_particle != null)
+        if (_particle != null && !_processor._interact)
         {
             if (!_particle.activeSelf)
                 _particle.SetActive(true);
@@ -51,7 +58,7 @@ public class RemoteControllableObject : TriggerProcessor
 
     public void RateDownParticle()
     {
-        if (_particle != null)
+        if (_particle != null && !_processor._interact)
         {
             if (!_particle.activeSelf)
                 _particle.SetActive(true);

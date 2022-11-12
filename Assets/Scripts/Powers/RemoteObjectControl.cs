@@ -113,7 +113,7 @@ public class RemoteObjectControl : ARangedPower
         if ((hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity)).collider != null)
         {
             var remote = hit.collider.gameObject.GetComponent<RemoteControllableObject>();
-            if (remote != null)
+            if (remote != null && remote.IsTriggerable())
             {
                 if (_objectInTouch != null && _objectInTouch != remote)
                     UnPreview();

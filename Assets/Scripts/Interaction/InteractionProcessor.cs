@@ -8,7 +8,7 @@ public class InteractionProcessor : AInteractable
     [SerializeField] private AInteractable[] _interactions;
     [SerializeField] private bool _stopOnInteract;
     [HideInInspector] public bool _enabled = true;
-    private bool _interact = false;
+    [HideInInspector] public bool _interact = false;
     private TriggerProcessor _triggerInteractor = null;
 
     private void Start()

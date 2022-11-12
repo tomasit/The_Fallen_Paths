@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
     {
         if (hit.gameObject.layer == LayerMask.NameToLayer("Lader"))
         {
+            Debug.Log("Ladder exit");
             _collideWithLadder = false;
             if (_isClimbing)
                 ActiveLadder(false);
