@@ -6,13 +6,14 @@ using UnityEngine.Rendering;
 public class PowerManager : MonoBehaviour
 {
     [System.Serializable]
-    private class PowerData
+    public class PowerData
     {
         public APower power;
         [System.NonSerialized] public float cooldown = 0;
         public float cooldownDuration;
         [System.NonSerialized] public float duration = 0;
         public float maxDuration = -1;
+        public bool unlocked = false;
     }
     [SerializeField]
     public List<PowerData> _powers;
@@ -26,9 +27,16 @@ public class PowerManager : MonoBehaviour
 
     }
 
+    int FindPowerIndex(string powerName)
+    {
+        return _powers.FindIndex(x => x.power.GetType() == System.Type.GetType(powerName));
+    }
+
+
+
     public void ChoosePower(string powerName)
     {
-        int powerIndex = _powers.FindIndex(x => x.power.GetType() == System.Type.GetType(powerName));
+        int powerIndex = FindPowerIndex(powerName);
 
         if (powerIndex < 0)
             return;
@@ -46,7 +54,7 @@ public class PowerManager : MonoBehaviour
         else if (canUseAnyPower && _currentPowerIndex == -1 && powerIndex >= 0)
         {
             var currentPowerData = _powers[powerIndex];
-            if (currentPowerData.cooldown <= 0)
+            if (currentPowerData.cooldown <= 0 && currentPowerData.unlocked)
             {
                 currentPowerData.cooldown = 0;
                 _currentPowerIndex = powerIndex;
@@ -59,13 +67,13 @@ public class PowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<string> a = new List<string> { "Teleportation", "RemoteObjectControl" };
+        List<string> powerNames = new List<string> { "Teleportation", "RemoteObjectControl" };
         // NOTE: best debug ever
-        for (int i = 0; i < a.Count; ++i)
+        for (int i = 0; i < powerNames.Count; ++i)
         {
-            if (Input.GetKeyDown(KeyCode.A + i))
+            if (Input.GetKeyDown("A"))
             {
-                ChoosePower(a[i]);
+                ChoosePower(powerNames[i]);
             }
         }
         if (_currentPowerIndex >= 0)
