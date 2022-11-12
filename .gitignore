@@ -100,5 +100,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # VSCode
-
 .vscode
+
+# Todo
+todo
