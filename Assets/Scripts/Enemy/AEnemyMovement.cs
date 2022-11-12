@@ -7,10 +7,17 @@ using static EnemyInfo;
 public abstract class AEnemyMovement : MonoBehaviour
 {
     public Transform target;
+    [SerializeField] protected Transform _targetPosition;
     public bool isAtDistanceToInteract = false;
     public float speed = 1f;
-    protected Transform spritePos;
-    [SerializeField] protected Transform _targetPosition;
+
+    public Transform collisionObj = null;//pour moi ca sert a rien
+    public bool isClimbing = false;
+    public bool isEndClimbing = false;
+    
+    protected Transform player;
+
+    [HideInInspector] public Transform spritePos;
     [HideInInspector] protected Agent agentMovement;
     [HideInInspector] protected EnemyDetectionManager detectionManager;
     [HideInInspector] protected TriggerCoroutineProcessor detectionTrigger;
@@ -30,13 +37,7 @@ public abstract class AEnemyMovement : MonoBehaviour
 
     public void Move()
     {
-        //if isAtDistanceToInteract => stop
-
-        //if (speed == 0f) {
-            //agentMovement.SetTarget(gameObject.transform, transform.position);
-        //} else {
-            agentMovement.SetTarget(target, detectionManager.rayCastOffset);
-        //}
+        agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         agentMovement.SetSpeed(speed);
         RotateAxis();
     }
@@ -54,12 +55,53 @@ public abstract class AEnemyMovement : MonoBehaviour
         return value;
     }
 
+    protected Vector3 FindDistanceToAttack(Transform t)
+    {
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, t.position);
+            
+        Vector3 distanceToPlayer = new Vector3(
+            t.position.x + (DistanceToInteract.x * (targetDirection.x > 0 ? -1 : 1)), 
+            t.position.y + (DistanceToInteract.y * (targetDirection.y > 0 ? 1 : -1)), 
+            t.position.z);
+        return distanceToPlayer - new Vector3(0f, detectionManager.rayCastOffset.y, 0f);
+    }
+
     private void RotateAxis()
     {
         if (detectionManager.direction == Vector2.right) {
             transform.eulerAngles = new Vector3(0, 0, 0);
         } else if (detectionManager.direction == Vector2.left) {
             transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other == null)
+            return;
+        Vector3 targetDirection = FindTargetDirection(spritePos.position, target.position);
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("Lader") && 
+        !RangeOf(targetDirection.y, 0f, 1f)) {
+                isClimbing = true;
+                collisionObj = other.gameObject.transform;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader")) {
+            isEndClimbing = true;
+            collisionObj = other.gameObject.transform;
+        }
+    }
+    
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other == null) {
+            return;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Lader")) {
+            collisionObj = null;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("LastLader")) {
+            isEndClimbing = false;
         }
     }
 }

@@ -41,6 +41,7 @@ public class EnemyDetectionManager : MonoBehaviour
     //si il voit un random qui est spoted, Trigger sa processCoroutine
     private bool ThrowRay(Vector2 directionRay, float distance)
     {
+        UpdateOffsetRaycast();
         RaycastHit2D raycast = Physics2D.Raycast(
             transform.position + rayCastOffset,
             directionRay, 
@@ -74,6 +75,16 @@ public class EnemyDetectionManager : MonoBehaviour
         }
         return false;
     }
+
+    public void UpdateOffsetRaycast()
+    {
+        if (direction == Vector2.right) {
+            rayCastOffset = new Vector3(Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
+        } else if (direction == Vector2.left) {
+            rayCastOffset = new Vector3(-Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
+        }
+    }
+
 
     public void SetRayCastDirection(Vector2 directionToSet)
     {
