@@ -46,7 +46,7 @@ public class EnemyDetectionManager : MonoBehaviour
             transform.position + rayCastOffset,
             directionRay, 
             float.PositiveInfinity, 
-            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("Enemy")));
+            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("Ground")));
 
         //faire un checkEnemy avec un bool detectedEnemy
         //faire un checkPlayer avec un book detectedPlayer
@@ -72,6 +72,8 @@ public class EnemyDetectionManager : MonoBehaviour
                     return true;
                 }
             }
+        } else {
+            DebugRay(debug, distance, directionRay, Color.green);
         }
         return false;
     }
@@ -84,7 +86,6 @@ public class EnemyDetectionManager : MonoBehaviour
             rayCastOffset = new Vector3(-Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
         }
     }
-
 
     public void SetRayCastDirection(Vector2 directionToSet)
     {
@@ -113,7 +114,7 @@ public class EnemyDetectionManager : MonoBehaviour
             if (detectionState == DetectionState.Alert) {
                 DetectionClock(timeToForgetAlerted, ref forgetAlertClock, DetectionState.None);
             } else if (detectionState == DetectionState.Spoted) {
-                DetectionClock(timeToForgetSpoted, ref forgetSpotClock, DetectionState.None);
+                DetectionClock(timeToForgetSpoted, ref forgetSpotClock, DetectionState.Alert);
             }
         }
     }

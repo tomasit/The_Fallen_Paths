@@ -10,22 +10,20 @@ public class EnemyEventsManager : MonoBehaviour
     public Enemy[] Enemies;
     public LayerMask[] layersToIgnore;
     private Transform player;
+    private AnimatorStateMachine animatorController;
 
     void Start()
     {
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
-        
-
+        animatorController = GetComponent<AnimatorStateMachine>();
 
         foreach(var enemy in Enemies) {
             //enemy.uuid = Guid.NewGuid().ToString();
-
             IgnoreLayers(enemy);
-
-            //enemy.interactionManager.damage = Damage[enemy.type];
-            //enemy.interactionManager.coolDown = CoolDown[enemy.type];
-            
-            enemy.movementManager.target = enemy.roomProprieties.targets[0];
+            if (enemy.roomProprieties != null)
+                enemy.movementManager.target = enemy.roomProprieties.targets[0];
+            enemy.healtWrapper.SetAnimator(enemy.animator);
+            enemy.healtWrapper.SetMaxHealth(EnemyInfo.Health[enemy.type]);
         }
     }
 
@@ -35,123 +33,29 @@ public class EnemyEventsManager : MonoBehaviour
             if (!enemy.enabled) {
                 continue;   
             }
-            if (enemy.detectionManager.detectionState == DetectionState.None) {
+            if (Input.GetKeyDown(KeyCode.Y)) {
+                enemy.healtWrapper.Hit(1);
+            }
+            if (enemy.detectionManager.detectionState == DetectionState.None && enemy.roomProprieties != null) {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
             }
-            if (enemy.detectionManager.detectionState == DetectionState.Flee) {
+            if (enemy.detectionManager.detectionState == DetectionState.Flee && enemy.fleePoints != null) {
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
             RaycastDirection(enemy);
             DetectionEventState(enemy);
-            AnimationController(enemy);
+            AnimationStateMachine(enemy);
+            CheckResetState(enemy);
         }
     }
 
-    private void AnimationController(Enemy enemy)
+    private void CheckResetState(Enemy enemy)
     {
-        Vector3 targetDistance = FindTargetDirection(
-            enemy.movementManager.spritePos.position, 
-            enemy.movementManager.target.position);
-
-        bool isAtTargetPosition = false;
-        bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
-        
-        Debug.Log("targetDistance.x = " + targetDistance.x);
-        Debug.Log("targetDistance.y = " + targetDistance.y);
-        if (targetDistance.x > 0) {
-            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
-                isAtTargetPosition = true;
-            }
-        } else if (targetDistance.x < 0) {
-            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
-                isAtTargetPosition = true;
-            }
+        if (player.GetComponent<BasicHealthWrapper>().isDead()) {
+            enemy.detectionManager.SetState(DetectionState.None);
         }
-
-        if (isAtTargetPosition && 
-            (enemy.detectionManager.detectionState == DetectionState.None ||
-            enemy.detectionManager.detectionState == DetectionState.Freeze) &&
-            !isClimbing
-            ) {
-            enemy.animator.SetTrigger("Idle");
-        }
-        if (enemy.movementManager.isAtDistanceToInteract && 
-            (enemy.detectionManager.detectionState == DetectionState.Alert || 
-            enemy.detectionManager.detectionState == DetectionState.Spoted) &&
-            !isClimbing
-            ) {
-            enemy.animator.SetTrigger("Ready");
-        }
-        if (isAtTargetPosition && 
-            enemy.detectionManager.detectionState == DetectionState.Flee &&
-            !isClimbing) {
-            enemy.animator.SetTrigger("Scared");
-        }
-        if (!isAtTargetPosition &&
-            (enemy.detectionManager.detectionState == DetectionState.Alert ||
-            enemy.detectionManager.detectionState == DetectionState.None) &&
-            !isClimbing /*il a pas pris de hit*/) {
-                enemy.animator.SetTrigger("Walking");
-        }
-        if (!enemy.movementManager.isAtDistanceToInteract &&
-            (enemy.detectionManager.detectionState == DetectionState.Spoted ||
-            enemy.detectionManager.detectionState == DetectionState.Flee) &&
-            !isClimbing /*il a pas pris de hit*/) {
-                enemy.animator.SetTrigger("Running");
-                //sinon il doit être en mode ready to nicker des mères
-        }
-        
-        if (enemy.movementManager.collisionObj != null) {
-            if (enemy.movementManager.isEndClimbing && (targetDistance.y < -1f)) {
-                enemy.animator.SetTrigger("SitDown");
-            }
-            if (enemy.movementManager.collisionObj.gameObject.layer == LayerMask.NameToLayer("Lader") && 
-            enemy.movementManager.isClimbing && !RangeOf(targetDistance.y, 0f, 1f) && 
-            !enemy.movementManager.isEndClimbing) {
-                enemy.animator.SetBool("Climbing", true);
-            }
-            if (enemy.movementManager.isEndClimbing && enemy.movementManager.isClimbing && 
-            !(targetDistance.y < -1f)) {
-                enemy.animator.SetTrigger("StandUp");
-                enemy.animator.SetBool("Climbing", false);
-                enemy.movementManager.isClimbing = false;
-            }
-        } else {
-            enemy.animator.SetBool("Climbing", false);
-            if (!enemy.movementManager.isEndClimbing) {
-                enemy.movementManager.isClimbing = false;
-            }
-        }
-
-        var currentAnimationName = enemy.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-
-        //Debug.Log("isAtTargetPosition = " + isAtTargetPosition);
-        
-        //si c le player faut soustraire l'offset en X de l'attaque
-        if (isAtTargetPosition && (currentAnimationName == "sword_climbing")) {
-            Debug.Log("stop anim");
-            enemy.animator.speed = 0;
-        } else {
-            enemy.animator.speed = 1;
-        }
-
-        //faire des conditions pour les lader ici
-        
-        //health manager sur les enemies
-        /*if (//il s'est fait hit, savedHealth <= Health
-        ) {
-            enemy.animator.SetTrigger("Hit");
-        }
-        if (//healthMnager <= 0
-        ) {
-            enemy.animator.SetTrigger("Dead");
-        }
-        if (//son collider trigger avec un collider lader
-        ) {
-            //enemy.animator.SetTrigger("Climbing");
-        }*/       
     }
 
     private void IgnoreLayers(Enemy enemy)
@@ -249,5 +153,31 @@ public class EnemyEventsManager : MonoBehaviour
             Debug.Log("error : enemy has no detection state");
             enemy.sprite.color = Color.blue;
         }
+    }
+
+    private void AnimationStateMachine(Enemy enemy)
+    {
+        Vector3 targetDistance = FindTargetDirection(
+            enemy.movementManager.spritePos.position, 
+            enemy.movementManager.target.position);
+
+        bool isAtTargetPosition = false;
+        bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
+        
+        if (targetDistance.x >= 0) {
+            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+                isAtTargetPosition = true;
+            }
+        } else if (targetDistance.x <= 0) {
+            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+                isAtTargetPosition = true;
+            }
+        }
+
+        animatorController.Idle(enemy, isAtTargetPosition, isClimbing);
+        animatorController.Fight(enemy, isClimbing);
+        animatorController.Scared(enemy, isAtTargetPosition, isClimbing);
+        animatorController.Moving(enemy, isAtTargetPosition, isClimbing);
+        animatorController.Climbing(enemy, targetDistance, isAtTargetPosition, isClimbing);
     }
 }

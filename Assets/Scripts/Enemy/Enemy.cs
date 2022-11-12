@@ -7,7 +7,7 @@ public class EnemyInfo
 {
     public static Dictionary<EnemyType, float> Speed = new Dictionary<EnemyType, float>()
     {
-        { EnemyType.Guard, 1.5f },
+        { EnemyType.Guard, 0.5f },
         { EnemyType.RoyalGuard, 3f },
         { EnemyType.Random, 1f }
     };
@@ -24,6 +24,13 @@ public class EnemyInfo
         { EnemyType.Guard, 1f },
         { EnemyType.RoyalGuard, 2f },
         { EnemyType.Random, 0.5f }
+    };
+
+    public static Dictionary<EnemyType, int> Health = new Dictionary<EnemyType, int>()
+    {
+        { EnemyType.Guard, 2 },
+        { EnemyType.RoyalGuard, 2 },
+        { EnemyType.Random, 1 }
     };
 
     public static Vector3 DistanceToInteract = new Vector3(1f, 0f, 0f);
@@ -90,4 +97,5 @@ public struct Enemy {
     public Agent agentMovement;
     public AEnemyMovement movementManager;
     public EnemyDetectionManager detectionManager;
+    public BasicHealthWrapper healtWrapper;
 }
