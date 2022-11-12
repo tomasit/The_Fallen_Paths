@@ -90,21 +90,5 @@ public class AnimatorStateMachine : MonoBehaviour
             enemy.animator.speed = 1;
         }*/
     }
-    public void Damages(Enemy enemy)
-    {
-        //health manager sur les enemies
-        /*if (//il s'est fait hit, savedHealth <= Health
-        ) {
-            enemy.animator.SetTrigger("Hit");
-        }
-        if (//healthMnager <= 0
-        ) {
-            enemy.animator.SetTrigger("Dead");
-        }
-        if (//son collider trigger avec un collider lader
-        ) {
-            //enemy.animator.SetTrigger("Climbing");
-        }*/
-    }
 
 }
