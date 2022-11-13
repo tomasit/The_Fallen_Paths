@@ -88,7 +88,7 @@ public class Teleportation : AVisualCircleRangedPower
 
         var _colliderTempSize = _collider.size * transform.localScale;
         _colliderTempSize.y -= 0.1f;
-        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, 0f, (1 << 11));
+        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, 0f, (1 << LayerMask.NameToLayer("Level")));
 
         _canCast = !box;
         if (!_canCast)

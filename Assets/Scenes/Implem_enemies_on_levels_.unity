@@ -4556,6 +4556,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 454048067}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[3].unlocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[3].maxDuration
       value: -1
       objectReference: {fileID: 0}

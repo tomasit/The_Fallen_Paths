@@ -37,9 +37,9 @@ public class LinkEnemies : AVisualCircleRangedPower
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//Define the ray pointed by the mouse in the game window
             RaycastHit hitInfo; //Information of ray collision
-            Debug.Log(hitInfo);
             if (Physics.Raycast(ray, out hitInfo))
                 Debug.Log(hitInfo.collider.gameObject.tag);//Determine whether to hit the object            return false;
+            Debug.Log(hitInfo);
             return false;
         }
         else

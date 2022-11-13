@@ -636,7 +636,7 @@ MonoBehaviour:
   - power: {fileID: 7329469978031202593}
     cooldownDuration: 5
     maxDuration: -1
-    unlocked: 1
+    unlocked: 0
   canUseAnyPower: 1
 --- !u!1 &5928635508013474871
 GameObject:

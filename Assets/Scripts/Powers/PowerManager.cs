@@ -14,6 +14,7 @@ public class PowerManager : MonoBehaviour
         [System.NonSerialized] public float duration = 0;
         public float maxDuration = -1;
         public bool unlocked = false;
+        public KeyCode key;
     }
     [SerializeField]
     public List<PowerData> _powers;
@@ -65,16 +66,11 @@ public class PowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<string> powerNames = new List<string> { "Teleportation", "RatPower", "RemoteObjectControl", "LinkEnemies" };
-        // NOTE: best debug ever
-        for (int i = 0; i < powerNames.Count; ++i)
-        {
-            if (Input.GetKeyDown(KeyCode.A + i))
+        foreach (var data in _powers)
+            if (Input.GetKeyDown(data.key))
             {
-                Debug.Log(powerNames[i]);
-                ChoosePower(powerNames[i]);
+                ChoosePower(data.power.GetType().Name);
             }
-        }
         if (_currentPowerIndex >= 0)
         {
             var currentPowerData = _powers[_currentPowerIndex];
