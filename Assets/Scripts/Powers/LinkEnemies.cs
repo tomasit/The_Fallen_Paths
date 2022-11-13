@@ -33,7 +33,17 @@ public class LinkEnemies : AVisualCircleRangedPower
 
     protected override bool canCastPower()
     {
-        return false;
+        if (!firstEnemySelected)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//Define the ray pointed by the mouse in the game window
+            RaycastHit hitInfo; //Information of ray collision
+            Debug.Log(hitInfo);
+            if (Physics.Raycast(ray, out hitInfo))
+                Debug.Log(hitInfo.collider.gameObject.tag);//Determine whether to hit the object            return false;
+            return false;
+        }
+        else
+            return true;
     }
 
     // Update is called once per frame

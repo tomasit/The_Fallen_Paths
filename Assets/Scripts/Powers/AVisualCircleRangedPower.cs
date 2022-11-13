@@ -51,8 +51,7 @@ public abstract class AVisualCircleRangedPower : ARangedPower
 
     void Update()
     {
-        // NOTE: KeyCodes for debug. R = Activate Range && Click = Use Power
-        if (activated) // powerActivated -> firingPower
+        if (activated)
         {
             if (mouseDistranceIsCorrect())
             {

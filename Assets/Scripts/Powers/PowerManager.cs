@@ -32,8 +32,6 @@ public class PowerManager : MonoBehaviour
         return _powers.FindIndex(x => x.power.GetType() == System.Type.GetType(powerName));
     }
 
-
-
     public void ChoosePower(string powerName)
     {
         int powerIndex = FindPowerIndex(powerName);
@@ -67,12 +65,13 @@ public class PowerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<string> powerNames = new List<string> { "Teleportation", "RemoteObjectControl" };
+        List<string> powerNames = new List<string> { "Teleportation", "RatPower", "RemoteObjectControl", "LinkEnemies" };
         // NOTE: best debug ever
         for (int i = 0; i < powerNames.Count; ++i)
         {
-            if (Input.GetKeyDown("A"))
+            if (Input.GetKeyDown(KeyCode.A + i))
             {
+                Debug.Log(powerNames[i]);
                 ChoosePower(powerNames[i]);
             }
         }
