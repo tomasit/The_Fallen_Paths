@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class TwoStateInteraction : AInteractable
 {
+    [SerializeField] private SoundData.SoundEffectName[] _soundNames;
     [SerializeField] private string[] _description;
     [SerializeField] private Sprite[] _stateSprite;
     private int _spriteIndex = 0;
+    private SoundEffect _soundEffectPlayer = null;
 
     private void Start()
     {
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         Load();
         _descriptionHeight = AInteractable.DescriptionHeight.TWO_STATE_DESCRIPTION;
         GetComponent<SpriteRenderer>().sprite = _stateSprite[_spriteIndex];
-        // var triggerProcessor = GetComponent<CollisionDetection>();
-        // if (triggerProcessor != null && GetComponent<InteractionProcessor>()._enabled)
-        // {
-        //     triggerProcessor._displayedText = _description[_spriteIndex];
-        // }
     }
 
     public override void Save()
@@ -41,11 +39,7 @@ public class TwoStateInteraction : AInteractable
         _spriteIndex = (_spriteIndex == 0 ? 1 : 0);
         GetComponent<SpriteRenderer>().sprite = _stateSprite[_spriteIndex];
         Save();
-        // var triggerProcessor = GetComponent<CollisionDetection>();
-        // if (triggerProcessor != null)
-        // {
-        //     triggerProcessor._displayedText = _description[_spriteIndex];
-        //     triggerProcessor.SetDescription(_description[_spriteIndex]);
-        // }
+        if (_soundEffectPlayer != null)
+            _soundEffectPlayer.PlaySound(_soundNames[_spriteIndex]);
     }
 }

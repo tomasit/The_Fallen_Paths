@@ -10,10 +10,12 @@ public class InteractionProcessor : AInteractable
     [HideInInspector] public bool _enabled = true;
     [HideInInspector] public bool _interact = false;
     private TriggerProcessor _triggerInteractor = null;
+    private SoundEffect _soundEffectPlayer = null;
 
     private void Start()
     {
         Load();
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         _triggerInteractor = GetComponent<TriggerProcessor>();
         if (_interact)
             DisableTriggerInteractor();
@@ -33,8 +35,14 @@ public class InteractionProcessor : AInteractable
 
     public override void Interact()
     {
-        if (_interact || !_enabled)
+        if (_interact)
             return;
+
+        if (!_enabled)
+        {
+            _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.INTERACTION_LOCK);
+            return;
+        }
 
         foreach (var interaction in _interactions)
         {
