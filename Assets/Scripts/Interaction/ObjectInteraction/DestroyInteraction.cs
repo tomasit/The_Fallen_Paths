@@ -10,12 +10,14 @@ public class DestroyInteraction : AInteractable
     [SerializeField] private int _numberTap;
     [SerializeField] private Sprite[] _spriteSheet;
     [SerializeField] private Behaviour[] _componentToDesactivate;
+    private SoundEffect _soundEffectPlayer;
     private SpriteRenderer _sprite;
     private int _currentTap;
     private Vector3 _originalPos;
 
     private void Start()
     {
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         _currentTap = 0;
         _sprite = GetComponent<SpriteRenderer>();
     }
@@ -27,6 +29,7 @@ public class DestroyInteraction : AInteractable
 
     public override void Interact()
     {
+        _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.INTERACTION_BREAK_METAL);
         _currentTap += 1;
         float percentage = (float)_currentTap / (float)_numberTap;
         _originalPos = (_currentTap == 1 ? _cameraShake.transform.localPosition : _originalPos);

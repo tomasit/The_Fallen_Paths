@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using ExtensionMethods;
 
 public class TMPDialogue : MonoBehaviour
 {
@@ -51,7 +52,7 @@ public class TMPDialogue : MonoBehaviour
         public DialoguePartOfSide[] _partOfSide;
     }
 
-    [SerializeField] private Dialogue[] _dialogues;
+    [SerializeField] protected Dialogue[] _dialogues;
     [SerializeField] private GameObject _dialogueBox;
     [SerializeField] private Transform _canvasTransform;
     [SerializeField] private float _waveSpeed;
@@ -62,20 +63,22 @@ public class TMPDialogue : MonoBehaviour
     [SerializeField] private Vector2 _woodleAmplitude;
     [SerializeField] private float _popDuration;
     [SerializeField] private bool _handleByInput = false;
-    private TMP_Text _textMeshPro;
-    private Coroutine _popCoroutine = null;
-    private Mesh _mesh;
-    private Vector3[] _vertices;
-    private Color32[] _colors;
-    private int _dialogueIndex;
-    private int _partOfSideIndex;
-    private bool _isCompute = false;
-    private float _currentPopSpeed;
-    private bool _canSkip = false;
-    private GameObject _dialogueBoxReference = null;
+    private SoundEffect _soundEffectPlayer;
+    protected TMP_Text _textMeshPro;
+    protected Coroutine _popCoroutine = null;
+    protected Mesh _mesh;
+    protected Vector3[] _vertices;
+    protected Color32[] _colors;
+    protected int _dialogueIndex;
+    protected int _partOfSideIndex;
+    protected bool _isCompute = false;
+    protected float _currentPopSpeed;
+    protected bool _canSkip = false;
+    protected GameObject _dialogueBoxReference = null;
 
     private void Start()
     {
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         _currentPopSpeed = _popDuration;
         for (int i = 0; i < _dialogues.Length; ++i)
         {
@@ -85,18 +88,18 @@ public class TMPDialogue : MonoBehaviour
         }
     }
 
-    public bool IsFinish()
+    public virtual bool IsFinish()
     {
-        return (_dialogueBoxReference == null);        
+        return (_dialogueBoxReference == null);
     }
 
-    private void ChangeText(int partOfSideIndex)
+    protected void ChangeText(int partOfSideIndex)
     {
         _textMeshPro.text = _dialogues[_dialogueIndex]._partOfSide[partOfSideIndex]._fullText;
         _partOfSideIndex = partOfSideIndex;
     }
 
-    private void SetupDialogue(int dialogueIndex)
+    protected void SetupDialogue(int dialogueIndex)
     {
         int index = 0;
         _dialogues[dialogueIndex]._isSetup = true;
@@ -124,8 +127,9 @@ public class TMPDialogue : MonoBehaviour
                         _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._colorRandomSpeed.Add(1.0f - random);
                     }
                 }
+                int substringToDeduce = _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.CountSubstring("<i>") * 3 + _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.CountSubstring("</i>") * 4;
                 _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._firstIndex = index;
-                _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._lastIndex = index + _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.Length;
+                _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._lastIndex = index + _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.Length - substringToDeduce;
                 index = _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._lastIndex;
                 _dialogues[dialogueIndex]._partOfSide[j]._fullText += _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text;
             }
@@ -159,7 +163,7 @@ public class TMPDialogue : MonoBehaviour
         return false;
     }
 
-    private IEnumerator PopDialogue(int dialogueIndex)
+    protected virtual IEnumerator PopDialogue(int dialogueIndex)
     {
         ChangeText(dialogueIndex);
         _isCompute = false;
@@ -201,6 +205,10 @@ public class TMPDialogue : MonoBehaviour
 
                             if ((updateI = PopCharacter(vertexIndex, time, info)))
                             {
+                                if (_currentPopSpeed == _popDuration)
+                                    _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.UI_CHARACTER_POP);
+                                else if (i % 4 == 0)
+                                    _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.UI_CHARACTER_POP);
                                 i++;
                                 time = 0.0f;
                             }                            
@@ -234,7 +242,7 @@ public class TMPDialogue : MonoBehaviour
         _popCoroutine = null;
     }
 
-    private void UpdateTextModifier(int vertexIndex, ModifiableText d, int currentIndex)
+    protected void UpdateTextModifier(int vertexIndex, ModifiableText d, int currentIndex)
     {
         if (d._textModifier == TextModifier.WODDLE)
         {
@@ -278,7 +286,7 @@ public class TMPDialogue : MonoBehaviour
         }
     }
 
-    private void UpdateColor(int vertexIndex, ModifiableText d, int colorIndex)
+    protected void UpdateColor(int vertexIndex, ModifiableText d, int colorIndex)
     {
         if (d._colorModifier == TextColor.SOLID)
         {
@@ -293,7 +301,7 @@ public class TMPDialogue : MonoBehaviour
         }
     }
 
-    private void InstantiateDialogueBox()
+    protected void InstantiateDialogueBox()
     {
         _dialogueBoxReference = Instantiate(_dialogueBox, _canvasTransform) as GameObject;
         _textMeshPro = _dialogueBoxReference.transform.GetChild(0).GetComponent<TMP_Text>();
@@ -301,7 +309,7 @@ public class TMPDialogue : MonoBehaviour
             Debug.Log("No tmp found");
     }
 
-    public void StartDialogue(int index)
+    public virtual void StartDialogue(int index)
     {
         if (_popCoroutine != null)
         {
@@ -327,7 +335,7 @@ public class TMPDialogue : MonoBehaviour
         _popCoroutine = StartCoroutine(PopDialogue(_partOfSideIndex));
     }
 
-    private int? GetDialogueByName(string dialogueName)
+    protected int? GetDialogueByName(string dialogueName)
     {
         int i = 0;
         foreach (Dialogue d in _dialogues)
@@ -339,7 +347,7 @@ public class TMPDialogue : MonoBehaviour
         return null;
     }
 
-    public void StartDialogue(string dialogueName)
+    public virtual void StartDialogue(string dialogueName)
     {
         if (_popCoroutine != null)
         {

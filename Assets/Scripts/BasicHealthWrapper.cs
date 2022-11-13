@@ -28,7 +28,8 @@ public class BasicHealthWrapper : MonoBehaviour
     public void Heal(uint healValue)
     {
         _health.Heal(healValue);
-        _animator.SetTrigger("Heal");
+        _animator.SetBool("Dead", false);
+//        _animator.SetTrigger("Heal");
     }
 
     public bool isDead() 
