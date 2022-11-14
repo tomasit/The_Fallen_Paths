@@ -22,6 +22,11 @@ public class RatPower : APower
         _yellowSpr.enabled = false;
     }
 
+    public override void Cancel()
+    {
+
+    }
+
     private IEnumerator RatTransformation(Vector3 target)
     {
         _rescaleMask.alphaCutoff = 1.0f;

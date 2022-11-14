@@ -15,7 +15,6 @@ public abstract class AVisualCircleRangedPower : ARangedPower
 
     public override void Use()
     {
-        // powerActivated = true
         activated = true;
         showRange();
     }
@@ -43,18 +42,22 @@ public abstract class AVisualCircleRangedPower : ARangedPower
         _rangeObject.transform.localScale = oldScale;
     }
 
+    public override void CancelRange()
+    {
+        base.CancelRange();
+        StopAndDetachRangeObject();
+        UnPreview();
+    }
+
     void Update()
     {
-        // NOTE: KeyCodes for debug. R = Activate Range && Click = Use Power
-        if (activated) // powerActivated -> firingPower
+        if (activated)
         {
             if (mouseDistranceIsCorrect())
             {
                 if (canCastPower() && Input.GetMouseButtonDown(0))
                 {
-                    StopAndDetachRangeObject();
-                    UnPreview();
-                    activated = false;
+                    CancelRange();
                     firingPower = true;
                 }
                 else
@@ -62,10 +65,6 @@ public abstract class AVisualCircleRangedPower : ARangedPower
             }
             else
                 UnPreview();
-        }
-        else if (Input.GetKey(KeyCode.R)) // NOTE: Remove this else if when power manager is done
-        {
-            Use();
         }
         else if (_rangeObject != null && _rangeObject.particleCount == 0)
         {
