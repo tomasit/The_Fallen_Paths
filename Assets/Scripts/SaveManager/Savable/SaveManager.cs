@@ -23,6 +23,7 @@ public class SaveManager : MonoBehaviour
 
     private List<ObjectData> _levelData;
     private PlayerInfoSave _playerInfo;
+    private Parameters _parameters;
     private int _currentLevel = 0;
 
     private void Awake() {
@@ -35,7 +36,14 @@ public class SaveManager : MonoBehaviour
         }
         _levelData = new List<ObjectData>();
         _playerInfo = new PlayerInfoSave();
+        _parameters = new Parameters();
+        _parameters._subVolume = new Dictionary<SoundData.SoundEffectType, float>();
         Load();
+    }
+
+    public Parameters GetParameters()
+    {
+        return _parameters;
     }
 
     public PlayerInfoSave GetPlayerInfo()
@@ -80,6 +88,20 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
+        // Load parameters
+        if (SerializationManager.Exist("Parameters"))
+        {
+            _parameters = (Parameters)SerializationManager.Load("Parameters");
+        }
+        else
+        {
+            _parameters._subVolume.Add(SoundData.SoundEffectType.MUSIC, 1.0f);
+            _parameters._subVolume.Add(SoundData.SoundEffectType.PLAYER, 1.0f);
+            _parameters._subVolume.Add(SoundData.SoundEffectType.ENVIRONMENT, 1.0f);
+            _parameters._subVolume.Add(SoundData.SoundEffectType.UI, 1.0f);
+            SaveParameters();
+        }
+
         // maybe have a _totalLevel properties, iterate on this and fullfil the _levelData propertie
 
         if (SerializationManager.Exist("Level_" + _currentLevel))
@@ -92,8 +114,14 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public void SaveParameters()
+    {
+        SerializationManager.Save("Parameters", _parameters);
+    }
+
     public void Save()
     {
+        // save current level
         SerializationManager.Save("Level_" + _currentLevel, _levelData[_currentLevel]);
     }
 

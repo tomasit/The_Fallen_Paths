@@ -18,10 +18,12 @@ public class LightInteraction : AInteractable
     private float _alightTime;
     private float _oscillationFrequence;
     private float _oscillationTimer;
+    private SoundEffect _soundEffectPlayer = null;
 
     private void Start()
     {
         Load();
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         _oscillationTimer = 0.0f;
         _oscillationFrequence = Random.Range(0.1f, 0.2f);
         _alightTime = 0.0f;
@@ -98,6 +100,9 @@ public class LightInteraction : AInteractable
     public override void Interact()
     {
         _isAlight = !_isAlight;
+        if (_soundEffectPlayer != null)
+            _soundEffectPlayer.PlaySound(_isAlight ? SoundData.SoundEffectName.INTERACTION_FIRE_IN : SoundData.SoundEffectName.INTERACTION_FIRE_OUT);
+
         ComputeLight();
         _event.Invoke(_isAlight);
         Save();

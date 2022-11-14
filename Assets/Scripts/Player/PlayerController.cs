@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private MovementValues _playerValues;
     [SerializeField] private MovementValues _ratValues;
     [SerializeField] private LayerMask _levelLayerMask;
+    private SoundEffect _soundEffectPlayer = null;
     private MovementValues[] _movementValues;
     private bool _blockInput = false;
     private float deceleration = 0.0f;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         _runtimeGroundedRayMagnitude = _groundedRayMagnitude;
         _movementValues = new MovementValues[2];
         _movementValues[0] = _playerValues;
@@ -66,7 +68,11 @@ public class PlayerController : MonoBehaviour
         rayPosition.y = rayPosition.y - (_collider.size.y * transform.localScale.y) / 2 - _runtimeGroundedRayMagnitude + (_collider.offset.y * transform.localScale.y);
 
         RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.right, _collider.size.x * transform.localScale.x, _levelLayerMask);
+        bool oldGrounded = _isGrounded;
         _isGrounded = hit;
+        if (_isGrounded && !oldGrounded)
+            if (_soundEffectPlayer != null)
+                _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.PLAYER_LAND);
 
         Debug.DrawRay(rayPosition, Vector2.right * (_collider.size.x * transform.localScale.x), _isGrounded ? Color.red : Color.green);
         return _isGrounded;
@@ -123,6 +129,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        if (_soundEffectPlayer != null)
+            _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.PLAYER_JUMP);
         _rigidBody.velocity = new Vector2(0, _movementValues[_currentValueIndex].jumpPower);
     }
 
@@ -157,12 +165,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hit)
     {
-        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("Lader"));
+        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder"));
     }
 
     private void OnTriggerExit2D(Collider2D hit)
     {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Lader"))
+        if (hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder"))
         {
             _collideWithLadder = false;
             if (_isClimbing)
@@ -274,5 +282,17 @@ public class PlayerController : MonoBehaviour
             _rigidBody.velocity = new Vector2(_movementValues[_currentValueIndex].playerSpeed, _verticalPlayerSpeed);
         else
             _rigidBody.velocity = new Vector2(_movementValues[_currentValueIndex].playerSpeed, _rigidBody.velocity.y);
+    }
+
+    public void PlayWalkSound()
+    {
+        if (_soundEffectPlayer != null)
+            _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.PLAYER_WALK);
+    }
+
+    public void PlayLandSound()
+    {
+        if (_soundEffectPlayer != null)
+            _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.PLAYER_WALK);
     }
 }

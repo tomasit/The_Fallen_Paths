@@ -5478,10 +5478,10 @@ TextureImporter:
       name: Medieval_props_204
       rect:
         serializedVersion: 2
-        x: 714
-        y: 557
-        width: 30
-        height: 8
+        x: 713
+        y: 556
+        width: 32
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -8843,8 +8843,8 @@ TextureImporter:
       Medieval_props_208: 21300416
       Medieval_props_65: 21300130
       Medieval_props_153: 21300306
-      Medieval_props_91: 21300182
       Medieval_props_248: 21300496
+      Medieval_props_91: 21300182
       Medieval_props_264: 21300528
       Medieval_props_94: 21300188
       Medieval_props_232: 21300464

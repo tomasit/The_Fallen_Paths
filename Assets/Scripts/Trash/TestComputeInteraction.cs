@@ -29,6 +29,18 @@ public class TestComputeInteraction : MonoBehaviour
             _interactor = null;
     }
 
+    private void OnCollisionEnter2D(Collision2D hit)
+    {
+        if (hit.collider.GetComponent<CollisionDetection>() != null)
+            _interactor = hit.collider.GetComponent<CollisionDetection>();
+    }
+
+    private void OnCollisionExit2D(Collision2D hit)
+    {
+        if (hit.collider.GetComponent<CollisionDetection>() != null)
+            _interactor = null;
+    }
+
     private void Update()
     {
         if (_interactor != null && !_blockInput)

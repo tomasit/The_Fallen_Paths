@@ -7,41 +7,25 @@ using System;
 
 public class TutorialManager : MonoBehaviour
 {
+    [SerializeField] private TMPDialogue _dialogue;
+    [SerializeField] private TransitionScreen _transitionDialogue;
+    [SerializeField] private EnemyDetectionManager _enemy1;
     [SerializeField] private SubLevelChange _door1;
+    [SerializeField] private Transform _respawnRoom1;
+    [SerializeField] private Transform _respawnEnemy1Pos;
+    [SerializeField] private SubLevelChange _door2;
     [SerializeField] private Transform _canvasTransform;
     [SerializeField] private GameObject _nameBox;
     [SerializeField] private PlayerController _controller;
     [SerializeField] private InteractionSelectorEnable _firstDoorEnabler;
+    [SerializeField] private InteractionSelectorEnable _secondDoorEnabler;
     [SerializeField] private DestroyInteraction _cageInteraction;
     [SerializeField] private TestComputeInteraction _interactor;
-    [SerializeField] private string _description;
-    [SerializeField] private Image _fadeImage;
-    [SerializeField] private TextMeshProUGUI _tmproUGUI;
     [SerializeField] private float _fadeDuration;
     [SerializeField] private RemoteObjectControl _power; // replace by power manager
-    private TMPDialogue _dialogue;
     private Coroutine _tutorialCoroutine;
     private bool _startTutorial;
     private GameObject _nameBoxRef;
-
-    private IEnumerator BlackFade(bool fadeIn)
-    {
-        Color baseImgColor = _fadeImage.color;
-        Color nextImgColor = new Color(baseImgColor.r, baseImgColor.g, baseImgColor.b, fadeIn ? 1.0f : 0.0f);
-        Color baseTxtColor = _tmproUGUI.color;
-        Color nextTxtColor = new Color(baseTxtColor.r, baseTxtColor.g, baseTxtColor.b, fadeIn ? 1.0f : 0.0f);
-
-        _tmproUGUI.text = _description;
-
-        yield return (new WaitForSeconds(3.0f));
-
-        for (float t = 0; _fadeImage.color != nextImgColor && _tmproUGUI.color != nextTxtColor; t += Time.deltaTime / _fadeDuration)
-        {
-            _fadeImage.color = Color.Lerp(baseImgColor, nextImgColor, t);
-            _tmproUGUI.color = Color.Lerp(baseTxtColor, nextTxtColor, t);
-            yield return null;
-        }
-    }
 
     private IEnumerator ReminderOffset(string dialogueName)
     {
@@ -163,14 +147,46 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
         StopCoroutine(reminder);
+    }
+
+    private IEnumerator WaitForRespawn()
+    {
+        _controller.BlockInput(true);
+        _transitionDialogue.StartDeadTransition();
+        while (_transitionDialogue.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
+            yield return null;
+        _enemy1.transform.position = _respawnEnemy1Pos.position;
+        _enemy1.SetState(DetectionState.Freeze);
+        _controller.transform.position = _respawnRoom1.position;
+        _controller.transform.gameObject.GetComponent<BasicHealthWrapper>().Heal(1);
+        while (_transitionDialogue.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+            yield return null;
+        _dialogue.StartDialogue("TryAgain");
+        yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
+       _enemy1.SetState(DetectionState.None);
+    }
+
+    private IEnumerator GoToNextRoom()
+    {
+        while (!_door2.IsInTransition())
+        {
+            if (_controller.transform.gameObject.GetComponent<Animator>().GetBool("Dead"))
+            {
+                yield return StartCoroutine(WaitForRespawn());
+            }
+            else
+                yield return null;
+        }
     }
 
     private IEnumerator TutorialCoroutine()
     {
         _interactor.BlockInput(true);
         _controller.BlockInput(true);
-        yield return StartCoroutine(BlackFade(false));
+        _transitionDialogue.StartBeginTransition("Room_1_description");
+        while (_transitionDialogue.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+            yield return null;
         if (SaveManager.DataInstance.GetPlayerInfo()._playerName == "")
             _nameBoxRef = Instantiate(_nameBox, _canvasTransform);
         while (SaveManager.DataInstance.GetPlayerInfo()._playerName == "")
@@ -216,7 +232,10 @@ public class TutorialManager : MonoBehaviour
         yield return StartCoroutine(WaitForClick());
         _dialogue.StartDialogue("CongratPower");
         yield return StartCoroutine(WaitForDialogueToFinish());
+        _enemy1.detectionState = DetectionState.None;
         _controller.BlockInput(false);
+        _secondDoorEnabler.Interact();
+        yield return StartCoroutine(GoToNextRoom());
     }
 
     private void Update()
@@ -230,12 +249,6 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        _fadeImage.color = new Color(_fadeImage.color.r, _fadeImage.color.g, _fadeImage.color.b, 1.0f);
-        _tmproUGUI.color = new Color(_tmproUGUI.color.r, _tmproUGUI.color.g, _tmproUGUI.color.b, 1.0f);
-        _dialogue = GetComponent<TMPDialogue>();
-        if (_description.Contains("\\n"))
-        {
-            _description = _description.Replace("\\n", "\n");
-        }
+        _controller.transform.gameObject.GetComponent<BasicHealthWrapper>().SetMaxHealth(1);
     }
 }

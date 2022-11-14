@@ -2167,6 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfbd94dd4d002249b01d2c03f67bd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
   _grid: {fileID: 54091027}
   _fadeImage: {fileID: 0}
   _tmproUGUI: {fileID: 0}
@@ -2240,6 +2241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _color: {r: 4, g: 0.8, b: 0, a: 1}
+  _outlinethickness: 1
 --- !u!61 &185300767
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2562,6 +2564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _color: {r: 1, g: 0.8370818, b: 0, a: 1}
+  _outlinethickness: 1
 --- !u!61 &545042518
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2973,7 +2976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325771, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3483225076850325771, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
       propertyPath: m_SortingLayerID
@@ -3051,8 +3054,42 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.067
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2313984762432693892, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
+--- !u!1 &758453424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2313984762432693994, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
+  m_PrefabInstance: {fileID: 758453423}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &758453425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2313984762432693895, guid: 7cea12ac42c6a55ecae96feb0bff9ac2, type: 3}
+  m_PrefabInstance: {fileID: 758453423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758453424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c8b66da370378e3b59be9a256a41aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &758453426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758453424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fc8bc73d443e75fb63dadd3e2e1e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powers:
+  - power: {fileID: 758453425}
+    cooldownDuration: 0
+    maxDuration: 0
+  canUseAnyPower: 1
 --- !u!1 &914650654
 GameObject:
   m_ObjectHideFlags: 0
@@ -9547,6 +9584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _color: {r: 0.0665282, g: 1, b: 0, a: 1}
+  _outlinethickness: 1
 --- !u!61 &1102432720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21735,6 +21773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfbd94dd4d002249b01d2c03f67bd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
   _grid: {fileID: 1720151120}
   _fadeImage: {fileID: 0}
   _tmproUGUI: {fileID: 0}
@@ -21808,6 +21847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _color: {r: 4, g: 0.8, b: 0, a: 1}
+  _outlinethickness: 1
 --- !u!61 &2109167462
 BoxCollider2D:
   m_ObjectHideFlags: 0

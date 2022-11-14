@@ -9,6 +9,7 @@ public class HideInteraction : MonoBehaviour
     private Coroutine _litCoroutine = null;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _litDuration = 0.3f;
+    private bool _isHide = false;
 
     private void Start()
     {
@@ -19,11 +20,12 @@ public class HideInteraction : MonoBehaviour
 
     public bool IsHide()
     {
-        return true;
+        return _isHide;
     }
 
     public void Hide(bool hide, bool isLitPlace)
     {
+        _isHide = hide;
         _controller.BlockInput(hide);
 
         if (isLitPlace && !hide)

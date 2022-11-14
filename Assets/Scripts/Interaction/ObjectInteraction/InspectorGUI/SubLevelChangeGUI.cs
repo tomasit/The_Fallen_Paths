@@ -12,6 +12,7 @@ public class SubLevelChangeGUI : Editor
     private SerializedProperty _image;
     private SerializedProperty _text;
     private SerializedProperty _player;
+    private SerializedProperty _soundType;
 
     private void OnEnable()
     {
@@ -19,6 +20,7 @@ public class SubLevelChangeGUI : Editor
         _tilemap = serializedObject.FindProperty("_grid");
         _image = serializedObject.FindProperty("_fadeImage");
         _text = serializedObject.FindProperty("_tmproUGUI");
+        _soundType = serializedObject.FindProperty("_soundType");
     }
 
     public override void OnInspectorGUI()
@@ -27,6 +29,7 @@ public class SubLevelChangeGUI : Editor
 
         EditorGUILayout.PropertyField(_tilemap);
         EditorGUILayout.PropertyField(_player);
+        EditorGUILayout.PropertyField(_soundType);
 
         place._interactOnStart = GUILayout.Toggle(place._interactOnStart, "Interact on start");
 

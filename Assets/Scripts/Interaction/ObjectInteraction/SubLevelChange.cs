@@ -18,11 +18,14 @@ public class SubLevelChange : AInteractable
     public string _fadeDescription = "";
     public float _fadeDuration = 1.0f;
     public float _descriptionDuration = 1.0f;
+    public SoundData.SoundEffectName _soundType;
     private Camera _camera = null;
     private bool _isTransitionning = false;
+    private SoundEffect _soundEffectPlayer;
 
     private void Start()
     {
+        _soundEffectPlayer = GetComponent<SoundEffect>();
         if (!_camera)
             _camera = Camera.main;
         if (_interactOnStart)
@@ -106,6 +109,8 @@ public class SubLevelChange : AInteractable
 
     public override void Interact()
     {
+        if (_soundEffectPlayer != null)
+            _soundEffectPlayer.PlaySound(_soundType);
         FitWithWorldSize camResize = _camera.GetComponent<FitWithWorldSize>();
 
         if (camResize != null)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InteractionSelectorEnable))]
+// [RequireComponent(typeof(InteractionSelectorEnable))]
 public class MultiLockedInteraction : AInteractable
 {
     [SerializeField] private int _unlockConditionNb;
@@ -31,7 +31,8 @@ public class MultiLockedInteraction : AInteractable
         _currentUnlockNb += 1;
         if (_currentUnlockNb == _unlockConditionNb)
         {
-            GetComponent<InteractionSelectorEnable>().Interact();
+            if (GetComponent<InteractionSelectorEnable>() != null)
+                GetComponent<InteractionSelectorEnable>().Interact();
             foreach (var interaction in _conditionalInteractions)
                 interaction.Interact();
         }

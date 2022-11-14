@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(BoxCollider2D))]
 public class Teleportation : AVisualCircleRangedPower
 {
@@ -63,12 +64,15 @@ public class Teleportation : AVisualCircleRangedPower
         }
     }
 
+    public override void Cancel()
+    {
+        return;
+    }
+
 
     protected override bool canCastPower()
     {
         Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        // Debug.Log(transform.localScale);
 
         var yColliderOffset = new Vector2(0, (_collider.size.y * transform.localScale.y) / 2);
 
@@ -84,7 +88,7 @@ public class Teleportation : AVisualCircleRangedPower
 
         var _colliderTempSize = _collider.size * transform.localScale;
         _colliderTempSize.y -= 0.1f;
-        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, -0.1f, (1 << 11));
+        var box = BoxCastDrawer.BoxCastAndDraw(_calculatedPosition, _colliderTempSize, 0, Vector2.zero, 0f, (1 << LayerMask.NameToLayer("Level")));
 
         _canCast = !box;
         if (!_canCast)
