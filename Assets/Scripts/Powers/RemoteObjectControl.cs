@@ -147,7 +147,7 @@ public class RemoteObjectControl : ARangedPower
                     if (Input.GetMouseButtonDown(0))
                     {
                         Fire();
-                        Cancel();
+                        CancelRange();
                     }
                 }
                 else
