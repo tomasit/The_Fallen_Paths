@@ -56,6 +56,9 @@ public class EnemyEventsManager : MonoBehaviour
         if (player.GetComponent<BasicHealthWrapper>().isDead()) {
             enemy.detectionManager.SetState(DetectionState.None);
         }
+        if (enemy.healtWrapper.isDead()) {
+            enemy.enabled = false;
+        }
     }
 
     private void IgnoreLayers(Enemy enemy)

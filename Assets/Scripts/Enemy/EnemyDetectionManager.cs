@@ -49,8 +49,6 @@ public class EnemyDetectionManager : MonoBehaviour
             (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 
             1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("Ground")));
 
-        //faire un checkEnemy avec un bool detectedEnemy
-        //faire un checkPlayer avec un book detectedPlayer
         if (raycast.collider != null)
         {
             if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {

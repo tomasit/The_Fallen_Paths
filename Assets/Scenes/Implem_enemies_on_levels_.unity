@@ -2817,6 +2817,7 @@ MonoBehaviour:
   _fadeDescription: 
   _fadeDuration: 1
   _descriptionDuration: 1
+  _soundType: 0
 --- !u!114 &119008279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3678,6 +3679,7 @@ MonoBehaviour:
     Room II'
   _fadeDuration: 1
   _descriptionDuration: 1
+  _soundType: 0
 --- !u!114 &185300763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3695,6 +3697,7 @@ MonoBehaviour:
   - {fileID: 185300769}
   _stopOnInteract: 0
   _enabled: 1
+  _interact: 0
 --- !u!114 &185300764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5412,6 +5415,7 @@ MonoBehaviour:
   - {fileID: 545042523}
   _stopOnInteract: 0
   _enabled: 1
+  _interact: 0
 --- !u!114 &545042522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6653,7 +6657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e783a154ab1bced18b3f3243a1fb119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
+  _target: {fileID: 1823324444}
   targetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &703658058
 GameObject:
@@ -12839,16 +12843,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5107b8c6be737574eb4ba2d2c7c2a501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogue: {fileID: 0}
+  _transitionDialogue: {fileID: 0}
+  _enemy1: {fileID: 0}
   _door1: {fileID: 185300762}
+  _respawnRoom1: {fileID: 0}
+  _respawnEnemy1Pos: {fileID: 0}
+  _door2: {fileID: 0}
   _canvasTransform: {fileID: 501055652}
   _nameBox: {fileID: 5954929881415853913, guid: bcf6d9cc0eb343d43ab6e745a3731bf4, type: 3}
   _controller: {fileID: 0}
   _firstDoorEnabler: {fileID: 185300770}
+  _secondDoorEnabler: {fileID: 0}
   _cageInteraction: {fileID: 2133006540}
   _interactor: {fileID: 0}
-  _description: Chapter I\n-\nPrison\n-\nRoom I
-  _fadeImage: {fileID: 1392080640}
-  _tmproUGUI: {fileID: 1314461604}
   _fadeDuration: 2
   _power: {fileID: 0}
 --- !u!1 &774917539
@@ -21572,6 +21580,7 @@ MonoBehaviour:
   - {fileID: 1430149561}
   _stopOnInteract: 0
   _enabled: 1
+  _interact: 0
 --- !u!114 &1102432722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21764,6 +21773,7 @@ MonoBehaviour:
   - {fileID: 1115182598}
   _stopOnInteract: 0
   _enabled: 1
+  _interact: 0
 --- !u!114 &1115182596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21808,6 +21818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae14a02cc858724bb732f53abbbb682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundNames: 
   _description: []
   _stateSprite:
   - {fileID: 21300154, guid: b79c5c1c2647f3f40835d6e9578a1ada, type: 3}
@@ -39396,6 +39407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae14a02cc858724bb732f53abbbb682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundNames: 
   _description:
   - Open
   - Open
@@ -39433,6 +39445,7 @@ MonoBehaviour:
     Room I'
   _fadeDuration: 1
   _descriptionDuration: 1
+  _soundType: 0
 --- !u!114 &2109167458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39451,6 +39464,7 @@ MonoBehaviour:
   - {fileID: 2109167465}
   _stopOnInteract: 0
   _enabled: 1
+  _interact: 0
 --- !u!114 &2109167459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40002,6 +40016,7 @@ MonoBehaviour:
   - {fileID: 2133006540}
   _stopOnInteract: 0
   _enabled: 1
+  _interact: 0
 --- !u!114 &2133006539
 MonoBehaviour:
   m_ObjectHideFlags: 0
