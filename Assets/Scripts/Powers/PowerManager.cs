@@ -63,7 +63,6 @@ public class PowerManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         foreach (var data in _powers)
