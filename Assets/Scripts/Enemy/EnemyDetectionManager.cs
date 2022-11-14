@@ -46,7 +46,8 @@ public class EnemyDetectionManager : MonoBehaviour
             transform.position + rayCastOffset,
             directionRay, 
             float.PositiveInfinity, 
-            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("Ground")));
+            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Wall") | 
+            1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("Ground")));
 
         //faire un checkEnemy avec un bool detectedEnemy
         //faire un checkPlayer avec un book detectedPlayer
@@ -67,9 +68,11 @@ public class EnemyDetectionManager : MonoBehaviour
 
             if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer) {
                 if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
-                    DebugRay(debug, distance, directionRay, Color.red);
-                    lastEventPosition = raycast.collider.gameObject.transform.position;
-                    return true;
+                    if (!raycast.collider.gameObject.GetComponent<HideInteraction>().IsHide()) {
+                        DebugRay(debug, distance, directionRay, Color.red);
+                        lastEventPosition = raycast.collider.gameObject.transform.position;
+                        return true;
+                    }
                 }
             }
         } else {
@@ -101,6 +104,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     private void ModifyDetectionState()
     {
+        //au bout de 2s sur la forgetAlertClcok quand il te playerDetected == false. il va passer en spoted quand meme
         InitStateVariables();
 
         if (playerDetected) {
