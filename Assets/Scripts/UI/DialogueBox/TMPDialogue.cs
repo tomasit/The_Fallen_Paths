@@ -63,6 +63,8 @@ public class TMPDialogue : MonoBehaviour
     [SerializeField] private Vector2 _woodleAmplitude;
     [SerializeField] private float _popDuration;
     [SerializeField] private bool _handleByInput = false;
+    [SerializeField] private Transform _target;
+    [SerializeField] private Vector2 _targetOffset;
     private SoundEffect _soundEffectPlayer;
     protected TMP_Text _textMeshPro;
     protected Coroutine _popCoroutine = null;
@@ -86,6 +88,11 @@ public class TMPDialogue : MonoBehaviour
             if (_dialogues[i]._setupOnStart)
                 SetupDialogue(i);
         }
+    }
+
+    public bool HasFinishPop()
+    {
+        return (_popCoroutine == null);
     }
 
     public virtual bool IsFinish()
@@ -448,6 +455,18 @@ public class TMPDialogue : MonoBehaviour
         }
         _mesh.vertices = _vertices;
         _mesh.colors32 = _colors;
+
+        if (_target != null)
+        {
+            var canvasRect = _canvasTransform.gameObject.GetComponent<RectTransform>();
+            Vector2 viewportPosition = Camera.main.WorldToViewportPoint(_target.transform.position + (Vector3)_targetOffset);
+            Vector2 worldObject_ScreenPosition = new Vector2(
+            ((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)),
+            ((viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));
+
+            if (_dialogueBoxReference != null)
+                _dialogueBoxReference.GetComponent<RectTransform>().anchoredPosition = worldObject_ScreenPosition;
+        }
     }
 
     private float CosWave(float time)
