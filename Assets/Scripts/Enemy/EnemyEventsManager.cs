@@ -33,9 +33,6 @@ public class EnemyEventsManager : MonoBehaviour
             if (!enemy.enabled) {
                 continue;   
             }
-            if (Input.GetKeyDown(KeyCode.Y)) {
-                enemy.healtWrapper.Hit(1);
-            }
             if (enemy.detectionManager.detectionState == DetectionState.None && enemy.roomProprieties != null) {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
@@ -48,6 +45,10 @@ public class EnemyEventsManager : MonoBehaviour
             DetectionEventState(enemy);
             AnimationStateMachine(enemy);
             CheckResetState(enemy);
+
+            if (Input.GetKeyDown(KeyCode.Y)) {
+                //enemy.dialogs.;
+            }
         }
     }
 

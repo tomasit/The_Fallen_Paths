@@ -98,4 +98,6 @@ public struct Enemy {
     public AEnemyMovement movementManager;
     public EnemyDetectionManager detectionManager;
     public BasicHealthWrapper healtWrapper;
+
+    public TMPDialogue dialogs;
 }
