@@ -18,10 +18,8 @@ public class EnemyEventsManager : MonoBehaviour
         animatorController = GetComponent<AnimatorStateMachine>();
 
         foreach(var enemy in Enemies) {
-            InitEnemyComponents(enemy);
-
-            //enemy.uuid = Guid.NewGuid().ToString();
             IgnoreLayers(enemy);
+            InitEnemyComponents(enemy);
             if (enemy.roomProprieties != null)
                 enemy.movementManager.target = enemy.roomProprieties.targets[0];
             enemy.healtWrapper.SetAnimator(enemy.animator);
@@ -31,7 +29,14 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void InitEnemyComponents(Enemy enemy)
     {
-        enemy.entity.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        enemy.uuid = Guid.NewGuid().ToString();
+        enemy.sprite = enemy.entity.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        enemy.animator = enemy.entity.transform.GetChild(0).GetComponent<Animator>();
+        enemy.dialogs = enemy.entity.transform.GetChild(0).GetComponent<TMPDialogue>();
+        enemy.agentMovement = enemy.entity.GetComponent<Agent>();
+        enemy.movementManager = enemy.entity.GetComponent<AEnemyMovement>();
+        enemy.detectionManager = enemy.entity.GetComponent<EnemyDetectionManager>();
+        enemy.healtWrapper = enemy.entity.GetComponent<BasicHealthWrapper>();
     }
 
     void Update()
@@ -87,7 +92,7 @@ public class EnemyEventsManager : MonoBehaviour
         {
             // NOTE : if the layerMask is the 31, it didn't work
             int layerValue = (int)Mathf.Log(layer.value, 2);
-            Physics2D.IgnoreLayerCollision(layerValue, enemy.movementManager.gameObject.layer, true);
+            Physics2D.IgnoreLayerCollision(layerValue, enemy.entity.layer, true);
         }
     }
 
@@ -98,7 +103,7 @@ public class EnemyEventsManager : MonoBehaviour
             return;
         }
 
-        Vector3 directionPoint = FindTargetDirection(enemy.movementManager.gameObject.transform.position, enemy.movementManager.target.position);
+        Vector3 directionPoint = FindTargetDirection(enemy.entity.transform.position, enemy.movementManager.target.position);
 
         if (directionPoint.x > 0) {
             enemy.detectionManager.SetRayCastDirection(Vector2.right);
