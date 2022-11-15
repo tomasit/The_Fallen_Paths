@@ -463,6 +463,18 @@ public class TMPDialogue : MonoBehaviour
         FollowTarget();
     }
 
+    public string[] GetDialogueNames()
+    {
+        string[] dialogNames = new string[_dialogues.Length]; 
+        int index = 0;
+        
+        foreach (var dialog in _dialogues) {
+            dialogNames[index] = dialog.dialogueName;
+            ++index;
+        }
+        return dialogNames;
+    }
+
     private void FollowTarget()
     {
         if (_target != null)
