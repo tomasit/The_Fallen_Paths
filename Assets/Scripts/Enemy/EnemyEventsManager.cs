@@ -47,13 +47,25 @@ public class EnemyEventsManager : MonoBehaviour
             CheckResetState(enemy);
 
             if (Input.GetKeyDown(KeyCode.Y)) {
-                //enemy.dialogs.;
+
+                /*enemy.dialogs.SetUpTarget(
+                    enemy.sprite.transform, 
+                    new Vector3(
+                            Camera.main.ScreenToWorldPoint(
+                            0, 
+                            enemy.sprite.sprite.rect.height / 2, 
+                            0)
+                        )
+                );*/
+
+                enemy.dialogs.StartDialogue(0);
             }
         }
     }
 
     private void CheckResetState(Enemy enemy)
     {
+        //comme le player a tjr un collider il va continuer a le tapper
         if (player.GetComponent<BasicHealthWrapper>().isDead()) {
             enemy.detectionManager.SetState(DetectionState.None);
         }

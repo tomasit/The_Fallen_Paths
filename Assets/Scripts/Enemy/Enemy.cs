@@ -86,18 +86,17 @@ public enum EnemyEventState {
 public struct Enemy {
     public string uuid;
     public bool enabled;
-    public EnemyType type;
 
+    public GameObject entity;
+
+    public EnemyType type;
     public SpriteRenderer sprite;
     public Animator animator;
-
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
-
     public Agent agentMovement;
     public AEnemyMovement movementManager;
     public EnemyDetectionManager detectionManager;
     public BasicHealthWrapper healtWrapper;
-
     public TMPDialogue dialogs;
 }

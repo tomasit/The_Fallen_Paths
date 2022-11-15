@@ -212,12 +212,15 @@ public class TMPDialogue : MonoBehaviour
 
                             if ((updateI = PopCharacter(vertexIndex, time, info)))
                             {
-                                if (_currentPopSpeed == _popDuration)
-                                    _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.UI_CHARACTER_POP);
-                                else if (i % 4 == 0)
-                                    _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.UI_CHARACTER_POP);
+                                if (_soundEffectPlayer != null) {
+                                    if (_currentPopSpeed == _popDuration)
+                                        _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.UI_CHARACTER_POP);
+                                    else if (i % 4 == 0)
+                                        _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.UI_CHARACTER_POP);
+                                }
                                 i++;
                                 time = 0.0f;
+                                
                             }                            
                         }
                         else
@@ -243,6 +246,7 @@ public class TMPDialogue : MonoBehaviour
             }
             _mesh.colors32 = _colors;
             _mesh.vertices = _vertices;
+            FollowTarget();
             yield return null;
         }
         _isCompute = true;
@@ -456,6 +460,11 @@ public class TMPDialogue : MonoBehaviour
         _mesh.vertices = _vertices;
         _mesh.colors32 = _colors;
 
+        FollowTarget();
+    }
+
+    private void FollowTarget()
+    {
         if (_target != null)
         {
             var canvasRect = _canvasTransform.gameObject.GetComponent<RectTransform>();
@@ -467,6 +476,12 @@ public class TMPDialogue : MonoBehaviour
             if (_dialogueBoxReference != null)
                 _dialogueBoxReference.GetComponent<RectTransform>().anchoredPosition = worldObject_ScreenPosition;
         }
+    }
+
+    public void SetUpTarget(Transform target, Vector3? offset = null)
+    {
+        _target = target;
+        _targetOffset = offset ?? Vector3.zero;
     }
 
     private float CosWave(float time)
