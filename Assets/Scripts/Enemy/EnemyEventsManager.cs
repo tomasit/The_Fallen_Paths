@@ -18,6 +18,8 @@ public class EnemyEventsManager : MonoBehaviour
         animatorController = GetComponent<AnimatorStateMachine>();
 
         foreach(var enemy in Enemies) {
+            InitEnemyComponents(enemy);
+
             //enemy.uuid = Guid.NewGuid().ToString();
             IgnoreLayers(enemy);
             if (enemy.roomProprieties != null)
@@ -25,6 +27,11 @@ public class EnemyEventsManager : MonoBehaviour
             enemy.healtWrapper.SetAnimator(enemy.animator);
             enemy.healtWrapper.SetMaxHealth(EnemyInfo.Health[enemy.type]);
         }
+    }
+
+    private void InitEnemyComponents(Enemy enemy)
+    {
+        enemy.entity.transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     void Update()
