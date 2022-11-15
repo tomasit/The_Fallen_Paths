@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+//using System;
 
 using static EnemyInfo;
 
@@ -24,12 +24,13 @@ public class EnemyEventsManager : MonoBehaviour
                 enemy.movementManager.target = enemy.roomProprieties.targets[0];
             enemy.healtWrapper.SetAnimator(enemy.animator);
             enemy.healtWrapper.SetMaxHealth(EnemyInfo.Health[enemy.type]);
+            enemy.dialogs.SetUpTarget(enemy.entity.transform, new Vector3(0, enemy.sprite.bounds.size.y / 1.5f, 0));
         }
     }
 
     private void InitEnemyComponents(Enemy enemy)
     {
-        enemy.uuid = Guid.NewGuid().ToString();
+        enemy.uuid = System.Guid.NewGuid().ToString();
         enemy.sprite = enemy.entity.transform.GetChild(0).GetComponent<SpriteRenderer>();
         enemy.animator = enemy.entity.transform.GetChild(0).GetComponent<Animator>();
         enemy.dialogs = enemy.entity.transform.GetChild(0).GetComponent<TMPDialogue>();
@@ -55,23 +56,9 @@ public class EnemyEventsManager : MonoBehaviour
             }
             RaycastDirection(enemy);
             DetectionEventState(enemy);
+            DialogRandomEvents(enemy);
             AnimationStateMachine(enemy);
             CheckResetState(enemy);
-
-            if (Input.GetKeyDown(KeyCode.Y)) {
-
-                /*enemy.dialogs.SetUpTarget(
-                    enemy.sprite.transform, 
-                    new Vector3(
-                            Camera.main.ScreenToWorldPoint(
-                            0, 
-                            enemy.sprite.sprite.rect.height / 2, 
-                            0)
-                        )
-                );*/
-
-                enemy.dialogs.StartDialogue(0);
-            }
         }
     }
 
@@ -181,6 +168,50 @@ public class EnemyEventsManager : MonoBehaviour
             Debug.Log("error : enemy has no detection state");
             enemy.sprite.color = Color.blue;
         }
+    }
+
+    private void DialogRandomEvents(Enemy enemy)
+    {
+        if (enemy.detectionManager.detectionState == DetectionState.None) {
+            // faire une coroutine, ensuite les detruire
+            // mettre une clock et les faire apparaitre tout les X temps
+            //int nbDialog = FindNbDialogs("Dialog ");
+            //int indexDialog = Random.Range(0, nbDialog + 1);
+            //enemy.dialogs.StartDialogue("Dialog " + indexDialog.ToString());
+        
+        } else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
+            // faire une coroutine, ensuite les detruire
+            // faire appariatre & fois les dialogs
+            int nbDialog = FindNbDialogs("Alerted ", enemy.dialogs);
+            int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
+            enemy.dialogs.StartDialogue("Alerted " + indexDialog.ToString());
+        
+        } else if (enemy.detectionManager.detectionState == DetectionState.Spoted) {
+            // faire une coroutine, ensuite les detruire
+            // faire appariatre & fois les dialogs
+            int nbDialog = FindNbDialogs("Spoted ", enemy.dialogs);
+            int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
+            enemy.dialogs.StartDialogue("Spoted " + indexDialog.ToString());
+
+        } else if (enemy.detectionManager.detectionState == DetectionState.Flee) {
+            // faire une coroutine, ensuite les detruire
+            // faire appariatre & fois les dialogs
+            int nbDialog = FindNbDialogs("Flee ", enemy.dialogs);
+            int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
+            enemy.dialogs.StartDialogue("Flee " + indexDialog.ToString());
+        }
+    }
+
+    private int FindNbDialogs(string dialogToFind, TMPDialogue dialogs)
+    {
+        int cpt = 0;
+
+        foreach(string dialogName in dialogs.GetDialogueNames()) {
+            if (dialogName.Contains(dialogToFind)) {
+                ++cpt;
+            }
+        }
+        return cpt;
     }
 
     private void AnimationStateMachine(Enemy enemy)
