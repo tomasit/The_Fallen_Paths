@@ -87,15 +87,14 @@ public struct Enemy {
     public string uuid;
     public bool enabled;
     public EnemyType type;
-
-    public SpriteRenderer sprite;
-    public Animator animator;
-
+    public GameObject entity;
+    [HideInInspector] public SpriteRenderer sprite;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public TMPDialogue dialogs;
+    [HideInInspector] public Agent agentMovement;
+    [HideInInspector] public AEnemyMovement movementManager;
+    [HideInInspector] public EnemyDetectionManager detectionManager;
+    [HideInInspector] public BasicHealthWrapper healtWrapper;
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
-
-    public Agent agentMovement;
-    public AEnemyMovement movementManager;
-    public EnemyDetectionManager detectionManager;
-    public BasicHealthWrapper healtWrapper;
 }
