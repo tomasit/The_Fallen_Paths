@@ -82,6 +82,15 @@ public class TransitionScreen : TMPDialogue
         _transitionCoroutine = StartCoroutine(SemiTransition());
     }
 
+    public void StartTransition(string quoteName)
+    {
+        StartDialogue(quoteName);
+        var c = _dialogueBoxReference.GetComponent<Image>().color;
+        c.a = 0.0f;
+        _dialogueBoxReference.GetComponent<Image>().color = c;
+        
+        _transitionCoroutine = StartCoroutine(FullTransition());
+    }
 
     private void UpdateAlpha(float alpha)
     {

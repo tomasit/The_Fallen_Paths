@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class BasicHealthWrapper : MonoBehaviour
 {
-    private Health _health;
-    [SerializeField] private Animator _animator;
+    protected Health _health;
+    [SerializeField] protected Animator _animator;
     [SerializeField] private bool externalAnimator = false;
 
     void Start()
@@ -17,19 +17,24 @@ public class BasicHealthWrapper : MonoBehaviour
         }
     }
 
-    public void Hit(uint damage)
+    public virtual void Hit(uint damage)
     {
-        _health.Hit(damage, 
+        _health.Hit(damage,
             () => {_animator.SetTrigger("Hit");},
             () => {_animator.SetBool("Dead", true);}
         );
     }
 
+    public void Revive()
+    {
+        _health.health = _health.maxHealth;
+        _animator.SetBool("Dead", false);
+    }
+
     public void Heal(uint healValue)
     {
         _health.Heal(healValue);
-        _animator.SetBool("Dead", false);
-//        _animator.SetTrigger("Heal");
+        _animator.SetTrigger("Heal");
     }
 
     public bool isDead() 

@@ -184,7 +184,6 @@ GameObject:
   - component: {fileID: 5928635507966699355}
   - component: {fileID: 7329469978031202593}
   - component: {fileID: 5928635507966699352}
-  - component: {fileID: 5928635507966699353}
   - component: {fileID: 5928635507966699328}
   - component: {fileID: 5928635507966699331}
   - component: {fileID: 5928635507966699341}
@@ -454,20 +453,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 2
---- !u!114 &5928635507966699353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5928635507966699321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb9a25d059abab1488e0759235ee76e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
-  externalAnimator: 0
 --- !u!114 &5928635507966699328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,18 +610,22 @@ MonoBehaviour:
     cooldownDuration: 5
     maxDuration: -1
     unlocked: 0
+    key: 0
   - power: {fileID: 5928635507966699350}
     cooldownDuration: 5
     maxDuration: -1
     unlocked: 0
+    key: 0
   - power: {fileID: 5928635507966699341}
     cooldownDuration: 5
     maxDuration: -1
     unlocked: 0
+    key: 0
   - power: {fileID: 7329469978031202593}
     cooldownDuration: 5
     maxDuration: -1
     unlocked: 0
+    key: 0
   canUseAnyPower: 1
 --- !u!1 &5928635508013474871
 GameObject:

@@ -7,6 +7,9 @@ using System;
 
 public class TutorialManager : MonoBehaviour
 {
+    [SerializeField] private PowerManager _powerManager;
+    [SerializeField] private Transform _respawnRoom2;
+    [SerializeField] private DeathManager _deathManager;
     [SerializeField] private TMPDialogue _dialogue;
     [SerializeField] private TransitionScreen _transitionDialogue;
     [SerializeField] private EnemyDetectionManager _enemy1;
@@ -151,15 +154,12 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator WaitForRespawn()
     {
-        _controller.BlockInput(true);
-        _transitionDialogue.StartDeadTransition();
-        while (_transitionDialogue.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
+        while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
             yield return null;
+        _controller.BlockInput(true);
         _enemy1.transform.position = _respawnEnemy1Pos.position;
         _enemy1.SetState(DetectionState.Freeze);
-        _controller.transform.position = _respawnRoom1.position;
-        _controller.transform.gameObject.GetComponent<BasicHealthWrapper>().Heal(1);
-        while (_transitionDialogue.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+        while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.NONE)
             yield return null;
         _dialogue.StartDialogue("TryAgain");
         yield return StartCoroutine(WaitForDialogueToFinish());
@@ -216,6 +216,7 @@ public class TutorialManager : MonoBehaviour
             _dialogue.StopDialogue();
         while (_door1.IsInTransition())
             yield return null;
+        _deathManager.SetCheckpoint(_respawnRoom1.position);
         _dialogue.StartDialogue("PowerExplanation");
         _controller.BlockInput(true);
         _interactor.BlockInput(true);
@@ -236,6 +237,7 @@ public class TutorialManager : MonoBehaviour
         _controller.BlockInput(false);
         _secondDoorEnabler.Interact();
         yield return StartCoroutine(GoToNextRoom());
+        _deathManager.SetCheckpoint(_respawnRoom2.position);
     }
 
     private void Update()
