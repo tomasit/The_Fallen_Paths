@@ -54,6 +54,17 @@ public class HideInteraction : MonoBehaviour
         _litCoroutine = null;
     }
 
+    public void Cancel()
+    {
+        _isHide = false;
+        if (_litCoroutine != null)
+        {
+            StopCoroutine(_litCoroutine);
+            _litCoroutine = null;
+        }
+        _spriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    }
+
     public void LitPlaceAlight(bool isAlight)
     {
         if (_litCoroutine != null)
