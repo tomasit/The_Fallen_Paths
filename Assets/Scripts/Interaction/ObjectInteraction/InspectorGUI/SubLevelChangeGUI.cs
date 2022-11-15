@@ -9,18 +9,16 @@ using UnityEngine.Tilemaps;
 public class SubLevelChangeGUI : Editor
 {
     private SerializedProperty _tilemap;
-    private SerializedProperty _image;
-    private SerializedProperty _text;
     private SerializedProperty _player;
     private SerializedProperty _soundType;
+    private SerializedProperty _transitionScreen;
 
     private void OnEnable()
     {
         _player = serializedObject.FindProperty("_player");
         _tilemap = serializedObject.FindProperty("_grid");
-        _image = serializedObject.FindProperty("_fadeImage");
-        _text = serializedObject.FindProperty("_tmproUGUI");
         _soundType = serializedObject.FindProperty("_soundType");
+        _transitionScreen = serializedObject.FindProperty("_transitionScreen");
     }
 
     public override void OnInspectorGUI()
@@ -44,12 +42,10 @@ public class SubLevelChangeGUI : Editor
         if ((place._fadeChange = GUILayout.Toggle(place._fadeChange, "On change fade")))
         {
             place._translateChange = false;
-            EditorGUILayout.PropertyField(_image);
-            EditorGUILayout.PropertyField(_text);
+            EditorGUILayout.PropertyField(_transitionScreen);
             GUILayout.Label("Description");
-            place._fadeDescription = GUILayout.TextArea(place._fadeDescription, 200);
-            place._descriptionDuration = EditorGUILayout.FloatField("Description duration", place._descriptionDuration);
-            place._fadeDuration = EditorGUILayout.FloatField("Fade duration", place._fadeDuration);
+            place._quoteName = GUILayout.TextArea(place._quoteName, 200);
+            
         }
         else
             place._translateChange = true;

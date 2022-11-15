@@ -9,19 +9,16 @@ public class SubLevelChange : AInteractable
 {
     public GameObject _player;
     public Tilemap _grid;
-    public Image _fadeImage;
-    public TextMeshProUGUI _tmproUGUI;
     public bool _interactOnStart = false;
     public bool _translateChange = false;
     public float _translateSpeed = 1.0f;
     public bool _fadeChange = false;
-    public string _fadeDescription = "";
-    public float _fadeDuration = 1.0f;
-    public float _descriptionDuration = 1.0f;
+    public string _quoteName = "";
     public SoundData.SoundEffectName _soundType;
     private Camera _camera = null;
     private bool _isTransitionning = false;
     private SoundEffect _soundEffectPlayer;
+    public TransitionScreen _transitionScreen;
 
     private void Start()
     {
@@ -71,33 +68,35 @@ public class SubLevelChange : AInteractable
         BlockInput(false);
     }
 
-    private IEnumerator BlackFade(bool fadeIn)
-    {
-        Color baseImgColor = _fadeImage.color;
-        Color nextImgColor = new Color(baseImgColor.r, baseImgColor.g, baseImgColor.b, fadeIn ? 1.0f : 0.0f);
-        Color baseTxtColor = _tmproUGUI.color;
-        Color nextTxtColor = new Color(baseTxtColor.r, baseTxtColor.g, baseTxtColor.b, fadeIn ? 1.0f : 0.0f);
+    // private IEnumerator BlackFade(bool fadeIn)
+    // {
+    //     Color baseImgColor = _fadeImage.color;
+    //     Color nextImgColor = new Color(baseImgColor.r, baseImgColor.g, baseImgColor.b, fadeIn ? 1.0f : 0.0f);
+    //     Color baseTxtColor = _tmproUGUI.color;
+    //     Color nextTxtColor = new Color(baseTxtColor.r, baseTxtColor.g, baseTxtColor.b, fadeIn ? 1.0f : 0.0f);
 
-        _tmproUGUI.text = _fadeDescription;
+    //     _tmproUGUI.text = _fadeDescription;
 
-        yield return new WaitForSeconds(Time.deltaTime);
+    //     yield return new WaitForSeconds(Time.deltaTime);
 
-        for (float t = 0; _fadeImage.color != nextImgColor && _tmproUGUI.color != nextTxtColor; t += Time.deltaTime / _fadeDuration)
-        {
-            _fadeImage.color = Color.Lerp(baseImgColor, nextImgColor, t);
-            _tmproUGUI.color = Color.Lerp(baseTxtColor, nextTxtColor, t);
-            yield return null;
-        }
-    }
+    //     for (float t = 0; _fadeImage.color != nextImgColor && _tmproUGUI.color != nextTxtColor; t += Time.deltaTime / _fadeDuration)
+    //     {
+    //         _fadeImage.color = Color.Lerp(baseImgColor, nextImgColor, t);
+    //         _tmproUGUI.color = Color.Lerp(baseTxtColor, nextTxtColor, t);
+    //         yield return null;
+    //     }
+    // }
 
     private IEnumerator Fade()
     {
         _isTransitionning = true;
         BlockInput(true);
-        yield return StartCoroutine(BlackFade(true));
+        _transitionScreen.StartTransition(_quoteName);
+        while (_transitionScreen.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
+            yield return null;
         MoveAndResizeCamera();
-        yield return new WaitForSeconds(_descriptionDuration);
-        yield return StartCoroutine(BlackFade(false));
+        while (_transitionScreen.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+            yield return null;
         BlockInput(false);
         _isTransitionning = false;
     }
