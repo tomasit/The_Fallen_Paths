@@ -33,6 +33,29 @@ public class PowerManager : MonoBehaviour
         return _powers.FindIndex(x => x.power.GetType() == System.Type.GetType(powerName));
     }
 
+    public void ResetEverything()
+    {
+        if (_currentPowerIndex != -1)
+            CancelCurrentPowerState();
+        foreach (var power in _powers)
+        {
+            power.cooldown = 0;
+            power.duration = 0;
+        }
+    }
+
+    private void CancelCurrentPowerState()
+    {
+        var currentPower = _powers[_currentPowerIndex].power;
+        if (currentPower.firingPower == false && currentPower is ARangedPower)
+        {
+            (currentPower as ARangedPower).CancelRange();
+        }
+        else if (currentPower.firingPower == true)
+            currentPower.Cancel();
+        _currentPowerIndex = -1;
+    }
+
     public void ChoosePower(string powerName)
     {
         int powerIndex = FindPowerIndex(powerName);
@@ -40,16 +63,7 @@ public class PowerManager : MonoBehaviour
         if (powerIndex < 0)
             return;
         if (powerIndex == _currentPowerIndex)
-        {
-            var currentPower = _powers[_currentPowerIndex].power;
-            if (currentPower.firingPower == false && currentPower is ARangedPower)
-            {
-                (currentPower as ARangedPower).CancelRange();
-            }
-            else if (currentPower.firingPower == true)
-                currentPower.Cancel();
-            _currentPowerIndex = -1;
-        }
+            CancelCurrentPowerState();
         else if (canUseAnyPower && _currentPowerIndex == -1 && powerIndex >= 0)
         {
             var currentPowerData = _powers[powerIndex];
