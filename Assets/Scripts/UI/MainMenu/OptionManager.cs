@@ -9,14 +9,27 @@ public class OptionManager : MonoBehaviour
     public Dropdown res_dropdown;
     public Dropdown win_dropdown;
     public TextMeshProUGUI textMeshProUGUI;
-    public Slider volumeSlider;
+    public Slider volumeGlobal;
+    public Slider volumeEnv;
     private bool fs = true;
     private int width = 1920;
     private int height = 1080;
+    Parameters param;
 
-    public void SetVolume()
+    private void Start()
     {
-        AudioListener.volume = volumeSlider.value;
+        param = SaveManager.DataInstance.GetParameters();
+    }
+    public void SetGlobalVolume()
+    {
+        param._globalVolume = volumeGlobal.value;
+        SaveManager.DataInstance.SaveParameters();
+    }
+
+    public void SetEnvVolume()
+    {
+        param._subVolume.Add(SoundData.SoundEffectType.ENVIRONMENT, volumeEnv.value);
+        SaveManager.DataInstance.SaveParameters();
     }
 
     public void SetNumberText(float value)
@@ -36,6 +49,8 @@ public class OptionManager : MonoBehaviour
             fs = false;
             Screen.SetResolution(width, height, fs);
         }
+        param._fullscreen = fs;
+        SaveManager.DataInstance.SaveParameters();
     }
 
     public void OnResChange()
@@ -64,5 +79,8 @@ public class OptionManager : MonoBehaviour
                     break;
                 }
         }
+        param._width = width;
+        param._height = height;
+        SaveManager.DataInstance.SaveParameters();
     }
 }
