@@ -17,7 +17,8 @@ public class EnemyEventsManager : MonoBehaviour
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         animatorController = GetComponent<AnimatorStateMachine>();
 
-        foreach(var enemy in Enemies) {
+        foreach (var enemy in Enemies)
+        {
             IgnoreLayers(enemy);
             InitEnemyComponents(enemy);
             if (enemy.roomProprieties != null)
@@ -42,15 +43,19 @@ public class EnemyEventsManager : MonoBehaviour
 
     void Update()
     {
-        foreach(var enemy in Enemies) {
-            if (!enemy.enabled) {
-                continue;   
+        foreach (var enemy in Enemies)
+        {
+            if (!enemy.enabled)
+            {
+                continue;
             }
-            if (enemy.detectionManager.detectionState == DetectionState.None && enemy.roomProprieties != null) {
+            if (enemy.detectionManager.detectionState == DetectionState.None && enemy.roomProprieties != null)
+            {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
             }
-            if (enemy.detectionManager.detectionState == DetectionState.Flee && enemy.fleePoints != null) {
+            if (enemy.detectionManager.detectionState == DetectionState.Flee && enemy.fleePoints != null)
+            {
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
@@ -65,10 +70,12 @@ public class EnemyEventsManager : MonoBehaviour
     private void CheckResetState(Enemy enemy)
     {
         //comme le player a tjr un collider il va continuer a le tapper
-        if (player.GetComponent<BasicHealthWrapper>().isDead()) {
+        if (player.GetComponent<PlayerHealthWrapper>().isDead())
+        {
             enemy.detectionManager.SetState(DetectionState.None);
         }
-        if (enemy.healtWrapper.isDead()) {
+        if (enemy.healtWrapper.isDead())
+        {
             enemy.enabled = false;
         }
     }
@@ -85,16 +92,20 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void RaycastDirection(Enemy enemy)
     {
-        if (enemy.movementManager.target == null) {
+        if (enemy.movementManager.target == null)
+        {
             //Debug.Log("MovementManager target is null (eventManager issue)");
             return;
         }
 
         Vector3 directionPoint = FindTargetDirection(enemy.entity.transform.position, enemy.movementManager.target.position);
 
-        if (directionPoint.x > 0) {
+        if (directionPoint.x > 0)
+        {
             enemy.detectionManager.SetRayCastDirection(Vector2.right);
-        } else {
+        }
+        else
+        {
             enemy.detectionManager.SetRayCastDirection(Vector2.left);
         }
     }
@@ -106,27 +117,35 @@ public class EnemyEventsManager : MonoBehaviour
 
         int index = 0;
         var playerDirection = FindTargetDirection(movManager.gameObject.transform.position, player.position);
-        
-        foreach (var point in fleePoints.targets) {
+
+        foreach (var point in fleePoints.targets)
+        {
             var pointDirection = FindTargetDirection(point.position, movManager.gameObject.transform.position);
 
             //Debug.Log("------------------");
             //Debug.Log("playerDir : " + playerDirection.x);
             //Debug.Log("pointDir : " + pointDirection.x);
-            if (playerDirection.x < 0 && pointDirection.x < 0) {
+            if (playerDirection.x < 0 && pointDirection.x < 0)
+            {
                 //Debug.Log("Je vais au point a droite : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
-            } else if (playerDirection.x > 0 && pointDirection.x > 0) {
+            }
+            else if (playerDirection.x > 0 && pointDirection.x > 0)
+            {
                 //Debug.Log("Je vais au point a gauche : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
             }
 
-            if (RangeOf(pointDirection.x, playerDirection.x, 0.001f)) {
-                if (index + 1 > fleePoints.targets.Length - 1) {
+            if (RangeOf(pointDirection.x, playerDirection.x, 0.001f))
+            {
+                if (index + 1 > fleePoints.targets.Length - 1)
+                {
                     index = 0;
-                } else {
+                }
+                else
+                {
                     index++;
                 }
                 fleePoints.targetIndex = index;
@@ -144,27 +163,43 @@ public class EnemyEventsManager : MonoBehaviour
         AEnemyMovement movManager = enemy.movementManager;
 
         if (RangeOf(movManager.transform.position.x, room.targets[room.targetIndex].position.x, 0.1f) &&
-            RangeOf(movManager.transform.position.y, room.targets[room.targetIndex].position.y, 0.75f)) {
-            if ((room.targets.Length - 1) == room.targetIndex) {
+            RangeOf(movManager.transform.position.y, room.targets[room.targetIndex].position.y, 0.75f))
+        {
+            if ((room.targets.Length - 1) == room.targetIndex)
+            {
                 room.targetIndex = 0;
-            } else {
+            }
+            else
+            {
                 room.targetIndex += 1;
             }
         }
     }
 
-    private void DetectionEventState(Enemy enemy) {
-        if (enemy.detectionManager.detectionState == DetectionState.None) {
+    private void DetectionEventState(Enemy enemy)
+    {
+        if (enemy.detectionManager.detectionState == DetectionState.None)
+        {
             enemy.movementManager.BasicMovement();
-        } else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Alert)
+        {
             enemy.movementManager.AlertMovement();
-        } else if (enemy.detectionManager.detectionState == DetectionState.Spoted) {
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Spoted)
+        {
             enemy.movementManager.SpotMovement();
-        } else if (enemy.detectionManager.detectionState == DetectionState.Flee) {
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Flee)
+        {
             enemy.movementManager.FleeMovement();
-        } else if (enemy.detectionManager.detectionState == DetectionState.Freeze) {
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Freeze)
+        {
             enemy.movementManager.FreezeMovement();
-        } else {
+        }
+        else
+        {
             Debug.Log("error : enemy has no detection state");
             enemy.sprite.color = Color.blue;
         }
@@ -172,28 +207,35 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void DialogRandomEvents(Enemy enemy)
     {
-        if (enemy.detectionManager.detectionState == DetectionState.None) {
+        if (enemy.detectionManager.detectionState == DetectionState.None)
+        {
             // faire une coroutine, ensuite les detruire
             // mettre une clock et les faire apparaitre tout les X temps
             //int nbDialog = FindNbDialogs("Dialog ");
             //int indexDialog = Random.Range(0, nbDialog + 1);
             //enemy.dialogs.StartDialogue("Dialog " + indexDialog.ToString());
-        
-        } else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
+
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Alert)
+        {
             // faire une coroutine, ensuite les detruire
             // faire appariatre & fois les dialogs
             int nbDialog = FindNbDialogs("Alerted ", enemy.dialogs);
             int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
             enemy.dialogs.StartDialogue("Alerted " + indexDialog.ToString());
-        
-        } else if (enemy.detectionManager.detectionState == DetectionState.Spoted) {
+
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Spoted)
+        {
             // faire une coroutine, ensuite les detruire
             // faire appariatre & fois les dialogs
             int nbDialog = FindNbDialogs("Spoted ", enemy.dialogs);
             int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
             enemy.dialogs.StartDialogue("Spoted " + indexDialog.ToString());
 
-        } else if (enemy.detectionManager.detectionState == DetectionState.Flee) {
+        }
+        else if (enemy.detectionManager.detectionState == DetectionState.Flee)
+        {
             // faire une coroutine, ensuite les detruire
             // faire appariatre & fois les dialogs
             int nbDialog = FindNbDialogs("Flee ", enemy.dialogs);
@@ -206,8 +248,10 @@ public class EnemyEventsManager : MonoBehaviour
     {
         int cpt = 0;
 
-        foreach(string dialogName in dialogs.GetDialogueNames()) {
-            if (dialogName.Contains(dialogToFind)) {
+        foreach (string dialogName in dialogs.GetDialogueNames())
+        {
+            if (dialogName.Contains(dialogToFind))
+            {
                 ++cpt;
             }
         }
@@ -217,18 +261,23 @@ public class EnemyEventsManager : MonoBehaviour
     private void AnimationStateMachine(Enemy enemy)
     {
         Vector3 targetDistance = FindTargetDirection(
-            enemy.movementManager.spritePos.position, 
+            enemy.movementManager.spritePos.position,
             enemy.movementManager.target.position);
 
         bool isAtTargetPosition = false;
         bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
-        
-        if (targetDistance.x >= 0) {
-            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+
+        if (targetDistance.x >= 0)
+        {
+            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f))
+            {
                 isAtTargetPosition = true;
             }
-        } else if (targetDistance.x <= 0) {
-            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
+        }
+        else if (targetDistance.x <= 0)
+        {
+            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f))
+            {
                 isAtTargetPosition = true;
             }
         }

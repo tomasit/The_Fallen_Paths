@@ -55,7 +55,7 @@ public abstract class AVisualCircleRangedPower : ARangedPower
         {
             if (mouseDistranceIsCorrect())
             {
-                if (canCastPower() && Input.GetMouseButtonDown(0))
+                if (canCastPower())
                 {
                     CancelRange();
                     firingPower = true;

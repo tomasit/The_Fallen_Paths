@@ -12,8 +12,9 @@ public class RemoteObjectControl : ARangedPower
     private RemoteControllableObject _objectInTouch = null;
     private bool _hasObjectInRange = false;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _triggerableObjects = FindObjectsOfType<RemoteControllableObject>(true);
         _instantiatedParticles = new List<GameObject>();
     }

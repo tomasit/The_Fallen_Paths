@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ARangedPower -> Preview(), CanCastPower(), 
-
-// AVisualCircleRangedPower
 public abstract class ARangedPower : APower
 {
     public float rangeRadius = 0;
@@ -24,6 +21,11 @@ public abstract class ARangedPower : APower
     public virtual void CancelRange()
     {
         activated = false;
+    }
+
+    public override void Fire()
+    {
+        _powerManager.ActivatePowerCooldownFromStackTrace(2);
     }
 
     protected abstract void Preview();
