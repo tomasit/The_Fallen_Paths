@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//le manque de lumière emepeche l'enemy de voir
-
 public class EnemyDetectionManager : MonoBehaviour
 {
     [Header("Debug")]
@@ -16,7 +14,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     [Header("States")]
     public bool playerDetected = false;
-    public DetectionState detectionState = DetectionState.None;//faire un state undefined ou alors faire en sorte qu'il aille pqas forcement vers le playeer quanfd il est alert
+    public DetectionState detectionState = DetectionState.None;
     public RaycastHit2D raycast;
     
     [Header("Clocks")]
@@ -32,13 +30,10 @@ public class EnemyDetectionManager : MonoBehaviour
 
     void Update()
     {
-        //si il est hide dans un truc ne pas le detecter
         playerDetected = ThrowRay(direction, detectionDistance);
-
         ModifyDetectionState();
     }
 
-    //si il voit un random qui est spoted, Trigger sa processCoroutine
     private bool ThrowRay(Vector2 directionRay, float distance)
     {
         UpdateOffsetRaycast();
@@ -66,6 +61,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
             if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer) {
                 if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
+                    //si il est hide dans un truc ne pas le detecter
                     if (!raycast.collider.gameObject.GetComponent<HideInteraction>().IsHide()) {
                         DebugRay(debug, distance, directionRay, Color.red);
                         lastEventPosition = raycast.collider.gameObject.transform.position;
@@ -100,6 +96,7 @@ public class EnemyDetectionManager : MonoBehaviour
         ResetClocks(ref clocks, 3);
     }
 
+    //quand il change de state trigger un dialog etc
     private void ModifyDetectionState()
     {
         //au bout de 2s sur la forgetAlertClcok quand il te playerDetected == false. il va passer en spoted quand meme

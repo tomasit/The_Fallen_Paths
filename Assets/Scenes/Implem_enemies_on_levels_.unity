@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 2025786}
   - component: {fileID: 2025785}
   - component: {fileID: 2025784}
+  - component: {fileID: 2025798}
   m_Layer: 10
   m_Name: Guard 1
   m_TagString: Untagged
@@ -379,6 +380,316 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &2025798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8750ff1b6ac4f546a51aec4c6f8972d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - dialogueName: Alerted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 57855
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Show yourself
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I heard something
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 4
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where did he goes ?!?
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: No it's probably the rats
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You're becoming crazy
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Shut your mouth and make your round
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 1
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 255
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I'm gonna shot your ass !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You'll wish you'd never been born
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Why I'm not at the front with the others
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I should have listen to my mother...
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Aahh !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: It's so dirty here, rats are anywhere
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where does the cleaners are going to make their work
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _canvasTransform: {fileID: 712523113}
+  _waveSpeed: 5
+  _waveAmplitude: 4
+  _bounceSpeed: {x: 5, y: 5}
+  _bounceAmplitude: {x: 1, y: 1}
+  _woodleSpeed: {x: 3, y: 3}
+  _woodleAmplitude: {x: 1, y: 1}
+  _popDuration: 0.07
+  _handleByInput: 0
+  _target: {fileID: 0}
+  _targetOffset: {x: 0, y: 0}
 --- !u!1 &4772494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3335,6 +3646,7 @@ GameObject:
   - component: {fileID: 168076108}
   - component: {fileID: 168076107}
   - component: {fileID: 168076106}
+  - component: {fileID: 168076119}
   m_Layer: 10
   m_Name: Random 1
   m_TagString: Untagged
@@ -3556,6 +3868,316 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &168076119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168076105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8750ff1b6ac4f546a51aec4c6f8972d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - dialogueName: Alerted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 57855
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Show yourself
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I heard something
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 4
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where did he goes ?!?
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: No it's probably the rats
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You're becoming crazy
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Shut your mouth and make your round
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 1
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 255
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I'm gonna shot your ass !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You'll wish you'd never been born
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Why I'm not at the front with the others
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I should have listen to my mother...
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Aahh !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: It's so dirty here, rats are anywhere
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where does the cleaners are going to make their work
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _canvasTransform: {fileID: 712523113}
+  _waveSpeed: 5
+  _waveAmplitude: 4
+  _bounceSpeed: {x: 5, y: 5}
+  _bounceAmplitude: {x: 1, y: 1}
+  _woodleSpeed: {x: 3, y: 3}
+  _woodleAmplitude: {x: 1, y: 1}
+  _popDuration: 0.07
+  _handleByInput: 0
+  _target: {fileID: 0}
+  _targetOffset: {x: 0, y: 0}
 --- !u!1 &185300759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5149,353 +5771,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &501055648
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 501055652}
-  - component: {fileID: 501055653}
-  m_Layer: 5
-  m_Name: Dialogs
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &501055652
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501055648}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0049049454, y: 0.0049049454, z: 0.0049049454}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 677646365}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &501055653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501055648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8750ff1b6ac4f546a51aec4c6f8972d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogues:
-  - dialogueName: Alerted 1
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '!'
-        _textModifier: 0
-        _colorModifier: 2
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 57855
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Alerted 2
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: Show yourself
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Alerted 3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: I heard something
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Alerted 4
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: Where did he goes ?!?
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: AlertedResponse 3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: No it's probably the rats
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: AlertedResponse 3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: You're becoming crazy
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: AlertedResponse 3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: Shut your mouth and make your round
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Spoted 1
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '!'
-        _textModifier: 0
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 255
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Spoted 2
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: I'm gonna shot your ass !!!
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Spoted 3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: You'll wish you'd never been born
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Dialog 1
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: Why I'm not at the front with the others
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Dialog 2
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: I should have listen to my mother...
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Rat 1
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: Aahh !!!
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Rat 2
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: It's so dirty here, rats are anywhere
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Rat 3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: Where does the cleaners are going to make their work
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
-  _canvasTransform: {fileID: 712523113}
-  _waveSpeed: 5
-  _waveAmplitude: 4
-  _bounceSpeed: {x: 5, y: 5}
-  _bounceAmplitude: {x: 1, y: 1}
-  _woodleSpeed: {x: 3, y: 3}
-  _woodleAmplitude: {x: 1, y: 1}
-  _popDuration: 0.07
-  _handleByInput: 0
-  _target: {fileID: 0}
-  _targetOffset: {x: 0, y: 0}
 --- !u!1 &545042515
 GameObject:
   m_ObjectHideFlags: 0
@@ -6670,6 +6945,7 @@ GameObject:
   - component: {fileID: 677646357}
   - component: {fileID: 677646356}
   - component: {fileID: 677646355}
+  - component: {fileID: 677646369}
   m_Layer: 10
   m_Name: Guard 2
   m_TagString: Untagged
@@ -6842,7 +7118,6 @@ Transform:
   m_Children:
   - {fileID: 94035265}
   - {fileID: 1823324444}
-  - {fileID: 501055652}
   m_Father: {fileID: 946713026}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6905,6 +7180,316 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1823324444}
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &677646369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677646354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8750ff1b6ac4f546a51aec4c6f8972d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - dialogueName: Alerted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 57855
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Show yourself
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I heard something
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 4
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where did he goes ?!?
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: No it's probably the rats
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You're becoming crazy
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Shut your mouth and make your round
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 1
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 255
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I'm gonna shot your ass !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You'll wish you'd never been born
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Why I'm not at the front with the others
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I should have listen to my mother...
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Aahh !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: It's so dirty here, rats are anywhere
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where does the cleaners are going to make their work
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _canvasTransform: {fileID: 712523113}
+  _waveSpeed: 5
+  _waveAmplitude: 4
+  _bounceSpeed: {x: 5, y: 5}
+  _bounceAmplitude: {x: 1, y: 1}
+  _woodleSpeed: {x: 3, y: 3}
+  _woodleAmplitude: {x: 1, y: 1}
+  _popDuration: 0.07
+  _handleByInput: 0
+  _target: {fileID: 0}
+  _targetOffset: {x: 0, y: 0}
 --- !u!1 &703658058
 GameObject:
   m_ObjectHideFlags: 0
@@ -13155,7 +13740,7 @@ MonoBehaviour:
         _colorRandomSpeed: []
       _fullText: 
   _dialogueBox: {fileID: 2293967979908483698, guid: 889ee7ab36dc04c43ba433753dbb0a78, type: 3}
-  _canvasTransform: {fileID: 501055652}
+  _canvasTransform: {fileID: 0}
   _waveSpeed: 5
   _waveAmplitude: 4
   _bounceSpeed: {x: 5, y: 5}
@@ -13200,7 +13785,7 @@ MonoBehaviour:
   _respawnRoom1: {fileID: 0}
   _respawnEnemy1Pos: {fileID: 0}
   _door2: {fileID: 0}
-  _canvasTransform: {fileID: 501055652}
+  _canvasTransform: {fileID: 0}
   _nameBox: {fileID: 5954929881415853913, guid: bcf6d9cc0eb343d43ab6e745a3731bf4, type: 3}
   _controller: {fileID: 0}
   _firstDoorEnabler: {fileID: 185300770}
@@ -14054,14 +14639,14 @@ MonoBehaviour:
     enabled: 0
     type: 0
     entity: {fileID: 2025783}
-    sprite: {fileID: 153309909}
-    animator: {fileID: 153309908}
+    sprite: {fileID: 0}
+    animator: {fileID: 0}
+    agentMovement: {fileID: 0}
+    movementManager: {fileID: 0}
+    detectionManager: {fileID: 0}
+    healtWrapper: {fileID: 0}
     dialogs: {fileID: 0}
-    agentMovement: {fileID: 2025797}
-    movementManager: {fileID: 2025796}
-    detectionManager: {fileID: 2025795}
-    healtWrapper: {fileID: 2025784}
-    roomProprieties: {fileID: 1343391272}
+    roomProprieties: {fileID: 2052816610}
     fleePoints: {fileID: 1073775014}
   - uuid: 
     enabled: 0
@@ -14069,11 +14654,11 @@ MonoBehaviour:
     entity: {fileID: 168076105}
     sprite: {fileID: 1635215471}
     animator: {fileID: 1635215470}
-    dialogs: {fileID: 0}
     agentMovement: {fileID: 168076118}
     movementManager: {fileID: 168076117}
     detectionManager: {fileID: 168076116}
     healtWrapper: {fileID: 168076106}
+    dialogs: {fileID: 0}
     roomProprieties: {fileID: 121149671}
     fleePoints: {fileID: 1073775014}
   - uuid: 
@@ -14082,31 +14667,35 @@ MonoBehaviour:
     entity: {fileID: 1345283077}
     sprite: {fileID: 1495729651}
     animator: {fileID: 1495729650}
-    dialogs: {fileID: 0}
     agentMovement: {fileID: 1345283090}
     movementManager: {fileID: 1345283089}
     detectionManager: {fileID: 1345283088}
     healtWrapper: {fileID: 1345283078}
+    dialogs: {fileID: 0}
     roomProprieties: {fileID: 868669389}
     fleePoints: {fileID: 1073775014}
   - uuid: 
     enabled: 1
     type: 0
     entity: {fileID: 677646354}
-    sprite: {fileID: 94035267}
-    animator: {fileID: 94035266}
-    dialogs: {fileID: 501055653}
-    agentMovement: {fileID: 677646368}
-    movementManager: {fileID: 677646367}
-    detectionManager: {fileID: 677646366}
-    healtWrapper: {fileID: 677646355}
+    sprite: {fileID: 0}
+    animator: {fileID: 0}
+    agentMovement: {fileID: 0}
+    movementManager: {fileID: 0}
+    detectionManager: {fileID: 0}
+    healtWrapper: {fileID: 0}
+    dialogs: {fileID: 0}
     roomProprieties: {fileID: 1343391272}
-    fleePoints: {fileID: 0}
+    fleePoints: {fileID: 1073775014}
   layersToIgnore:
   - serializedVersion: 2
     m_Bits: 1024
   - serializedVersion: 2
     m_Bits: 128
+  timeRandomDialog: 10
+  timeDurationDialog: 4.5
+  probablityDialog: 1
+  clockDialog: 0
 --- !u!4 &946713026
 Transform:
   m_ObjectHideFlags: 0
@@ -27125,6 +27714,7 @@ GameObject:
   - component: {fileID: 1345283080}
   - component: {fileID: 1345283079}
   - component: {fileID: 1345283078}
+  - component: {fileID: 1345283091}
   m_Layer: 10
   m_Name: Random 2
   m_TagString: Untagged
@@ -27348,6 +27938,316 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1345283091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345283077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8750ff1b6ac4f546a51aec4c6f8972d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - dialogueName: Alerted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 57855
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Show yourself
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I heard something
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Alerted 4
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where did he goes ?!?
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: No it's probably the rats
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You're becoming crazy
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: AlertedResponse 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Shut your mouth and make your round
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '!'
+        _textModifier: 0
+        _colorModifier: 1
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 255
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I'm gonna shot your ass !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Spoted 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: You'll wish you'd never been born
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Why I'm not at the front with the others
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Dialog 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: I should have listen to my mother...
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 1
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Aahh !!!
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 2
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: It's so dirty here, rats are anywhere
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Rat 3
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Where does the cleaners are going to make their work
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _canvasTransform: {fileID: 712523113}
+  _waveSpeed: 5
+  _waveAmplitude: 4
+  _bounceSpeed: {x: 5, y: 5}
+  _bounceAmplitude: {x: 1, y: 1}
+  _woodleSpeed: {x: 3, y: 3}
+  _woodleAmplitude: {x: 1, y: 1}
+  _popDuration: 0.07
+  _handleByInput: 0
+  _target: {fileID: 0}
+  _targetOffset: {x: 0, y: 0}
 --- !u!1 &1379767794
 GameObject:
   m_ObjectHideFlags: 0

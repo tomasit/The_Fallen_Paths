@@ -17,14 +17,15 @@ public class EnemyEventsManager : MonoBehaviour
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         animatorController = GetComponent<AnimatorStateMachine>();
 
-        foreach(var enemy in Enemies) {
-            IgnoreLayers(enemy);
-            InitEnemyComponents(enemy);
-            if (enemy.roomProprieties != null)
-                enemy.movementManager.target = enemy.roomProprieties.targets[0];
-            enemy.healtWrapper.SetAnimator(enemy.animator);
-            enemy.healtWrapper.SetMaxHealth(EnemyInfo.Health[enemy.type]);
-            enemy.dialogs.SetUpTarget(enemy.entity.transform, new Vector3(0, enemy.sprite.bounds.size.y / 1.5f, 0));
+        for (int i = 0; i < Enemies.Length; ++i) {
+            var enemy = new Enemy();
+            IgnoreLayers(Enemies[i]);
+            InitEnemyComponents(Enemies[i]);
+            if (Enemies[i].roomProprieties != null)
+                Enemies[i].movementManager.target = Enemies[i].roomProprieties.targets[0];
+            Enemies[i].healtWrapper.SetAnimator(Enemies[i].animator);
+            Enemies[i].healtWrapper.SetMaxHealth(EnemyInfo.Health[Enemies[i].type]);
+            Enemies[i].dialogs.SetUpTarget(Enemies[i].entity.transform, new Vector3(0, Enemies[i].sprite.bounds.size.y / 1.5f, 0));
         }
     }
 
@@ -33,11 +34,11 @@ public class EnemyEventsManager : MonoBehaviour
         enemy.uuid = System.Guid.NewGuid().ToString();
         enemy.sprite = enemy.entity.transform.GetChild(0).GetComponent<SpriteRenderer>();
         enemy.animator = enemy.entity.transform.GetChild(0).GetComponent<Animator>();
-        enemy.dialogs = enemy.entity.transform.GetChild(0).GetComponent<TMPDialogue>();
         enemy.agentMovement = enemy.entity.GetComponent<Agent>();
         enemy.movementManager = enemy.entity.GetComponent<AEnemyMovement>();
         enemy.detectionManager = enemy.entity.GetComponent<EnemyDetectionManager>();
         enemy.healtWrapper = enemy.entity.GetComponent<BasicHealthWrapper>();
+        enemy.dialogs = enemy.entity.GetComponent<TMPDialogue>();
     }
 
     void Update()
@@ -137,7 +138,6 @@ public class EnemyEventsManager : MonoBehaviour
         }
     }
 
-
     private void RoomTargetPoints(Enemy enemy)
     {
         RoomProprieties room = enemy.roomProprieties;
@@ -170,48 +170,45 @@ public class EnemyEventsManager : MonoBehaviour
         }
     }
 
+    //Alert ou Spoted : 
+    // coroutine activent les dialogues
+    // trigger dans la coroutine activent la réponse si y a un enemy a proximité
+
     private void DialogRandomEvents(Enemy enemy)
     {
+        if (enemy.detectionManager.detectionState != DetectionState.None)
+            clockDialog = 0f;
         if (enemy.detectionManager.detectionState == DetectionState.None) {
+            clockDialog += Time.deltaTime;
+            if (clockDialog >= timeRandomDialog) {
+                clockDialog = 0f;
+                var rd = Random.Range(0, probablityDialog);
+                Debug.Log("rd = " + rd);
+                if (rd == 0) {
+                    StartCoroutine(PlayDialog("Dialog ", enemy));
+                }
+            }
+        } /*else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
             // faire une coroutine, ensuite les detruire
-            // mettre une clock et les faire apparaitre tout les X temps
-            //int nbDialog = FindNbDialogs("Dialog ");
-            //int indexDialog = Random.Range(0, nbDialog + 1);
-            //enemy.dialogs.StartDialogue("Dialog " + indexDialog.ToString());
-        
-        } else if (enemy.detectionManager.detectionState == DetectionState.Alert) {
-            // faire une coroutine, ensuite les detruire
-            // faire appariatre & fois les dialogs
             int nbDialog = FindNbDialogs("Alerted ", enemy.dialogs);
-            int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
+            int indexDialog = UnityEngine.Random.Range(1, nbDialog + 1);
+            Debug.Log("|" + "Alerted " + indexDialog.ToString() + "|");
             enemy.dialogs.StartDialogue("Alerted " + indexDialog.ToString());
         
         } else if (enemy.detectionManager.detectionState == DetectionState.Spoted) {
             // faire une coroutine, ensuite les detruire
-            // faire appariatre & fois les dialogs
             int nbDialog = FindNbDialogs("Spoted ", enemy.dialogs);
-            int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
+            int indexDialog = UnityEngine.Random.Range(1, nbDialog + 1);
+            Debug.Log("|" + "Spoted " + indexDialog.ToString() + "|");
             enemy.dialogs.StartDialogue("Spoted " + indexDialog.ToString());
 
         } else if (enemy.detectionManager.detectionState == DetectionState.Flee) {
             // faire une coroutine, ensuite les detruire
-            // faire appariatre & fois les dialogs
             int nbDialog = FindNbDialogs("Flee ", enemy.dialogs);
-            int indexDialog = UnityEngine.Random.Range(0, nbDialog + 1);
+            int indexDialog = UnityEngine.Random.Range(1, nbDialog + 1);
+            Debug.Log("|" + "Flee " + indexDialog.ToString() + "|");
             enemy.dialogs.StartDialogue("Flee " + indexDialog.ToString());
-        }
-    }
-
-    private int FindNbDialogs(string dialogToFind, TMPDialogue dialogs)
-    {
-        int cpt = 0;
-
-        foreach(string dialogName in dialogs.GetDialogueNames()) {
-            if (dialogName.Contains(dialogToFind)) {
-                ++cpt;
-            }
-        }
-        return cpt;
+        }*/
     }
 
     private void AnimationStateMachine(Enemy enemy)

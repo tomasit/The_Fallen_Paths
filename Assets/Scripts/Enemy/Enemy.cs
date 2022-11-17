@@ -82,19 +82,20 @@ public enum EnemyEventState {
     SeenOffLight,
 }
 
-[Serializable]
-public struct Enemy {
+[System.Serializable]
+public class Enemy {
+    public Enemy() {}
     public string uuid;
     public bool enabled;
     public EnemyType type;
     public GameObject entity;
     [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public Animator animator;
-    [HideInInspector] public TMPDialogue dialogs;
     [HideInInspector] public Agent agentMovement;
     [HideInInspector] public AEnemyMovement movementManager;
     [HideInInspector] public EnemyDetectionManager detectionManager;
     [HideInInspector] public BasicHealthWrapper healtWrapper;
+    [HideInInspector] public TMPDialogue dialogs;
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
 }
