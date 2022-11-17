@@ -9,7 +9,7 @@ public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private PowerManager _powerManager;
     [SerializeField] private Transform _respawnRoom2;
-    [SerializeField] private DeathManager _deathManager;
+    [SerializeField] private TutoDeathManager _deathManager;
     [SerializeField] private TMPDialogue _dialogue;
     [SerializeField] private TransitionScreen _transitionDialogue;
     [SerializeField] private EnemyDetectionManager _enemy1;

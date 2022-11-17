@@ -64,9 +64,9 @@ public class RatPower : APower
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Use();
-        }
+        // if (Input.GetKeyDown(KeyCode.T))
+        // {
+        //     Use();
+        // }
     }
 }

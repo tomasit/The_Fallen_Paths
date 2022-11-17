@@ -69,11 +69,6 @@ public class CollisionDetection : TriggerProcessor
             if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(true);
-                if (_UIDisplayedText != null)
-                {
-//                    SetDescription(GetDescription(transform.gameObject));
-//                    _UIDisplayedText.SetLayout(gameObject, _textOffset, true);
-                }
             }
         }
     }
@@ -85,11 +80,6 @@ public class CollisionDetection : TriggerProcessor
             if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(true);
-                if (_UIDisplayedText != null)
-                {
-//                    SetDescription(GetDescription(transform.gameObject));
-//                    _UIDisplayedText.SetLayout(gameObject, _textOffset, true);
-                }
             }
         }
     }
@@ -101,11 +91,6 @@ public class CollisionDetection : TriggerProcessor
             if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(false);
-                if (_UIDisplayedText != null)
-                {
-//                    SetDescription("");
-//                    _UIDisplayedText.SetLayout(null, Vector3.zero, false);
-                }
             }
         }
     }
@@ -117,11 +102,6 @@ public class CollisionDetection : TriggerProcessor
             if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(false);
-                if (_UIDisplayedText != null)
-                {
-//                    SetDescription("");
-//                    _UIDisplayedText.SetLayout(null, Vector3.zero, false);
-                }
             }
         }
     }

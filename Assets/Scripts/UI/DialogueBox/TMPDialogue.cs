@@ -90,6 +90,11 @@ public class TMPDialogue : MonoBehaviour
         }
     }
 
+    public void SetCanvasTransform(Transform canvasTransform)
+    {
+        _canvasTransform = canvasTransform;
+    }
+
     public bool HasFinishPop()
     {
         return (_popCoroutine == null);
@@ -318,6 +323,7 @@ public class TMPDialogue : MonoBehaviour
         _textMeshPro = _dialogueBoxReference.transform.GetChild(0).GetComponent<TMP_Text>();
         if (_textMeshPro == null)
             Debug.Log("No tmp found");
+        FollowTarget();
     }
 
     public virtual void StartDialogue(int index)
@@ -343,7 +349,13 @@ public class TMPDialogue : MonoBehaviour
             SetupDialogue(_dialogueIndex);
 
         _partOfSideIndex = 0;
-        _popCoroutine = StartCoroutine(PopDialogue(_partOfSideIndex));
+        if (_popDuration == 0.0f)
+        {
+            ChangeText(_partOfSideIndex);
+            _isCompute = true;
+        }
+        else
+            _popCoroutine = StartCoroutine(PopDialogue(_partOfSideIndex));
     }
 
     protected int? GetDialogueByName(string dialogueName)
@@ -381,7 +393,13 @@ public class TMPDialogue : MonoBehaviour
             SetupDialogue(_dialogueIndex);
 
         _partOfSideIndex = 0;
-        _popCoroutine = StartCoroutine(PopDialogue(0));
+        if (_popDuration == 0.0f)
+        {
+            ChangeText(_partOfSideIndex);
+            _isCompute = true;
+        }
+        else
+            _popCoroutine = StartCoroutine(PopDialogue(_partOfSideIndex));
     }
 
     public void StopDialogue()
@@ -390,7 +408,8 @@ public class TMPDialogue : MonoBehaviour
         if (_popCoroutine != null)
             StopCoroutine(_popCoroutine);
         _popCoroutine = null;
-        Destroy(_dialogueBoxReference);
+        if (_dialogueBoxReference != null)
+            Destroy(_dialogueBoxReference);
         _dialogueBoxReference = null;
         _textMeshPro = null;
     }
@@ -410,7 +429,13 @@ public class TMPDialogue : MonoBehaviour
                 else
                 {
                     _canSkip = false;
-                    _popCoroutine = StartCoroutine(PopDialogue(_partOfSideIndex + 1));
+                    if (_popDuration == 0.0f)
+                    {
+                        ChangeText(_partOfSideIndex + 1);
+                        _isCompute = true;
+                    }
+                    else
+                        _popCoroutine = StartCoroutine(PopDialogue(_partOfSideIndex + 1));
                 }
             }
         }
