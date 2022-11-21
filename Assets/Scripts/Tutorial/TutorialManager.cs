@@ -233,7 +233,7 @@ public class TutorialManager : MonoBehaviour
         yield return StartCoroutine(WaitForClick());
         _dialogue.StartDialogue("CongratPower");
         yield return StartCoroutine(WaitForDialogueToFinish());
-        _enemy1.detectionState = DetectionState.None;
+        _enemy1.SetState(DetectionState.None);
         _controller.BlockInput(false);
         _secondDoorEnabler.Interact();
         yield return StartCoroutine(GoToNextRoom());

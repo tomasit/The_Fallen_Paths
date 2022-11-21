@@ -108,8 +108,8 @@ public class CoroutineProcessor : ACoroutine
             //Debug.Log("Guard remaining : " + obj.gameObject.name);
             Vector3 enemyPosIte = ComparePosition(obj.gameObject.transform.position, transform.position);
             
-            if (obj.gameObject.GetComponent<EnemyDetectionManager>().detectionState == DetectionState.Spoted ||
-                obj.gameObject.GetComponent<EnemyDetectionManager>().detectionState == DetectionState.Alert) {
+            if (obj.gameObject.GetComponent<EnemyDetectionManager>().GetState() == DetectionState.Spoted ||
+                obj.gameObject.GetComponent<EnemyDetectionManager>().GetState() == DetectionState.Alert) {
                 //Debug.Log(obj.gameObject.name + " is knowed or arleady alerted");
                 continue;
             }
