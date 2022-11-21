@@ -14,7 +14,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     [Header("States")]
     public bool playerDetected = false;
-    public DetectionState detectionState = DetectionState.None;
+    private DetectionState detectionState = DetectionState.None;
     public RaycastHit2D raycast;
     
     [Header("Clocks")]
@@ -28,6 +28,14 @@ public class EnemyDetectionManager : MonoBehaviour
     [Header("Positions")]
     public Vector3 lastEventPosition;
 
+    [Header("Maybe tarsh later idk")]
+    public EnemyDialogManager dialogManager;
+
+    void Start()
+    {
+        dialogManager = GetComponent<EnemyDialogManager>();
+    }
+    
     void Update()
     {
         playerDetected = ThrowRay(direction, detectionDistance);
@@ -91,9 +99,20 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void SetState(DetectionState state)
     {
-        detectionState = state;
-        var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};
-        ResetClocks(ref clocks, 3);
+        //Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
+        if (state != detectionState) {
+            //appeler enemyEventManager || dire a enemyEventManager que c le moment
+            //trigger ?
+            dialogManager.ChoosDialogType(state);
+            detectionState = state;
+            var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};
+            ResetClocks(ref clocks, 3);
+        }
+    }
+
+    public DetectionState GetState()
+    {
+        return detectionState;
     }
 
     //quand il change de state trigger un dialog etc
@@ -129,7 +148,7 @@ public class EnemyDetectionManager : MonoBehaviour
     {
         clock += Time.deltaTime;
         if (clock >= time) {
-            detectionState = stateToAssign;
+            SetState(stateToAssign);
             return true;
         }
         return false;
@@ -145,7 +164,8 @@ public class EnemyDetectionManager : MonoBehaviour
             }
             if (detectionState == DetectionState.None || detectionState == DetectionState.Alert) {
                 if (detectionState == DetectionState.None) {
-                    detectionState = DetectionState.Alert;
+                    SetState(DetectionState.Alert);
+                    //detectionState = DetectionState.Alert;
                 }
                 if (detectionState == DetectionState.Alert) {
                     forgetAlertClock = 0f;

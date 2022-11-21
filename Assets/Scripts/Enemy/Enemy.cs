@@ -95,7 +95,7 @@ public class Enemy {
     [HideInInspector] public AEnemyMovement movementManager;
     [HideInInspector] public EnemyDetectionManager detectionManager;
     [HideInInspector] public BasicHealthWrapper healtWrapper;
-    [HideInInspector] public TMPDialogue dialogs;
+    [HideInInspector] public EnemyDialogManager dialogManager;
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
 }

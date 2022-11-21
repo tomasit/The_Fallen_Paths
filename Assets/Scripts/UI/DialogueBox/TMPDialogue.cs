@@ -490,6 +490,11 @@ public class TMPDialogue : MonoBehaviour
         }
     }
 
+    public void SetDialogBox(GameObject dialogBox)
+    {
+        _dialogueBox = dialogBox;
+    }
+
     public void SetUpTarget(Transform target, Vector3? offset = null)
     {
         _target = target;

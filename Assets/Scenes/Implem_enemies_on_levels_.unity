@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2025785}
   - component: {fileID: 2025784}
   - component: {fileID: 2025798}
+  - component: {fileID: 2025799}
   m_Layer: 10
   m_Name: Guard 1
   m_TagString: Untagged
@@ -338,7 +339,6 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
-  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -346,6 +346,7 @@ MonoBehaviour:
   timeToForgetSpoted: 20
   forgetSpotClock: 0
   lastEventPosition: {x: 0, y: 0, z: 0}
+  dialogManager: {fileID: 0}
 --- !u!114 &2025796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,6 +691,27 @@ MonoBehaviour:
   _handleByInput: 0
   _target: {fileID: 0}
   _targetOffset: {x: 0, y: 0}
+--- !u!114 &2025799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3179a719460fab4a8417562194d5af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs: {fileID: 0}
+  _timeRandomDialog: 5
+  _probablityDialog: 2
+  _clockDialog: 0
+  _durationDialog: 4.5
+  triggerDialog: 0
+  _dialogBoxReference: {fileID: 0}
+  popUpPrefab: {fileID: 0}
+  dialogPrefab: {fileID: 0}
 --- !u!1 &4772494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,6 +3669,7 @@ GameObject:
   - component: {fileID: 168076107}
   - component: {fileID: 168076106}
   - component: {fileID: 168076119}
+  - component: {fileID: 168076120}
   m_Layer: 10
   m_Name: Random 1
   m_TagString: Untagged
@@ -3826,7 +3849,6 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
-  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -3834,6 +3856,7 @@ MonoBehaviour:
   timeToForgetSpoted: 20
   forgetSpotClock: 0
   lastEventPosition: {x: 0, y: 0, z: 0}
+  dialogManager: {fileID: 0}
 --- !u!114 &168076117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4178,6 +4201,27 @@ MonoBehaviour:
   _handleByInput: 0
   _target: {fileID: 0}
   _targetOffset: {x: 0, y: 0}
+--- !u!114 &168076120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168076105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3179a719460fab4a8417562194d5af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs: {fileID: 0}
+  _timeRandomDialog: 5
+  _probablityDialog: 2
+  _clockDialog: 0
+  _durationDialog: 4.5
+  triggerDialog: 0
+  _dialogBoxReference: {fileID: 0}
+  popUpPrefab: {fileID: 0}
+  dialogPrefab: {fileID: 0}
 --- !u!1 &185300759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,6 +5815,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &537987667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537987668}
+  m_Layer: 0
+  m_Name: point 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &537987668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537987667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 84.75, y: 22.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1343391271}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545042515
 GameObject:
   m_ObjectHideFlags: 0
@@ -6946,6 +7021,7 @@ GameObject:
   - component: {fileID: 677646356}
   - component: {fileID: 677646355}
   - component: {fileID: 677646369}
+  - component: {fileID: 677646370}
   m_Layer: 10
   m_Name: Guard 2
   m_TagString: Untagged
@@ -7138,7 +7214,6 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
-  detectionState: 0
   timeToSpotPlayer: 3
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -7146,6 +7221,7 @@ MonoBehaviour:
   timeToForgetSpoted: 20
   forgetSpotClock: 0
   lastEventPosition: {x: 0, y: 0, z: 0}
+  dialogManager: {fileID: 0}
 --- !u!114 &677646367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7193,26 +7269,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogues:
-  - dialogueName: Alerted 1
+  - dialogueName: Alerted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 2
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278255615
         _gradientColor:
           serializedVersion: 2
-          rgba: 57855
+          rgba: 65535
         _colorSpeedRandomness: 0
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 2
+  - dialogueName: Alerted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7231,7 +7307,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 3
+  - dialogueName: Alerted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7250,7 +7326,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 4
+  - dialogueName: Alerted 3
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7269,7 +7345,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7288,7 +7364,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7307,7 +7383,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7326,17 +7402,17 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 1
+  - dialogueName: Spoted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 1
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278190335
         _gradientColor:
           serializedVersion: 2
           rgba: 255
@@ -7345,7 +7421,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 2
+  - dialogueName: Spoted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7364,7 +7440,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 3
+  - dialogueName: Spoted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -7478,7 +7554,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _dialogueBox: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
   _canvasTransform: {fileID: 712523113}
   _waveSpeed: 5
   _waveAmplitude: 4
@@ -7490,6 +7566,27 @@ MonoBehaviour:
   _handleByInput: 0
   _target: {fileID: 0}
   _targetOffset: {x: 0, y: 0}
+--- !u!114 &677646370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677646354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3179a719460fab4a8417562194d5af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs: {fileID: 0}
+  _timeRandomDialog: 2
+  _probablityDialog: 1
+  _clockDialog: 0
+  _durationDialog: 4.5
+  triggerDialog: 0
+  _dialogBoxReference: {fileID: 0}
+  popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
+  dialogPrefab: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
 --- !u!1 &703658058
 GameObject:
   m_ObjectHideFlags: 0
@@ -14645,7 +14742,7 @@ MonoBehaviour:
     movementManager: {fileID: 0}
     detectionManager: {fileID: 0}
     healtWrapper: {fileID: 0}
-    dialogs: {fileID: 0}
+    dialogManager: {fileID: 0}
     roomProprieties: {fileID: 2052816610}
     fleePoints: {fileID: 1073775014}
   - uuid: 
@@ -14658,7 +14755,7 @@ MonoBehaviour:
     movementManager: {fileID: 168076117}
     detectionManager: {fileID: 168076116}
     healtWrapper: {fileID: 168076106}
-    dialogs: {fileID: 0}
+    dialogManager: {fileID: 0}
     roomProprieties: {fileID: 121149671}
     fleePoints: {fileID: 1073775014}
   - uuid: 
@@ -14671,7 +14768,7 @@ MonoBehaviour:
     movementManager: {fileID: 1345283089}
     detectionManager: {fileID: 1345283088}
     healtWrapper: {fileID: 1345283078}
-    dialogs: {fileID: 0}
+    dialogManager: {fileID: 0}
     roomProprieties: {fileID: 868669389}
     fleePoints: {fileID: 1073775014}
   - uuid: 
@@ -14684,7 +14781,7 @@ MonoBehaviour:
     movementManager: {fileID: 0}
     detectionManager: {fileID: 0}
     healtWrapper: {fileID: 0}
-    dialogs: {fileID: 0}
+    dialogManager: {fileID: 0}
     roomProprieties: {fileID: 1343391272}
     fleePoints: {fileID: 1073775014}
   layersToIgnore:
@@ -14692,10 +14789,6 @@ MonoBehaviour:
     m_Bits: 1024
   - serializedVersion: 2
     m_Bits: 128
-  timeRandomDialog: 10
-  timeDurationDialog: 4.5
-  probablityDialog: 1
-  clockDialog: 0
 --- !u!4 &946713026
 Transform:
   m_ObjectHideFlags: 0
@@ -27675,6 +27768,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1895468775}
+  - {fileID: 537987668}
   m_Father: {fileID: 1441753953}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27692,6 +27786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
   - {fileID: 1895468775}
+  - {fileID: 537987668}
   targetIndex: 0
 --- !u!1 &1345283077
 GameObject:
@@ -27715,6 +27810,7 @@ GameObject:
   - component: {fileID: 1345283079}
   - component: {fileID: 1345283078}
   - component: {fileID: 1345283091}
+  - component: {fileID: 1345283092}
   m_Layer: 10
   m_Name: Random 2
   m_TagString: Untagged
@@ -27896,7 +27992,6 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
-  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -27904,6 +27999,7 @@ MonoBehaviour:
   timeToForgetSpoted: 20
   forgetSpotClock: 0
   lastEventPosition: {x: 0, y: 0, z: 0}
+  dialogManager: {fileID: 0}
 --- !u!114 &1345283089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28248,6 +28344,27 @@ MonoBehaviour:
   _handleByInput: 0
   _target: {fileID: 0}
   _targetOffset: {x: 0, y: 0}
+--- !u!114 &1345283092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345283077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3179a719460fab4a8417562194d5af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs: {fileID: 0}
+  _timeRandomDialog: 5
+  _probablityDialog: 2
+  _clockDialog: 0
+  _durationDialog: 4.5
+  triggerDialog: 0
+  _dialogBoxReference: {fileID: 0}
+  popUpPrefab: {fileID: 0}
+  dialogPrefab: {fileID: 0}
 --- !u!1 &1379767794
 GameObject:
   m_ObjectHideFlags: 0
@@ -33225,7 +33342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1895468775}
   m_Layer: 0
-  m_Name: point 2
+  m_Name: point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
