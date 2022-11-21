@@ -4542,7 +4542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[0].key
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[3].key
@@ -4558,6 +4558,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[3].unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[1].cancelable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
@@ -13985,6 +13989,7 @@ MonoBehaviour:
     m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 1, g: 1, b: 1, a: 1}
   _enemyPreviewPrefab: {fileID: 8856858939196353508, guid: 972e6a1322ae7ccaea7c12c9f12a4e23, type: 3}
+  _linePreviewPrefab: {fileID: 7245415105210968470, guid: eda4880a869db04ac9bbd92fd85f3f6e, type: 3}
 --- !u!1 &914650654
 GameObject:
   m_ObjectHideFlags: 0

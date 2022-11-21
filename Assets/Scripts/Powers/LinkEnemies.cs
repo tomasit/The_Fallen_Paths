@@ -11,50 +11,88 @@ public class LinkEnemies : AVisualCircleRangedPower
     private ParticleSystem _mousePreview = null;
     private ParticleSystem[] _enemiesPreview = null;
 
+    private LineRenderer _linePreview = null;
+    [SerializeField] private LineRenderer _linePreviewPrefab = null;
+
     private EnemyEventsManager _enemyEventManager = null;
 
-    private enum EnemyIndex
-    {
-        FIRST_ENEMY,
-        SECOND_ENEMY
-    }
+    private float _powerMaxDuration;
+    private float _powerTimer = 0;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        _powerMaxDuration = _powerManager.GetPowerMaxDurationFromStackTrace(1);
         _enemiesPreview = new ParticleSystem[2];
     }
 
     public override void Cancel()
     {
+        firingPower = false;
         _sourceEnemy = null;
         _destEnemy = null;
+        UnPreview();
+        foreach (var preview in _enemiesPreview)
+            if (preview != null)
+                Destroy(preview.gameObject);
+        _enemiesPreview[0] = null;
+        _enemiesPreview[1] = null;
     }
 
     public override void Fire()
     {
-        float _powerMaxDuration = _powerManager.GetPowerMaxDurationFromStackTrace(1);
+        _powerTimer += Time.deltaTime;
+        if (_powerTimer >= _powerMaxDuration)
+        {
+            _powerTimer = 0;
+            Cancel();
+            return;
+        }
+        _linePreview.SetPosition(0, _sourceEnemy.transform.position);
+        _linePreview.SetPosition(1, _destEnemy != null ? _destEnemy.transform.position : Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        _enemiesPreview[0].transform.position = _sourceEnemy.transform.position;
     }
 
     protected override void Preview()
     {
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
         if (_mousePreview == null)
         {
             _mousePreview = Instantiate(_enemyPreviewPrefab, mousePosition, Quaternion.identity);
         }
         _mousePreview.transform.position = mousePosition;
+
+        if (_sourceEnemy != null)
+        {
+            if (_linePreview == null)
+                _linePreview = Instantiate(_linePreviewPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            _linePreview.SetPosition(0, _sourceEnemy.transform.position);
+            _linePreview.SetPosition(1, mousePosition);
+        }
     }
 
     protected override void UnPreview()
     {
-        if (_mousePreview != null)
+        if (_mousePreview != null && firingPower == false)
         {
             Destroy(_mousePreview.gameObject);
             _mousePreview = null;
-            Debug.Log("???????????");
         }
+        if (_linePreview != null && firingPower == false)
+        {
+            var callerPowerType = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod();
+            Destroy(_linePreview.gameObject);
+            _linePreview = null;
+        }
+    }
+
+    private void InstantiateEnemyPreview(ref ParticleSystem preview, Transform enemyTransform)
+    {
+        preview = Instantiate(_enemyPreviewPrefab, enemyTransform.position, Quaternion.identity);
+        preview.transform.parent = enemyTransform;
+        preview.transform.localScale = new Vector3(1, 1, 1);
     }
 
     protected override bool canCastPower()
@@ -64,18 +102,16 @@ public class LinkEnemies : AVisualCircleRangedPower
         if (hit == false)
             return false;
 
-        Debug.Log(hit.collider.gameObject.name + " " + Input.GetMouseButton(0));
-        if (_sourceEnemy == null && Input.GetMouseButton(0))
+        if (_sourceEnemy == null && Input.GetMouseButtonDown(0))
         {
             _sourceEnemy = hit.collider.gameObject;
             if (_enemyEventManager == null)
                 _enemyEventManager = _sourceEnemy.transform.GetComponentInParent<EnemyEventsManager>();
-            _enemiesPreview[0] = Instantiate(_enemyPreviewPrefab, _sourceEnemy.transform.position, Quaternion.identity);
-            _enemiesPreview[0].transform.parent = _sourceEnemy.transform;
-            _enemiesPreview[0].transform.localScale = new Vector3(1, 1, 1);
+            InstantiateEnemyPreview(ref _enemiesPreview[0], _sourceEnemy.transform);
+            _linePreview = Instantiate(_linePreviewPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             return false;
         }
-        else if (_sourceEnemy != null && _sourceEnemy.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID())
+        else if (_sourceEnemy != null /*&& _sourceEnemy.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID()*/)
         {
             var supposedDestEnemy = hit.collider.gameObject;
             EnemyType? sourceType = null;
@@ -87,12 +123,12 @@ public class LinkEnemies : AVisualCircleRangedPower
                 else if (enemy.entity.GetInstanceID() == supposedDestEnemy.GetInstanceID())
                     destType = enemy.type;
 
-            if (sourceType != null && sourceType == destType && Input.GetMouseButton(0))
+            if (sourceType != null && sourceType == destType && Input.GetMouseButtonDown(0))
             {
+                _powerManager.ActivatePowerCooldownFromStackTrace();
+
                 _destEnemy = supposedDestEnemy;
-                _enemiesPreview[1] = Instantiate(_enemyPreviewPrefab, _destEnemy.transform.position, Quaternion.identity);
-                _enemiesPreview[1].transform.parent = _destEnemy.transform;
-                _enemiesPreview[1].transform.localScale = new Vector3(1, 1, 1);
+                InstantiateEnemyPreview(ref _enemiesPreview[1], _destEnemy.transform);
                 return true;
             }
             return false;

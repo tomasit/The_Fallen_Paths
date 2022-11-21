@@ -14,6 +14,7 @@ public class PowerManager : MonoBehaviour
         [System.NonSerialized] public float duration = 0;
         public float maxDuration = -1;
         public bool unlocked = false;
+        public bool cancelable = false;
 
         public bool powerManageItsDuration = true;
         public KeyCode key;
@@ -37,7 +38,7 @@ public class PowerManager : MonoBehaviour
         return _powers[powerIndex].maxDuration;
     }
 
-    public void ActivatePowerCooldownFromStackTrace(int frame)
+    public void ActivatePowerCooldownFromStackTrace(int frame = 1)
     {
         var callerPowerType = new System.Diagnostics.StackTrace().GetFrame(frame).GetMethod().ReflectedType;
         Debug.Log("Activate cooldown for " + callerPowerType.Name);
@@ -47,8 +48,7 @@ public class PowerManager : MonoBehaviour
 
     public void ResetEverything()
     {
-        if (_currentPowerIndex != -1)
-            CancelCurrentPowerState();
+        CancelCurrentPowerState();
         foreach (var power in _powers)
         {
             power.cooldown = 0;
@@ -56,14 +56,17 @@ public class PowerManager : MonoBehaviour
         }
     }
 
-    private void CancelCurrentPowerState()
+    private void CancelCurrentPowerState(bool canCancelFire = true)
     {
+        if (_currentPowerIndex == -1)
+            return;
+
         var currentPower = _powers[_currentPowerIndex].power;
         if (currentPower.firingPower == false && currentPower is ARangedPower)
         {
             (currentPower as ARangedPower).CancelRange();
         }
-        else if (currentPower.firingPower == true)
+        else if (canCancelFire && currentPower.firingPower == true)
             currentPower.Cancel();
         _currentPowerIndex = -1;
     }
@@ -75,7 +78,9 @@ public class PowerManager : MonoBehaviour
         if (powerIndex < 0)
             return;
         if (powerIndex == _currentPowerIndex)
-            CancelCurrentPowerState();
+        {
+            CancelCurrentPowerState(_powers[powerIndex].cancelable);
+        }
         else if (canUseAnyPower && _currentPowerIndex != -1
             && (_powers[_currentPowerIndex].power is ARangedPower)
             && (_powers[_currentPowerIndex].power as ARangedPower).activated == true
@@ -87,12 +92,13 @@ public class PowerManager : MonoBehaviour
             _currentPowerIndex = powerIndex;
         }
         else if (canUseAnyPower &&
-        (_currentPowerIndex == -1 || (_powers[_currentPowerIndex].power.firingPower == true && _powers[_currentPowerIndex].powerManageItsDuration == true)))
+        (_currentPowerIndex == -1
+        || (_powers[_currentPowerIndex].power.firingPower == true
+        && _powers[_currentPowerIndex].powerManageItsDuration == true)))
         {
             var currentPowerData = _powers[powerIndex];
             if (currentPowerData.cooldown <= 0 && currentPowerData.unlocked)
             {
-                currentPowerData.cooldown = 0;
                 _currentPowerIndex = powerIndex;
                 currentPowerData.power.Use();
             }
