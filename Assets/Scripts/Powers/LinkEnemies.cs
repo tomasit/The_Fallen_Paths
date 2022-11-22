@@ -49,8 +49,8 @@ public class LinkEnemies : AVisualCircleRangedPower
             Cancel();
             return;
         }
-        _linePreview.SetPosition(0, _sourceEnemy.transform.position);
-        _linePreview.SetPosition(1, _destEnemy != null ? _destEnemy.transform.position : Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        _linePreview.SetPosition(0, _sourceEnemy.GetComponentInChildren<SpriteRenderer>().transform.position);
+        _linePreview.SetPosition(1, _destEnemy.GetComponentInChildren<SpriteRenderer>().transform.position);
         _enemiesPreview[0].transform.position = _sourceEnemy.transform.position;
     }
 
@@ -68,7 +68,7 @@ public class LinkEnemies : AVisualCircleRangedPower
         {
             if (_linePreview == null)
                 _linePreview = Instantiate(_linePreviewPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            _linePreview.SetPosition(0, _sourceEnemy.transform.position);
+            _linePreview.SetPosition(0, _sourceEnemy.GetComponentInChildren<SpriteRenderer>().transform.position);
             _linePreview.SetPosition(1, mousePosition);
         }
     }
@@ -111,7 +111,7 @@ public class LinkEnemies : AVisualCircleRangedPower
             _linePreview = Instantiate(_linePreviewPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             return false;
         }
-        else if (_sourceEnemy != null /*&& _sourceEnemy.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID()*/)
+        else if (_sourceEnemy != null && _sourceEnemy.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID())
         {
             var supposedDestEnemy = hit.collider.gameObject;
             EnemyType? sourceType = null;

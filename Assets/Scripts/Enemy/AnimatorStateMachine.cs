@@ -10,8 +10,8 @@ public class AnimatorStateMachine : MonoBehaviour
     public void Idle(Enemy enemy, bool isAtTargetPosition, bool isClimbing)
     {
         if (isAtTargetPosition && 
-            (enemy.detectionManager.detectionState == DetectionState.None ||
-            enemy.detectionManager.detectionState == DetectionState.Freeze) &&
+            (enemy.detectionManager.GetState() == DetectionState.None ||
+            enemy.detectionManager.GetState() == DetectionState.Freeze) &&
             !isClimbing
             ) {
             enemy.animator.SetTrigger("Idle");
@@ -20,8 +20,8 @@ public class AnimatorStateMachine : MonoBehaviour
     public void Fight(Enemy enemy, bool isClimbing)
     {
         if (enemy.movementManager.isAtDistanceToInteract && 
-            (enemy.detectionManager.detectionState == DetectionState.Alert || 
-            enemy.detectionManager.detectionState == DetectionState.Spoted) &&
+            (enemy.detectionManager.GetState() == DetectionState.Alert || 
+            enemy.detectionManager.GetState() == DetectionState.Spoted) &&
             !isClimbing
             ) {
             enemy.animator.SetTrigger("Ready");
@@ -30,7 +30,7 @@ public class AnimatorStateMachine : MonoBehaviour
     public void Scared(Enemy enemy, bool isAtTargetPosition, bool isClimbing)
     {
         if (isAtTargetPosition && 
-            enemy.detectionManager.detectionState == DetectionState.Flee &&
+            enemy.detectionManager.GetState() == DetectionState.Flee &&
             !isClimbing) {
             enemy.animator.SetTrigger("Scared");
         }
@@ -38,14 +38,14 @@ public class AnimatorStateMachine : MonoBehaviour
     public void Moving(Enemy enemy, bool isAtTargetPosition, bool isClimbing)
     {
         if (!isAtTargetPosition &&
-            (enemy.detectionManager.detectionState == DetectionState.Alert ||
-            enemy.detectionManager.detectionState == DetectionState.None) &&
+            (enemy.detectionManager.GetState() == DetectionState.Alert ||
+            enemy.detectionManager.GetState() == DetectionState.None) &&
             !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Walking");
         }
         if (!enemy.movementManager.isAtDistanceToInteract &&
-            (enemy.detectionManager.detectionState == DetectionState.Spoted ||
-            enemy.detectionManager.detectionState == DetectionState.Flee) &&
+            (enemy.detectionManager.GetState() == DetectionState.Spoted ||
+            enemy.detectionManager.GetState() == DetectionState.Flee) &&
             !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Running");
                 //sinon il doit être en mode ready to nicker des mères
