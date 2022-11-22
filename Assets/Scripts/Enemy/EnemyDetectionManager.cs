@@ -14,7 +14,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     [Header("States")]
     public bool playerDetected = false;
-    private DetectionState detectionState = DetectionState.None;
+    [SerializeField] private DetectionState detectionState = DetectionState.None;
     public RaycastHit2D raycast;
     
     [Header("Clocks")]
