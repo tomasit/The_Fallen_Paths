@@ -89,13 +89,13 @@ public class Enemy {
     public bool enabled;
     public EnemyType type;
     public GameObject entity;
-    /*[HideInInspector]*/ public SpriteRenderer sprite;
-    /*[HideInInspector]*/ public Animator animator;
-    /*[HideInInspector]*/ public Agent agentMovement;
-    /*[HideInInspector]*/ public AEnemyMovement movementManager;
-    /*[HideInInspector]*/ public EnemyDetectionManager detectionManager;
-    /*[HideInInspector]*/ public BasicHealthWrapper healtWrapper;
-    /*[HideInInspector]*/ public EnemyDialogManager dialogManager;
+    [HideInInspector] public SpriteRenderer sprite;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public Agent agentMovement;
+    [HideInInspector] public AEnemyMovement movementManager;
+    [HideInInspector] public EnemyDetectionManager detectionManager;
+    [HideInInspector] public BasicHealthWrapper healtWrapper;
+    [HideInInspector] public EnemyDialogManager dialogManager;
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
 }
