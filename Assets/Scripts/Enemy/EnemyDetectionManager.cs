@@ -99,7 +99,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void SetState(DetectionState state)
     {
-        //Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
+        Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
         if (state != detectionState) {
             //appeler enemyEventManager || dire a enemyEventManager que c le moment
             //trigger ?

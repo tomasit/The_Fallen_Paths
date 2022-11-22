@@ -69,10 +69,10 @@ public class EnemyDialogManager : MonoBehaviour
     public void SetDialog(string dialogName, GameObject dialogBox, bool instantDialog)
     {
         if (instantDialog) {
-            //Debug.Log("--Instant dialog");
+            Debug.Log("--Instant dialog");
             StartCoroutine(PlayPopUpDialog(dialogName, dialogBox, _durationDialog));
         } else {
-            //Debug.Log("--Sheduled dialog");
+            Debug.Log("--Sheduled dialog");
             triggerDialog = true;
             _dialogName = dialogName;
             _dialogBoxReference = dialogBox;

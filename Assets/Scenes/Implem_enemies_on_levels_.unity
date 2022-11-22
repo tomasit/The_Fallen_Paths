@@ -7579,8 +7579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs: {fileID: 0}
-  _timeRandomDialog: 2
-  _probablityDialog: 1
+  _timeRandomDialog: 5
+  _probablityDialog: 2
   _clockDialog: 0
   _durationDialog: 4.5
   triggerDialog: 0
