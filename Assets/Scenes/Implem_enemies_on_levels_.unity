@@ -339,6 +339,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
+  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -3029,7 +3030,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 80cd2a4626de55940abae75bd4f67f2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3476,7 +3477,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 80cd2a4626de55940abae75bd4f67f2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3849,6 +3850,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
+  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -5174,7 +5176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.15
+      value: 93.11
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5211,6 +5213,10 @@ PrefabInstance:
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928635507966699352, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699354, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _levelLayerMask.m_Bits
@@ -7214,6 +7220,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
+  detectionState: 0
   timeToSpotPlayer: 3
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -27992,6 +27999,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
+  detectionState: 0
   timeToSpotPlayer: 2
   detectionClock: 0
   timeToForgetAlerted: 10
@@ -29131,7 +29139,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: a3a34d4ba74b0aa45b8b555571436695, type: 3}
   m_Color: {r: 1, g: 0.92825115, b: 0.2783019, a: 1}
   m_FlipX: 0
@@ -30554,7 +30562,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: a3a34d4ba74b0aa45b8b555571436695, type: 3}
   m_Color: {r: 1, g: 0.92825115, b: 0.2783019, a: 1}
   m_FlipX: 0

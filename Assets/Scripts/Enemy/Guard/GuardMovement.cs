@@ -57,10 +57,16 @@ public class GuardMovement : AEnemyMovement
         target = _targetPosition;
         
         NoNegative(speed = Speed[EnemyType.Guard]);
+
+        //faudrait quand meme que si le player est sur le collider de l'enemy, le spot direct
+        if (targetDirection.x == 0 && RangeOf(targetDirection.y, 0f, 0.80f)) {
+            isAtDistanceToInteract = true;
+        } else {
+            isAtDistanceToInteract = false;
+        }
         if (targetDirection.x > 0) {
             if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 isAtDistanceToInteract = true;
-                detectionManager.SetState(DetectionState.Spoted);
             } else {
                 isAtDistanceToInteract = false;
             }
@@ -68,7 +74,6 @@ public class GuardMovement : AEnemyMovement
         if (targetDirection.x < 0) {
             if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
                 isAtDistanceToInteract = true;
-                detectionManager.SetState(DetectionState.Spoted);
             } else {
                 isAtDistanceToInteract = false;
             }

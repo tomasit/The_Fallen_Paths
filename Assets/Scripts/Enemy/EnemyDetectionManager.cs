@@ -14,7 +14,7 @@ public class EnemyDetectionManager : MonoBehaviour
 
     [Header("States")]
     public bool playerDetected = false;
-    private DetectionState detectionState = DetectionState.None;
+    [SerializeField] private DetectionState detectionState = DetectionState.None;
     public RaycastHit2D raycast;
     
     [Header("Clocks")]
@@ -99,10 +99,8 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void SetState(DetectionState state)
     {
-        Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
+        //Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
         if (state != detectionState) {
-            //appeler enemyEventManager || dire a enemyEventManager que c le moment
-            //trigger ?
             dialogManager.ChoosDialogType(state);
             detectionState = state;
             var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};

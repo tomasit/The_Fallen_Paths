@@ -69,10 +69,10 @@ public class EnemyDialogManager : MonoBehaviour
     public void SetDialog(string dialogName, GameObject dialogBox, bool instantDialog)
     {
         if (instantDialog) {
-            Debug.Log("--Instant dialog");
+            //Debug.Log("--Instant dialog");
             StartCoroutine(PlayPopUpDialog(dialogName, dialogBox, _durationDialog));
         } else {
-            Debug.Log("--Sheduled dialog");
+            //Debug.Log("--Sheduled dialog");
             triggerDialog = true;
             _dialogName = dialogName;
             _dialogBoxReference = dialogBox;
@@ -92,7 +92,7 @@ public class EnemyDialogManager : MonoBehaviour
     //dans eventManager on set les sprites de EnemyDialogManager
     public void ChoosDialogType(DetectionState detectionState)
     {
-        Debug.Log("Change dialog type");
+        //Debug.Log("Change dialog type");
         ResetDialogVariables();
 
         if (detectionState == DetectionState.None) {
