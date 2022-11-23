@@ -101,8 +101,6 @@ public class EnemyDetectionManager : MonoBehaviour
     {
         //Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
         if (state != detectionState) {
-            //appeler enemyEventManager || dire a enemyEventManager que c le moment
-            //trigger ?
             dialogManager.ChoosDialogType(state);
             detectionState = state;
             var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};

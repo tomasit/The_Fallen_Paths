@@ -17,7 +17,6 @@ public class EnemyEventsManager : MonoBehaviour
         animatorController = GetComponent<AnimatorStateMachine>();
 
         for (int i = 0; i < Enemies.Length; ++i) {
-            //var enemy = new Enemy();
             IgnoreLayers(Enemies[i]);
             InitEnemyComponents(Enemies[i]);
             if (Enemies[i].roomProprieties != null)
@@ -44,9 +43,7 @@ public class EnemyEventsManager : MonoBehaviour
         foreach (var enemy in Enemies)
         {
             if (!enemy.enabled)
-            {
                 continue;
-            }
             if (enemy.detectionManager.GetState() == DetectionState.None && enemy.roomProprieties != null) {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
@@ -64,13 +61,7 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void CheckResetState(Enemy enemy)
     {
-        //comme le player a tjr un collider il va continuer a le tapper
-        if (player.GetComponent<PlayerHealthWrapper>().isDead())
-        {
-            enemy.detectionManager.SetState(DetectionState.None);
-        }
-        if (enemy.healtWrapper.isDead())
-        {
+        if (enemy.healtWrapper.isDead()) {
             enemy.enabled = false;
         }
     }
@@ -87,20 +78,21 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void RaycastDirection(Enemy enemy)
     {
-        if (enemy.movementManager.target == null)
-        {
+        if (enemy.movementManager.target == null) {
             //Debug.Log("MovementManager target is null (eventManager issue)");
             return;
         }
 
         Vector3 directionPoint = FindTargetDirection(enemy.entity.transform.position, enemy.movementManager.target.position);
-
-        if (directionPoint.x > 0)
-        {
-            enemy.detectionManager.SetRayCastDirection(Vector2.right);
+        if (directionPoint.x == 0) {
+            //Debug.Log("direction ray : NOTHING");
+            return;
         }
-        else
-        {
+        if (directionPoint.x > 0) {
+            //Debug.Log("direction ray : RIGHT");
+            enemy.detectionManager.SetRayCastDirection(Vector2.right);
+        } else {
+            //Debug.Log("direction ray : LEFT");
             enemy.detectionManager.SetRayCastDirection(Vector2.left);
         }
     }
@@ -120,29 +112,21 @@ public class EnemyEventsManager : MonoBehaviour
             //Debug.Log("------------------");
             //Debug.Log("playerDir : " + playerDirection.x);
             //Debug.Log("pointDir : " + pointDirection.x);
-            if (playerDirection.x < 0 && pointDirection.x < 0)
-            {
+            if (playerDirection.x < 0 && pointDirection.x < 0) {
                 //Debug.Log("Je vais au point a droite : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
-            }
-            else if (playerDirection.x > 0 && pointDirection.x > 0)
-            {
+            } else if (playerDirection.x > 0 && pointDirection.x > 0) {
                 //Debug.Log("Je vais au point a gauche : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
             }
 
-            if (RangeOf(pointDirection.x, playerDirection.x, 0.001f))
-            {
+            if (RangeOf(pointDirection.x, playerDirection.x, 0.001f)) {
                 if (index + 1 > fleePoints.targets.Length - 1)
-                {
                     index = 0;
-                }
                 else
-                {
                     index++;
-                }
                 fleePoints.targetIndex = index;
                 //Debug.Log("Player is here, move to = " + fleePoints.targets[index].gameObject.name);
                 return;
@@ -157,35 +141,31 @@ public class EnemyEventsManager : MonoBehaviour
         AEnemyMovement movManager = enemy.movementManager;
 
         if (RangeOf(movManager.transform.position.x, room.targets[room.targetIndex].position.x, 0.1f) &&
-            RangeOf(movManager.transform.position.y, room.targets[room.targetIndex].position.y, 0.75f))
-        {
+            RangeOf(movManager.transform.position.y, room.targets[room.targetIndex].position.y, 0.75f)) {
             if ((room.targets.Length - 1) == room.targetIndex)
-            {
                 room.targetIndex = 0;
-            }
             else
-            {
                 room.targetIndex += 1;
-            }
         }
     }
 
     private void DetectionEventState(Enemy enemy) {
-        if (enemy.detectionManager.GetState() == DetectionState.None) {
-            enemy.movementManager.BasicMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Alert) {
-            enemy.movementManager.AlertMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Spoted) {
-            enemy.movementManager.SpotMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Flee) {
-            enemy.movementManager.FleeMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Freeze) {
-            enemy.movementManager.FreezeMovement();
-        }
-        else
-        {
+        var dtcManager = enemy.detectionManager;
+        var movManager = enemy.movementManager;
+        var playerHealthWrp = player.GetComponent<BasicHealthWrapper>();
+
+        if (dtcManager.GetState() == DetectionState.None || playerHealthWrp.isDead()) {
+            movManager.BasicMovement();
+        } else if (dtcManager.GetState() == DetectionState.Alert) {
+            movManager.AlertMovement();
+        } else if (dtcManager.GetState() == DetectionState.Spoted) {
+            movManager.SpotMovement();
+        } else if (dtcManager.GetState() == DetectionState.Flee) {
+            movManager.FleeMovement();
+        } else if (dtcManager.GetState() == DetectionState.Freeze) {
+            movManager.FreezeMovement();
+        } else {
             Debug.Log("error : enemy has no detection state");
-            enemy.sprite.color = Color.blue;
         }
     }
 
@@ -198,25 +178,20 @@ public class EnemyEventsManager : MonoBehaviour
         bool isAtTargetPosition = false;
         bool isClimbing = enemy.movementManager.isEndClimbing || enemy.movementManager.isClimbing;
 
-        if (targetDistance.x >= 0)
-        {
-            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f))
-            {
+        if (targetDistance.x >= 0) {
+            if (targetDistance.x < 0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
                 isAtTargetPosition = true;
             }
-        }
-        else if (targetDistance.x <= 0)
-        {
-            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f))
-            {
+        } else if (targetDistance.x <= 0) {
+            if (targetDistance.x > -0.1f && RangeOf(targetDistance.y, 0f, 0.80f)) {
                 isAtTargetPosition = true;
             }
         }
 
         animatorController.Idle(enemy, isAtTargetPosition, isClimbing);
-        animatorController.Fight(enemy, isClimbing);
         animatorController.Scared(enemy, isAtTargetPosition, isClimbing);
         animatorController.Moving(enemy, isAtTargetPosition, isClimbing);
+        animatorController.Fight(enemy, isClimbing);
         animatorController.Climbing(enemy, targetDistance, isAtTargetPosition, isClimbing);
     }
 }

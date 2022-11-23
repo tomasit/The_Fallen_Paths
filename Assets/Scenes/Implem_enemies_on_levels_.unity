@@ -395,26 +395,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogues:
-  - dialogueName: Alerted 1
+  - dialogueName: Alerted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 2
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278255615
         _gradientColor:
           serializedVersion: 2
-          rgba: 57855
+          rgba: 65535
         _colorSpeedRandomness: 0
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 2
+  - dialogueName: Alerted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -433,7 +433,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 3
+  - dialogueName: Alerted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -452,7 +452,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 4
+  - dialogueName: Alerted 3
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -471,7 +471,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -490,7 +490,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -509,7 +509,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -528,17 +528,17 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 1
+  - dialogueName: Spoted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 1
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278190335
         _gradientColor:
           serializedVersion: 2
           rgba: 255
@@ -547,7 +547,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 2
+  - dialogueName: Spoted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -566,7 +566,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 3
+  - dialogueName: Spoted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -680,7 +680,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _dialogueBox: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
   _canvasTransform: {fileID: 712523113}
   _waveSpeed: 5
   _waveAmplitude: 4
@@ -3030,7 +3030,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 80cd2a4626de55940abae75bd4f67f2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3474,7 +3474,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 80cd2a4626de55940abae75bd4f67f2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3903,26 +3903,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogues:
-  - dialogueName: Alerted 1
+  - dialogueName: Alerted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 2
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278255615
         _gradientColor:
           serializedVersion: 2
-          rgba: 57855
+          rgba: 65535
         _colorSpeedRandomness: 0
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 2
+  - dialogueName: Alerted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -3941,7 +3941,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 3
+  - dialogueName: Alerted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -3960,7 +3960,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 4
+  - dialogueName: Alerted 3
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -3979,7 +3979,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -3998,7 +3998,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -4017,7 +4017,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -4036,17 +4036,17 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 1
+  - dialogueName: Spoted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 1
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278190335
         _gradientColor:
           serializedVersion: 2
           rgba: 255
@@ -4055,7 +4055,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 2
+  - dialogueName: Spoted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -4074,7 +4074,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 3
+  - dialogueName: Spoted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -4188,7 +4188,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _dialogueBox: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
   _canvasTransform: {fileID: 712523113}
   _waveSpeed: 5
   _waveAmplitude: 4
@@ -5162,7 +5162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 92.58
+      value: 93.11
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5199,6 +5199,10 @@ PrefabInstance:
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928635507966699352, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699354, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _levelLayerMask.m_Bits
@@ -7573,8 +7577,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs: {fileID: 0}
-  _timeRandomDialog: 2
-  _probablityDialog: 1
+  _timeRandomDialog: 5
+  _probablityDialog: 2
   _clockDialog: 0
   _durationDialog: 4.5
   triggerDialog: 0
@@ -28147,26 +28151,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogues:
-  - dialogueName: Alerted 1
+  - dialogueName: Alerted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 2
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278255615
         _gradientColor:
           serializedVersion: 2
-          rgba: 57855
+          rgba: 65535
         _colorSpeedRandomness: 0
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 2
+  - dialogueName: Alerted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28185,7 +28189,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 3
+  - dialogueName: Alerted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28204,7 +28208,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Alerted 4
+  - dialogueName: Alerted 3
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28223,7 +28227,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28242,7 +28246,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28261,7 +28265,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: AlertedResponse 3
+  - dialogueName: AlertedResponse 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28280,17 +28284,17 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 1
+  - dialogueName: Spoted
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
       - _text: '!'
         _textModifier: 0
-        _colorModifier: 1
+        _colorModifier: 0
         _solidColor:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278190335
         _gradientColor:
           serializedVersion: 2
           rgba: 255
@@ -28299,7 +28303,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 2
+  - dialogueName: Spoted 1
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28318,7 +28322,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: Spoted 3
+  - dialogueName: Spoted 2
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -28432,7 +28436,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  _dialogueBox: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
+  _dialogueBox: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
   _canvasTransform: {fileID: 712523113}
   _waveSpeed: 5
   _waveAmplitude: 4
@@ -29231,7 +29235,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: a3a34d4ba74b0aa45b8b555571436695, type: 3}
   m_Color: {r: 1, g: 0.92825115, b: 0.2783019, a: 1}
   m_FlipX: 0
@@ -30654,7 +30658,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: a3a34d4ba74b0aa45b8b555571436695, type: 3}
   m_Color: {r: 1, g: 0.92825115, b: 0.2783019, a: 1}
   m_FlipX: 0
