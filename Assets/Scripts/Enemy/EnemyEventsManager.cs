@@ -169,6 +169,8 @@ public class EnemyEventsManager : MonoBehaviour
         }
     }
 
+    //en fonction de si c un civil ou pas, pas les mêmes animations :
+    //si il est en spot et proche de sa target il va pas attacker
     private void AnimationStateMachine(Enemy enemy)
     {
         Vector3 targetDistance = FindTargetDirection(

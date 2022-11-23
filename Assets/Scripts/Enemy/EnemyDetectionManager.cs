@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//est ce que l'archer detecte le player avec un raycast droit ?
 public class EnemyDetectionManager : MonoBehaviour
 {
     [Header("Debug")]

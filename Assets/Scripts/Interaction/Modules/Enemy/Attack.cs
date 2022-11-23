@@ -31,3 +31,5 @@ public class Attack : ACoroutine
         triggerProcessor.SetDisabling(true);
     }
 }
+
+//attack speciale pour le archer
