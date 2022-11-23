@@ -14278,7 +14278,7 @@ MonoBehaviour:
   Enemies:
   - uuid: 
     enabled: 1
-    type: 2
+    type: 3
     entity: {fileID: 1345283077}
     sprite: {fileID: 1495729651}
     animator: {fileID: 1495729650}
