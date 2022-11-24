@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  detectionDistance: 5
+  _detectionDistance: 0
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
@@ -346,8 +346,8 @@ MonoBehaviour:
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
+  _detectionTarget: {fileID: 0}
   lastEventPosition: {x: 0, y: 0, z: 0}
-  dialogManager: {fileID: 0}
 --- !u!114 &2025796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4586,11 +4586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 113.37
+      value: 98.62
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.85
+      value: 22.85
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6418,7 +6418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &677646355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6600,7 +6600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  detectionDistance: 2
+  _detectionDistance: 0
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
@@ -6611,8 +6611,8 @@ MonoBehaviour:
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
+  _detectionTarget: {fileID: 0}
   lastEventPosition: {x: 0, y: 0, z: 0}
-  dialogManager: {fileID: 0}
 --- !u!114 &677646367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14277,7 +14277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - uuid: 
-    enabled: 1
+    enabled: 0
     type: 3
     entity: {fileID: 1345283077}
     sprite: {fileID: 1495729651}
@@ -14303,7 +14303,7 @@ MonoBehaviour:
     roomProprieties: {fileID: 2052816610}
     fleePoints: {fileID: 1073775014}
   - uuid: 
-    enabled: 1
+    enabled: 0
     type: 0
     entity: {fileID: 677646354}
     sprite: {fileID: 0}
@@ -14316,7 +14316,7 @@ MonoBehaviour:
     roomProprieties: {fileID: 1343391272}
     fleePoints: {fileID: 1073775014}
   - uuid: 
-    enabled: 1
+    enabled: 0
     type: 1
     entity: {fileID: 999030755}
     sprite: {fileID: 0}
@@ -14362,7 +14362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 999030771}
   - component: {fileID: 999030770}
-  - component: {fileID: 999030769}
+  - component: {fileID: 999030773}
   - component: {fileID: 999030768}
   - component: {fileID: 999030767}
   - component: {fileID: 999030766}
@@ -14370,7 +14370,7 @@ GameObject:
   - component: {fileID: 999030764}
   - component: {fileID: 999030763}
   - component: {fileID: 999030762}
-  - component: {fileID: 999030761}
+  - component: {fileID: 999030772}
   - component: {fileID: 999030760}
   - component: {fileID: 999030759}
   - component: {fileID: 999030758}
@@ -14382,7 +14382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &999030756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14758,19 +14758,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.00085890293, y: 0.1593673}
   m_Size: {x: 0.23224768, y: 0.5438332}
   m_Direction: 0
---- !u!114 &999030761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999030755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3857aee6251b24b32a50379cf00bf968, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventType: 0
 --- !u!114 &999030762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14801,7 +14788,7 @@ MonoBehaviour:
   enemyState: 0
   _coroutines:
   - {fileID: 999030762}
-  - {fileID: 999030761}
+  - {fileID: 999030772}
   _execAllCoroutines: 0
   _stopOnInteract: 0
   _enabled: 1
@@ -14878,7 +14865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  detectionDistance: 2
+  _detectionDistance: 0
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
@@ -14889,28 +14876,8 @@ MonoBehaviour:
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
+  _detectionTarget: {fileID: 0}
   lastEventPosition: {x: 0, y: 0, z: 0}
-  dialogManager: {fileID: 0}
---- !u!114 &999030769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999030755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88f45a010055abafe8425cbe3eabdee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1305419455}
-  _targetPosition: {fileID: 1305419455}
-  isAtDistanceToInteract: 0
-  speed: 0.75
-  collisionObj: {fileID: 0}
-  isClimbing: 0
-  isEndClimbing: 0
-  spritePos: {fileID: 0}
 --- !u!114 &999030770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14942,6 +14909,40 @@ Transform:
   m_Father: {fileID: 946713026}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &999030772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999030755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18aa4fb20a88672c5a3b4726607d4018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventType: 0
+  arrow: {fileID: 7742736508876356950, guid: 5298f7c90e6eea2099ab3f4c858075b3, type: 3}
+--- !u!114 &999030773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999030755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9636cf9cb94421d86a3d56d403e8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1305419455}
+  _targetPosition: {fileID: 1305419455}
+  isAtDistanceToInteract: 0
+  speed: 1
+  collisionObj: {fileID: 0}
+  isClimbing: 0
+  isEndClimbing: 0
+  spritePos: {fileID: 0}
 --- !u!1 &1001827688
 GameObject:
   m_ObjectHideFlags: 0
@@ -27982,7 +27983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1345283078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28153,7 +28154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  detectionDistance: 5
+  _detectionDistance: 0
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
   playerDetected: 0
@@ -28164,8 +28165,8 @@ MonoBehaviour:
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
+  _detectionTarget: {fileID: 0}
   lastEventPosition: {x: 0, y: 0, z: 0}
-  dialogManager: {fileID: 0}
 --- !u!114 &1345283089
 MonoBehaviour:
   m_ObjectHideFlags: 0

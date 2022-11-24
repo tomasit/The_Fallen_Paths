@@ -37,6 +37,14 @@ public class EnemyInfo
         { EnemyType.Random, 1 }
     };
 
+    public static Dictionary<EnemyType, float> DetectionDistance = new Dictionary<EnemyType, float>()
+    {
+        { EnemyType.Guard, 2f },
+        { EnemyType.Archer, 10f },
+        { EnemyType.RoyalGuard, 2f },
+        { EnemyType.Random, 2f }
+    };
+
     public static Vector3 DistanceToInteract = new Vector3(1f, 0f, 0f);
 
     public static bool RangeOfPosition(Vector3 posAim, Vector3 posCompare, float range) 

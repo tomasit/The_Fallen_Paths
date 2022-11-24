@@ -11,7 +11,7 @@ public abstract class AEnemyMovement : MonoBehaviour
     public bool isAtDistanceToInteract = false;
     public float speed = 1f;
     private Vector3 _lastFramePosition;
-    private bool _hasMoved = false;
+    private int _hasMoved = 0;
 
     public Transform collisionObj = null;//pour moi ca sert a rien
     public bool isClimbing = false;
@@ -47,10 +47,18 @@ public abstract class AEnemyMovement : MonoBehaviour
     
     private void CheckMovement()
     {
-        if (_lastFramePosition == transform.position)
-            _hasMoved = false;
-        else
-            _hasMoved = true;
+        Debug.Log("hasMoved = " + _hasMoved);
+        if (_lastFramePosition == transform.position) {
+            _hasMoved = 0;
+        } else {
+            if (_lastFramePosition.x > transform.position.x) {
+                //move left
+                _hasMoved = -1;
+            } else {
+                //move right
+                _hasMoved = 1;
+            }
+        }
         _lastFramePosition = transform.position;
     }
 
@@ -85,6 +93,11 @@ public abstract class AEnemyMovement : MonoBehaviour
     }
 
     public bool HasMovedFromLastFrame()
+    {
+        return (_hasMoved == 0) ? false : true;
+    }
+
+    public int DirectionMovedFromLastFrame()
     {
         return _hasMoved;
     }

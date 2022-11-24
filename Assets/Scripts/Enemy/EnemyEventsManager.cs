@@ -23,6 +23,7 @@ public class EnemyEventsManager : MonoBehaviour
                 Enemies[i].movementManager.target = Enemies[i].roomProprieties.targets[0];
             Enemies[i].healtWrapper.SetAnimator(Enemies[i].animator);
             Enemies[i].healtWrapper.SetMaxHealth(EnemyInfo.Health[Enemies[i].type]);
+            Enemies[i].detectionManager.SetDetectionDistance(DetectionDistance[Enemies[i].type]);
         }
     }
 
@@ -52,7 +53,7 @@ public class EnemyEventsManager : MonoBehaviour
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
-            RaycastDirection(enemy);
+            RotateEnemies(enemy);
             DetectionEventState(enemy);
             AnimationStateMachine(enemy);
             CheckResetState(enemy);
@@ -73,27 +74,6 @@ public class EnemyEventsManager : MonoBehaviour
             // NOTE : if the layerMask is the 31, it didn't work
             int layerValue = (int)Mathf.Log(layer.value, 2);
             Physics2D.IgnoreLayerCollision(layerValue, enemy.entity.layer, true);
-        }
-    }
-
-    private void RaycastDirection(Enemy enemy)
-    {
-        if (enemy.movementManager.target == null) {
-            //Debug.Log("MovementManager target is null (eventManager issue)");
-            return;
-        }
-
-        Vector3 directionPoint = FindTargetDirection(enemy.entity.transform.position, enemy.movementManager.target.position);
-        if (directionPoint.x == 0) {
-            //Debug.Log("direction ray : NOTHING");
-            return;
-        }
-        if (directionPoint.x > 0) {
-            //Debug.Log("direction ray : RIGHT");
-            enemy.detectionManager.SetRayCastDirection(Vector2.right);
-        } else {
-            //Debug.Log("direction ray : LEFT");
-            enemy.detectionManager.SetRayCastDirection(Vector2.left);
         }
     }
 
@@ -146,6 +126,30 @@ public class EnemyEventsManager : MonoBehaviour
                 room.targetIndex = 0;
             else
                 room.targetIndex += 1;
+        }
+    }
+
+    private void RotateEnemies(Enemy enemy)
+    {
+        //si le player est spoted, et tres proche
+        //il va reculer
+        //ne pas le faire rotate a ce moment la
+        if (enemy.movementManager.HasMovedFromLastFrame()) {
+            if (enemy.movementManager.DirectionMovedFromLastFrame() < 0) {
+                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 180f, 0f);
+                enemy.sprite.flipX = true;
+            } else {
+                enemy.sprite.flipX = false;
+                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            }
+        } else {
+            if (enemy.detectionManager.direction.x < 0) {
+                enemy.sprite.flipX = true;
+                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            } else if (enemy.detectionManager.direction.x > 0) {
+                enemy.sprite.flipX = false;
+                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 0, 0f);
+            }
         }
     }
 
