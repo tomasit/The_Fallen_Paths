@@ -92,9 +92,9 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void UpdateOffsetRaycast()
     {
-        if (direction.x >= 0) {
+        if (direction.x > 0) {
             rayCastOffset = new Vector3(Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
-        } else if (direction.x <= 0) {
+        } else if (direction.x < 0) {
             rayCastOffset = new Vector3(-Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
         }
     }
