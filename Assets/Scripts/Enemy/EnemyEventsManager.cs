@@ -131,24 +131,20 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void RotateEnemies(Enemy enemy)
     {
-        //si le player est spoted, et tres proche
-        //il va reculer
-        //ne pas le faire rotate a ce moment la
         if (enemy.movementManager.HasMovedFromLastFrame()) {
+            //ca ca marche pas tjr, il faudrai + proche que juste playerDetected
+            //if (enemy.detectionManager.playerDetected)
+            //    return;
             if (enemy.movementManager.DirectionMovedFromLastFrame() < 0) {
-                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 180f, 0f);
-                enemy.sprite.flipX = true;
+                enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
             } else {
-                enemy.sprite.flipX = false;
-                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+                enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
             }
         } else {
             if (enemy.detectionManager.direction.x < 0) {
-                enemy.sprite.flipX = true;
-                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 180f, 0f);
+                enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
             } else if (enemy.detectionManager.direction.x > 0) {
-                enemy.sprite.flipX = false;
-                //enemy.sprite.transform.eulerAngles = new Vector3(0f, 0, 0f);
+                enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
             }
         }
     }

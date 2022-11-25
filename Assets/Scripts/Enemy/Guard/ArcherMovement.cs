@@ -83,8 +83,6 @@ public class ArcherMovement : AEnemyMovement
 
     public override void SpotMovement()
     {
-        Debug.Log("Attack pass");
-
         _targetPosition.localPosition = Vector3.zero;
         Vector3 targetDirection = FindTargetDirection(spritePos.position, player.position);
         target = player;
@@ -92,27 +90,6 @@ public class ArcherMovement : AEnemyMovement
         Attack(player.transform);
         isAtDistanceToInteract = true;
         speed = 0f;
-
-        /*if (targetDirection.x > 0) {
-            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
-                Attack(player.transform);
-                isAtDistanceToInteract = true;
-                speed = 0f;
-            } else {
-                isAtDistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Archer] + (Speed[EnemyType.Archer] * 1.5f));
-            }
-        }
-        if (targetDirection.x < 0) {
-            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
-                Attack(player.transform);
-                isAtDistanceToInteract = true;
-                speed = 0f;
-            } else {
-                isAtDistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Archer] + (Speed[EnemyType.Archer] * 1.5f));
-            }
-        }*/
     }
 
     private void Attack(Transform objToAttack)

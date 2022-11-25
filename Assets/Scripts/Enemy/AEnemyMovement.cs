@@ -41,21 +41,17 @@ public abstract class AEnemyMovement : MonoBehaviour
     {
         agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         agentMovement.SetSpeed(speed);
-        RotateAxis();
         CheckMovement();
     }
     
     private void CheckMovement()
     {
-        Debug.Log("hasMoved = " + _hasMoved);
         if (_lastFramePosition == transform.position) {
             _hasMoved = 0;
         } else {
             if (_lastFramePosition.x > transform.position.x) {
-                //move left
                 _hasMoved = -1;
             } else {
-                //move right
                 _hasMoved = 1;
             }
         }
@@ -79,17 +75,6 @@ public abstract class AEnemyMovement : MonoBehaviour
             t.position.y + (DistanceToInteract.y * (targetDirection.y > 0 ? 1 : -1)), 
             t.position.z);
         return distanceToPlayer - new Vector3(0f, detectionManager.rayCastOffset.y, 0f);
-    }
-
-    //le faire rotate du coté ou sa vélocité est
-    //dans la direction ou il va... sans rigidbody...
-    private void RotateAxis()
-    {
-        if (detectionManager.direction == Vector2.right) {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        } else if (detectionManager.direction == Vector2.left) {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
     }
 
     public bool HasMovedFromLastFrame()

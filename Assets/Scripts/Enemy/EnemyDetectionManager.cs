@@ -56,8 +56,7 @@ public class EnemyDetectionManager : MonoBehaviour
             directionRay, 
             float.PositiveInfinity, 
             (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Enemy") | 
-            1 << LayerMask.NameToLayer("Level"))
-            );
+            1 << LayerMask.NameToLayer("Level")));
 
         if (raycast.collider != null)
         {
@@ -75,8 +74,8 @@ public class EnemyDetectionManager : MonoBehaviour
             }
 
             if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer) {
-                if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
-                    //si il est hide dans un truc ne pas le detecter
+                float distanceToPoint = Vector2.Distance(raycast.point, transform.position + rayCastOffset);
+                if (RangeOf(distance, distanceToPoint, 0.1f) || RangeOf(distanceToPoint, distance, 0.1f)) {
                     if (!raycast.collider.gameObject.GetComponent<HideInteraction>().IsHide()) {
                         DebugRay(debug, distance, directionRay, Color.red);
                         lastEventPosition = raycast.collider.gameObject.transform.position;

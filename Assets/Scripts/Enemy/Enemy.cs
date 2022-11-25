@@ -13,6 +13,7 @@ public class EnemyInfo
         { EnemyType.Random, 1f }
     };
     
+    //set sur les attacks
     public static Dictionary<EnemyType, float> CoolDown = new Dictionary<EnemyType, float>()
     {
         { EnemyType.Guard, 1.5f },
@@ -40,7 +41,7 @@ public class EnemyInfo
     public static Dictionary<EnemyType, float> DetectionDistance = new Dictionary<EnemyType, float>()
     {
         { EnemyType.Guard, 2f },
-        { EnemyType.Archer, 10f },
+        { EnemyType.Archer, 5f },
         { EnemyType.RoyalGuard, 2f },
         { EnemyType.Random, 2f }
     };

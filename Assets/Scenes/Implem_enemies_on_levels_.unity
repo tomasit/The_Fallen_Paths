@@ -401,7 +401,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -534,7 +534,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -685,7 +685,7 @@ MonoBehaviour:
   _waveSpeed: 5
   _waveAmplitude: 4
   _bounceSpeed: {x: 5, y: 5}
-  _bounceAmplitude: {x: 1, y: 1}
+  _bounceAmplitude: {x: 5, y: 5}
   _woodleSpeed: {x: 3, y: 3}
   _woodleAmplitude: {x: 1, y: 1}
   _popDuration: 0.07
@@ -708,7 +708,7 @@ MonoBehaviour:
   _timeRandomDialog: 10
   _probablityDialog: 4
   _clockDialog: 0
-  _durationDialog: 4.5
+  _durationDialog: 10
   triggerDialog: 0
   _dialogBoxReference: {fileID: 0}
   popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
@@ -4586,11 +4586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 98.62
+      value: 102.87
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.85
+      value: 33.34
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4631,6 +4631,10 @@ PrefabInstance:
     - target: {fileID: 5928635507966699354, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _levelLayerMask.m_Bits
       value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928635507966699357, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.size
@@ -4995,7 +4999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438388511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.49, y: -2.37, z: 0}
+  m_LocalPosition: {x: 83.26, y: 22.380001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6418,7 +6422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &677646355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6666,7 +6670,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -6799,7 +6803,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -6950,7 +6954,7 @@ MonoBehaviour:
   _waveSpeed: 5
   _waveAmplitude: 4
   _bounceSpeed: {x: 5, y: 5}
-  _bounceAmplitude: {x: 1, y: 1}
+  _bounceAmplitude: {x: 5, y: 5}
   _woodleSpeed: {x: 3, y: 3}
   _woodleAmplitude: {x: 1, y: 1}
   _popDuration: 0.07
@@ -6973,7 +6977,7 @@ MonoBehaviour:
   _timeRandomDialog: 10
   _probablityDialog: 4
   _clockDialog: 0
-  _durationDialog: 4.5
+  _durationDialog: 10
   triggerDialog: 0
   _dialogBoxReference: {fileID: 0}
   popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
@@ -14277,7 +14281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - uuid: 
-    enabled: 0
+    enabled: 1
     type: 3
     entity: {fileID: 1345283077}
     sprite: {fileID: 1495729651}
@@ -14303,7 +14307,7 @@ MonoBehaviour:
     roomProprieties: {fileID: 2052816610}
     fleePoints: {fileID: 1073775014}
   - uuid: 
-    enabled: 0
+    enabled: 1
     type: 0
     entity: {fileID: 677646354}
     sprite: {fileID: 0}
@@ -14316,7 +14320,7 @@ MonoBehaviour:
     roomProprieties: {fileID: 1343391272}
     fleePoints: {fileID: 1073775014}
   - uuid: 
-    enabled: 0
+    enabled: 1
     type: 1
     entity: {fileID: 999030755}
     sprite: {fileID: 0}
@@ -14382,7 +14386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &999030756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14399,7 +14403,7 @@ MonoBehaviour:
   _timeRandomDialog: 10
   _probablityDialog: 4
   _clockDialog: 0
-  _durationDialog: 4.5
+  _durationDialog: 10
   triggerDialog: 0
   _dialogBoxReference: {fileID: 0}
   popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
@@ -14423,7 +14427,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -14556,7 +14560,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -14707,7 +14711,7 @@ MonoBehaviour:
   _waveSpeed: 5
   _waveAmplitude: 4
   _bounceSpeed: {x: 5, y: 5}
-  _bounceAmplitude: {x: 1, y: 1}
+  _bounceAmplitude: {x: 5, y: 5}
   _woodleSpeed: {x: 3, y: 3}
   _woodleAmplitude: {x: 1, y: 1}
   _popDuration: 0.07
@@ -27983,7 +27987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1345283078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28220,7 +28224,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -28353,7 +28357,7 @@ MonoBehaviour:
     _partOfSide:
     - _modifiableText:
       - _text: '!'
-        _textModifier: 0
+        _textModifier: 4
         _colorModifier: 0
         _solidColor:
           serializedVersion: 2
@@ -28504,7 +28508,7 @@ MonoBehaviour:
   _waveSpeed: 5
   _waveAmplitude: 4
   _bounceSpeed: {x: 5, y: 5}
-  _bounceAmplitude: {x: 1, y: 1}
+  _bounceAmplitude: {x: 5, y: 5}
   _woodleSpeed: {x: 3, y: 3}
   _woodleAmplitude: {x: 1, y: 1}
   _popDuration: 0.07
@@ -28527,7 +28531,7 @@ MonoBehaviour:
   _timeRandomDialog: 10
   _probablityDialog: 4
   _clockDialog: 0
-  _durationDialog: 4.5
+  _durationDialog: 10
   triggerDialog: 0
   _dialogBoxReference: {fileID: 0}
   popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
@@ -29335,7 +29339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504736470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.37, y: -2.38, z: 0}
+  m_LocalPosition: {x: 111.37, y: 32.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33276,7 +33280,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.23, z: 0}
   m_LocalScale: {x: 1.7000002, y: 1.7000002, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1933652768}
   m_Father: {fileID: 999030771}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33561,6 +33566,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1999287609}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1933652767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933652768}
+  m_Layer: 10
+  m_Name: arrow spawn point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1933652768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933652767}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1839907181}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1949021673 stripped
 Transform:

@@ -7,16 +7,12 @@ using static EnemyInfo;
 public class Arrow : MonoBehaviour
 {
     public float speed = 1f;
-    public int damages = 1;
+    public uint damages = 1;
     public Rigidbody2D rigidbody;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-    }
-
-    void Update()
-    {
         rigidbody.AddForce(transform.right.normalized * speed, ForceMode2D.Impulse);
     }
 
@@ -30,8 +26,9 @@ public class Arrow : MonoBehaviour
                 return;
             }
             if (collider.gameObject.GetComponent<BasicHealthWrapper>() != null) {
-                gameObject.GetComponent<BasicHealthWrapper>().Hit((uint)damages);
+                collider.gameObject.GetComponent<BasicHealthWrapper>().Hit(damages);
             }
+            
             //instanciate particules
             Object.Destroy(gameObject);
         }
