@@ -90,7 +90,7 @@ public struct Enemy {
     public GameObject entity;
     [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public Animator animator;
-    [HideInInspector] public TMPDialogue dialogs;
+    public TMPDialogue dialogs;
     [HideInInspector] public Agent agentMovement;
     [HideInInspector] public AEnemyMovement movementManager;
     [HideInInspector] public EnemyDetectionManager detectionManager;

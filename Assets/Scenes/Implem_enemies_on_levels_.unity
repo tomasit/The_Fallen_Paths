@@ -2808,16 +2808,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _grid: {fileID: 1259068970}
-  _fadeImage: {fileID: 0}
-  _tmproUGUI: {fileID: 0}
   _interactOnStart: 1
   _translateChange: 0
   _translateSpeed: 1
   _fadeChange: 1
-  _fadeDescription: 
-  _fadeDuration: 1
-  _descriptionDuration: 1
+  _quoteName: 
   _soundType: 0
+  _transitionScreen: {fileID: 0}
 --- !u!114 &119008279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3662,24 +3659,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _grid: {fileID: 54091027}
-  _fadeImage: {fileID: 0}
-  _tmproUGUI: {fileID: 0}
   _interactOnStart: 0
   _translateChange: 0
   _translateSpeed: 20
   _fadeChange: 1
-  _fadeDescription: 'Chapter I
-
-    -
-
-    Prison
-
-    -
-
-    Room II'
-  _fadeDuration: 1
-  _descriptionDuration: 1
+  _quoteName: 
   _soundType: 0
+  _transitionScreen: {fileID: 0}
 --- !u!114 &185300763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4555,16 +4541,28 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
-      propertyPath: _powers.Array.data[3].power
-      value: 
-      objectReference: {fileID: 454048067}
-    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
-      propertyPath: _powers.Array.data[3].unlocked
+      propertyPath: _powers.Array.data[0].key
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[3].key
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[3].power
+      value: 
+      objectReference: {fileID: 906327608}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[0].unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[3].unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[3].maxDuration
-      value: -1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[3].cooldownDuration
@@ -4904,17 +4902,6 @@ Transform:
   m_Father: {fileID: 1073775013}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &454048067 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5928635507966699341, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
-  m_PrefabInstance: {fileID: 403111835}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a979efca22eb82340a159a08cbf7bfb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &475197737
 GameObject:
   m_ObjectHideFlags: 0
@@ -13193,6 +13180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5107b8c6be737574eb4ba2d2c7c2a501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _powerManager: {fileID: 0}
+  _respawnRoom2: {fileID: 0}
+  _deathManager: {fileID: 0}
   _dialogue: {fileID: 0}
   _transitionDialogue: {fileID: 0}
   _enemy1: {fileID: 0}
@@ -13894,6 +13884,107 @@ Transform:
   m_Father: {fileID: 40150167}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &906327593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5928635507966699321, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+  m_PrefabInstance: {fileID: 403111835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &906327607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906327593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ff54031430a2428eade944f8fd225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
+  externalAnimator: 0
+  _deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &906327608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906327593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bfe76f9236777c1a495046cd5c8c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firingPower: 0
+  rangeRadius: 7
+  activated: 0
+  _rangePrefab: {fileID: 1990342430478220552, guid: f96e6c13c4aa9ba1eaae5c5236807c5f, type: 3}
+  _rangeColor:
+    m_Mode: 0
+    m_GradientMin:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    m_GradientMax:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
+    m_ColorMax: {r: 1, g: 1, b: 1, a: 1}
+  _enemyPreviewPrefab: {fileID: 8856858939196353508, guid: 972e6a1322ae7ccaea7c12c9f12a4e23, type: 3}
 --- !u!1 &914650654
 GameObject:
   m_ObjectHideFlags: 0
@@ -14101,7 +14192,7 @@ MonoBehaviour:
     detectionManager: {fileID: 677646366}
     healtWrapper: {fileID: 677646355}
     roomProprieties: {fileID: 1343391272}
-    fleePoints: {fileID: 0}
+    fleePoints: {fileID: 1073775014}
   layersToIgnore:
   - serializedVersion: 2
     m_Bits: 1024
@@ -39786,24 +39877,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _grid: {fileID: 1720151120}
-  _fadeImage: {fileID: 0}
-  _tmproUGUI: {fileID: 0}
   _interactOnStart: 0
   _translateChange: 0
   _translateSpeed: 20
   _fadeChange: 1
-  _fadeDescription: 'Chapter I
-
-    -
-
-    Prison
-
-    -
-
-    Room I'
-  _fadeDuration: 1
-  _descriptionDuration: 1
+  _quoteName: 
   _soundType: 0
+  _transitionScreen: {fileID: 0}
 --- !u!114 &2109167458
 MonoBehaviour:
   m_ObjectHideFlags: 0

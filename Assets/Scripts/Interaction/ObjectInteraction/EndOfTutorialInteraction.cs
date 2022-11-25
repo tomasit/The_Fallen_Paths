@@ -11,7 +11,7 @@ public class EndOfTutorialInteraction : AInteractable
     private IEnumerator BackToBegin()
     {
         _transition.StartBeginTransition("EndOfTutorial");
-        while (_transition.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+        while (_transition.GetTransitionState() != TransitionScreen.TransitionState.END)
             yield return null;
         SaveManager.DataInstance.GetPlayerInfo()._playerName = "";
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

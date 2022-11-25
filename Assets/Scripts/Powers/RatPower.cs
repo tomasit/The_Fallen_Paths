@@ -13,8 +13,9 @@ public class RatPower : APower
     private Vector3 _playerBaseScale;
     private Coroutine _ratCoroutine = null;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _playerBaseScale = transform.localScale;
         _baseAnimator = GetComponent<Animator>().runtimeAnimatorController;
         _baseScale = _rescaleMask.transform.localScale;

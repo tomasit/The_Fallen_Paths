@@ -12,5 +12,8 @@ public class PlayerInfoSave
 public class Parameters
 {
     public float _globalVolume = 1.0f;
+    public int _width = 1920;
+    public int _height = 1080;
+    public bool _fullscreen = true;
     public Dictionary<SoundData.SoundEffectType, float> _subVolume;
 }

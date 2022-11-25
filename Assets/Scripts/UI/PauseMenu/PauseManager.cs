@@ -7,7 +7,7 @@ public class PauseManager : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject PauseUI;
-    public int gameStartScene;
+    public int gameMainMScene;
 
     private void Update()
     {
@@ -42,7 +42,7 @@ public class PauseManager : MonoBehaviour
         PauseUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-        SceneManager.LoadScene(gameStartScene);
+        SceneManager.LoadScene(gameMainMScene);
     }
 
     public void QuitGame()

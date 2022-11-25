@@ -127,7 +127,7 @@ public class SaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-            Save();
+        // if (Input.GetKeyDown(KeyCode.S))
+        //     Save();
     }
 }

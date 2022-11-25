@@ -14,6 +14,8 @@ public class PowerManager : MonoBehaviour
         [System.NonSerialized] public float duration = 0;
         public float maxDuration = -1;
         public bool unlocked = false;
+
+        public bool powerManageItsDuration = true;
         public KeyCode key;
     }
     [SerializeField]
@@ -22,15 +24,25 @@ public class PowerManager : MonoBehaviour
 
     public bool canUseAnyPower = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
+    int FindPowerIndex(System.Type powerType)
+    {
+        return _powers.FindIndex(x => x.power.GetType() == powerType);
     }
 
-    int FindPowerIndex(string powerName)
+    public float GetPowerMaxDurationFromStackTrace(int frame)
     {
-        return _powers.FindIndex(x => x.power.GetType() == System.Type.GetType(powerName));
+        var callerPowerType = new System.Diagnostics.StackTrace().GetFrame(frame).GetMethod().ReflectedType;
+        int powerIndex = FindPowerIndex(callerPowerType);
+        return _powers[powerIndex].maxDuration;
+    }
+
+    public void ActivatePowerCooldownFromStackTrace(int frame)
+    {
+        var callerPowerType = new System.Diagnostics.StackTrace().GetFrame(frame).GetMethod().ReflectedType;
+        Debug.Log("Activate cooldown for " + callerPowerType.Name);
+        int powerIndex = FindPowerIndex(callerPowerType);
+        _powers[powerIndex].cooldown = _powers[powerIndex].cooldownDuration;
     }
 
     public void ResetEverything()
@@ -56,15 +68,26 @@ public class PowerManager : MonoBehaviour
         _currentPowerIndex = -1;
     }
 
-    public void ChoosePower(string powerName)
+    public void ChoosePower(System.Type powerType)
     {
-        int powerIndex = FindPowerIndex(powerName);
+        int powerIndex = FindPowerIndex(powerType);
 
         if (powerIndex < 0)
             return;
         if (powerIndex == _currentPowerIndex)
             CancelCurrentPowerState();
-        else if (canUseAnyPower && _currentPowerIndex == -1 && powerIndex >= 0)
+        else if (canUseAnyPower && _currentPowerIndex != -1
+            && (_powers[_currentPowerIndex].power is ARangedPower)
+            && (_powers[_currentPowerIndex].power as ARangedPower).activated == true
+            && (_powers[powerIndex].cooldown <= 0)
+            && (_powers[powerIndex].unlocked))
+        {
+            (_powers[_currentPowerIndex].power as ARangedPower).CancelRange();
+            _powers[powerIndex].power.Use();
+            _currentPowerIndex = powerIndex;
+        }
+        else if (canUseAnyPower &&
+        (_currentPowerIndex == -1 || (_powers[_currentPowerIndex].power.firingPower == true && _powers[_currentPowerIndex].powerManageItsDuration == true)))
         {
             var currentPowerData = _powers[powerIndex];
             if (currentPowerData.cooldown <= 0 && currentPowerData.unlocked)
@@ -72,7 +95,6 @@ public class PowerManager : MonoBehaviour
                 currentPowerData.cooldown = 0;
                 _currentPowerIndex = powerIndex;
                 currentPowerData.power.Use();
-                currentPowerData.cooldown = currentPowerData.cooldownDuration;
             }
         }
     }
@@ -82,8 +104,9 @@ public class PowerManager : MonoBehaviour
         foreach (var data in _powers)
             if (Input.GetKeyDown(data.key))
             {
-                ChoosePower(data.power.GetType().Name);
+                ChoosePower(data.power.GetType());
             }
+
         if (_currentPowerIndex >= 0)
         {
             var currentPowerData = _powers[_currentPowerIndex];
@@ -101,19 +124,24 @@ public class PowerManager : MonoBehaviour
                 }
                 currentPowerData.duration = 0;
             }
-            else if (currentPowerData.maxDuration != -1)
+        }
+        foreach (var power in _powers)
+        {
+            if (power.cooldown > 0)
             {
-                currentPowerData.duration += Time.deltaTime;
-                if (currentPowerData.duration >= currentPowerData.maxDuration)
+                power.cooldown = Mathf.Max(power.cooldown - Time.deltaTime, 0);
+                Debug.Log(power.power.GetType().Name + " cooldown: " + power.cooldown);
+            }
+            if (power.powerManageItsDuration == false && power.maxDuration != -1 && power.power.firingPower == true)
+            {
+                power.duration += Time.deltaTime;
+                if (power.duration >= power.maxDuration)
                 {
-                    currentPower.Cancel();
-                    currentPowerData.duration = 0;
+                    power.power.Cancel();
+                    power.duration = 0;
                     _currentPowerIndex = -1;
                 }
             }
         }
-        foreach (var power in _powers)
-            if (power.cooldown > 0)
-                power.cooldown = Mathf.Max(power.cooldown - Time.deltaTime, 0);
     }
 }

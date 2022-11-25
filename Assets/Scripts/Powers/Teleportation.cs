@@ -14,13 +14,15 @@ public class Teleportation : AVisualCircleRangedPower
     [SerializeField] private ParticleSystem _teleportationEffectPrefab = null;
     private bool _canCast = false;
     private BoxCollider2D _collider = null;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _collider = GetComponent<BoxCollider2D>();
     }
 
     public override void Fire()
     {
+        base.Fire();
         transform.position = _calculatedPosition;
         var tempParticles = Instantiate(_teleportationEffectPrefab, _calculatedPosition, Quaternion.identity);
         var tempMain = tempParticles.main;
@@ -94,6 +96,6 @@ public class Teleportation : AVisualCircleRangedPower
         if (!_canCast)
             _calculatedPosition = newPosition;
 
-        return (_canCast);
+        return (_canCast && Input.GetMouseButton(0));
     }
 }

@@ -7,6 +7,9 @@ using System;
 
 public class TutorialManager : MonoBehaviour
 {
+    [SerializeField] private EnemyEventsManager _enemyEvent;
+    [SerializeField] private EnemyDetectionManager _enemy2;
+    [SerializeField] private EnemyDetectionManager _enemy3;
     [SerializeField] private PowerManager _powerManager;
     [SerializeField] private Transform _respawnRoom2;
     [SerializeField] private TutoDeathManager _deathManager;
@@ -161,22 +164,50 @@ public class TutorialManager : MonoBehaviour
         _enemy1.SetState(DetectionState.Freeze);
         while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.NONE)
             yield return null;
+       _controller.BlockInput(true);
         _dialogue.StartDialogue("TryAgain");
         yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
        _enemy1.SetState(DetectionState.None);
     }
 
+    private IEnumerator WaitForRespawnRoom2()
+    {
+        while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
+            yield return null;
+        _controller.BlockInput(true);
+        _enemy2.transform.position = _enemyEvent.Enemies[0].roomProprieties.targets[0].position;
+        _enemy2.SetState(DetectionState.None);
+        _enemy3.transform.position = _enemyEvent.Enemies[1].roomProprieties.targets[0].position;
+        _enemy3.SetState(DetectionState.None);
+        while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+            yield return null;
+        _controller.BlockInput(false);
+    }
+
     private IEnumerator GoToNextRoom()
     {
         while (!_door2.IsInTransition())
         {
-            if (_controller.transform.gameObject.GetComponent<Animator>().GetBool("Dead"))
+            if (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.NONE)
             {
                 yield return StartCoroutine(WaitForRespawn());
             }
             else
                 yield return null;
+        }
+    }
+
+    private IEnumerator EndOfTutorial()
+    {
+        while (true)
+        {
+            if (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.NONE)
+            {
+                yield return StartCoroutine(WaitForRespawnRoom2());
+            }
+            else
+                yield return null;            
         }
     }
 
@@ -222,6 +253,7 @@ public class TutorialManager : MonoBehaviour
         _interactor.BlockInput(true);
         yield return StartCoroutine(WaitForDialogueToFinish());
         yield return new WaitForSeconds(2); // replace by unlock power animation
+        _powerManager._powers[0].unlocked = true;
         _dialogue.StartDialogue("PowerInstruction");
         yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
@@ -238,6 +270,7 @@ public class TutorialManager : MonoBehaviour
         _secondDoorEnabler.Interact();
         yield return StartCoroutine(GoToNextRoom());
         _deathManager.SetCheckpoint(_respawnRoom2.position);
+        yield return StartCoroutine(EndOfTutorial());
     }
 
     private void Update()
