@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
     public float speed = 1f;
     public uint damages = 1;
     public Rigidbody2D rigidbody;
+    //public GameObject particles;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class Arrow : MonoBehaviour
             }
             
             //instanciate particules
+            //GameObject newParticles = Object.Instantiate(particles, transform.position, transform.rotation);
             Object.Destroy(gameObject);
         }
     }

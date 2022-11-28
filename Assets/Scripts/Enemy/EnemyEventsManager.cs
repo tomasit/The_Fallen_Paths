@@ -132,10 +132,11 @@ public class EnemyEventsManager : MonoBehaviour
     private void RotateEnemies(Enemy enemy)
     {
         if (enemy.movementManager.HasMovedFromLastFrame()) {
-            // Faire ca pour les guard, royalGuard
-            // Pour les archer et les mages ne pas le faore
-            //if (enemy.detectionManager.playerDetected)
-            //    return;
+            if (enemy.type != EnemyType.Archer && enemy.type != EnemyType.Mage) {
+                if (enemy.detectionManager.playerDetected) {
+                    return;
+                }
+            }
             if (enemy.movementManager.DirectionMovedFromLastFrame() < 0) {
                 enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
             } else {
