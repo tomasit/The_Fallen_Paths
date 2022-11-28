@@ -8,19 +8,19 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MainCharacter
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PostProcess
+  - Player
+  - Stairs
+  - Lader
+  - Enemy
+  - Level
+  - Wall
+  - LastLader
+  - Ground
+  - PlayerLadder
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: LightHide
+    uniqueID: 989546703
+    locked: 0
+  - name: Player
+    uniqueID: 3311460339
+    locked: 0
+  - name: Foreground
+    uniqueID: 657912469
+    locked: 0
+  - name: UI
+    uniqueID: 1161798753
     locked: 0

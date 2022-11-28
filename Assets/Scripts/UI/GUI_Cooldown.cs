@@ -13,7 +13,7 @@ public class GUI_Cooldown : MonoBehaviour
     [SerializeField]
     private TMP_Text textCD;
     private bool IsCooldown = false;
-    // private List<PowerManager.PowerData> powList = PowerManager._powers;
+    PowerManager pow = new PowerManager();
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class GUI_Cooldown : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             onCD();
         }
