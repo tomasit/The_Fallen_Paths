@@ -16,7 +16,8 @@ public class EnemyEventsManager : MonoBehaviour
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         animatorController = GetComponent<AnimatorStateMachine>();
 
-        for (int i = 0; i < Enemies.Length; ++i) {
+        for (int i = 0; i < Enemies.Length; ++i)
+        {
             //var enemy = new Enemy();
             IgnoreLayers(Enemies[i]);
             InitEnemyComponents(Enemies[i]);
@@ -25,6 +26,25 @@ public class EnemyEventsManager : MonoBehaviour
             Enemies[i].healtWrapper.SetAnimator(Enemies[i].animator);
             Enemies[i].healtWrapper.SetMaxHealth(EnemyInfo.Health[Enemies[i].type]);
         }
+    }
+
+    public void LinkEnemies(int sourceInstanceID, int destInstanceID)
+    {
+        Enemy source = null;
+        Enemy dest = null;
+        foreach (var enemy in Enemies)
+            if (enemy.entity.GetInstanceID() == sourceInstanceID)
+                source = enemy;
+            else if (enemy.entity.GetInstanceID() == destInstanceID)
+                dest = enemy;
+
+    }
+    public void UnlinkEnem(int destInstanceID)
+    {
+        Enemy dest = null;
+        foreach (var enemy in Enemies)
+            if (enemy.entity.GetInstanceID() == destInstanceID)
+                dest = enemy;
     }
 
     private void InitEnemyComponents(Enemy enemy)
@@ -47,11 +67,13 @@ public class EnemyEventsManager : MonoBehaviour
             {
                 continue;
             }
-            if (enemy.detectionManager.GetState() == DetectionState.None && enemy.roomProprieties != null) {
+            if (enemy.detectionManager.GetState() == DetectionState.None && enemy.roomProprieties != null)
+            {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
             }
-            if (enemy.detectionManager.GetState() == DetectionState.Flee && enemy.fleePoints != null) {
+            if (enemy.detectionManager.GetState() == DetectionState.Flee && enemy.fleePoints != null)
+            {
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
@@ -170,16 +192,26 @@ public class EnemyEventsManager : MonoBehaviour
         }
     }
 
-    private void DetectionEventState(Enemy enemy) {
-        if (enemy.detectionManager.GetState() == DetectionState.None) {
+    private void DetectionEventState(Enemy enemy)
+    {
+        if (enemy.detectionManager.GetState() == DetectionState.None)
+        {
             enemy.movementManager.BasicMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Alert) {
+        }
+        else if (enemy.detectionManager.GetState() == DetectionState.Alert)
+        {
             enemy.movementManager.AlertMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Spoted) {
+        }
+        else if (enemy.detectionManager.GetState() == DetectionState.Spoted)
+        {
             enemy.movementManager.SpotMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Flee) {
+        }
+        else if (enemy.detectionManager.GetState() == DetectionState.Flee)
+        {
             enemy.movementManager.FleeMovement();
-        } else if (enemy.detectionManager.GetState() == DetectionState.Freeze) {
+        }
+        else if (enemy.detectionManager.GetState() == DetectionState.Freeze)
+        {
             enemy.movementManager.FreezeMovement();
         }
         else
