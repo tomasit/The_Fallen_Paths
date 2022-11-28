@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System.Text.RegularExpressions;
 
+[RequireComponent(typeof(TMPDialogue))]
 public class EnemyDialogManager : MonoBehaviour
 {
     public TMPDialogue dialogs;
@@ -43,13 +44,13 @@ public class EnemyDialogManager : MonoBehaviour
             var rd = Random.Range(0, _probablityDialog);
             //Debug.Log("rd = " + rd);
             if (rd == 0) {
-                StartCoroutine(PlayDialog(_dialogName, _dialogBoxReference, _durationDialog));
+                StartCoroutine(PlayRandomDialog(_dialogName, _dialogBoxReference, _durationDialog));
             }
         }
     }
 
     //si on veut un dialog random c bien, mais moi je veux le popUp "(!)"
-    private IEnumerator PlayDialog(string dialogType, GameObject dialogBox, float lifeTimeDialog)
+    private IEnumerator PlayRandomDialog(string dialogType, GameObject dialogBox, float lifeTimeDialog)
     {
         int nbDialog = 0;
         foreach(string dialogName in dialogs.GetDialogueNames()) {
@@ -70,7 +71,7 @@ public class EnemyDialogManager : MonoBehaviour
     {
         if (instantDialog) {
             //Debug.Log("--Instant dialog");
-            StartCoroutine(PlayPopUpDialog(dialogName, dialogBox, _durationDialog));
+            StartCoroutine(PlayThisDialog(dialogName, dialogBox, _durationDialog));
         } else {
             //Debug.Log("--Sheduled dialog");
             triggerDialog = true;
@@ -79,7 +80,7 @@ public class EnemyDialogManager : MonoBehaviour
         }
     }
 
-    private IEnumerator PlayPopUpDialog(string dialogName, GameObject dialogBox, float lifeTimeDialog)
+    private IEnumerator PlayThisDialog(string dialogName, GameObject dialogBox, float lifeTimeDialog)
     {
         dialogName = ReplaceWhitespace(dialogName, "");
         dialogs.SetDialogBox(dialogBox);

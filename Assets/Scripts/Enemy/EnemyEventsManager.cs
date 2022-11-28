@@ -132,7 +132,8 @@ public class EnemyEventsManager : MonoBehaviour
     private void RotateEnemies(Enemy enemy)
     {
         if (enemy.movementManager.HasMovedFromLastFrame()) {
-            //ca ca marche pas tjr, il faudrai + proche que juste playerDetected
+            // Faire ca pour les guard, royalGuard
+            // Pour les archer et les mages ne pas le faore
             //if (enemy.detectionManager.playerDetected)
             //    return;
             if (enemy.movementManager.DirectionMovedFromLastFrame() < 0) {
