@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 
 public class GUI_Cooldown : MonoBehaviour
 {
-     PowerManager pow = new PowerManager();
+    //PowerManager pow = new PowerManager();
     PowerManager.PowerData powerData;
     private float cd = 0;
     private float maxDuration = 0;
