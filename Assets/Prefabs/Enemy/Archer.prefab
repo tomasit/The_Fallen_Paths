@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventType: 0
   arrow: {fileID: 7742736508876356950, guid: 5298f7c90e6eea2099ab3f4c858075b3, type: 3}
+  arrowScale: {x: 1, y: 1, z: 1}
 --- !u!70 &5685882759341170909
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -620,8 +621,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.23, z: 0}
   m_LocalScale: {x: 1.7000002, y: 1.7000002, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5685882760292903957}
+  m_Children: []
   m_Father: {fileID: 5685882759341170886}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -697,37 +697,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &5685882760292903978
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5685882760292903957}
-  m_Layer: 10
-  m_Name: arrow spawn point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5685882760292903957
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5685882760292903978}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5685882760249302616}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5685882760787952011
 GameObject:
   m_ObjectHideFlags: 0

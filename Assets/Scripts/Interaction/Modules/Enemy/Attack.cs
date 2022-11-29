@@ -30,6 +30,6 @@ public class Attack : ACoroutine
             animator.SetTrigger("Attack");
         }
         yield return new WaitForSeconds(2f);//cooldown
-        triggerProcessor.SetDisabling(true);
+        triggerProcessor.Disable(true);
     }
 }

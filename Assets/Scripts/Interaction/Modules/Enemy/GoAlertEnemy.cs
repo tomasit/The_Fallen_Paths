@@ -21,16 +21,13 @@ public class GoAlertEnemy : ACoroutine
     public override IEnumerator Interact(Transform enemyToAlert = null)
     {
         if (enemyToAlert.gameObject == null) {
-            Debug.Log("Enemy to alert, gameobject is null");
             yield return null;
         }
 
         movementManager.target = enemyToAlert;
-        //afficher le pop up houlala y a un player
-        Debug.Log(gameObject.name + " running for guard : " + enemyToAlert.gameObject.name);
 
         var triggerProcessor = enemyToAlert.gameObject.GetComponent<DetectionToSpotEnemy>();
-        triggerProcessor.SetDisabling(false);
+        triggerProcessor.Disable(false);
         triggerProcessor.SetInteractionObj(transform);
         
         aim = enemyToAlert;

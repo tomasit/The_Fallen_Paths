@@ -43,7 +43,7 @@ public class ArcherMovement : AEnemyMovement
         }
 
         detectionTrigger.SetState(EnemyEventState.None);
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
         _targetPosition.localPosition = Vector3.zero;
         NoNegative(speed = Speed[EnemyType.Archer]);
     }
@@ -78,7 +78,7 @@ public class ArcherMovement : AEnemyMovement
         }
 
         detectionTrigger.SetState(EnemyEventState.None);
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
     }
 
     public override void SpotMovement()
@@ -96,7 +96,7 @@ public class ArcherMovement : AEnemyMovement
     {
         detectionTrigger.SetState(EnemyEventState.FightPlayer);
         detectionTrigger.SetInteractionObj(objToAttack);
-        detectionTrigger.SetDisabling(false);
+        detectionTrigger.Disable(false);
     }
 
     public override void FleeMovement()

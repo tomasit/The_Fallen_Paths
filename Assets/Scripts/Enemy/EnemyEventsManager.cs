@@ -43,8 +43,9 @@ public class EnemyEventsManager : MonoBehaviour
     {
         foreach (var enemy in Enemies)
         {
-            if (!enemy.enabled)
+            if (!enemy.enabled) {
                 continue;
+            }
             if (enemy.detectionManager.GetState() == DetectionState.None && enemy.roomProprieties != null) {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
@@ -64,6 +65,26 @@ public class EnemyEventsManager : MonoBehaviour
     {
         if (enemy.healtWrapper.isDead()) {
             enemy.enabled = false;
+            
+            enemy.detectionManager.Enable(false);
+            enemy.detectionManager.SetState(DetectionState.None, false);
+            
+            enemy.movementManager.target = null;
+            enemy.movementManager.isAtDistanceToInteract = false;
+            enemy.movementManager.speed = 0;
+            enemy.movementManager.collisionObj = null;
+            enemy.movementManager.isClimbing = false;
+            enemy.movementManager.isEndClimbing = false;
+            
+            enemy.agentMovement.DisableAgent();
+            
+            enemy.entity.GetComponent<CoroutineProcessor>().DisableTriggerInteractor(true);
+            enemy.entity.GetComponent<CoroutineProcessor>().Enable(false);
+
+            enemy.dialogManager.Enable(false);
+
+            enemy.entity.GetComponent<Collider2D>().enabled = false;
+
         }
     }
 
@@ -89,15 +110,10 @@ public class EnemyEventsManager : MonoBehaviour
         {
             var pointDirection = FindTargetDirection(point.position, movManager.gameObject.transform.position);
 
-            //Debug.Log("------------------");
-            //Debug.Log("playerDir : " + playerDirection.x);
-            //Debug.Log("pointDir : " + pointDirection.x);
             if (playerDirection.x < 0 && pointDirection.x < 0) {
-                //Debug.Log("Je vais au point a droite : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
             } else if (playerDirection.x > 0 && pointDirection.x > 0) {
-                //Debug.Log("Je vais au point a gauche : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
             }
@@ -108,7 +124,6 @@ public class EnemyEventsManager : MonoBehaviour
                 else
                     index++;
                 fleePoints.targetIndex = index;
-                //Debug.Log("Player is here, move to = " + fleePoints.targets[index].gameObject.name);
                 return;
             }
             ++index;
@@ -132,9 +147,11 @@ public class EnemyEventsManager : MonoBehaviour
     private void RotateEnemies(Enemy enemy)
     {
         if (enemy.movementManager.HasMovedFromLastFrame()) {
-            //ca ca marche pas tjr, il faudrai + proche que juste playerDetected
-            //if (enemy.detectionManager.playerDetected)
-            //    return;
+            if (enemy.type != EnemyType.Archer && enemy.type != EnemyType.Mage) {
+                if (enemy.detectionManager.playerDetected) {
+                    return;
+                }
+            }
             if (enemy.movementManager.DirectionMovedFromLastFrame() < 0) {
                 enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
             } else {
@@ -164,13 +181,9 @@ public class EnemyEventsManager : MonoBehaviour
             movManager.FleeMovement();
         } else if (dtcManager.GetState() == DetectionState.Freeze) {
             movManager.FreezeMovement();
-        } else {
-            Debug.Log("error : enemy has no detection state");
         }
     }
 
-    //en fonction de si c un civil ou pas, pas les mêmes animations :
-    //si il est en spot et proche de sa target il va pas attacker
     private void AnimationStateMachine(Enemy enemy)
     {
         Vector3 targetDistance = FindTargetDirection(

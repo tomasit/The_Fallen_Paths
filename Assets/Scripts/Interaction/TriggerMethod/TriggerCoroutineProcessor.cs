@@ -23,10 +23,7 @@ public class TriggerCoroutineProcessor : MonoBehaviour
                 _coroutine = StartCoroutine(Trigger(_interact));
             }
         } else {
-            //il est sensé passer ici zebi
             if (_coroutine != null) {
-                Debug.Log("_isDisable == true");
-                Debug.Log("coroutine = null");
                 _coroutine = null;
             }
         }
@@ -57,16 +54,13 @@ public class TriggerCoroutineProcessor : MonoBehaviour
         _processor.enemyState = state;
     }
 
-    public void SetDisabling(bool isDisable)
+    public void Disable(bool isDisable)
     {
         if (isDisable) {
-            //Debug.Log("---_isDisable : " + _isDisable);
             if (_processor.crRunning) {
-                //Debug.Log("---Stop Coroutines");
                 StopCoroutine(Trigger());
                 StopCoroutine(_processor.Interact());
             }
-            //Debug.Log("---Set _isDisable = true & crRunning = false");
             _isDisable = true;
             _processor.crRunning = false;
         } else {
