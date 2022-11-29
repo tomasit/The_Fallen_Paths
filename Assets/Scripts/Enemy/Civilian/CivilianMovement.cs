@@ -43,13 +43,13 @@ public class CivilianMovement : AEnemyMovement
         }
 
         _targetPosition.localPosition = Vector3.zero;
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
         NoNegative(speed = Speed[EnemyType.Random]);
     }
 
     public override void AlertMovement()
     {
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
         Vector3 targetDirection = FindTargetDirection(spritePos.position, detectionManager.lastEventPosition);
         _targetPosition.position = detectionManager.lastEventPosition;
         target = _targetPosition;
@@ -71,7 +71,7 @@ public class CivilianMovement : AEnemyMovement
     {
         _targetPosition.localPosition = Vector3.zero;
         detectionTrigger.SetState(EnemyEventState.SeenPlayer);
-        detectionTrigger.SetDisabling(false);
+        detectionTrigger.Disable(false);
         NoNegative(speed = Speed[EnemyType.Random] + (Speed[EnemyType.Random] * 1.5f));
     }
 
@@ -80,7 +80,7 @@ public class CivilianMovement : AEnemyMovement
         _targetPosition.localPosition = Vector3.zero;
         // idk if it works
         detectionTrigger.SetState(EnemyEventState.NoGuardAround);
-        detectionTrigger.SetDisabling(false);
+        detectionTrigger.Disable(false);
         //
         NoNegative(speed = Speed[EnemyType.Guard] + (Speed[EnemyType.Guard] * 1.5f));
     }

@@ -23,6 +23,7 @@ public class EnemyEventsManager : MonoBehaviour
                 Enemies[i].movementManager.target = Enemies[i].roomProprieties.targets[0];
             Enemies[i].healtWrapper.SetAnimator(Enemies[i].animator);
             Enemies[i].healtWrapper.SetMaxHealth(EnemyInfo.Health[Enemies[i].type]);
+            Enemies[i].detectionManager.SetDetectionDistance(DetectionDistance[Enemies[i].type]);
         }
     }
 
@@ -43,8 +44,9 @@ public class EnemyEventsManager : MonoBehaviour
     {
         foreach (var enemy in Enemies)
         {
-            if (!enemy.enabled)
+            if (!enemy.enabled) {
                 continue;
+            }
             if (enemy.detectionManager.GetState() == DetectionState.None && enemy.roomProprieties != null) {
                 RoomTargetPoints(enemy);
                 enemy.movementManager.target = enemy.roomProprieties.targets[enemy.roomProprieties.targetIndex];
@@ -53,7 +55,7 @@ public class EnemyEventsManager : MonoBehaviour
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
-            RaycastDirection(enemy);
+            RotateEnemies(enemy);
             DetectionEventState(enemy);
             AnimationStateMachine(enemy);
             CheckResetState(enemy);
@@ -64,6 +66,26 @@ public class EnemyEventsManager : MonoBehaviour
     {
         if (enemy.healtWrapper.isDead()) {
             enemy.enabled = false;
+            
+            enemy.detectionManager.Enable(false);
+            enemy.detectionManager.SetState(DetectionState.None, false);
+            
+            enemy.movementManager.target = null;
+            enemy.movementManager.isAtDistanceToInteract = false;
+            enemy.movementManager.speed = 0;
+            enemy.movementManager.collisionObj = null;
+            enemy.movementManager.isClimbing = false;
+            enemy.movementManager.isEndClimbing = false;
+            
+            enemy.agentMovement.DisableAgent();
+            
+            enemy.entity.GetComponent<CoroutineProcessor>().DisableTriggerInteractor(true);
+            enemy.entity.GetComponent<CoroutineProcessor>().Enable(false);
+
+            enemy.dialogManager.Enable(false);
+
+            enemy.entity.GetComponent<Collider2D>().enabled = false;
+
         }
     }
 
@@ -74,27 +96,6 @@ public class EnemyEventsManager : MonoBehaviour
             // NOTE : if the layerMask is the 31, it didn't work
             int layerValue = (int)Mathf.Log(layer.value, 2);
             Physics2D.IgnoreLayerCollision(layerValue, enemy.entity.layer, true);
-        }
-    }
-
-    private void RaycastDirection(Enemy enemy)
-    {
-        if (enemy.movementManager.target == null) {
-            //Debug.Log("MovementManager target is null (eventManager issue)");
-            return;
-        }
-
-        Vector3 directionPoint = FindTargetDirection(enemy.entity.transform.position, enemy.movementManager.target.position);
-        if (directionPoint.x == 0) {
-            //Debug.Log("direction ray : NOTHING");
-            return;
-        }
-        if (directionPoint.x > 0) {
-            //Debug.Log("direction ray : RIGHT");
-            enemy.detectionManager.SetRayCastDirection(Vector2.right);
-        } else {
-            //Debug.Log("direction ray : LEFT");
-            enemy.detectionManager.SetRayCastDirection(Vector2.left);
         }
     }
 
@@ -110,15 +111,10 @@ public class EnemyEventsManager : MonoBehaviour
         {
             var pointDirection = FindTargetDirection(point.position, movManager.gameObject.transform.position);
 
-            //Debug.Log("------------------");
-            //Debug.Log("playerDir : " + playerDirection.x);
-            //Debug.Log("pointDir : " + pointDirection.x);
             if (playerDirection.x < 0 && pointDirection.x < 0) {
-                //Debug.Log("Je vais au point a droite : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
             } else if (playerDirection.x > 0 && pointDirection.x > 0) {
-                //Debug.Log("Je vais au point a gauche : " + fleePoints.targets[index].gameObject.name + " index : " + index);
                 fleePoints.targetIndex = index;
                 return;
             }
@@ -129,7 +125,6 @@ public class EnemyEventsManager : MonoBehaviour
                 else
                     index++;
                 fleePoints.targetIndex = index;
-                //Debug.Log("Player is here, move to = " + fleePoints.targets[index].gameObject.name);
                 return;
             }
             ++index;
@@ -150,6 +145,28 @@ public class EnemyEventsManager : MonoBehaviour
         }
     }
 
+    private void RotateEnemies(Enemy enemy)
+    {
+        if (enemy.movementManager.HasMovedFromLastFrame()) {
+            if (enemy.type != EnemyType.Archer && enemy.type != EnemyType.Mage) {
+                if (enemy.detectionManager.playerDetected) {
+                    return;
+                }
+            }
+            if (enemy.movementManager.DirectionMovedFromLastFrame() < 0) {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
+            } else {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+        } else {
+            if (enemy.detectionManager.direction.x < 0) {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
+            } else if (enemy.detectionManager.direction.x > 0) {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+        }
+    }
+
     private void DetectionEventState(Enemy enemy) {
         var dtcManager = enemy.detectionManager;
         var movManager = enemy.movementManager;
@@ -165,13 +182,9 @@ public class EnemyEventsManager : MonoBehaviour
             movManager.FleeMovement();
         } else if (dtcManager.GetState() == DetectionState.Freeze) {
             movManager.FreezeMovement();
-        } else {
-            Debug.Log("error : enemy has no detection state");
         }
     }
 
-    //en fonction de si c un civil ou pas, pas les mêmes animations :
-    //si il est en spot et proche de sa target il va pas attacker
     private void AnimationStateMachine(Enemy enemy)
     {
         Vector3 targetDistance = FindTargetDirection(

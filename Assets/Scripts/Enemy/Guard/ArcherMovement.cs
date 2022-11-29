@@ -22,8 +22,6 @@ public class ArcherMovement : AEnemyMovement
         }
         Move();
         AllowedMovement();
-
-        //Spot ou Alert : si t a la position de destinationfaire des gauche droite de direction de la tête
     }
     public override void BasicMovement()
     {
@@ -45,7 +43,7 @@ public class ArcherMovement : AEnemyMovement
         }
 
         detectionTrigger.SetState(EnemyEventState.None);
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
         _targetPosition.localPosition = Vector3.zero;
         NoNegative(speed = Speed[EnemyType.Archer]);
     }
@@ -80,7 +78,7 @@ public class ArcherMovement : AEnemyMovement
         }
 
         detectionTrigger.SetState(EnemyEventState.None);
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
     }
 
     public override void SpotMovement()
@@ -89,33 +87,16 @@ public class ArcherMovement : AEnemyMovement
         Vector3 targetDirection = FindTargetDirection(spritePos.position, player.position);
         target = player;
 
-        if (targetDirection.x > 0) {
-            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
-                Attack(player.transform);
-                isAtDistanceToInteract = true;
-                speed = 0f;
-            } else {
-                isAtDistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Archer] + (Speed[EnemyType.Archer] * 1.5f));
-            }
-        }
-        if (targetDirection.x < 0) {
-            if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
-                Attack(player.transform);
-                isAtDistanceToInteract = true;
-                speed = 0f;
-            } else {
-                isAtDistanceToInteract = false;
-                NoNegative(speed = Speed[EnemyType.Archer] + (Speed[EnemyType.Archer] * 1.5f));
-            }
-        }
+        Attack(player.transform);
+        isAtDistanceToInteract = true;
+        speed = 0f;
     }
 
     private void Attack(Transform objToAttack)
     {
         detectionTrigger.SetState(EnemyEventState.FightPlayer);
         detectionTrigger.SetInteractionObj(objToAttack);
-        detectionTrigger.SetDisabling(false);
+        detectionTrigger.Disable(false);
     }
 
     public override void FleeMovement()

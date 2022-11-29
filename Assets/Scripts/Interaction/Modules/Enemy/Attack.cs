@@ -20,16 +20,16 @@ public class Attack : ACoroutine
 
     public override IEnumerator Interact(Transform obj = null)
     {
-        if ((movementManager.isClimbing || movementManager.isEndClimbing)
-            /*qu'il se fait pas hit*/) {
+        if ((movementManager.isClimbing || movementManager.isEndClimbing) /* && qu'il se fait pas hit*/) {
             yield return null;
         }
+        
         //Debug.Log("Attack !!!");
-        obj.gameObject.GetComponent<BasicHealthWrapper>().Hit(1);//damage
-        animator.SetTrigger("Attack");
+        if (obj.gameObject.GetComponent<BasicHealthWrapper>() != null) {
+            obj.gameObject.GetComponent<BasicHealthWrapper>().Hit(1);//damage
+            animator.SetTrigger("Attack");
+        }
         yield return new WaitForSeconds(2f);//cooldown
-        triggerProcessor.SetDisabling(true);
+        triggerProcessor.Disable(true);
     }
 }
-
-//attack speciale pour le archer

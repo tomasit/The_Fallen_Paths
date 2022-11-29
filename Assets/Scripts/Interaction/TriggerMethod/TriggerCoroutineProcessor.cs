@@ -36,6 +36,12 @@ public class TriggerCoroutineProcessor : MonoBehaviour
         }
     }
 
+    //use in extreme case
+    public void SetCoroutine(Coroutine coroutine)
+    {
+        _coroutine = coroutine;
+    }
+
     public void SetInteractionObj(Transform interact)
     {
         if (interact != null) {
@@ -48,7 +54,7 @@ public class TriggerCoroutineProcessor : MonoBehaviour
         _processor.enemyState = state;
     }
 
-    public void SetDisabling(bool isDisable)
+    public void Disable(bool isDisable)
     {
         if (isDisable) {
             if (_processor.crRunning) {
