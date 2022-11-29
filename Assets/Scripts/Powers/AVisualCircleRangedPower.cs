@@ -57,8 +57,8 @@ public abstract class AVisualCircleRangedPower : ARangedPower
             {
                 if (canCastPower())
                 {
-                    CancelRange();
                     firingPower = true;
+                    CancelRange();
                 }
                 else
                     Preview();

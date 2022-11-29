@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2997600405512850930}
   - component: {fileID: 1351672045826154227}
   m_Layer: 5
-  m_Name: Test
+  m_Name: TextBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1161798753
   m_SortingLayer: 4
-  m_SortingOrder: 10
+  m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1351672045826154227
 MonoBehaviour:

@@ -26,7 +26,7 @@ public class Flee : ACoroutine
 
     public override IEnumerator Interact(Transform obj = null)
     {
-        detectionManager.detectionState = DetectionState.Flee;
+        detectionManager.SetState(DetectionState.Flee);
 
         //Debug.Log("ON ATTEND DE TRIGGER L'ANIM");
         aim = movementManager.target;

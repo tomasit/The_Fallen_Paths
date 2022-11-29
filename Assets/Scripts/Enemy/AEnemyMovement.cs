@@ -10,6 +10,8 @@ public abstract class AEnemyMovement : MonoBehaviour
     [SerializeField] protected Transform _targetPosition;
     public bool isAtDistanceToInteract = false;
     public float speed = 1f;
+    private Vector3 _lastFramePosition;
+    private bool _hasMoved = false;
 
     public Transform collisionObj = null;//pour moi ca sert a rien
     public bool isClimbing = false;
@@ -40,11 +42,16 @@ public abstract class AEnemyMovement : MonoBehaviour
         agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         agentMovement.SetSpeed(speed);
         RotateAxis();
+        CheckMovement();
     }
-
-    public void AllowedMovement()
+    
+    private void CheckMovement()
     {
-        //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+        if (_lastFramePosition == transform.position)
+            _hasMoved = false;
+        else
+            _hasMoved = true;
+        _lastFramePosition = transform.position;
     }
 
     public float NoNegative(float value)
@@ -75,6 +82,16 @@ public abstract class AEnemyMovement : MonoBehaviour
         } else if (detectionManager.direction == Vector2.left) {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
+    }
+
+    public bool HasMovedFromLastFrame()
+    {
+        return _hasMoved;
+    }
+
+    public void AllowedMovement()
+    {
+        //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
