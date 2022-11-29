@@ -3,21 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GUI_Cooldown : MonoBehaviour
 {
+     PowerManager pow = new PowerManager();
+    PowerManager.PowerData powerData;
+    private float cd = 0;
+    private float maxDuration = 0;
+
+
+    public int PowerIdex;
+
+    /*OLD*/
     public float CDTime;
     private float Timer;
-    [SerializeField]
+
+    [SerializeField] 
     private Image imageCD;
     [SerializeField]
     private TMP_Text textCD;
     private bool IsCooldown = false;
-    PowerManager pow = new PowerManager();
+
 
     private void Start()
     {
         textCD.gameObject.SetActive(false);
+//        powerData= pow._powers[PowerIdex];
     }
 
     private void Update()
