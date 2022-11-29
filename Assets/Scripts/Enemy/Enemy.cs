@@ -116,6 +116,7 @@ public class Enemy {
     [HideInInspector] public EnemyDetectionManager detectionManager;
     [HideInInspector] public BasicHealthWrapper healtWrapper;
     [HideInInspector] public EnemyDialogManager dialogManager;
+    //CoroutineProcessor ?
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
 }

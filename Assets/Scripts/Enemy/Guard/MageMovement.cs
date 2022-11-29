@@ -4,7 +4,7 @@ using UnityEngine;
 
 using static EnemyInfo;
 
-public class ArcherMovement : AEnemyMovement
+public class MageMovement : AEnemyMovement
 {
     void Start() 
     {
@@ -18,7 +18,7 @@ public class ArcherMovement : AEnemyMovement
     void Update()
     {
         if (isClimbing || isEndClimbing) {
-            speed = Speed[EnemyType.Archer];
+            speed = Speed[EnemyType.Mage];
         }
         Move();
         AllowedMovement();
@@ -45,7 +45,7 @@ public class ArcherMovement : AEnemyMovement
         detectionTrigger.SetState(EnemyEventState.None);
         detectionTrigger.Disable(true);
         _targetPosition.localPosition = Vector3.zero;
-        NoNegative(speed = Speed[EnemyType.Archer]);
+        NoNegative(speed = Speed[EnemyType.Mage]);
     }
 
     public override void AlertMovement()
@@ -54,7 +54,7 @@ public class ArcherMovement : AEnemyMovement
         _targetPosition.position = detectionManager.lastEventPosition;
         target = _targetPosition;
         
-        NoNegative(speed = Speed[EnemyType.Archer]);
+        NoNegative(speed = Speed[EnemyType.Mage]);
 
         //faudrait quand meme que si le player est sur le collider de l'enemy, le spot direct
         if (targetDirection.x == 0 && RangeOf(targetDirection.y, 0f, 0.80f)) {
@@ -102,6 +102,6 @@ public class ArcherMovement : AEnemyMovement
     public override void FleeMovement()
     {
         _targetPosition.localPosition = Vector3.zero;
-        NoNegative(speed = Speed[EnemyType.Archer] + (Speed[EnemyType.Archer] * 1.5f));
+        NoNegative(speed = Speed[EnemyType.Mage] + (Speed[EnemyType.Mage] * 1.5f));
     }
 }

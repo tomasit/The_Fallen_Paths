@@ -4,15 +4,15 @@ using UnityEngine;
 
 using static EnemyInfo;
 
-public class ArcherAttack : ACoroutine
+public class MageAttack : ACoroutine
 {
     private TriggerCoroutineProcessor triggerProcessor;
     private AEnemyMovement movementManager;
     private EnemyDetectionManager detectionManager;
     private SpriteRenderer sprite;
     private Animator animator;
-    [SerializeField] private GameObject arrow;
-    [SerializeField] private Vector3 arrowScale = new Vector3(1f, 1f, 1f);
+    [SerializeField] private GameObject shootBall;
+    [SerializeField] private Vector3 shootObjScale = new Vector3(1f, 1f, 1f);
 
     private void Start()
     {
@@ -32,36 +32,25 @@ public class ArcherAttack : ACoroutine
 
         Vector3 direction = FindTargetDirection(sprite.transform.position, target.position);
         int factorDirection_x = (gameObject.transform.eulerAngles.y == 0 ? 1 : -1);
-        int factorDirection_y = 0;
-        float valueToAddY = 0f;
+        float valueToAddY = detectionManager.rayCastOffset.y;
 
-        if (direction.y > 1.3f) {
-            animator.SetInteger("AttackState", 1);//up
-            factorDirection_y = 1;
-            valueToAddY = detectionManager.rayCastOffset.y + 1f;
-        } else if (direction.y < -0.7f) {
-            animator.SetInteger("AttackState", 2);//down
-            valueToAddY = detectionManager.rayCastOffset.y;
-            factorDirection_y = -1;
-        } else {
-            animator.SetInteger("AttackState", 0);//down
-            factorDirection_y = 1;
-            valueToAddY = detectionManager.rayCastOffset.y;
-        }
+        animator.SetInteger("AttackState", 0);//straight
+        //animator.SetInteger("AttackState", 1);//troubillons
+        //animator.SetInteger("AttackState", 2);//levé septre haut
 
         // SPAWN POSITION
         Vector3 spawnPosition = new Vector3(
-            transform.position.x + detectionManager.rayCastOffset.x + (factorDirection_x * arrow.GetComponent<SpriteRenderer>().bounds.size.x), 
-            transform.position.y + valueToAddY * factorDirection_y, 
+            transform.position.x + detectionManager.rayCastOffset.x, 
+            transform.position.y + valueToAddY, 
             transform.position.z);
         // INSTANCIATE
-        GameObject newArrow = Object.Instantiate(arrow, spawnPosition, transform.rotation, transform);
+        GameObject newShootBall = Object.Instantiate(shootBall, spawnPosition, transform.rotation, transform);
         // SCALE
-        newArrow.transform.localScale = new Vector3(arrowScale.x, arrowScale.y, arrowScale.z);
+        newShootBall.transform.localScale = new Vector3(shootObjScale.x, shootObjScale.y, shootObjScale.z);
         // ROTATION
         Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * direction;
         Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
-        newArrow.transform.rotation = targetRotation;
+        newShootBall.transform.rotation = targetRotation;
 
         animator.SetTrigger("Attack");
         

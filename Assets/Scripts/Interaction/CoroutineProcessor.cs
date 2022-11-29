@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-//[RequireComponent(typeof(TriggerCoroutineProcessor))]
+[RequireComponent(typeof(TriggerCoroutineProcessor))]
 public class CoroutineProcessor : ACoroutine
 {
     public bool crRunning = false;
@@ -14,19 +14,24 @@ public class CoroutineProcessor : ACoroutine
     [SerializeField] private bool _stopOnInteract;
     [HideInInspector] public bool _enabled = true;
     private bool _interact = false;
-    private TriggerProcessor _triggerInteractor = null;
+    private TriggerCoroutineProcessor _triggerInteractor = null;
 
     private void Start()
     {
         crRunning = false;
-        _triggerInteractor = GetComponent<TriggerProcessor>();
+        _triggerInteractor = GetComponent<TriggerCoroutineProcessor>();
         if (_interact)
-            DisableTriggerInteractor();
+            DisableTriggerInteractor(true);
     }
 
-    private void DisableTriggerInteractor()
+    public void DisableTriggerInteractor(bool state)
     {
-        _triggerInteractor.DisableTrigger();
+        _triggerInteractor.Disable(state);
+    }
+
+    public void Enable(bool state)
+    {
+        _enabled = false;
     }
 
     public override IEnumerator Interact(Transform objArg = null)
@@ -80,7 +85,7 @@ public class CoroutineProcessor : ACoroutine
 
         if (_stopOnInteract) {
             _interact = true;
-            DisableTriggerInteractor();
+            DisableTriggerInteractor(true);
         }
         enemyState = EnemyEventState.None;
         crRunning = false;

@@ -8,15 +8,20 @@ using System.Text.RegularExpressions;
 public class EnemyDialogManager : MonoBehaviour
 {
     public TMPDialogue dialogs;
+    [HideInInspector] public bool _enabled = true;
+
+    [Header("Current dialog")]
+    public bool triggerDialog = false;
+    private string _dialogName;
+    [SerializeField] private GameObject _dialogBoxReference;
+
+    [Header("Variable random dialog")]
     [SerializeField] private float _timeRandomDialog = 5f;
     [SerializeField] private int _probablityDialog = 2;
     [SerializeField] private float _clockDialog = 0f;
     [SerializeField] private float _durationDialog = 4.5f;
 
-    public bool triggerDialog = false;
-    private string _dialogName;
-    [SerializeField] private GameObject _dialogBoxReference;
-
+    [Header("Text boxes")]
     [SerializeField] private GameObject popUpPrefab;
     [SerializeField] private GameObject dialogPrefab;
 
@@ -36,6 +41,11 @@ public class EnemyDialogManager : MonoBehaviour
 
     private void Update()
     {
+        if (!_enabled) {
+            dialogs.StopDialogue();
+            ResetDialogVariables();
+            return;
+        }
         if (!triggerDialog)
             return;
         _clockDialog += Time.deltaTime;
@@ -115,6 +125,11 @@ public class EnemyDialogManager : MonoBehaviour
         _clockDialog = 0f;
         //_dialogName = "";
         //_spriteSheet = null;
+    }
+
+    public void Enable(bool state)
+    {
+        _enabled = state;
     }
 
     private readonly Regex sWhitespace = new Regex(@"\s+");

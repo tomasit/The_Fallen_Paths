@@ -96,7 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   damages: 1
-  rigidbody: {fileID: 0}
 --- !u!212 &7717874495087612943
 SpriteRenderer:
   m_ObjectHideFlags: 0
