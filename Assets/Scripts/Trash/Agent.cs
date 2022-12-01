@@ -42,8 +42,7 @@ public class Agent : MonoBehaviour
         
         Vector3 adjustedTarget = Vector3.zero;
 
-        if (target.gameObject.name == "Player") {
-            
+        if (target.gameObject.name == "Player" || target.gameObject.name == "TargetPos") {
             Vector3 targetDirection = FindTargetDirection(_agentSprite.position, target.position);
             
             Vector3 distanceToPlayer = new Vector3(

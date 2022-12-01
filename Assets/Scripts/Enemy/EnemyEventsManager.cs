@@ -18,13 +18,13 @@ public class EnemyEventsManager : MonoBehaviour
 
         for (int i = 0; i < Enemies.Length; ++i)
         {
-            //var enemy = new Enemy();
             IgnoreLayers(Enemies[i]);
             InitEnemyComponents(Enemies[i]);
             if (Enemies[i].roomProprieties != null)
                 Enemies[i].movementManager.target = Enemies[i].roomProprieties.targets[0];
             Enemies[i].healtWrapper.SetAnimator(Enemies[i].animator);
             Enemies[i].healtWrapper.SetMaxHealth(EnemyInfo.Health[Enemies[i].type]);
+            Enemies[i].detectionManager.SetDetectionDistance(DetectionDistance[Enemies[i].type]);
         }
     }
 
@@ -37,14 +37,15 @@ public class EnemyEventsManager : MonoBehaviour
                 source = enemy;
             else if (enemy.entity.GetInstanceID() == destInstanceID)
                 dest = enemy;
-
+        dest.entity.GetComponent<EnemyDetectionManager>()._sourceBehavior = source.entity;
     }
-    public void UnlinkEnem(int destInstanceID)
+    public void UnlinkEnemies(int destInstanceID)
     {
         Enemy dest = null;
         foreach (var enemy in Enemies)
             if (enemy.entity.GetInstanceID() == destInstanceID)
                 dest = enemy;
+        dest.entity.GetComponent<EnemyDetectionManager>()._sourceBehavior = null;
     }
 
     private void InitEnemyComponents(Enemy enemy)
@@ -64,9 +65,7 @@ public class EnemyEventsManager : MonoBehaviour
         foreach (var enemy in Enemies)
         {
             if (!enemy.enabled)
-            {
                 continue;
-            }
             if (enemy.detectionManager.GetState() == DetectionState.None && enemy.roomProprieties != null)
             {
                 RoomTargetPoints(enemy);
@@ -77,7 +76,7 @@ public class EnemyEventsManager : MonoBehaviour
                 FleeTargetPoints(enemy);
                 enemy.movementManager.target = enemy.fleePoints.targets[enemy.fleePoints.targetIndex];
             }
-            RaycastDirection(enemy);
+            RotateEnemies(enemy);
             DetectionEventState(enemy);
             AnimationStateMachine(enemy);
             CheckResetState(enemy);
@@ -86,11 +85,6 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void CheckResetState(Enemy enemy)
     {
-        //comme le player a tjr un collider il va continuer a le tapper
-        if (player.GetComponent<PlayerHealthWrapper>().isDead())
-        {
-            enemy.detectionManager.SetState(DetectionState.None);
-        }
         if (enemy.healtWrapper.isDead())
         {
             enemy.enabled = false;
@@ -104,26 +98,6 @@ public class EnemyEventsManager : MonoBehaviour
             // NOTE : if the layerMask is the 31, it didn't work
             int layerValue = (int)Mathf.Log(layer.value, 2);
             Physics2D.IgnoreLayerCollision(layerValue, enemy.entity.layer, true);
-        }
-    }
-
-    private void RaycastDirection(Enemy enemy)
-    {
-        if (enemy.movementManager.target == null)
-        {
-            //Debug.Log("MovementManager target is null (eventManager issue)");
-            return;
-        }
-
-        Vector3 directionPoint = FindTargetDirection(enemy.entity.transform.position, enemy.movementManager.target.position);
-
-        if (directionPoint.x > 0)
-        {
-            enemy.detectionManager.SetRayCastDirection(Vector2.right);
-        }
-        else
-        {
-            enemy.detectionManager.SetRayCastDirection(Vector2.left);
         }
     }
 
@@ -158,13 +132,9 @@ public class EnemyEventsManager : MonoBehaviour
             if (RangeOf(pointDirection.x, playerDirection.x, 0.001f))
             {
                 if (index + 1 > fleePoints.targets.Length - 1)
-                {
                     index = 0;
-                }
                 else
-                {
                     index++;
-                }
                 fleePoints.targetIndex = index;
                 //Debug.Log("Player is here, move to = " + fleePoints.targets[index].gameObject.name);
                 return;
@@ -182,45 +152,82 @@ public class EnemyEventsManager : MonoBehaviour
             RangeOf(movManager.transform.position.y, room.targets[room.targetIndex].position.y, 0.75f))
         {
             if ((room.targets.Length - 1) == room.targetIndex)
-            {
                 room.targetIndex = 0;
+            else
+                room.targetIndex += 1;
+        }
+    }
+
+    private void RotateEnemies(Enemy enemy)
+    {
+        if (enemy.movementManager.HasMovedFromLastFrame())
+        {
+            //ca ca marche pas tjr, il faudrai + proche que juste playerDetected
+            //if (enemy.detectionManager.playerDetected)
+            //    return;
+            if (enemy.movementManager.DirectionMovedFromLastFrame() < 0)
+            {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
             }
             else
             {
-                room.targetIndex += 1;
+                enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+        }
+        else
+        {
+            if (enemy.detectionManager.direction.x < 0)
+            {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
+            }
+            else if (enemy.detectionManager.direction.x > 0)
+            {
+                enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
             }
         }
     }
 
     private void DetectionEventState(Enemy enemy)
     {
-        if (enemy.detectionManager.GetState() == DetectionState.None)
+        var dtcManager = enemy.detectionManager;
+        var movManager = enemy.movementManager;
+        var playerHealthWrp = player.GetComponent<BasicHealthWrapper>();
+
+        if (dtcManager._sourceBehavior != null)
+            dtcManager.SetState(dtcManager._sourceBehavior.GetComponent<EnemyDetectionManager>().GetState());
+
+        if (dtcManager.GetState() == DetectionState.None || playerHealthWrp.isDead())
         {
-            enemy.movementManager.BasicMovement();
+            movManager.BasicMovement();
         }
-        else if (enemy.detectionManager.GetState() == DetectionState.Alert)
+        else if (dtcManager.GetState() == DetectionState.Alert)
         {
-            enemy.movementManager.AlertMovement();
+            movManager.AlertMovement();
+            if (dtcManager._sourceBehavior != null)
+                dtcManager._sourceBehavior.GetComponent<AEnemyMovement>().target = movManager.target;
         }
-        else if (enemy.detectionManager.GetState() == DetectionState.Spoted)
+        else if (dtcManager.GetState() == DetectionState.Spoted)
         {
-            enemy.movementManager.SpotMovement();
+            movManager.SpotMovement();
+            if (dtcManager._sourceBehavior != null)
+                dtcManager._sourceBehavior.GetComponent<AEnemyMovement>().target = movManager.target;
         }
-        else if (enemy.detectionManager.GetState() == DetectionState.Flee)
+        else if (dtcManager.GetState() == DetectionState.Flee)
         {
-            enemy.movementManager.FleeMovement();
+            movManager.FleeMovement();
         }
-        else if (enemy.detectionManager.GetState() == DetectionState.Freeze)
+        else if (dtcManager.GetState() == DetectionState.Freeze)
         {
-            enemy.movementManager.FreezeMovement();
+            movManager.FreezeMovement();
         }
         else
         {
             Debug.Log("error : enemy has no detection state");
-            enemy.sprite.color = Color.blue;
         }
     }
 
+    //en fonction de si c un civil ou pas, pas les mêmes animations :
+    //si il est en spot et proche de sa target il va pas attacker
     private void AnimationStateMachine(Enemy enemy)
     {
         Vector3 targetDistance = FindTargetDirection(
@@ -246,9 +253,9 @@ public class EnemyEventsManager : MonoBehaviour
         }
 
         animatorController.Idle(enemy, isAtTargetPosition, isClimbing);
-        animatorController.Fight(enemy, isClimbing);
         animatorController.Scared(enemy, isAtTargetPosition, isClimbing);
         animatorController.Moving(enemy, isAtTargetPosition, isClimbing);
+        animatorController.Fight(enemy, isClimbing);
         animatorController.Climbing(enemy, targetDistance, isAtTargetPosition, isClimbing);
     }
 }

@@ -10,6 +10,8 @@ public abstract class AEnemyMovement : MonoBehaviour
     [SerializeField] protected Transform _targetPosition;
     public bool isAtDistanceToInteract = false;
     public float speed = 1f;
+    private Vector3 _lastFramePosition;
+    private int _hasMoved = 0;
 
     public Transform collisionObj = null;//pour moi ca sert a rien
     public bool isClimbing = false;
@@ -39,12 +41,21 @@ public abstract class AEnemyMovement : MonoBehaviour
     {
         agentMovement.SetTarget(target, detectionManager.rayCastOffset);
         agentMovement.SetSpeed(speed);
-        RotateAxis();
+        CheckMovement();
     }
-
-    public void AllowedMovement()
+    
+    private void CheckMovement()
     {
-        //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+        if (_lastFramePosition == transform.position) {
+            _hasMoved = 0;
+        } else {
+            if (_lastFramePosition.x > transform.position.x) {
+                _hasMoved = -1;
+            } else {
+                _hasMoved = 1;
+            }
+        }
+        _lastFramePosition = transform.position;
     }
 
     public float NoNegative(float value)
@@ -66,15 +77,19 @@ public abstract class AEnemyMovement : MonoBehaviour
         return distanceToPlayer - new Vector3(0f, detectionManager.rayCastOffset.y, 0f);
     }
 
-    //le faire rotate du coté ou sa vélocité est
-    //dans la direction ou il va... sans rigidbody...
-    private void RotateAxis()
+    public bool HasMovedFromLastFrame()
     {
-        if (detectionManager.direction == Vector2.right) {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        } else if (detectionManager.direction == Vector2.left) {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
+        return (_hasMoved == 0) ? false : true;
+    }
+
+    public int DirectionMovedFromLastFrame()
+    {
+        return _hasMoved;
+    }
+
+    public void AllowedMovement()
+    {
+        //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)

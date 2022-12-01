@@ -16,27 +16,36 @@ public class AnimatorStateMachine : MonoBehaviour
             ) {
             enemy.animator.SetTrigger("Idle");
         }
+
+        if (!enemy.movementManager.HasMovedFromLastFrame() && 
+        (enemy.detectionManager.GetState() == DetectionState.None || 
+        enemy.detectionManager.GetState() == DetectionState.Freeze)) {
+            enemy.animator.SetTrigger("Idle");
+        }
     }
+
     public void Fight(Enemy enemy, bool isClimbing)
     {
-        if (enemy.movementManager.isAtDistanceToInteract && 
+        if (!enemy.movementManager.HasMovedFromLastFrame() && 
             (enemy.detectionManager.GetState() == DetectionState.Alert || 
             enemy.detectionManager.GetState() == DetectionState.Spoted) &&
             !isClimbing
             ) {
             enemy.animator.SetTrigger("Ready");
         }
-    }
-    public void Scared(Enemy enemy, bool isAtTargetPosition, bool isClimbing)
-    {
-        if (isAtTargetPosition && 
-            enemy.detectionManager.GetState() == DetectionState.Flee &&
-            !isClimbing) {
-            enemy.animator.SetTrigger("Scared");
+
+        if (!enemy.movementManager.HasMovedFromLastFrame() && 
+        (enemy.detectionManager.GetState() == DetectionState.Alert || 
+        enemy.detectionManager.GetState() == DetectionState.Spoted)) {
+            enemy.animator.SetTrigger("Ready");
         }
     }
+
     public void Moving(Enemy enemy, bool isAtTargetPosition, bool isClimbing)
     {
+        if (!enemy.movementManager.HasMovedFromLastFrame()) {
+            return;
+        }
         if (!isAtTargetPosition &&
             (enemy.detectionManager.GetState() == DetectionState.Alert ||
             enemy.detectionManager.GetState() == DetectionState.None) &&
@@ -48,9 +57,18 @@ public class AnimatorStateMachine : MonoBehaviour
             enemy.detectionManager.GetState() == DetectionState.Flee) &&
             !isClimbing /*il a pas pris de hit*/) {
                 enemy.animator.SetTrigger("Running");
-                //sinon il doit être en mode ready to nicker des mères
         }
     }
+
+    public void Scared(Enemy enemy, bool isAtTargetPosition, bool isClimbing)
+    {
+        if (isAtTargetPosition && 
+            enemy.detectionManager.GetState() == DetectionState.Flee &&
+            !isClimbing) {
+            enemy.animator.SetTrigger("Scared");
+        }
+    }
+
     public void Climbing(Enemy enemy, Vector3 targetDistance, bool isAtTargetPosition, bool isClimbing)
     {
         if (enemy.movementManager.collisionObj != null) {
@@ -68,27 +86,18 @@ public class AnimatorStateMachine : MonoBehaviour
                 enemy.animator.SetBool("Climbing", false);
                 enemy.movementManager.isClimbing = false;
             }
+
+            if (!enemy.movementManager.HasMovedFromLastFrame()) {
+                enemy.animator.speed = 0;
+            } else {
+                enemy.animator.speed = 1;
+            }
         } else {
             enemy.animator.SetBool("Climbing", false);
             if (!enemy.movementManager.isEndClimbing) {
                 enemy.movementManager.isClimbing = false;
             }
         }
-
-        //Debug.Log("targetDistance.x = " + targetDistance.x);
-        //Debug.Log("targetDistance.y = " + targetDistance.y);
-
-        /*var currentAnimationName = enemy.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-
-        //Debug.Log("isAtTargetPosition = " + isAtTargetPosition);
-        
-        //si c le player faut soustraire l'offset en X de l'attaque
-        if (isAtTargetPosition && (currentAnimationName == "sword_climbing")) {
-            Debug.Log("stop anim");
-            enemy.animator.speed = 0;
-        } else {
-            enemy.animator.speed = 1;
-        }*/
     }
 
 }

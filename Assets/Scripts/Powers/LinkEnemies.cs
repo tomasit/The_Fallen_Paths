@@ -29,7 +29,7 @@ public class LinkEnemies : AVisualCircleRangedPower
 
     public override void Cancel()
     {
-        _enemyEventManager.UnlinkEnemies(_sourceEnemy.GetInstanceID(), _destEnemy.GetInstanceID());
+        _enemyEventManager.UnlinkEnemies(_destEnemy.GetInstanceID());
         firingPower = false;
         _sourceEnemy = null;
         _destEnemy = null;
