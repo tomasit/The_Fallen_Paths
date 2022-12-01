@@ -15,6 +15,7 @@ public class EnemyDetectionManager : MonoBehaviour
     public Vector3 rayCastOffset;
 
     [Header("States")]
+    [HideInInspector] public bool _enabled = true;
     public bool playerDetected = false;
     [SerializeField] private DetectionState detectionState = DetectionState.None;
     private RaycastHit2D raycast;
@@ -44,13 +45,16 @@ public class EnemyDetectionManager : MonoBehaviour
 
     void Update()
     {
-        UpdateRaycastDirection();
-        UpdateOffsetRaycast();
-        if (_sourceBehavior != null)
-            playerDetected = _sourceBehavior.GetComponent<EnemyDetectionManager>().playerDetected;
-        else
-            playerDetected = ThrowRay(direction, _detectionDistance);
-        ModifyDetectionState();
+        if (_enabled)
+        {
+            UpdateRaycastDirection();
+            UpdateOffsetRaycast();
+            if (_sourceBehavior != null)
+                playerDetected = _sourceBehavior.GetComponent<EnemyDetectionManager>().playerDetected;
+            else
+                playerDetected = ThrowRay(direction, _detectionDistance);
+            ModifyDetectionState();
+        }
     }
 
     private bool ThrowRay(Vector2 directionRay, float distance)
@@ -121,6 +125,10 @@ public class EnemyDetectionManager : MonoBehaviour
         direction = directionPoint;
     }
 
+    public void Enable(bool state)
+    {
+        _enabled = state;
+    }
 
     public void SetDetectionDistance(float distance)
     {
@@ -143,12 +151,15 @@ public class EnemyDetectionManager : MonoBehaviour
         return _detectionTarget;
     }
 
-    public void SetState(DetectionState state)
+    public void SetState(DetectionState state, bool activeDialog = true)
     {
         //Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
         if (state != detectionState)
         {
-            dialogManager.ChoosDialogType(state);
+            if (activeDialog)
+            {
+                dialogManager.ChoosDialogType(state);
+            }
             detectionState = state;
             var clocks = new[] { detectionClock, forgetAlertClock, forgetSpotClock };
             ResetClocks(ref clocks, 3);

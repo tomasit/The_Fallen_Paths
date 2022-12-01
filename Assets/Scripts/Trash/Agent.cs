@@ -27,6 +27,13 @@ public class Agent : MonoBehaviour
         _agent.SetDestination(targetPosition);
     }
 
+    public void DisableAgent()
+    {
+        _target = transform;
+        targetPosition = _target.position;
+
+    }
+
     public void SetSpeed(float speed)
     {
         _agent.speed = speed;

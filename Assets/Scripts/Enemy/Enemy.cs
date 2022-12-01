@@ -9,6 +9,7 @@ public class EnemyInfo
     {
         { EnemyType.Guard, 1.5f },
         { EnemyType.Archer, 1.5f },
+        { EnemyType.Mage, 1f },
         { EnemyType.RoyalGuard, 3f },
         { EnemyType.Random, 1f }
     };
@@ -18,6 +19,7 @@ public class EnemyInfo
     {
         { EnemyType.Guard, 1.5f },
         { EnemyType.Archer, 2f },
+        { EnemyType.Mage, 3f },
         { EnemyType.RoyalGuard, 2f },
         { EnemyType.Random, 2f }
     };
@@ -26,6 +28,7 @@ public class EnemyInfo
     {
         { EnemyType.Guard, 1f },
         { EnemyType.Archer, 0.5f },
+        { EnemyType.Mage, 1f },
         { EnemyType.RoyalGuard, 2f },
         { EnemyType.Random, 0.5f }
     };
@@ -34,6 +37,7 @@ public class EnemyInfo
     {
         { EnemyType.Guard, 2 },
         { EnemyType.Archer, 1 },
+        { EnemyType.Mage, 3 },
         { EnemyType.RoyalGuard, 3 },
         { EnemyType.Random, 1 }
     };
@@ -42,6 +46,7 @@ public class EnemyInfo
     {
         { EnemyType.Guard, 2f },
         { EnemyType.Archer, 5f },
+        { EnemyType.Mage, 3.5f },
         { EnemyType.RoyalGuard, 2f },
         { EnemyType.Random, 2f }
     };
@@ -73,6 +78,7 @@ public enum EnemyType
 {
     Guard,
     Archer,
+    Mage,
     RoyalGuard,
     Random,
 }
@@ -112,6 +118,7 @@ public class Enemy
     [HideInInspector] public EnemyDetectionManager detectionManager;
     [HideInInspector] public BasicHealthWrapper healtWrapper;
     [HideInInspector] public EnemyDialogManager dialogManager;
+    //CoroutineProcessor ?
     public RoomProprieties roomProprieties;
     public RoomProprieties fleePoints;
 }

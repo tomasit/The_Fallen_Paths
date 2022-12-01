@@ -12,6 +12,7 @@ public class ArcherAttack : ACoroutine
     private SpriteRenderer sprite;
     private Animator animator;
     [SerializeField] private GameObject arrow;
+    [SerializeField] private Vector3 arrowScale = new Vector3(1f, 1f, 1f);
 
     private void Start()
     {
@@ -54,9 +55,9 @@ public class ArcherAttack : ACoroutine
             transform.position.y + valueToAddY * factorDirection_y, 
             transform.position.z);
         // INSTANCIATE
-        GameObject newArrow = Object.Instantiate(arrow, spawnPosition, transform.rotation);
+        GameObject newArrow = Object.Instantiate(arrow, spawnPosition, transform.rotation, transform);
         // SCALE
-        newArrow.transform.localScale = new Vector3(4f, 4f, 1f);
+        newArrow.transform.localScale = new Vector3(arrowScale.x, arrowScale.y, arrowScale.z);
         // ROTATION
         Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * direction;
         Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
@@ -65,7 +66,7 @@ public class ArcherAttack : ACoroutine
         animator.SetTrigger("Attack");
         
         yield return new WaitForSeconds(4f);//cooldown
-        triggerProcessor.SetDisabling(true);
+        triggerProcessor.Disable(true);
         triggerProcessor.SetCoroutine(null);
     }
 }

@@ -45,7 +45,7 @@ public class GuardMovement : AEnemyMovement
         }
 
         detectionTrigger.SetState(EnemyEventState.None);
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
         _targetPosition.localPosition = Vector3.zero;
         NoNegative(speed = Speed[EnemyType.Guard]);
     }
@@ -80,7 +80,7 @@ public class GuardMovement : AEnemyMovement
         }
 
         detectionTrigger.SetState(EnemyEventState.None);
-        detectionTrigger.SetDisabling(true);
+        detectionTrigger.Disable(true);
     }
 
     public override void SpotMovement()
@@ -115,7 +115,7 @@ public class GuardMovement : AEnemyMovement
     {
         detectionTrigger.SetState(EnemyEventState.FightPlayer);
         detectionTrigger.SetInteractionObj(objToAttack);
-        detectionTrigger.SetDisabling(false);
+        detectionTrigger.Disable(false);
     }
 
     public override void FleeMovement()

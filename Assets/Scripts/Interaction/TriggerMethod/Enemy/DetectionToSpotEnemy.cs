@@ -73,7 +73,7 @@ public class DetectionToSpotEnemy : MonoBehaviour
         }
     }
 
-    public void SetDisabling(bool isDisable)
+    public void Disable(bool isDisable)
     {
         if (isDisable) {
             if (_processor.crRunning) {
