@@ -8,7 +8,7 @@ public class EnemyDetectionManager : MonoBehaviour
 {
     [Header("Debug")]
     public bool debug = false;
-    
+
     [Header("Raycast")]
     [SerializeField] private float _detectionDistance;
     public Vector2 direction = Vector2.right;
@@ -19,7 +19,7 @@ public class EnemyDetectionManager : MonoBehaviour
     public bool playerDetected = false;
     [SerializeField] private DetectionState detectionState = DetectionState.None;
     private RaycastHit2D raycast;
-    
+
     [Header("Clocks")]
     [SerializeField] private float timeToSpotPlayer = 1.5f;
     [SerializeField] private float detectionClock = 0f;
@@ -27,6 +27,7 @@ public class EnemyDetectionManager : MonoBehaviour
     [SerializeField] private float forgetAlertClock = 0f;
     [SerializeField] private float timeToForgetSpoted = 10f;
     [SerializeField] private float forgetSpotClock = 0f;
+    public GameObject _sourceBehavior = null;
 
     [Header("Targets")]
     [SerializeField] private Transform _detectionTarget;
@@ -41,13 +42,17 @@ public class EnemyDetectionManager : MonoBehaviour
         dialogManager = GetComponent<EnemyDialogManager>();
         _detectionTarget = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
     }
-    
+
     void Update()
     {
-        if (_enabled) {
+        if (_enabled)
+        {
             UpdateRaycastDirection();
             UpdateOffsetRaycast();
-            playerDetected = ThrowRay(direction, _detectionDistance);
+            if (_sourceBehavior != null)
+                playerDetected = _sourceBehavior.GetComponent<EnemyDetectionManager>().playerDetected;
+            else
+                playerDetected = ThrowRay(direction, _detectionDistance);
             ModifyDetectionState();
         }
     }
@@ -56,37 +61,45 @@ public class EnemyDetectionManager : MonoBehaviour
     {
         RaycastHit2D raycast = Physics2D.Raycast(
             transform.position + rayCastOffset,
-            directionRay, 
-            float.PositiveInfinity, 
-            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Enemy") | 
+            directionRay,
+            float.PositiveInfinity,
+            (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Enemy") |
             1 << LayerMask.NameToLayer("Level")));
 
         if (raycast.collider != null)
         {
-            if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
+            if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <= distance)
+            {
                 distance = raycast.distance;
             }
             DebugRay(debug, distance, directionRay, Color.green);
 
-            if (LayerMask.NameToLayer("Enemy") == raycast.collider.gameObject.layer) {
-                if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <=  distance) {
+            if (LayerMask.NameToLayer("Enemy") == raycast.collider.gameObject.layer)
+            {
+                if (Vector2.Distance(raycast.point, transform.position + rayCastOffset) <= distance)
+                {
                     DebugRay(debug, distance, directionRay, Color.blue);
                     //si il est mort : lastEventPosition = raycast.collider.gameObject.transform.position;
                     //Debug.Log("Ca detect les enemy");
                 }
             }
 
-            if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer) {
+            if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer)
+            {
                 float distanceToPoint = Vector2.Distance(raycast.point, transform.position + rayCastOffset);
-                if (RangeOf(distance, distanceToPoint, 0.1f) || RangeOf(distanceToPoint, distance, 0.1f)) {
-                    if (!raycast.collider.gameObject.GetComponent<HideInteraction>().IsHide()) {
+                if (RangeOf(distance, distanceToPoint, 0.1f) || RangeOf(distanceToPoint, distance, 0.1f))
+                {
+                    if (!raycast.collider.gameObject.GetComponent<HideInteraction>().IsHide())
+                    {
                         DebugRay(debug, distance, directionRay, Color.red);
                         lastEventPosition = raycast.collider.gameObject.transform.position;
                         return true;
                     }
                 }
             }
-        } else {
+        }
+        else
+        {
             DebugRay(debug, distance, directionRay, Color.green);
         }
         return false;
@@ -94,9 +107,12 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void UpdateOffsetRaycast()
     {
-        if (direction.x > 0) {
+        if (direction.x > 0)
+        {
             rayCastOffset = new Vector3(Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
-        } else if (direction.x < 0) {
+        }
+        else if (direction.x < 0)
+        {
             rayCastOffset = new Vector3(-Mathf.Abs(rayCastOffset.x), rayCastOffset.y, rayCastOffset.z);
         }
     }
@@ -125,7 +141,8 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void SetDetectionTarget(Transform target)
     {
-        if (target != null) {
+        if (target != null)
+        {
             _detectionTarget = target;
         }
     }
@@ -137,12 +154,14 @@ public class EnemyDetectionManager : MonoBehaviour
     public void SetState(DetectionState state, bool activeDialog = true)
     {
         //Debug.Log("State to assign : " + state + " / Actual state : " + detectionState);
-        if (state != detectionState) {
-            if (activeDialog) {
+        if (state != detectionState)
+        {
+            if (activeDialog)
+            {
                 dialogManager.ChoosDialogType(state);
             }
             detectionState = state;
-            var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};
+            var clocks = new[] { detectionClock, forgetAlertClock, forgetSpotClock };
             ResetClocks(ref clocks, 3);
         }
     }
@@ -157,52 +176,69 @@ public class EnemyDetectionManager : MonoBehaviour
         //au bout de 2s sur la forgetAlertClcok quand il te playerDetected == false. il va passer en spoted quand meme
         InitStateVariables();
 
-        if (playerDetected) {
-            if (detectionState == DetectionState.None || detectionState == DetectionState.Alert) {
-                if (DetectionClock(timeToSpotPlayer, ref detectionClock, DetectionState.Spoted)) {
-                    var clocks = new [] {detectionClock, forgetAlertClock, forgetSpotClock};
+        if (playerDetected)
+        {
+            if (detectionState == DetectionState.None || detectionState == DetectionState.Alert)
+            {
+                if (DetectionClock(timeToSpotPlayer, ref detectionClock, DetectionState.Spoted))
+                {
+                    var clocks = new[] { detectionClock, forgetAlertClock, forgetSpotClock };
                     ResetClocks(ref clocks, 3);
                 }
             }
-        } else if (!playerDetected) {
-            if (detectionState == DetectionState.Alert) {
+        }
+        else if (!playerDetected)
+        {
+            if (detectionState == DetectionState.Alert)
+            {
                 DetectionClock(timeToForgetAlerted, ref forgetAlertClock, DetectionState.None);
-            } else if (detectionState == DetectionState.Spoted) {
+            }
+            else if (detectionState == DetectionState.Spoted)
+            {
                 DetectionClock(timeToForgetSpoted, ref forgetSpotClock, DetectionState.Alert);
             }
         }
     }
 
-    private bool DetectionClock(float time, ref float clock, DetectionState stateToAssign) 
+    private bool DetectionClock(float time, ref float clock, DetectionState stateToAssign)
     {
         clock += Time.deltaTime;
-        if (clock >= time) {
+        if (clock >= time)
+        {
             SetState(stateToAssign);
             return true;
         }
         return false;
     }
-    private void ResetClocks(ref float [] clocks, int size)
+    private void ResetClocks(ref float[] clocks, int size)
     {
-        for (int index = 0; index != size; ++index) {
+        for (int index = 0; index != size; ++index)
+        {
             clocks[index] = 0f;
         }
     }
 
     private void InitStateVariables()
     {
-        if (!playerDetected) {
+        if (!playerDetected)
+        {
             detectionClock = 0f;
-        } else if (playerDetected) {
-            if (detectionState == DetectionState.Spoted) {
+        }
+        else if (playerDetected)
+        {
+            if (detectionState == DetectionState.Spoted)
+            {
                 forgetSpotClock = 0f;
             }
-            if (detectionState == DetectionState.None || detectionState == DetectionState.Alert) {
-                if (detectionState == DetectionState.None) {
+            if (detectionState == DetectionState.None || detectionState == DetectionState.Alert)
+            {
+                if (detectionState == DetectionState.None)
+                {
                     SetState(DetectionState.Alert);
                     //detectionState = DetectionState.Alert;
                 }
-                if (detectionState == DetectionState.Alert) {
+                if (detectionState == DetectionState.Alert)
+                {
                     forgetAlertClock = 0f;
                 }
             }
@@ -211,7 +247,8 @@ public class EnemyDetectionManager : MonoBehaviour
 
     public void DebugRay(bool draw, float dist, Vector2 direction, Color color)
     {
-        if (draw) {
+        if (draw)
+        {
             Debug.DrawRay(transform.position + rayCastOffset, Vector3.Normalize(direction) * dist, color);
         }
     }

@@ -29,6 +29,7 @@ public class LinkEnemies : AVisualCircleRangedPower
 
     public override void Cancel()
     {
+        _enemyEventManager.UnlinkEnemies(_destEnemy.GetInstanceID());
         firingPower = false;
         _sourceEnemy = null;
         _destEnemy = null;
@@ -42,6 +43,8 @@ public class LinkEnemies : AVisualCircleRangedPower
 
     public override void Fire()
     {
+        if (_powerTimer == 0)
+            _enemyEventManager.LinkEnemies(_sourceEnemy.GetInstanceID(), _destEnemy.GetInstanceID());
         _powerTimer += Time.deltaTime;
         if (_powerTimer >= _powerMaxDuration)
         {

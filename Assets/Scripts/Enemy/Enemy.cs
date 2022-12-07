@@ -13,7 +13,7 @@ public class EnemyInfo
         { EnemyType.RoyalGuard, 3f },
         { EnemyType.Random, 1f }
     };
-    
+
     //set sur les attacks
     public static Dictionary<EnemyType, float> CoolDown = new Dictionary<EnemyType, float>()
     {
@@ -53,11 +53,11 @@ public class EnemyInfo
 
     public static Vector3 DistanceToInteract = new Vector3(1f, 0f, 0f);
 
-    public static bool RangeOfPosition(Vector3 posAim, Vector3 posCompare, float range) 
+    public static bool RangeOfPosition(Vector3 posAim, Vector3 posCompare, float range)
     {
         //Debug.Log(posCompare.x - range + " < " + posAim.x + " && " + posAim.x + " < " + posCompare.x + range);
         //Debug.Log(posCompare.y - range + " < " + posAim.y + " && " + posAim.y + " < " + posCompare.y + range);
-        return ((posCompare.x - range <= posAim.x) && (posAim.x <= posCompare.x + range) && 
+        return ((posCompare.x - range <= posAim.x) && (posAim.x <= posCompare.x + range) &&
                 (posCompare.y - range <= posAim.y) && (posAim.y <= posCompare.y + range)
         );
     }
@@ -92,7 +92,8 @@ public enum DetectionState
     Freeze,
 }
 
-public enum EnemyEventState {
+public enum EnemyEventState
+{
     None,
     SeenPlayer,
     FightPlayer,
@@ -103,8 +104,9 @@ public enum EnemyEventState {
 }
 
 [System.Serializable]
-public class Enemy {
-    public Enemy() {}
+public class Enemy
+{
+    public Enemy() { }
     public string uuid;
     public bool enabled;
     public EnemyType type;
