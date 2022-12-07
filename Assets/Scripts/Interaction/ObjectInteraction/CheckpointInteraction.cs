@@ -33,35 +33,40 @@ public class CheckpointInteraction : AInteractable
             emission.rateOverTime = (_activated ? 0 : p._rateOverTime);
         }
         _dialogue = GetComponent<TMPDialogue>();
+
+        if (_choosenByUser)
+            FindObjectOfType<PlayerController>().transform.position = transform.position;
     }
 
     public void Reset()
     {
-        _activated = false;
-
-        if (_fire.activeSelf)
-            _fire.SetActive(false);
-        foreach (var p in _particles)
-        {
-            var emission = p._particle.GetComponent<ParticleSystem>().emission;
-            emission.rateOverTime = p._rateOverTime;
-        }
+        // _activated = false;
+        _choosenByUser = false;
+        // if (_fire.activeSelf)
+        //     _fire.SetActive(false);
+        // foreach (var p in _particles)
+        // {
+        //     var emission = p._particle.GetComponent<ParticleSystem>().emission;
+        //     emission.rateOverTime = p._rateOverTime;
+        // }
         Save();
     }
 
     public override void Interact()
     {
         _activated = true;
-        _dialogue.StartDialogue((_activated ? "ActivatedInteraction" : "ActiveInteraction"));
+        _choosenByUser = true;
+        _dialogue.StartDialogue("ChooseByUserCheckpoint");
 
-        // foreach (var checkPoint in _checkpoints)
-        // {
-        //     if (checkPoint.transform.gameObject != transform.gameObject)
-        //         checkPoint.Reset();
-        // }
+        foreach (var checkPoint in _checkpoints)
+        {
+            if (checkPoint.transform.gameObject != transform.gameObject)
+                checkPoint.Reset();
+        }
 
         if (!_fire.activeSelf)
             _fire.SetActive(true);
+
         foreach (var p in _particles)
         {
             var emission = p._particle.GetComponent<ParticleSystem>().emission;
@@ -74,11 +79,14 @@ public class CheckpointInteraction : AInteractable
     {
         if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_activated)))
             _activated = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_activated));
+        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_choosenByUser)))
+            _choosenByUser = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_choosenByUser));
     }
 
     public override void Save()
     {
         SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_activated), _activated);
+        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_choosenByUser), _choosenByUser);
     }
 
     private void Update()
@@ -88,6 +96,13 @@ public class CheckpointInteraction : AInteractable
         if (!_outline.IsTrigger() && !_dialogue.IsFinish())
             _dialogue.StopDialogue();
         else if (_outline.IsTrigger() && _dialogue.IsFinish())
-            _dialogue.StartDialogue((_activated ? "ActivatedInteraction" : "ActiveInteraction"));
+        {
+            if (!_activated)
+                _dialogue.StartDialogue("UnactiveCheckpoint");
+            else if (_activated && !_choosenByUser)
+                _dialogue.StartDialogue("ActiveCheckpoint");
+            else
+                _dialogue.StartDialogue("ChooseByUserCheckpoint");
+        }
     }
 }

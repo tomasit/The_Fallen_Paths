@@ -4933,7 +4933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogues:
-  - dialogueName: NotActivated
+  - dialogueName: UnactiveCheckpoint
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -4991,7 +4991,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: ActivatedAndChoose
+  - dialogueName: ChooseByUserCheckpoint
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -5023,7 +5023,7 @@ MonoBehaviour:
         _lastIndex: 0
         _colorRandomSpeed: []
       _fullText: 
-  - dialogueName: ActivatedButNotChoosen
+  - dialogueName: ActiveCheckpoint
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
@@ -5041,7 +5041,7 @@ MonoBehaviour:
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
-      - _text: Registeer
+      - _text: Set as checkpoint\n
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
