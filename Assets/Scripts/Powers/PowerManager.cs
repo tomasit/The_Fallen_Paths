@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Events;
 
 public class PowerManager : MonoBehaviour
 {
@@ -15,18 +16,27 @@ public class PowerManager : MonoBehaviour
         public float maxDuration = -1;
         public bool unlocked = false;
         public bool cancelable = false;
-
         public bool powerManageItsDuration = true;
         public KeyCode key;
     }
     [SerializeField]
     public List<PowerData> _powers;
     private int _currentPowerIndex = -1;
-
     public bool canUseAnyPower = true;
+    private UnityEvent<System.Type> _unlockPowerEvent;
 
+    public UnityEvent<System.Type> Observe()
+    {
+        return _unlockPowerEvent;    
+    }
 
-    int FindPowerIndex(System.Type powerType)
+    public void UnlockPower(System.Type powerType)
+    {
+        _powers[FindPowerIndex(powerType)].unlocked = true;
+        _unlockPowerEvent.Invoke(powerType);
+    }
+
+    public int FindPowerIndex(System.Type powerType)
     {
         return _powers.FindIndex(x => x.power.GetType() == powerType);
     }

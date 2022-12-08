@@ -12,6 +12,9 @@ public class SubLevelChangeGUI : Editor
     private SerializedProperty _player;
     private SerializedProperty _soundType;
     private SerializedProperty _transitionScreen;
+    private SerializedProperty _translateMoveTo;
+    private SerializedProperty _fadeTpPosition;
+    private SerializedProperty _translateTpPosition;
 
     private void OnEnable()
     {
@@ -19,6 +22,9 @@ public class SubLevelChangeGUI : Editor
         _tilemap = serializedObject.FindProperty("_grid");
         _soundType = serializedObject.FindProperty("_soundType");
         _transitionScreen = serializedObject.FindProperty("_transitionScreen");
+        _fadeTpPosition = serializedObject.FindProperty("_fadeTpPosition");
+        _translateMoveTo = serializedObject.FindProperty("_translateMoveTo");
+        _translateTpPosition = serializedObject.FindProperty("_translateTpPosition");
     }
 
     public override void OnInspectorGUI()
@@ -34,7 +40,10 @@ public class SubLevelChangeGUI : Editor
         if ((place._translateChange = GUILayout.Toggle(place._translateChange, "On change translate")))
         {
             place._fadeChange = false;
-            place._translateSpeed = EditorGUILayout.FloatField("Translate speed", place._translateSpeed);
+            place._translateDuration = EditorGUILayout.FloatField("Translate duration", place._translateDuration);
+            EditorGUILayout.PropertyField(_translateMoveTo);
+            if (place._teleportPlayer = GUILayout.Toggle(place._teleportPlayer, "Teleport player"))
+                EditorGUILayout.PropertyField(_translateTpPosition);
         }
         else
             place._fadeChange = true;
@@ -42,6 +51,7 @@ public class SubLevelChangeGUI : Editor
         if ((place._fadeChange = GUILayout.Toggle(place._fadeChange, "On change fade")))
         {
             place._translateChange = false;
+            EditorGUILayout.PropertyField(_fadeTpPosition);
             EditorGUILayout.PropertyField(_transitionScreen);
             GUILayout.Label("Description");
             place._quoteName = GUILayout.TextArea(place._quoteName, 200);

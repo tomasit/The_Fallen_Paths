@@ -108,19 +108,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void AnimateMovement(bool idle)
+    public void AnimateMovement(bool idle)
     {
         _animator.SetFloat("Y Velocity", _rigidBody.velocity.y);
         _animator.SetBool("Jumping", !_isGrounded);
         _animator.SetBool("Walking", _isGrounded && !idle);
     }
 
-    void Move(float input)
+    public void Move(float input)
     {
         bool oppositeDirection = _goingLeft && input < 0 || !_goingLeft && input > 0;
 
         if (oppositeDirection)
         {
+            Debug.Log("flip player");
             FlipPlayerHorizontally();
         }
 
@@ -142,7 +143,7 @@ public class PlayerController : MonoBehaviour
             _movementValues[_currentValueIndex].playerSpeed = 0;
     }
 
-    private void ActiveLadder(bool active)
+    public void ActiveLadder(bool active)
     {
         _isClimbing = active;
         _rigidBody.gravityScale = active ? 0.0f : 1.0f;
@@ -220,13 +221,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void LadderMovement()
+    public void LadderMovement(float horizontalInput, float verticalInput)
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
         bool oppositeDirection = _goingLeft && horizontalInput < 0 || !_goingLeft && horizontalInput > 0;
         if (oppositeDirection)
             _goingLeft = !_goingLeft;
-        float verticalInput = Input.GetAxisRaw("Vertical");
         _goingTop = (verticalInput > 0);
 
         VerticalMovement(verticalInput);
@@ -250,14 +249,17 @@ public class PlayerController : MonoBehaviour
         {
             bool grounded = isGrounded();
 
-            if (_collideWithLadder && !_isClimbing && Input.GetAxisRaw("Vertical") > 0.0f)
-                ActiveLadder(true);
-            else if ((grounded && _isClimbing) || (_isClimbing && Input.GetAxisRaw("Vertical") <= 0.0f))
-                ActiveLadder(false);
+            if (!_blockInput)
+            {
+                if (_collideWithLadder && !_isClimbing && Input.GetAxisRaw("Vertical") > 0.0f)
+                    ActiveLadder(true);
+                else if ((grounded && _isClimbing) || (_isClimbing && Input.GetAxisRaw("Vertical") <= 0.0f))
+                    ActiveLadder(false);
+            }
 
             if (_isClimbing)
             {
-                LadderMovement();
+                LadderMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             }
             else
             {
