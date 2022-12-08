@@ -10,7 +10,6 @@ public class RemoteObjectControl : ARangedPower
     private RemoteControllableObject[] _triggerableObjects;
     private List<GameObject> _instantiatedParticles;
     private RemoteControllableObject _objectInTouch = null;
-    private bool _hasObjectInRange = false;
 
     protected override void Start()
     {
@@ -44,6 +43,14 @@ public class RemoteObjectControl : ARangedPower
         shape1.alignToDirection = true;
         shape2.rotation = new Vector3(0.0f, 90.0f, 0.0f);
         shape2.alignToDirection = false;
+
+        // active all trigerable particles
+        foreach (var triggerable in _triggerableObjects)
+        {
+            if (!triggerable.transform.gameObject.activeSelf)
+                continue;
+            triggerable.RateUpParticle();
+        }
     }
 
     public override void CancelRange()
@@ -67,29 +74,18 @@ public class RemoteObjectControl : ARangedPower
         _instantiatedParticles.Clear();
     }
 
-    private void CheckDistance()
+    public bool HasObjectInRange()
     {
-        bool tmp = false;
         foreach (var triggerable in _triggerableObjects)
         {
             if (!triggerable.transform.gameObject.activeSelf)
                 continue;
             if (Vector2.Distance(triggerable.transform.position, transform.position) <= rangeRadius)
             {
-                tmp = true;
-                triggerable.RateUpParticle();
-            }
-            else
-            {
-                triggerable.RateDownParticle();
+                return true;
             }
         }
-        _hasObjectInRange = tmp;
-    }
-
-    public bool HasObjectInRange()
-    {
-        return _hasObjectInRange;
+        return false;
     }
 
     private void UnactiveRemoteObjectParticle()
@@ -139,7 +135,7 @@ public class RemoteObjectControl : ARangedPower
     {
         if (activated)
         {
-            CheckDistance();
+            // CheckDistance();
             if (mouseDistranceIsCorrect())
             {
                 if (canCastPower())
@@ -157,17 +153,5 @@ public class RemoteObjectControl : ARangedPower
             else
                 UnPreview();
         }
-
-        // NOTE: Remove this block when power manager is done
-
-        // if (Input.GetKeyDown(KeyCode.A) && !activated)
-        // {
-        //     Use();
-        // }
-        // else if (Input.GetKeyDown(KeyCode.A) && activated)
-        // {
-        //     Cancel();
-        // }
-
     }
 }
