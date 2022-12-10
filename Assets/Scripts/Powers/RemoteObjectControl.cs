@@ -124,6 +124,7 @@ public class RemoteObjectControl : ARangedPower
                 if (_objectInTouch != null && _objectInTouch != remote)
                     UnPreview();
                 _objectInTouch = remote;
+                _powerManager.ActivatePowerCooldownFromStackTrace(); // Ligne rajouté
                 return true;
             }
         }
