@@ -234,11 +234,12 @@ MonoBehaviour:
   _detectionDistance: 0
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
+  _enabled: 1
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 3
   detectionClock: 0
-  timeToForgetAlerted: 10
+  timeToForgetAlerted: 20
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
@@ -718,11 +719,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs: {fileID: 0}
+  _enabled: 1
+  triggerDialog: 0
+  _dialogBoxReference: {fileID: 0}
   _timeRandomDialog: 10
   _probablityDialog: 4
   _clockDialog: 0
   _durationDialog: 10
-  triggerDialog: 0
-  _dialogBoxReference: {fileID: 0}
   popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
   dialogPrefab: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}

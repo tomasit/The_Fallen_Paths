@@ -146,6 +146,7 @@ public class EnemyEventsManager : MonoBehaviour
 
     private void RotateEnemies(Enemy enemy)
     {
+        //s'il sont en freeze, ou qu'ils bouge pas, les mettre en direction de leur raycast
         if (enemy.movementManager.HasMovedFromLastFrame()) {
             if (enemy.type != EnemyType.Archer && enemy.type != EnemyType.Mage) {
                 if (enemy.detectionManager.playerDetected) {
@@ -158,6 +159,10 @@ public class EnemyEventsManager : MonoBehaviour
                 enemy.entity.transform.eulerAngles = new Vector3(0, 0, 0);
             }
         } else {
+            //si jamais il bouge pas il va pas rotate en fonction du player
+            if (enemy.detectionManager.GetState() != DetectionState.Spoted) {
+                return;
+            }
             if (enemy.detectionManager.direction.x < 0) {
                 enemy.entity.transform.eulerAngles = new Vector3(0, 180, 0);
             } else if (enemy.detectionManager.direction.x > 0) {
