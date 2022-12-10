@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Checkpoint.prefab.meta
+guid: de060a8667baa46719d712440d3f249e
+PrefabImporter:
+=======
+guid: fa50ce7ec9b8023728147be0f0178c54
+NativeFormatImporter:
+>>>>>>> feat/level_2:Assets/Scenes/Levels/Level_2/NavMesh-NavMeshSurface.asset.meta
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

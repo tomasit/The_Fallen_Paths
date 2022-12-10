@@ -14,6 +14,8 @@ public class RemoteControllableObject : TriggerProcessor
     private void Awake()
     {
         _processor = GetComponent<InteractionProcessor>();
+     	if (_processor == null)
+     	   Debug.Log("processor null after awake : " + gameObject.name); 
         GetComponent<Collider2D>().isTrigger = _isTrigger;
         _particle.SetActive(false);
     }
@@ -58,6 +60,8 @@ public class RemoteControllableObject : TriggerProcessor
 
     public void RateDownParticle()
     {
+    	if (_processor == null)
+    	    Debug.Log(gameObject.name);
         if (_particle != null && !_processor._interact)
         {
             if (!_particle.activeSelf)
