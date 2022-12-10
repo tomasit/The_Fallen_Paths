@@ -25260,7 +25260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &766863497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45675,6 +45675,10 @@ PrefabInstance:
       value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[2].key
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[0].power
       value: 
       objectReference: {fileID: 1878878632}
@@ -45688,6 +45692,10 @@ PrefabInstance:
       objectReference: {fileID: 1878878635}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[0].unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: _powers.Array.data[2].unlocked
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
