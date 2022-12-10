@@ -7,70 +7,45 @@ using Unity.VisualScripting;
 
 public class GUI_Cooldown : MonoBehaviour
 {
-    //PowerManager pow = new PowerManager();
-    PowerManager.PowerData powerData;
-    private float cd = 0;
-    private float maxDuration = 0;
-
-
     public int PowerIdex;
-
-    /*OLD*/
-    public float CDTime;
-    private float Timer;
 
     [SerializeField] 
     private Image imageCD;
     [SerializeField]
     private TMP_Text textCD;
-    private bool IsCooldown = false;
+    private PowerManager powerManager;
+    private float cd = 0;
+    private float maxDuration = 0;
+
+
+
 
 
     private void Start()
     {
+        powerManager = FindObjectOfType<PowerManager>();
         textCD.gameObject.SetActive(false);
-//        powerData= pow._powers[PowerIdex];
+        maxDuration= powerManager._powers[PowerIdex].cooldownDuration;
+        print(maxDuration);
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        cd = powerManager._powers[PowerIdex].cooldown;
+        if(cd > 0)
         {
-            onCD();
-        }
-        if(IsCooldown)
-        {
-            ApplyCoolDown();
-        }
-    }
-    private void ApplyCoolDown()
-    {
-        Timer  -= Time.deltaTime;
-
-        if (Timer < 0.0f)
-        {
-            IsCooldown = false;
-            textCD.gameObject.SetActive(false);
-            imageCD.fillAmount = 0.0f;
-        } else
-        {
-            textCD.text = Mathf.RoundToInt(Timer).ToString();
-            imageCD.fillAmount = Timer / CDTime;
-        }
-
-
-    }
-    public void onCD()
-    {
-        if (IsCooldown)
-        {
-            // Sound Effect or UI msg
-        } else 
-        {
-            IsCooldown = true;
-            Timer = CDTime;
             textCD.gameObject.SetActive(true);
-            textCD.text = Timer.ToString();
+            ApplyCoolDown(cd);
+        } else if (cd == 0)
+        {
+            textCD.gameObject.SetActive(false);
         }
+    }
+    private void ApplyCoolDown(float cd)
+    {
+        textCD.text = Mathf.RoundToInt(cd).ToString();
+        imageCD.fillAmount = cd / maxDuration;
+        print(maxDuration);
     }
 }
