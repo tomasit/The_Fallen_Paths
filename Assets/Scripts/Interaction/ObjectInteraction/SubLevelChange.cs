@@ -46,7 +46,7 @@ public class SubLevelChange : AInteractable
     private void BlockInput(bool block)
     {
         PlayerController ctrl = _player.GetComponent<PlayerController>();
-        TestComputeInteraction itrct = _player.GetComponent<TestComputeInteraction>();
+        ComputeInteraction itrct = _player.GetComponent<ComputeInteraction>();
 
         if (ctrl)
             ctrl.BlockInput(block);

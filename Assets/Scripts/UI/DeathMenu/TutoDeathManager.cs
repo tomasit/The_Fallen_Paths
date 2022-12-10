@@ -30,7 +30,7 @@ public class TutoDeathManager : MonoBehaviour
     {
         _transitionScreen.StartDeadTransition();
         _player.GetComponent<PlayerController>().BlockInput(true);
-        _player.GetComponent<TestComputeInteraction>().BlockInput(true);
+        _player.GetComponent<ComputeInteraction>().BlockInput(true);
         _player.GetComponent<PowerManager>().canUseAnyPower = false;
         while (_transitionScreen.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
             yield return null;
@@ -41,7 +41,7 @@ public class TutoDeathManager : MonoBehaviour
         while (_transitionScreen.GetTransitionState() != TransitionScreen.TransitionState.NONE)
             yield return null;
         _player.GetComponent<PlayerController>().BlockInput(false);
-        _player.GetComponent<TestComputeInteraction>().BlockInput(false);
+        _player.GetComponent<ComputeInteraction>().BlockInput(false);
         _player.GetComponent<PowerManager>().canUseAnyPower = true;
     }
 

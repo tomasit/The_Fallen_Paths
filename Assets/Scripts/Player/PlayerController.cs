@@ -297,4 +297,9 @@ public class PlayerController : MonoBehaviour
         if (_soundEffectPlayer != null)
             _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.PLAYER_WALK);
     }
+
+    public PlayerType GetPlayerType()
+    {
+        return (PlayerType)_currentValueIndex;
+    }
 }
