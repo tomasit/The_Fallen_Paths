@@ -26,7 +26,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private InteractionSelectorEnable _firstDoorEnabler;
     [SerializeField] private InteractionSelectorEnable _secondDoorEnabler;
     [SerializeField] private DestroyInteraction _cageInteraction;
-    [SerializeField] private TestComputeInteraction _interactor;
+    [SerializeField] private ComputeInteraction _interactor;
     [SerializeField] private float _fadeDuration;
     [SerializeField] private RemoteObjectControl _power; // replace by power manager
     private Coroutine _tutorialCoroutine;

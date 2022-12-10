@@ -1187,6 +1187,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -3651,10 +3663,10 @@ TextureImporter:
       name: Medieval_props_117
       rect:
         serializedVersion: 2
-        x: 241
-        y: 689
-        width: 20
-        height: 33
+        x: 238
+        y: 685
+        width: 26
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -6066,10 +6078,10 @@ TextureImporter:
       name: Medieval_props_232
       rect:
         serializedVersion: 2
-        x: 806
-        y: 488
-        width: 20
-        height: 22
+        x: 803
+        y: 486
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -8843,8 +8855,8 @@ TextureImporter:
       Medieval_props_208: 21300416
       Medieval_props_65: 21300130
       Medieval_props_153: 21300306
-      Medieval_props_91: 21300182
       Medieval_props_248: 21300496
+      Medieval_props_91: 21300182
       Medieval_props_264: 21300528
       Medieval_props_94: 21300188
       Medieval_props_232: 21300464

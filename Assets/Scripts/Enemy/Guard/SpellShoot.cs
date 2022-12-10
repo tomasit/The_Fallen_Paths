@@ -31,17 +31,16 @@ public class SpellShoot : MonoBehaviour
     {
         if (otherCollider != null) {
             var layerName = otherCollider.gameObject.layer;
-            if (layerName == LayerMask.NameToLayer("Ground") || layerName == LayerMask.NameToLayer("Stairs") || 
-                layerName == LayerMask.NameToLayer("Lader") || layerName == LayerMask.NameToLayer("LastLader") || 
-                layerName == LayerMask.NameToLayer("PlayerLader")) {
-                return;
+            if (layerName == LayerMask.NameToLayer("Level") || 
+                layerName == LayerMask.NameToLayer("Player") || 
+                layerName == LayerMask.NameToLayer("Enemy")) {
+                if (otherCollider.gameObject.GetComponent<BasicHealthWrapper>() != null) {
+                    otherCollider.gameObject.GetComponent<BasicHealthWrapper>().Hit(damages);
+                }
+                
+                GameObject newParticles = Object.Instantiate(particles, transform.position, transform.rotation);
+                Object.Destroy(gameObject);
             }
-            if (otherCollider.gameObject.GetComponent<BasicHealthWrapper>() != null) {
-                otherCollider.gameObject.GetComponent<BasicHealthWrapper>().Hit(damages);
-            }
-            
-            GameObject newParticles = Object.Instantiate(particles, transform.position, transform.rotation);
-            Object.Destroy(gameObject);
         }
     }
 }

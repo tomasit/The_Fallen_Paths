@@ -28,17 +28,16 @@ public class Arrow : MonoBehaviour
     {
         if (colliderOther != null) {
             var layerName = colliderOther.gameObject.layer;
-            if (layerName == LayerMask.NameToLayer("Ground") || layerName == LayerMask.NameToLayer("Stairs") || 
-                layerName == LayerMask.NameToLayer("Lader") || layerName == LayerMask.NameToLayer("LastLader") || 
-                layerName == LayerMask.NameToLayer("PlayerLader")) {
-                return;
+            if (layerName == LayerMask.NameToLayer("Level") || 
+                layerName == LayerMask.NameToLayer("Player") || 
+                layerName == LayerMask.NameToLayer("Enemy")) {
+                if (colliderOther.gameObject.GetComponent<BasicHealthWrapper>() != null) {
+                    colliderOther.gameObject.GetComponent<BasicHealthWrapper>().Hit(damages);
+                }
+                
+                //GameObject newParticles = Object.Instantiate(particles, transform.position, transform.rotation);
+                Object.Destroy(gameObject);
             }
-            if (colliderOther.gameObject.GetComponent<BasicHealthWrapper>() != null) {
-                colliderOther.gameObject.GetComponent<BasicHealthWrapper>().Hit(damages);
-            }
-            
-            //GameObject newParticles = Object.Instantiate(particles, transform.position, transform.rotation);
-            Object.Destroy(gameObject);
         }
     }
 }
