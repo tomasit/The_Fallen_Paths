@@ -8,9 +8,6 @@ public class OptionManager : MonoBehaviour
 {
     public Dropdown res_dropdown;
     public Dropdown win_dropdown;
-    public TextMeshProUGUI textMeshProUGUI;
-    public Slider volumeGlobal;
-    public Slider volumeEnv;
     private bool fs = true;
     private int width = 1920;
     private int height = 1080;
@@ -19,22 +16,6 @@ public class OptionManager : MonoBehaviour
     private void Start()
     {
         param = SaveManager.DataInstance.GetParameters();
-    }
-    public void SetGlobalVolume()
-    {
-        param._globalVolume = volumeGlobal.value;
-        SaveManager.DataInstance.SaveParameters();
-    }
-
-    public void SetEnvVolume()
-    {
-        param._subVolume.Add(SoundData.SoundEffectType.ENVIRONMENT, volumeEnv.value);
-        SaveManager.DataInstance.SaveParameters();
-    }
-
-    public void SetNumberText(float value)
-    {
-        textMeshProUGUI.text = value.ToString();
     }
 
     public void OnScreenChange()
