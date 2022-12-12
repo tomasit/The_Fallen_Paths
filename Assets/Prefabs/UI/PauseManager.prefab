@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseUI: {fileID: 307682048377822132}
+  optionPanel: {fileID: 1965100591598755831}
+  pausePanel: {fileID: 6708918962657058747}
   gameMainMScene: 0
 --- !u!1001 &6146041601613246683
 PrefabInstance:

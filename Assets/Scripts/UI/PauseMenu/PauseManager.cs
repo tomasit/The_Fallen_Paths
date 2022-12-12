@@ -7,6 +7,8 @@ public class PauseManager : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject PauseUI;
+    public GameObject optionPanel;
+    public GameObject pausePanel;
     public int gameMainMScene;
 
     private void Update()
@@ -16,6 +18,9 @@ public class PauseManager : MonoBehaviour
             if (isPaused)
             {
                 Resume();
+                optionPanel.gameObject.SetActive(false);
+                pausePanel.gameObject.SetActive(true);
+
             } else
             {
                 Pause();
