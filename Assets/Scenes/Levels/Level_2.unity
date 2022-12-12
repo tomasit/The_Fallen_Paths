@@ -800,7 +800,7 @@ MonoBehaviour:
       - m_Target: {fileID: 529126883}
         m_TargetAssemblyTypeName: HideInteraction, Assembly-CSharp
         m_MethodName: LitPlaceAlight
-        m_Mode: 6
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -49307,11 +49307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 159.21
+      value: 226.96
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 44.03
+      value: 24.779999
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -113773,7 +113773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 529126869}
   _grid: {fileID: 1183582698}
-  _interactOnStart: 1
+  _interactOnStart: 0
   _translateChange: 0
   _translateDuration: 2
   _fadeChange: 1
@@ -124639,7 +124639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 529126869}
   _grid: {fileID: 322020322}
-  _interactOnStart: 0
+  _interactOnStart: 1
   _translateChange: 0
   _translateDuration: 2
   _fadeChange: 1
