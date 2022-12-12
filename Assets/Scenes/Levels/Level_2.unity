@@ -1342,544 +1342,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogues:
-  - dialogueName: Quote_1
+  - dialogueName: Mage_Room_description
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: '<i>"There is no such thing as a '
+      - _text: Chapter II\n-\nMage laboratory\n-\nRoom I
         _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'stupid '
-        _textModifier: 1
         _colorModifier: 2
         _solidColor:
           serializedVersion: 2
-          rgba: 4278226175
+          rgba: 4278190244
         _gradientColor:
           serializedVersion: 2
-          rgba: 4294940672
+          rgba: 4278234879
         _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'question, only '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'stupid '
-        _textModifier: 1
-        _colorModifier: 2
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278226175
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: people."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Roger Craser
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Quote_2
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: <i>"
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'Good '
-        _textModifier: 3
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: things come to those who wait."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Manu Los
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Quote_3
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '<i>"I did not '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: trip and fall
-        _textModifier: 3
-        _colorModifier: 2
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278190224
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278216191
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: . I attacked the floor, and I believe I am winning."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Homer Dalor
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Quote_4
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '<i>"I''m off like a '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: dirty shirt
-        _textModifier: 4
-        _colorModifier: 2
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278473068
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278217425
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: ."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Philippe Airienpourattendre
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Quote_5
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: <i>"
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'Common sense '
-        _textModifier: 1
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294901913
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4293460223
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'is like a deodorant. The people who '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'need it most '
-        _textModifier: 1
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294901913
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4293460223
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: never use it."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Clara Sio
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: Quote_6
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '<i>"The difference between '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'stupidity '
-        _textModifier: 2
-        _colorModifier: 2
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278207999
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278246399
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'and '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: 'genius '
-        _textModifier: 2
-        _colorModifier: 2
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4289199872
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294913280
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: is that genius has its limits."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Oscar Pediem
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: SpecialQuote_1.0
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '<i>"When life gives you lemons, make '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: lemonade
-        _textModifier: 3
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278238207
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278254847
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: ."\n\n</i>
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Mell Contact
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      _fullText: 
-  - dialogueName: SpecialQuote_1.1
-    _setupOnStart: 1
-    _isSetup: 0
-    _partOfSide:
-    - _modifiableText:
-      - _text: '<i>"When life gives you '
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 0
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: melons
-        _textModifier: 1
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278292480
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278254847
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: ', you could be dyslexic."\n\n</i>'
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Maeva Pasnousmanquer
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4294940672
-        _colorSpeedRandomness: 0
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
@@ -1889,7 +1366,7 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: Chapter I\n-\nPrison\n-\nRoom I
+      - _text: Chapter II\n-\nGuard living room\n-\nRoom II
         _textModifier: 0
         _colorModifier: 2
         _solidColor:
@@ -1908,7 +1385,7 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: Chapter I\n-\nPrison\n-\nRoom II
+      - _text: Chapter II\n-\nArcher Tower\n-\nRoom III
         _textModifier: 0
         _colorModifier: 2
         _solidColor:
@@ -1927,7 +1404,45 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: Chapter I\n-\nPrison\n-\nRoom III
+      - _text: Chapter II\n-\nGuard main district\n-\nRoom IV
+        _textModifier: 0
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278190244
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278234879
+        _colorSpeedRandomness: 1
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Hiden_Room_1_description
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Chapter II\n-\nWeapon reserve\n-\nRoom VI
+        _textModifier: 0
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278190244
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278234879
+        _colorSpeedRandomness: 1
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Hiden_Room_2_description
+    _setupOnStart: 1
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Chapter II\n-\nRoyal Kitchen\n-\nRoom V
         _textModifier: 0
         _colorModifier: 2
         _solidColor:
@@ -42975,7 +42490,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -47044,7 +46559,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 516057232}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -49792,11 +49307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 210.46
+      value: 159.21
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.779999
+      value: 44.03
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -55581,7 +55096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 893133711}
   m_Layer: 0
-  m_Name: PlayerGoTo
+  m_Name: PlayerTpTo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55595,7 +55110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 893133710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.75, z: 0}
+  m_LocalPosition: {x: -0.5, y: -5.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57865,7 +57380,7 @@ MonoBehaviour:
   subLevelInteractions:
   - {fileID: 1815414790}
   - {fileID: 1351963708}
-  indexLevel: 0
+  indexLevel: 1
 --- !u!114 &943810147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58978,7 +58493,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -67337,7 +66852,7 @@ MonoBehaviour:
   _translateChange: 0
   _translateDuration: 2
   _fadeChange: 1
-  _quoteName: Room_2_description
+  _quoteName: Mage_Room_description
   _soundType: 2
   _transitionScreen: {fileID: 54099199}
   _translateMoveTo: []
@@ -86675,15 +86190,15 @@ MonoBehaviour:
   _player: {fileID: 529126869}
   _grid: {fileID: 1277970463}
   _interactOnStart: 0
-  _translateChange: 1
+  _translateChange: 0
   _translateDuration: 2
-  _fadeChange: 0
-  _quoteName: 
+  _fadeChange: 1
+  _quoteName: Room_3_description
   _soundType: 0
-  _transitionScreen: {fileID: 0}
+  _transitionScreen: {fileID: 54099199}
   _translateMoveTo:
   - {fileID: 893133711}
-  _fadeTpPosition: {fileID: 0}
+  _fadeTpPosition: {fileID: 893133711}
   _teleportPlayer: 0
   _translateTpPosition: {fileID: 0}
 --- !u!114 &1351963709
@@ -90898,7 +90413,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -109012,7 +108527,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -114258,16 +113773,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 529126869}
   _grid: {fileID: 1183582698}
-  _interactOnStart: 0
-  _translateChange: 1
+  _interactOnStart: 1
+  _translateChange: 0
   _translateDuration: 2
-  _fadeChange: 0
-  _quoteName: 
+  _fadeChange: 1
+  _quoteName: Room_2_description
   _soundType: 0
-  _transitionScreen: {fileID: 0}
+  _transitionScreen: {fileID: 54099199}
   _translateMoveTo:
   - {fileID: 2108855144}
-  _fadeTpPosition: {fileID: 0}
+  _fadeTpPosition: {fileID: 2108855144}
   _teleportPlayer: 0
   _translateTpPosition: {fileID: 0}
 --- !u!114 &1815414791
@@ -121413,7 +120928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108855144}
   m_Layer: 0
-  m_Name: PlayerGoTo
+  m_Name: PlayerTpTo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121427,7 +120942,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108855143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -5, z: 0}
+  m_LocalPosition: {x: -2.25, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125124,11 +124639,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 529126869}
   _grid: {fileID: 322020322}
-  _interactOnStart: 1
+  _interactOnStart: 0
   _translateChange: 0
   _translateDuration: 2
   _fadeChange: 1
-  _quoteName: Mage_room
+  _quoteName: Mage_Room_description
   _soundType: 0
   _transitionScreen: {fileID: 54099199}
   _translateMoveTo: []
