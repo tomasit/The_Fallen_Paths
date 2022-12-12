@@ -121,7 +121,6 @@ public class PlayerController : MonoBehaviour
 
         if (oppositeDirection)
         {
-            Debug.Log("flip player");
             FlipPlayerHorizontally();
         }
 
