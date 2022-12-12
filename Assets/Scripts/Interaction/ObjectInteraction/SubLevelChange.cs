@@ -93,6 +93,7 @@ public class SubLevelChange : AInteractable
         float distance = 0.0f;
 
         float oldP = (dir.x == 0 ? _player.transform.position.y : _player.transform.position.x);
+
         while (i < _translateMoveTo.Length)
         {
             // if (dir.x == 0)
@@ -116,7 +117,7 @@ public class SubLevelChange : AInteractable
             }
             // }
 
-            Debug.Log("distance = " + distance);
+            //Debug.Log("distance = " + distance);
 
             if (Mathf.Abs(distance) >= (dir.x == 0 ? Mathf.Abs(dist.y) : Mathf.Abs(dist.x)))
             {

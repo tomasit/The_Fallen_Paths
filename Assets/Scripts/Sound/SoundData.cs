@@ -16,7 +16,8 @@ public class SoundData
         INTERACTION_FIRE_OUT,
         PLAYER_WALK,
         PLAYER_LAND,
-        PLAYER_JUMP
+        PLAYER_JUMP,
+        INTERACTION_CHEST
     }
 
     public enum SoundEffectType : int
@@ -53,5 +54,6 @@ public class SoundData
         _soundEffect.Add(SoundEffectName.PLAYER_WALK, Resources.Load<AudioClip>("SoundDesign/Player/FOOTSTEP_Trainers_Asphalt_Run_RR2_mono"));
         _soundEffect.Add(SoundEffectName.PLAYER_LAND, Resources.Load<AudioClip>("SoundDesign/Player/FOOTSTEP_Leather_Wood_Hollow_Land_RR6_mono"));
         _soundEffect.Add(SoundEffectName.PLAYER_JUMP, Resources.Load<AudioClip>("SoundDesign/Player/FOOTSTEP_Trainers_Asphalt_Run_RR8_mono"));
+        _soundEffect.Add(SoundEffectName.INTERACTION_CHEST, Resources.Load<AudioClip>("SoundDesign/Interaction/KEY_Out_Wood_Door_01_mono"));
     }
 }
