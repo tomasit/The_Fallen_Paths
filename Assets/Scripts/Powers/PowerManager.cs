@@ -146,7 +146,7 @@ public class PowerManager : MonoBehaviour
             if (power.cooldown > 0)
             {
                 power.cooldown = Mathf.Max(power.cooldown - Time.deltaTime, 0);
-                Debug.Log(power.power.GetType().Name + " cooldown: " + power.cooldown);
+                //Debug.Log(power.power.GetType().Name + " cooldown: " + power.cooldown);
             }
             if (power.powerManageItsDuration == false && power.maxDuration != -1 && power.power.firingPower == true)
             {

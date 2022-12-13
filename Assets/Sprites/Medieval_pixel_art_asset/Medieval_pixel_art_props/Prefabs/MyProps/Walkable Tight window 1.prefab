@@ -99,7 +99,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: -0.38895416}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,7 +148,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -168,5 +168,5 @@ CompositeCollider2D:
       - {x: 0.4687207, y: -0.4941234}
       - {x: -0.46875, y: -0.4941527}
       - {x: -0.4687207, y: -0.672739}
-  m_VertexDistance: 0.0005
+  m_VertexDistance: 0.08
   m_OffsetDistance: 0.00005
