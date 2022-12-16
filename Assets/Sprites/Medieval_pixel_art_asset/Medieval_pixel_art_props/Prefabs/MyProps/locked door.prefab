@@ -51,7 +51,6 @@ GameObject:
   - component: {fileID: 3775320449994744484}
   - component: {fileID: 3775320449994744485}
   - component: {fileID: 3775320449994744506}
-  - component: {fileID: 3775320449994744482}
   m_Layer: 0
   m_Name: Medieval_props_11
   m_TagString: Untagged
@@ -212,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isLocked: 1
   keysManager: {fileID: 0}
-  _unlockInteraction: {fileID: 3775320449994744482}
+  _unlockInteractions: []
   _objectActiveFalseOnUnlock: {fileID: 3933388131589285023}
 --- !u!114 &3775320449994744484
 MonoBehaviour:
@@ -340,31 +339,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundType: 3
---- !u!114 &3775320449994744482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3775320449994744507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bfbd94dd4d002249b01d2c03f67bd2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _grid: {fileID: 0}
-  _interactOnStart: 0
-  _translateChange: 0
-  _translateDuration: 2
-  _fadeChange: 1
-  _quoteName: Room_2_description
-  _soundType: 2
-  _transitionScreen: {fileID: 0}
-  _translateMoveTo: []
-  _fadeTpPosition: {fileID: 0}
-  _teleportPlayer: 0
-  _translateTpPosition: {fileID: 0}
 --- !u!1 &8885841463428211317
 GameObject:
   m_ObjectHideFlags: 0
