@@ -5,17 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    [SerializeField] private bool _enable = true;
     public static bool isPaused = false;
     public GameObject PauseUI;
+    public GameObject optionPanel;
+    public GameObject pausePanel;
     public int gameMainMScene;
+
+    public void Enable(bool state)
+    {
+        _enable = state;
+    }
 
     private void Update()
     {
+        if (!_enable) {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
             {
                 Resume();
+                optionPanel.gameObject.SetActive(false);
+                pausePanel.gameObject.SetActive(true);
+
             } else
             {
                 Pause();

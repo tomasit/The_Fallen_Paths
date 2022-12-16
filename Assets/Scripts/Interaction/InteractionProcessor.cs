@@ -46,6 +46,7 @@ public class InteractionProcessor : AInteractable
 
         foreach (var interaction in _interactions)
         {
+            //Debug.Log("Interact");
             interaction.Interact();
         }
 

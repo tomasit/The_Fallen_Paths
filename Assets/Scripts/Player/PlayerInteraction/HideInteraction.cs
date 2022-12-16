@@ -9,7 +9,7 @@ public class HideInteraction : MonoBehaviour
     private Coroutine _litCoroutine = null;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _litDuration = 0.3f;
-    private bool _isHide = false;
+    [SerializeField] private bool _isHide = false;
 
     private void Start()
     {
@@ -47,7 +47,7 @@ public class HideInteraction : MonoBehaviour
 
         for (float t = 0; t < 1.0f; t += Time.deltaTime / _litDuration)
         {
-            spr.material.color = Color.Lerp(baseColor, litColor , t);
+            spr.material.color = Color.Lerp(baseColor, litColor, t);
             yield return null;
         }
 

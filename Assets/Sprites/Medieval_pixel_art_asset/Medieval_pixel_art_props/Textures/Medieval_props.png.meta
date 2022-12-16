@@ -1187,6 +1187,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1425,10 +1437,10 @@ TextureImporter:
       name: Medieval_props_11
       rect:
         serializedVersion: 2
-        x: 612
-        y: 977
-        width: 9
-        height: 12
+        x: 610
+        y: 975
+        width: 13
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1467,10 +1479,10 @@ TextureImporter:
       name: Medieval_props_13
       rect:
         serializedVersion: 2
-        x: 581
+        x: 579
         y: 936
-        width: 23
-        height: 15
+        width: 27
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1488,10 +1500,10 @@ TextureImporter:
       name: Medieval_props_14
       rect:
         serializedVersion: 2
-        x: 608
+        x: 606
         y: 936
-        width: 23
-        height: 20
+        width: 27
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1509,10 +1521,10 @@ TextureImporter:
       name: Medieval_props_15
       rect:
         serializedVersion: 2
-        x: 636
+        x: 634
         y: 936
-        width: 31
-        height: 21
+        width: 35
+        height: 23
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1530,10 +1542,10 @@ TextureImporter:
       name: Medieval_props_16
       rect:
         serializedVersion: 2
-        x: 672
+        x: 670
         y: 936
-        width: 31
-        height: 28
+        width: 35
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1551,10 +1563,10 @@ TextureImporter:
       name: Medieval_props_17
       rect:
         serializedVersion: 2
-        x: 709
+        x: 707
         y: 936
-        width: 40
-        height: 29
+        width: 44
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1572,10 +1584,10 @@ TextureImporter:
       name: Medieval_props_18
       rect:
         serializedVersion: 2
-        x: 757
+        x: 755
         y: 936
-        width: 40
-        height: 35
+        width: 44
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1593,10 +1605,10 @@ TextureImporter:
       name: Medieval_props_19
       rect:
         serializedVersion: 2
-        x: 801
+        x: 799
         y: 936
-        width: 50
-        height: 29
+        width: 54
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1614,10 +1626,10 @@ TextureImporter:
       name: Medieval_props_20
       rect:
         serializedVersion: 2
-        x: 856
+        x: 854
         y: 936
-        width: 50
-        height: 35
+        width: 54
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3651,10 +3663,10 @@ TextureImporter:
       name: Medieval_props_117
       rect:
         serializedVersion: 2
-        x: 241
-        y: 689
-        width: 20
-        height: 33
+        x: 238
+        y: 685
+        width: 26
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -6066,10 +6078,10 @@ TextureImporter:
       name: Medieval_props_232
       rect:
         serializedVersion: 2
-        x: 806
-        y: 488
-        width: 20
-        height: 22
+        x: 803
+        y: 486
+        width: 26
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -8843,8 +8855,8 @@ TextureImporter:
       Medieval_props_208: 21300416
       Medieval_props_65: 21300130
       Medieval_props_153: 21300306
-      Medieval_props_91: 21300182
       Medieval_props_248: 21300496
+      Medieval_props_91: 21300182
       Medieval_props_264: 21300528
       Medieval_props_94: 21300188
       Medieval_props_232: 21300464

@@ -6,51 +6,36 @@ using TMPro;
 
 public class GUI_Cooldown : MonoBehaviour
 {
-    public float CDTime;
-    private float Timer;
-    [SerializeField]
-    private Image imageCD;
-    [SerializeField]
-    private TMP_Text textCD;
-    private bool IsCooldown = false;
-    PowerManager.PowerData pow = new PowerManager.PowerData();
+    public int PowerIdex;
 
+    [SerializeField] private Image imageCD;
+    [SerializeField] private TMP_Text textCD;
+    private PowerManager powerManager;
+    private float cd = 0;
+    private float maxDuration = 0;
+
+    private void Start()
+    {
+        powerManager = FindObjectOfType<PowerManager>();
+        textCD.gameObject.SetActive(false);
+        maxDuration= powerManager._powers[PowerIdex].cooldownDuration;
+    }
 
     private void Update()
     {
-        if(IsCooldown)
-        {
-            ApplyCoolDown();
-        }
-    }
-    private void ApplyCoolDown()
-    {
-        Timer  -= Time.deltaTime;
-
-        if (Timer < 0.0f)
-        {
-            IsCooldown = false;
-            textCD.gameObject.SetActive(false);
-            imageCD.fillAmount = 0.0f;
-        } else
-        {
-            textCD.text = Mathf.RoundToInt(Timer).ToString();
-            imageCD.fillAmount = Timer / CDTime;
-        }
-
-
-    }
-    public void onCD()
-    {
-        if (IsCooldown)
-        {
-            // Sound Effect or UI msg
-        } else 
-        {
-            IsCooldown = true;
-            Timer = CDTime;
+        cd = powerManager._powers[PowerIdex].cooldown;
+        if(cd > 0) {
             textCD.gameObject.SetActive(true);
-            textCD.text = Timer.ToString();
+            ApplyCoolDown(cd);
+        } else if (cd == 0) {
+            textCD.gameObject.SetActive(false);
         }
+    }
+
+    public void ApplyCoolDown(float cd)
+    {
+        textCD.text = Mathf.RoundToInt(cd).ToString();
+        imageCD.fillAmount = cd / maxDuration;
+        print(maxDuration);
     }
 }

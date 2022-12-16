@@ -113,7 +113,7 @@ public class Enemy
     public GameObject entity;
     [HideInInspector] public SpriteRenderer sprite;
     [HideInInspector] public Animator animator;
-    public TMPDialogue dialogs;
+    [HideInInspector] public TMPDialogue dialogs;
     [HideInInspector] public Agent agentMovement;
     [HideInInspector] public AEnemyMovement movementManager;
     [HideInInspector] public EnemyDetectionManager detectionManager;
