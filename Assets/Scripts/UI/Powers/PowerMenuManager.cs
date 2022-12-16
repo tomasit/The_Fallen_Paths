@@ -118,7 +118,10 @@ public class PowerMenuManager : MonoBehaviour
         }
 
         if (_blockExit) {
-            _blockExit = IsAssignedIndex();
+            _blockExit = WaitForAssignIndex();
+            if (!_blockExit) {
+                UnAblePowerMenu();
+            }
         }
 
         if (_isDisplay && isOnBaseMenu()) {
@@ -143,8 +146,7 @@ public class PowerMenuManager : MonoBehaviour
             AbleChoose();
         }
         if (Input.GetKeyDown(KeyCode.Escape) && _isDisplayingSlotChoosing) {
-            UnAbleChooseSlot();
-            AbleChooseKey();
+            GoPowerMenu();
         }
     }
 
@@ -154,16 +156,25 @@ public class PowerMenuManager : MonoBehaviour
         _indexToAssign = powerIndex;
     }
 
-    public bool IsAssignedIndex()
+    public bool WaitForAssignIndex()
     {
         for (int idx = 0; idx < _powerGUiManger._powersGui.Length; ++idx) 
         {
             if (_powerGUiManger._powersGui[idx].powerIndex == _indexToAssign) {
                 _indexToAssign = -1;
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
+    }
+
+    public void GoPowerMenu()
+    {
+        UnAbleChooseSlot();
+        UnAbleChooseKey();
+        UnAbleChoose();
+        UnCenterPower();
+        AblePowerMenu();
     }
 
 #region ACTIVE_UI
@@ -260,6 +271,7 @@ public class PowerMenuManager : MonoBehaviour
     {
         if (_moveIconDescription != null)
             StopCoroutine(_moveIconDescription);
+        //null ref la V jsp pq frr
         _moveIconDescription = StartCoroutine(MoveGUI(_currentPower.initialPos.position, _currentPower.entity.transform));
         // fade la color a la mano
         foreach (var power in _uiPowers) {
@@ -290,9 +302,6 @@ public class PowerMenuManager : MonoBehaviour
         _moveGuiCoroutine = StartCoroutine(MoveGUI(_guiGamePos.position, _powerGui.transform));
         StartCoroutine(MoveAndSetActiveFalseMenu(_uiBasePos.position, _powerUi.transform));
         StartCoroutine(MoveGuiAndEnabledPause());
-        /*if (_isDisplayingChoose) {
-            UnAbleChoose();
-        }*/
     }
 #endregion
 

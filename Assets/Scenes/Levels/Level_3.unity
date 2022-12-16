@@ -14307,7 +14307,7 @@ GameObject:
   - component: {fileID: 516057229}
   - component: {fileID: 516057228}
   m_Layer: 0
-  m_Name: Main Camera (1)
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18122,7 +18122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9395256e18b4534bbb6e2a7fa3f98c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enable: 1
   PauseUI: {fileID: 972259955}
+  optionPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
   gameMainMScene: 0
 --- !u!224 &736090162
 RectTransform:

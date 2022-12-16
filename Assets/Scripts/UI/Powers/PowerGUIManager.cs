@@ -40,18 +40,7 @@ public class PowerGUIManager : MonoBehaviour
         }
 
         //replace by load & save
-        var idexesPowerToAdd = new int [] {-1, -1, -1};
-
-        int idxPowerToAdd = 0;
-        for (int idx = 0; idx < _powerManager._powers.Count; ++idx) {
-            if (_powerManager._powers[idx].unlocked) {
-                idexesPowerToAdd[idxPowerToAdd] = idx;
-                ++idxPowerToAdd;
-            }
-        }
-        SetPowers(idexesPowerToAdd);
-        //! replace by load & save
-        SetUpGuiSlots();
+        LoadGuiSlots();
     }
 
     private void Update()
@@ -72,12 +61,28 @@ public class PowerGUIManager : MonoBehaviour
                 powerUnlocked += 1;
             }
         }
-        if (powerUnlocked == 0)
-        {
+        if (powerUnlocked == 0) {
             _powerGui.SetActive(false);
         } else {
+            //LoadGuiSlots();
             _powerGui.SetActive(true);
         }
+    }
+
+    public void LoadGuiSlots()
+    {
+        var idexesPowerToAdd = new int [] {-1, -1, -1};
+        int idxPowerToAdd = 0;
+
+        foreach (var powerGui in _powersGui)
+        {
+            if (powerGui.exist) {
+                idexesPowerToAdd[idxPowerToAdd] = powerGui.powerIndex;
+                ++idxPowerToAdd;
+            }
+        }
+        SetPowers(idexesPowerToAdd);
+        SetUpGuiSlots();
     }
 
     public void AddPower(int indexPower, int slotNb)
@@ -85,7 +90,7 @@ public class PowerGUIManager : MonoBehaviour
         var idexesPowerToAdd = new int [maxSlots];
 
         int idx = 0;
-        //mettre un -1 quand il y a rien dans le slot
+
         foreach(var power in _powersGui) {
             if (idx >= maxSlots) {
                 break;
@@ -97,11 +102,8 @@ public class PowerGUIManager : MonoBehaviour
             idexesPowerToAdd[idx] = powerIdx;
             ++idx;
         }
-        /*Debug.Log("________________");
-        for (int test = 0; test < idexesPowerToAdd.Length; ++test) {
-            Debug.Log("add index : " + idexesPowerToAdd[test]);
-        }*/
         SetPowers(idexesPowerToAdd);
+        DestroyGuiSlots();
         SetUpGuiSlots();
     }
 
@@ -147,7 +149,7 @@ public class PowerGUIManager : MonoBehaviour
         }
     }
 
-    public void SetUpGuiSlots()
+    public void DestroyGuiSlots()
     {
         var coolDowns = FindObjectsOfType<GUI_Cooldown>();
 
@@ -155,8 +157,10 @@ public class PowerGUIManager : MonoBehaviour
         {
             UnityEngine.Object.Destroy(coolDown.gameObject.transform.parent.transform.gameObject);
         }
+    }
 
-
+    public void SetUpGuiSlots()
+    {
         for (int idx = 0; idx < _powersGui.Length; ++idx) {
             var powerGui = _powersGui[idx];
 
@@ -176,7 +180,7 @@ public class PowerGUIManager : MonoBehaviour
             newSlot.transform.GetChild(0).Find("KeyValueText").GetComponent<TMP_Text>().text = "[" + powerGui.KeyValue + "]";
 
             _powersGui[idx].CoolDown = newSlot.transform.GetChild(0).GetComponent<GUI_Cooldown>();
-            _powersGui[idx].CoolDown.PowerIdex = powerGui.powerIndex;
+            _powersGui[idx].CoolDown.PowerIndex = powerGui.powerIndex;
         }
     }
 }

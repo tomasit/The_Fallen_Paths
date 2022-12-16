@@ -176,9 +176,9 @@ public class TutorialManager : MonoBehaviour
         while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.MIDDLE)
             yield return null;
         _controller.BlockInput(true);
-        _enemy2.transform.position = _enemyEvent.Enemies[0].roomProprieties.targets[0].position;
+        //_enemy2.transform.position = _enemyEvent.Enemies[0].roomProprieties.targets[0].position;
         _enemy2.SetState(DetectionState.None);
-        _enemy3.transform.position = _enemyEvent.Enemies[1].roomProprieties.targets[0].position;
+        //_enemy3.transform.position = _enemyEvent.Enemies[1].roomProprieties.targets[0].position;
         _enemy3.SetState(DetectionState.None);
         while (_deathManager.GetTransitionState() != TransitionScreen.TransitionState.NONE)
             yield return null;
@@ -253,10 +253,10 @@ public class TutorialManager : MonoBehaviour
         _interactor.BlockInput(true);
         yield return StartCoroutine(WaitForDialogueToFinish());
         GetComponent<AddPowerInteraction>().Interact();
+        FindObjectOfType<PowerMenuManager>().AblePowerMenu();
         FindObjectOfType<PowerMenuManager>().BlockUntilPowerAssign(0);
-        while (FindObjectOfType<PowerMenuManager>().IsAssignedIndex())
+        while (FindObjectOfType<PowerMenuManager>().WaitForAssignIndex())
             yield return null;
-        _powerManager._powers[0].unlocked = true;
         _dialogue.StartDialogue("PowerInstruction");
         yield return StartCoroutine(WaitForDialogueToFinish());
         _controller.BlockInput(false);
