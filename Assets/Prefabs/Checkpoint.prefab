@@ -4964,64 +4964,12 @@ MonoBehaviour:
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
-      - _text: 'P '
-        _textModifier: 4
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278229759
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278204927
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Open attack menu
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278204927
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
       _fullText: 
   - dialogueName: ChooseByUserCheckpoint
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
-    - _modifiableText:
-      - _text: 'P '
-        _textModifier: 4
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278229759
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278204927
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Open attack menu
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278204927
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
+    - _modifiableText: []
       _fullText: 
   - dialogueName: ActiveCheckpoint
     _setupOnStart: 1
@@ -5054,32 +5002,6 @@ MonoBehaviour:
         _firstIndex: 0
         _lastIndex: 0
         _colorRandomSpeed: []
-      - _text: 'P '
-        _textModifier: 4
-        _colorModifier: 1
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4278229759
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278204927
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
-      - _text: Open attack menu
-        _textModifier: 0
-        _colorModifier: 0
-        _solidColor:
-          serializedVersion: 2
-          rgba: 4294967295
-        _gradientColor:
-          serializedVersion: 2
-          rgba: 4278204927
-        _colorSpeedRandomness: 1
-        _firstIndex: 0
-        _lastIndex: 0
-        _colorRandomSpeed: []
       _fullText: 
   _dialogueBox: {fileID: 4026795420013153682, guid: da462c7986027d64989ef60e3d44f3bd, type: 3}
   _canvasTransform: {fileID: 0}
@@ -5092,7 +5014,7 @@ MonoBehaviour:
   _popDuration: 0
   _handleByInput: 0
   _target: {fileID: 3916857897183769734}
-  _targetOffset: {x: 0, y: 2}
+  _targetOffset: {x: 0, y: 3.5}
 --- !u!114 &3916857897183769735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5163,7 +5085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTrigger: 1
-  _textOffset: {x: 0, y: 0, z: 0}
+  _textOffset: {x: 0, y: 1, z: 0}
   _displayedText: 
   _triggerLayer:
     serializedVersion: 2

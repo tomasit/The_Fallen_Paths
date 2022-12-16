@@ -23,7 +23,6 @@ public class CheckpointInteraction : AInteractable
     private void Start()
     {
         _checkpoints = FindObjectsOfType<CheckpointInteraction>();
-
         Load();
         _outline = GetComponent<GlowOnTouch>();
         _fire.SetActive(_activated);
@@ -35,20 +34,15 @@ public class CheckpointInteraction : AInteractable
         _dialogue = GetComponent<TMPDialogue>();
 
         if (_choosenByUser)
+        {
             FindObjectOfType<PlayerController>().transform.position = transform.position;
+            FindObjectOfType<TransitionScreen>().StartDeadSemiTransition();
+        }
     }
 
     public void Reset()
     {
-        // _activated = false;
         _choosenByUser = false;
-        // if (_fire.activeSelf)
-        //     _fire.SetActive(false);
-        // foreach (var p in _particles)
-        // {
-        //     var emission = p._particle.GetComponent<ParticleSystem>().emission;
-        //     emission.rateOverTime = p._rateOverTime;
-        // }
         Save();
     }
 

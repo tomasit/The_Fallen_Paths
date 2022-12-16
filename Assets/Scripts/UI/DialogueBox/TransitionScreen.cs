@@ -23,13 +23,34 @@ public class TransitionScreen : TMPDialogue
         return _transitionState;
     }
 
+    public void StartDeadSemiTransition()
+    {
+        string quoteName = null;
+        if (playSpecialQuote)
+        {
+            quoteName = "SpecialQuote_1.1";
+            playSpecialQuote = false; 
+        }
+        else
+        {
+            int maxQuote = 7;
+            int seed = Random.Range(1, maxQuote + 1);
+            quoteName = (seed == maxQuote ? "SpecialQuote_1.0" : ("Quote_" + seed));
+            playSpecialQuote = (seed == maxQuote ? true : false);
+        }
+
+        StartDialogue(quoteName);
+        _dialogueBoxReference.GetComponent<Image>().color = Color.black;
+        _transitionCoroutine = StartCoroutine(SemiTransition());
+    }
+
     public void StartDeadTransition()
     {
         string quoteName = null;
         if (playSpecialQuote)
         {
             quoteName = "SpecialQuote_1.1";
-            playSpecialQuote = false;            
+            playSpecialQuote = false; 
         }
         else
         {
