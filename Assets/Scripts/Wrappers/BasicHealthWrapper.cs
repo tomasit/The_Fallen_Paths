@@ -19,6 +19,8 @@ public class BasicHealthWrapper : MonoBehaviour
 
     public virtual void Hit(uint damage)
     {
+        if (FindObjectOfType<TutoDeathManager>() != null)
+            FindObjectOfType<TutoDeathManager>().TriggerDeath();
         _health.Hit(damage,
             () => {_animator.SetTrigger("Hit");},
             () => {_animator.SetBool("Dead", true);}
