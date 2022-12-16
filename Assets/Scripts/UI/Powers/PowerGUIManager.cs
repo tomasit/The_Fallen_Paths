@@ -40,7 +40,15 @@ public class PowerGUIManager : MonoBehaviour
         }
 
         //replace by load & save
-        var idexesPowerToAdd = new int [] {};
+        var idexesPowerToAdd = new int [] {-1, -1, -1};
+
+        int idxPowerToAdd = 0;
+        for (int idx = 0; idx < _powerManager._powers.Count; ++idx) {
+            if (_powerManager._powers[idx].unlocked) {
+                idexesPowerToAdd[idxPowerToAdd] = idx;
+                ++idxPowerToAdd;
+            }
+        }
         SetPowers(idexesPowerToAdd);
         SetUpGuiSlots();
     }
@@ -63,6 +71,7 @@ public class PowerGUIManager : MonoBehaviour
                 powerUnlocked += 1;
             }
         }
+        Debug.Log("powerUnlocked = " + powerUnlocked);
         if (powerUnlocked == 0)
         {
             _powerGui.SetActive(false);

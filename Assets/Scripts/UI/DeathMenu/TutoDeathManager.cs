@@ -9,7 +9,7 @@ public class TutoDeathManager : MonoBehaviour
     [SerializeField] private TransitionScreen _transitionScreen;
     [SerializeField] private GameObject _player;
     private Coroutine _deathCoroutine = null;
-    private Vector3 _lastCheckpoint;
+    [SerializeField] private Vector3 _lastCheckpoint;
 
     public void SetCheckpoint(Vector3 position)
     {
