@@ -60,7 +60,7 @@ public class RatPower : APower
 
     public override void Fire()
     {
-
+        
     }
 
     private void Update()

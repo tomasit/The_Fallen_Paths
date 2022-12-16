@@ -3788,9 +3788,9 @@ MonoBehaviour:
   _player: {fileID: 1019027774}
   _grid: {fileID: 54091027}
   _interactOnStart: 0
-  _translateChange: 1
+  _translateChange: 0
   _translateDuration: 2
-  _fadeChange: 0
+  _fadeChange: 1
   _quoteName: Room_2_description
   _soundType: 2
   _transitionScreen: {fileID: 533056692}
@@ -3896,7 +3896,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185300759}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c59d6f19d90bcd9458bd04c74535e70b, type: 3}
   m_Name: 
@@ -25201,7 +25201,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080333159}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c59d6f19d90bcd9458bd04c74535e70b, type: 3}
   m_Name: 
@@ -38201,8 +38201,8 @@ PrefabInstance:
       value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
-      propertyPath: _powers.Array.data[1].key
-      value: 0
+      propertyPath: _powers.Array.data[2].key
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[0].power
@@ -38221,7 +38221,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
-      propertyPath: _powers.Array.data[1].unlocked
+      propertyPath: _powers.Array.data[2].unlocked
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

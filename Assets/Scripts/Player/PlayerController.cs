@@ -57,7 +57,9 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeValueIndex(PlayerType type)
     {
+        var oldIndex = _currentValueIndex;
         _currentValueIndex = (int)type;
+        _movementValues[_currentValueIndex].playerSpeed = _movementValues[oldIndex].playerSpeed;
     }
 
     public bool isGrounded()

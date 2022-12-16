@@ -21,7 +21,7 @@ public class GlowOnTouch : MonoBehaviour
     private void Awake()
     {
         _glowShader = GetComponent<SpriteRenderer>();
-        _glowShader.material = Resources.Load("GlowOutline", typeof(Material)) as Material;
+        _glowShader.material = Resources.Load("OutlineLit", typeof(Material)) as Material;
         _glowShader.material.SetColor("_OutlineColor", _color);
     }
 
