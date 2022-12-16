@@ -15,6 +15,8 @@ public class Health : MonoBehaviour
 
     public void Hit(uint damage, System.Action actionWhenHit = null, System.Action actionIfDead = null)
     {
+        if (FindObjectOfType<TutoDeathManager>() != null)
+            FindObjectOfType<TutoDeathManager>().TriggerDeath();
         health -= (int)damage;
 
         if (actionWhenHit != null)
