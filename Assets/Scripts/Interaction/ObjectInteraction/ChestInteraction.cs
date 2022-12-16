@@ -12,7 +12,8 @@ public class ChestInteraction : AInteractable
     [SerializeField] private SpriteRenderer open;
     [SerializeField] private SpriteRenderer closed;
     private SpriteRenderer _currentSprite;
-    [SerializeField] private Keys keysManager;
+
+    [SerializeField] AInteractable [] _openInteraction;
 
     private void Start()
     {
@@ -42,10 +43,16 @@ public class ChestInteraction : AInteractable
                 _soundEffectPlayer.PlaySound(SoundData.SoundEffectName.INTERACTION_CHEST);
             _currentSprite.sprite = _isOpen ? open.sprite : closed.sprite;
             transform.position = _isOpen ? open.gameObject.transform.position : closed.gameObject.transform.position;
-            if (keysManager != null) {
-                keysManager.AddKeys(_nbKeyContaining);
+            
+            //interact le tableau d'interaction
+            foreach (var interaction in _openInteraction) {
+                interaction.Interact();
             }
         }
         Save();
     }
 }
+
+//Prendre une AInteraction ou plusieur :
+// AddKey, AddPower
+// DisplayDialog

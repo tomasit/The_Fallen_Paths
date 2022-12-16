@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Keys : MonoBehaviour
 {
-    [SerializeField] private uint nbKeys = 0;
+    [SerializeField] private uint nbKeys;
+    //soundManager !
 
     public uint GetNbKeys()
     {
