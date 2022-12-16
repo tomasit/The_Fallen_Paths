@@ -4116,7 +4116,7 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: <b>Description :</b>
+      - _text: '<b>Description : </b>'
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
@@ -4365,7 +4365,7 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: <b>Description :</b>
+      - _text: '<b>Description : </b>'
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
@@ -4642,7 +4642,7 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: <b>Usage :</b>
+      - _text: '<b>Usage : </b>'
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
@@ -4702,7 +4702,7 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: <b>Usage :</b>
+      - _text: '<b>Usage : </b>'
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
