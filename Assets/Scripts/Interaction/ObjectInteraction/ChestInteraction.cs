@@ -52,7 +52,3 @@ public class ChestInteraction : AInteractable
         Save();
     }
 }
-
-//Prendre une AInteraction ou plusieur :
-// AddKey, AddPower
-// DisplayDialog

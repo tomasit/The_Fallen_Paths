@@ -5,11 +5,13 @@ using UnityEngine;
 public class ComputeInteraction : MonoBehaviour
 {
     private TriggerProcessor _interactor;
+    private PowerMenuManager _powerUiManager;
     private bool _blockInput = false;
 
     private void Start()
     {
         _interactor = null;
+        _powerUiManager = (PowerMenuManager)FindObjectOfType<PowerMenuManager>();
     }
 
     public void BlockInput(bool block)
@@ -48,6 +50,10 @@ public class ComputeInteraction : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 _interactor.Trigger();
+            }
+            if (Input.GetKeyDown(KeyCode.M)) 
+            {
+                _powerUiManager.AblePowerMenu();
             }
         }
     }

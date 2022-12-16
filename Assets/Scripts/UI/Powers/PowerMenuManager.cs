@@ -103,39 +103,30 @@ public class PowerMenuManager : MonoBehaviour
         if (_isDisplay) {
             _powerUi.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Escape) && isOnBaseMenu()) {
+                if (_isDisplayingDescription) {
+                    UnAbleDescription();
+                }
                 UnAblePowerMenu();
             }
-        } /*else {
+        } else {
             return;
-        }*/
+        }
 
         if (_isDisplay && isOnBaseMenu()) {
             ChoosePower();
         }
 
-        // Assign power to a key
-        //a la fin quand on choisit le slot
-        /*if (_isDisplayingChoose) {
-            AssignPower(slotIdx);
-        }*/
         if (_isDisplayingKeyChoosing) {
             InputKeyInText();
             TickKeyInput();
         }
 
-        // TEST
-        //able tout ca
-        if (Input.GetKeyDown(KeyCode.M) && !_isDisplay) {
-            AblePowerMenu();
-        }
-        //unable tout ca 
         else if (Input.GetKeyDown(KeyCode.M) && _isDisplay) {
             if (_isDisplayingDescription) {
                 UnAbleDescription();
             }
             UnAblePowerMenu();
         }
-        // !TEST
 
         if (Input.GetKeyDown(KeyCode.Escape) && _isDisplayingChoose) {
             UnAbleChoose();
@@ -261,6 +252,7 @@ public class PowerMenuManager : MonoBehaviour
     public void AblePowerMenu()
     {
         _pauseManager.Enable(false);
+        Time.timeScale = 0f;
         _isDisplay = true;
         LoadPowerIUSlots();
         if (_moveGuiCoroutine != null)
@@ -274,6 +266,7 @@ public class PowerMenuManager : MonoBehaviour
     public void UnAblePowerMenu()
     {
         _isDisplay = false;
+        Time.timeScale = 1f;
         _pauseManager.Enable(true);
         if (_moveGuiCoroutine != null)
             StopCoroutine(_moveGuiCoroutine);
