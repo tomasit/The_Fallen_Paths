@@ -47821,7 +47821,7 @@ PrefabInstance:
       objectReference: {fileID: 529126873}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[0].unlocked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[1].unlocked
