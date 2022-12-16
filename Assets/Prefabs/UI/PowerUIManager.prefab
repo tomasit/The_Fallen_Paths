@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 2922442651239302133}
   - component: {fileID: 2922442651239302132}
   m_Layer: 5
-  m_Name: Pos description
+  m_Name: Pos description-story
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -660,7 +660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.50602, y: -505.49408}
+  m_AnchoredPosition: {x: -962.3121, y: -202}
   m_SizeDelta: {x: 552.75, y: 436.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2922442651239302132
@@ -3110,7 +3110,7 @@ GameObject:
   - component: {fileID: 2922442652201739270}
   - component: {fileID: 2922442652201740281}
   m_Layer: 5
-  m_Name: Pos description follow
+  m_Name: Pos description-story follow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3133,7 +3133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.50602, y: -1635.4216}
+  m_AnchoredPosition: {x: -962.3121, y: -1331.927}
   m_SizeDelta: {x: 552.75, y: 436.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2922442652201740281
@@ -3251,6 +3251,9 @@ RectTransform:
   - {fileID: 2922442653106935103}
   - {fileID: 2922442652201739270}
   - {fileID: 2922442651239302133}
+  - {fileID: 1933220400118546957}
+  - {fileID: 7536060893467506923}
+  - {fileID: 632353019286418715}
   m_Father: {fileID: 2922442652499539221}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3601,7 +3604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2922442652499539221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3967,6 +3970,7 @@ GameObject:
   - component: {fileID: 2922442652780875295}
   - component: {fileID: 2922442652780875294}
   - component: {fileID: 2922442652780875281}
+  - component: {fileID: 4754037707965226128}
   m_Layer: 5
   m_Name: PowerUIManager
   m_TagString: Untagged
@@ -4085,11 +4089,15 @@ MonoBehaviour:
   _slotPanel: {fileID: 2922442651119780716}
   _prefabSlotButton: {fileID: 513810065691237833, guid: b2c7c462889abc66fb6c121dd0053ddb, type: 3}
   _isDisplayingDescription: 0
-  _descriptionDialog: {fileID: 2922442652780875281}
+  _descriptionDialogStory: {fileID: 2922442652780875281}
+  _descriptionDialogUsage: {fileID: 4754037707965226128}
   _posSlotPowerDescription: {fileID: 2922442652531357881}
-  _posSlotDescriptionBase: {fileID: 2922442653106935103}
-  _posSlotDescriptionFollow: {fileID: 2922442652201739270}
-  _posSlotDescription: {fileID: 2922442651239302133}
+  _posSlotDescriptionStoryBase: {fileID: 2922442653106935103}
+  _posSlotDescriptionStoryFollow: {fileID: 2922442652201739270}
+  _posSlotDescriptionStory: {fileID: 2922442651239302133}
+  _posSlotDescriptionUsageBase: {fileID: 1933220400118546957}
+  _posSlotDescriptionUsageFollow: {fileID: 7536060893467506923}
+  _posSlotDescriptionUsage: {fileID: 632353019286418715}
 --- !u!114 &2922442652780875281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4108,15 +4116,151 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: '<h2>Description :</h2> During your 12 years of detention in the terrible
-          jail of the castle, you had t\ ime to develop some very special talents
-          : the Telekinesis power, which allows \ you to control object remotly.
-          For exemple activate a lever, alight a torch... It can be usefull sometimes
-          to hide yourself in some recluse location.  <h2>Usage :</h2> First press
-          the key assign to it, once you see the waves around your head the p\ ower
-          is active. If you get close to an interactive object you will see waves
-          ar\ ound it also. Put your mouse uppon it, the outline tels you that you
-          you can in\ teract with it by clicking.'
+      - _text: <b>Description :</b>
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'During your 12 years of detention in the terrible jail of the castle,
+          you had time to develop a very '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'special '
+        _textModifier: 2
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4291297393
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 8519935
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'talent : the Telekinesis power, which allows you to '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'control object remotly '
+        _textModifier: 1
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278255615
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 39167
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: '. For exemple activate a '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: lever
+        _textModifier: 1
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 63743
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: ', alight a '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: torch
+        _textModifier: 1
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 63743
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: '... It can be usefull sometimes to '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'hide '
+        _textModifier: 1
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 63743
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: yourself in some recluse location.
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
@@ -4135,13 +4279,74 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: <h2>Description :</h2> A strange potion that you stole from a druid
-          (or a mage... Who knows?) allows y\ ou to transform yourself into a majestic
-          animal. This potion should be useful d\ uring your journey.  <h2>Usage
-          :</h2> Press the key assigned to the power. You should see a star flashing
-          and disaper\ ead, and your appearance should have been switched to a such
-          beatiful animal. I\ f you want to get back to your normal shap press the
-          key one more time.
+      - _text: <b>Description :</b>
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'A strange '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'potion '
+        _textModifier: 2
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4290969765
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 65335
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'that you stole from a druid (or a mage... Who knows?) allows you
+          to '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'transform '
+        _textModifier: 3
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278253311
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 42239
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: yourself into a majestic animal. This potion should be useful during
+          your journey.
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
@@ -4160,14 +4365,73 @@ MonoBehaviour:
     _isSetup: 0
     _partOfSide:
     - _modifiableText:
-      - _text: "<h2>Description :</h2> In the room of a nobleman you found a very
-          valuable book of sorcery. This allow\\ ed you to learn the teleportation
-          spell. Unfortunately it is only a short dista\\ nce away. Too bad you could
-          have reached your goal faster...  <h2>Usage :</h2> Press the assigned key,\tyou
-          will see an aura in the shape of a circle all aroun\\ d you. It represents
-          the the places where you can teleport yourself. Move your \\ mouse into
-          this\tarea and a preview of your character should appaear. Click wher\\
-          e you want to be teleported."
+      - _text: <b>Description :</b>
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'In the room of a nobleman you found a very valuable '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'book of sorcery '
+        _textModifier: 1
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4286840948
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 55807
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: '. This allowed you to learn the teleportation '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'spell '
+        _textModifier: 2
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4286840948
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 65291
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: . Unfortunately it is only a short distance away. Too bad you could
+          have reached your goal faster...
         _textModifier: 0
         _colorModifier: 0
         _solidColor:
@@ -4249,6 +4513,369 @@ MonoBehaviour:
   _popDuration: 0.07
   _handleByInput: 0
   _target: {fileID: 2922442652201739270}
+  _targetOffset: {x: 0, y: 0}
+--- !u!114 &4754037707965226128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922442652780875292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8750ff1b6ac4f546a51aec4c6f8972d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogues:
+  - dialogueName: Telekinesis
+    _setupOnStart: 0
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: '<b>Usage : </b>'
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'First press the key assign to it, once you see the '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'waves '
+        _textModifier: 3
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278255606
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 33791
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'around your head the power is active. If you get close to an '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'interactible object '
+        _textModifier: 3
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278255606
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 33791
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'you will see waves around it also. Put your mouse uppon it, the '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'outline '
+        _textModifier: 3
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278255606
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 33791
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: tels you that you you can interact with it by clicking.
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Metamorphosis
+    _setupOnStart: 0
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: <b>Usage :</b>
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'Press the key assigned to the power. You should see a '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'star flashing '
+        _textModifier: 1
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278249471
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 16777215
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: and disaperead, and your appearance should have been switched to a
+          such beatiful animal. If you want to get back to y\ our normal shap press
+          the key one more time.
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Teleportation
+    _setupOnStart: 0
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: <b>Usage :</b>
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'Press the assigned key, you will see an aura in the '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'shape of a circle '
+        _textModifier: 2
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278251775
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 36607
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'all around you. It represents the the places where you can teleport
+          yourself. Move your mouse into this area and a '
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'preview '
+        _textModifier: 2
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278251775
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 36607
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: of your character should appaear.
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: 'Click '
+        _textModifier: 2
+        _colorModifier: 2
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278251775
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 36607
+        _colorSpeedRandomness: 0.5
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: where you want to be teleported.
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: MindControl
+    _setupOnStart: 0
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Comming soon
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Frightening
+    _setupOnStart: 0
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Comming soon
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  - dialogueName: Enraging
+    _setupOnStart: 0
+    _isSetup: 0
+    _partOfSide:
+    - _modifiableText:
+      - _text: Comming soon
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 0
+        _colorSpeedRandomness: 0
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      _fullText: 
+  _dialogueBox: {fileID: 3977820555691030439, guid: e5129bb478af27802a6775b4fef7c11b, type: 3}
+  _canvasTransform: {fileID: 0}
+  _waveSpeed: 5
+  _waveAmplitude: 4
+  _bounceSpeed: {x: 5, y: 5}
+  _bounceAmplitude: {x: 1, y: 1}
+  _woodleSpeed: {x: 3, y: 5}
+  _woodleAmplitude: {x: 1, y: 1}
+  _popDuration: 0.07
+  _handleByInput: 0
+  _target: {fileID: 7536060893467506923}
   _targetOffset: {x: 0, y: 0}
 --- !u!1 &2922442652921128293
 GameObject:
@@ -4823,7 +5450,7 @@ GameObject:
   - component: {fileID: 2922442653106935103}
   - component: {fileID: 2922442653106935102}
   m_Layer: 5
-  m_Name: Pos description base
+  m_Name: Pos description-story base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,7 +5473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.50602, y: -1635.4216}
+  m_AnchoredPosition: {x: -962.3121, y: -1331.927}
   m_SizeDelta: {x: 552.75, y: 436.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2922442653106935102
@@ -5317,6 +5944,96 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4160283858092419932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 632353019286418715}
+  - component: {fileID: 2643871990575848784}
+  m_Layer: 5
+  m_Name: Pos description-usage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &632353019286418715
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160283858092419932}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2922442652304344351}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1019.968, y: -202}
+  m_SizeDelta: {x: 552.75, y: 436.98}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2643871990575848784
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160283858092419932}
+  m_CullTransparentMesh: 1
+--- !u!1 &4674256566639620905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7536060893467506923}
+  - component: {fileID: 4784959739388865241}
+  m_Layer: 5
+  m_Name: Pos description-usage follow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7536060893467506923
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674256566639620905}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2922442652304344351}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1019.968, y: -1331.9275}
+  m_SizeDelta: {x: 552.75, y: 436.98}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4784959739388865241
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674256566639620905}
+  m_CullTransparentMesh: 1
 --- !u!1 &4920872166513686521
 GameObject:
   m_ObjectHideFlags: 0
@@ -5488,3 +6205,48 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &7283597258601223028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933220400118546957}
+  - component: {fileID: 6055087235766444229}
+  m_Layer: 5
+  m_Name: Pos description-usage base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1933220400118546957
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283597258601223028}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2922442652304344351}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1019.968, y: -1331.9275}
+  m_SizeDelta: {x: 552.75, y: 436.98}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6055087235766444229
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283597258601223028}
+  m_CullTransparentMesh: 1
