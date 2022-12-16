@@ -253,8 +253,9 @@ public class TutorialManager : MonoBehaviour
         _interactor.BlockInput(true);
         yield return StartCoroutine(WaitForDialogueToFinish());
         GetComponent<AddPowerInteraction>().Interact();
-
-        yield return new WaitForSeconds(2); // replace by unlock power animation
+        FindObjectOfType<PowerMenuManager>().BlockUntilPowerAssign(0);
+        while (FindObjectOfType<PowerMenuManager>().IsAssignedIndex())
+            yield return null;
         _powerManager._powers[0].unlocked = true;
         _dialogue.StartDialogue("PowerInstruction");
         yield return StartCoroutine(WaitForDialogueToFinish());
