@@ -51,6 +51,12 @@ public class ComputeInteraction : MonoBehaviour
             {
                 _interactor.Trigger();
             }
+            
+            var checkPoints = FindObjectsOfType<CheckpointInteraction>();
+            
+            if (checkPoints.Length == 0) {
+                return;
+            }
             if (_interactor.gameObject.GetComponent<CheckpointInteraction>() != null) {
                 if (Input.GetKeyDown(KeyCode.M)) 
                 {
