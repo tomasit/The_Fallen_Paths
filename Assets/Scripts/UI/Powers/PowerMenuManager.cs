@@ -60,18 +60,23 @@ public class PowerMenuManager : MonoBehaviour
     [SerializeField] private GameObject _prefabSlotButton;
     [Header("Desciptions")]
     [SerializeField] private bool _isDisplayingDescription;
-    [SerializeField] private TMPDialogue _descriptionDialog;
+    [SerializeField] private TMPDialogue _descriptionDialogStory;
+    [SerializeField] private TMPDialogue _descriptionDialogUsage;
     [SerializeField] private Transform _posSlotPowerDescription;
 #endregion
 
     [Header("Description Animation")]
-    [SerializeField] private Transform _posSlotDescriptionBase;
-    [SerializeField] private Transform _posSlotDescriptionFollow;
-    [SerializeField] private Transform _posSlotDescription;
+    [SerializeField] private Transform _posSlotDescriptionStoryBase;
+    [SerializeField] private Transform _posSlotDescriptionStoryFollow;
+    [SerializeField] private Transform _posSlotDescriptionStory;
+    [SerializeField] private Transform _posSlotDescriptionUsageBase;
+    [SerializeField] private Transform _posSlotDescriptionUsageFollow;
+    [SerializeField] private Transform _posSlotDescriptionUsage;
     private Coroutine _moveGuiCoroutine;
     private Coroutine _moveUiCoroutine;
     private Coroutine _moveIconDescription;
-    private Coroutine _movePannelDescription;
+    private Coroutine _movePannelDescriptionStory;
+    private Coroutine _movePannelDescriptionUsage;
 
     private PowerManager _powerManager;
     private PowerGUIManager _powerGUiManger;
@@ -191,18 +196,25 @@ public class PowerMenuManager : MonoBehaviour
         _isDisplayingDescription = true;
         UnAbleChoose();
 
-        _descriptionDialog.StartDialogue(_currentPower.powerName.text);
-        if (_movePannelDescription != null)
-            StopCoroutine(_movePannelDescription);
-        _movePannelDescription = StartCoroutine(MoveGUI(_posSlotDescription.position, _posSlotDescriptionFollow.gameObject.transform));
+        _descriptionDialogStory.StartDialogue(_currentPower.powerName.text);
+        _descriptionDialogUsage.StartDialogue(_currentPower.powerName.text);
+        if (_movePannelDescriptionStory != null)
+            StopCoroutine(_movePannelDescriptionStory);
+        _movePannelDescriptionStory = StartCoroutine(MoveGUI(_posSlotDescriptionStory.position, _posSlotDescriptionStoryFollow.gameObject.transform));
+        if (_movePannelDescriptionUsage != null)
+            StopCoroutine(_movePannelDescriptionUsage);
+        _movePannelDescriptionUsage = StartCoroutine(MoveGUI(_posSlotDescriptionUsage.position, _posSlotDescriptionUsageFollow.gameObject.transform));
     }
     public void UnAbleDescription()
     {
         _isDisplayingDescription = false;
 
-        if (_movePannelDescription != null)
-            StopCoroutine(_movePannelDescription);
-        StartCoroutine(MoveAndDisableDialog(_posSlotDescriptionBase.position, _posSlotDescriptionFollow.gameObject.transform));
+        if (_movePannelDescriptionStory != null)
+            StopCoroutine(_movePannelDescriptionStory);
+        StartCoroutine(MoveAndDisableDialog(_posSlotDescriptionStoryBase.position, _posSlotDescriptionStoryFollow.gameObject.transform));
+        if (_movePannelDescriptionUsage != null)
+            StopCoroutine(_movePannelDescriptionUsage);
+        StartCoroutine(MoveAndDisableDialog(_posSlotDescriptionUsageBase.position, _posSlotDescriptionStoryFollow.gameObject.transform));
     }
 
     private void AbleChoose()
@@ -395,11 +407,17 @@ public class PowerMenuManager : MonoBehaviour
 
     private IEnumerator MoveAndDisableDialog(Vector3 dest, Transform objectToMove)
     {
-        if (_movePannelDescription != null)
-            StopCoroutine(_movePannelDescription);
-        _movePannelDescription = StartCoroutine(MoveGUI(_posSlotDescriptionBase.position, _posSlotDescriptionFollow.gameObject.transform));
-        yield return _movePannelDescription;
-        _descriptionDialog.StopDialogue();
+        if (_movePannelDescriptionStory != null)
+            StopCoroutine(_movePannelDescriptionStory);
+        _movePannelDescriptionStory = StartCoroutine(MoveGUI(_posSlotDescriptionStoryBase.position, _posSlotDescriptionStoryFollow.gameObject.transform));
+        if (_movePannelDescriptionUsage != null)
+            StopCoroutine(_movePannelDescriptionUsage);
+        _movePannelDescriptionUsage = StartCoroutine(MoveGUI(_posSlotDescriptionUsageBase.position, _posSlotDescriptionUsageFollow.gameObject.transform));
+        
+        yield return _movePannelDescriptionStory;
+        _descriptionDialogStory.StopDialogue();
+        yield return _movePannelDescriptionUsage;
+        _descriptionDialogUsage.StopDialogue();
     }
 
     private IEnumerator MoveAndSetActiveFalseMenu(Vector3 dest, Transform objectToMove)
