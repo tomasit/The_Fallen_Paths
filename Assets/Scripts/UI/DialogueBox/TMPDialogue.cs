@@ -140,6 +140,7 @@ public class TMPDialogue : MonoBehaviour
                     }
                 }
                 int substringToDeduce = _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.CountSubstring("<i>") * 3 + _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.CountSubstring("</i>") * 4;
+                substringToDeduce += _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.CountSubstring("<b>") * 3 + _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.CountSubstring("</b>") * 4;
                 _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._firstIndex = index;
                 _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._lastIndex = index + _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._text.Length - substringToDeduce;
                 index = _dialogues[dialogueIndex]._partOfSide[j]._modifiableText[i]._lastIndex;
