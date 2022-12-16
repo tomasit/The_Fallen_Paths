@@ -8,7 +8,7 @@ public class KeyLockedInteraction : AInteractable
     [SerializeField] private bool _isLocked;
     [SerializeField] private Keys keysManager;
 
-    [SerializeField] private AInteractable _unlockInteraction;
+    [SerializeField] private AInteractable [] _unlockInteractions;
     [SerializeField] private SpriteRenderer _objectActiveFalseOnUnlock;
 
     void Start()
@@ -45,7 +45,9 @@ public class KeyLockedInteraction : AInteractable
                 //Debug.Log("Sound effect == null");
             }
             _objectActiveFalseOnUnlock.enabled = false;
-            _unlockInteraction.Interact();
+            foreach (var interaction in _unlockInteractions) {
+                interaction.Interact();
+            }
             Save();
         } else {
             //locked sound

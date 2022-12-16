@@ -25,6 +25,18 @@ public class PowerManager : MonoBehaviour
     public bool canUseAnyPower = true;
     private UnityEvent<System.Type> _unlockPowerEvent;
 
+    public void AssignKey(int powerIdx, KeyCode newKey) {
+        if (powerIdx < _powers.Count) {
+            _powers[powerIdx].key = newKey;
+        } else {
+            Debug.Log("Could not add key");
+        }
+    }
+    public List<PowerData> GetPowers()
+    {
+        return _powers;
+    }
+
     public UnityEvent<System.Type> Observe()
     {
         return _unlockPowerEvent;    

@@ -239,9 +239,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetButtonDown("Debug Fire"))
-            GetComponent<BasicHealthWrapper>().Hit(1);
-
         if (_animator.GetBool("Dead"))
             _movementValues[_currentValueIndex].playerSpeed = 0;
         else
