@@ -50,6 +50,7 @@ public class PowerGUIManager : MonoBehaviour
             }
         }
         SetPowers(idexesPowerToAdd);
+        //! replace by load & save
         SetUpGuiSlots();
     }
 
@@ -71,7 +72,6 @@ public class PowerGUIManager : MonoBehaviour
                 powerUnlocked += 1;
             }
         }
-        Debug.Log("powerUnlocked = " + powerUnlocked);
         if (powerUnlocked == 0)
         {
             _powerGui.SetActive(false);

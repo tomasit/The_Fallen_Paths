@@ -19,6 +19,7 @@ public class BasicHealthWrapper : MonoBehaviour
 
     public virtual void Hit(uint damage)
     {
+
         _health.Hit(damage,
             () => {_animator.SetTrigger("Hit");},
             () => {_animator.SetBool("Dead", true);}
