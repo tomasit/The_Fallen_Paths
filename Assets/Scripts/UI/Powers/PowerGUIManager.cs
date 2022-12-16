@@ -22,7 +22,7 @@ public class PowerGUIManager : MonoBehaviour
     [SerializeField] private GameObject _powerGui;
 
     [Header("Slots")]
-    [SerializeField] private PowerGIUSlot [] _powersGui;
+    [SerializeField] public PowerGIUSlot [] _powersGui;
     [SerializeField] private GameObject _powerGuiSlotPrefab;
     public uint maxSlots = 3;
 
@@ -40,7 +40,7 @@ public class PowerGUIManager : MonoBehaviour
         }
 
         //replace by load & save
-        var idexesPowerToAdd = new [] {0};
+        var idexesPowerToAdd = new int [] {};
         SetPowers(idexesPowerToAdd);
         SetUpGuiSlots();
     }
@@ -48,6 +48,23 @@ public class PowerGUIManager : MonoBehaviour
     private void Update()
     {
         if (!_isDisplay) {
+            _powerGui.SetActive(false);
+        } else {
+            Display();
+        }
+    }
+
+    private void Display()
+    {
+        int powerUnlocked = 0;
+        foreach (var powerGui in _powersGui)
+        {
+            if (powerGui.exist) {
+                powerUnlocked += 1;
+            }
+        }
+        if (powerUnlocked == 0)
+        {
             _powerGui.SetActive(false);
         } else {
             _powerGui.SetActive(true);

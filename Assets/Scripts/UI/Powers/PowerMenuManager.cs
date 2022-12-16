@@ -72,6 +72,11 @@ public class PowerMenuManager : MonoBehaviour
     [SerializeField] private Transform _posSlotDescriptionUsageBase;
     [SerializeField] private Transform _posSlotDescriptionUsageFollow;
     [SerializeField] private Transform _posSlotDescriptionUsage;
+
+    [Header("Block input")]
+    [SerializeField] private bool _blockExit = false;
+    [SerializeField] private int _indexToAssign = -1;
+
     private Coroutine _moveGuiCoroutine;
     private Coroutine _moveUiCoroutine;
     private Coroutine _moveIconDescription;
@@ -102,7 +107,7 @@ public class PowerMenuManager : MonoBehaviour
     {
         if (_isDisplay) {
             _powerUi.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Escape) && isOnBaseMenu()) {
+            if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M)) && isOnBaseMenu() && !_blockExit) {
                 if (_isDisplayingDescription) {
                     UnAbleDescription();
                 }
@@ -112,6 +117,10 @@ public class PowerMenuManager : MonoBehaviour
             return;
         }
 
+        if (_blockExit) {
+            _blockExit = IsAssignedIndex();
+        }
+
         if (_isDisplay && isOnBaseMenu()) {
             ChoosePower();
         }
@@ -119,13 +128,6 @@ public class PowerMenuManager : MonoBehaviour
         if (_isDisplayingKeyChoosing) {
             InputKeyInText();
             TickKeyInput();
-        }
-
-        else if (Input.GetKeyDown(KeyCode.M) && _isDisplay) {
-            if (_isDisplayingDescription) {
-                UnAbleDescription();
-            }
-            UnAblePowerMenu();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && _isDisplayingChoose) {
@@ -144,6 +146,24 @@ public class PowerMenuManager : MonoBehaviour
             UnAbleChooseSlot();
             AbleChooseKey();
         }
+    }
+
+    public void BlockUntilPowerAssign(int powerIndex)
+    {
+        _blockExit = true;
+        _indexToAssign = powerIndex;
+    }
+
+    public bool IsAssignedIndex()
+    {
+        for (int idx = 0; idx < _powerGUiManger._powersGui.Length; ++idx) 
+        {
+            if (_powerGUiManger._powersGui[idx].powerIndex == _indexToAssign) {
+                _indexToAssign = -1;
+                return true;
+            }
+        }
+        return false;
     }
 
 #region ACTIVE_UI
@@ -252,7 +272,6 @@ public class PowerMenuManager : MonoBehaviour
     public void AblePowerMenu()
     {
         _pauseManager.Enable(false);
-        Time.timeScale = 0f;
         _isDisplay = true;
         LoadPowerIUSlots();
         if (_moveGuiCoroutine != null)
@@ -266,12 +285,11 @@ public class PowerMenuManager : MonoBehaviour
     public void UnAblePowerMenu()
     {
         _isDisplay = false;
-        Time.timeScale = 1f;
-        _pauseManager.Enable(true);
         if (_moveGuiCoroutine != null)
             StopCoroutine(_moveGuiCoroutine);
-        StartCoroutine(MoveGUI(_guiGamePos.position, _powerGui.transform));
+        _moveGuiCoroutine = StartCoroutine(MoveGUI(_guiGamePos.position, _powerGui.transform));
         StartCoroutine(MoveAndSetActiveFalseMenu(_uiBasePos.position, _powerUi.transform));
+        StartCoroutine(MoveGuiAndEnabledPause());
         /*if (_isDisplayingChoose) {
             UnAbleChoose();
         }*/
@@ -295,7 +313,7 @@ public class PowerMenuManager : MonoBehaviour
     private bool IsIllegalKey(KeyCode key)
     {
         return (
-            key == KeyCode.E || key == KeyCode.Space
+            key == KeyCode.E || key == KeyCode.Space || key == KeyCode.M
             || key == KeyCode.None 
             || key == KeyCode.Escape || key == KeyCode.Return 
             || key == KeyCode.Mouse0 || key == KeyCode.Mouse1 || key == KeyCode.Mouse2
@@ -411,6 +429,12 @@ public class PowerMenuManager : MonoBehaviour
         _descriptionDialogStory.StopDialogue();
         yield return _movePannelDescriptionUsage;
         _descriptionDialogUsage.StopDialogue();
+    }
+
+    private IEnumerator MoveGuiAndEnabledPause()
+    {
+        yield return _moveGuiCoroutine;
+        _pauseManager.Enable(true);
     }
 
     private IEnumerator MoveAndSetActiveFalseMenu(Vector3 dest, Transform objectToMove)

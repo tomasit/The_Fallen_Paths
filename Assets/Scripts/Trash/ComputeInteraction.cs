@@ -51,9 +51,11 @@ public class ComputeInteraction : MonoBehaviour
             {
                 _interactor.Trigger();
             }
-            if (Input.GetKeyDown(KeyCode.M)) 
-            {
-                _powerUiManager.AblePowerMenu();
+            if (_interactor.gameObject.GetComponent<CheckpointInteraction>() != null) {
+                if (Input.GetKeyDown(KeyCode.M)) 
+                {
+                    _powerUiManager.AblePowerMenu();
+                }
             }
         }
     }
