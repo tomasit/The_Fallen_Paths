@@ -17,13 +17,13 @@ public class MultiLockedInteraction : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_currentUnlockNb), _currentUnlockNb);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_currentUnlockNb), _currentUnlockNb);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_currentUnlockNb)))
-            _currentUnlockNb = (int)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_currentUnlockNb));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_currentUnlockNb)))
+        //     _currentUnlockNb = (int)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_currentUnlockNb));
     }
 
     public override void Interact()

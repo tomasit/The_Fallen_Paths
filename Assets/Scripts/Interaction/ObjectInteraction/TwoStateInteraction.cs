@@ -20,13 +20,13 @@ public class TwoStateInteraction : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex), _spriteIndex);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex), _spriteIndex);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_spriteIndex)))
-            _spriteIndex = (int)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_spriteIndex)))
+        //     _spriteIndex = (int)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex));
     }
 
     public override string GetDescription()

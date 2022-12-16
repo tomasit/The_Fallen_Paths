@@ -104428,7 +104428,7 @@ PrefabInstance:
     - target: {fileID: 4857711213384459233, guid: f7871852ad5614547939e3b6a97a180a, type: 3}
       propertyPath: _canvasTransform
       value: 
-      objectReference: {fileID: 761397648}
+      objectReference: {fileID: 832989352}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7871852ad5614547939e3b6a97a180a, type: 3}
 --- !u!1001 &1701866509
@@ -116663,11 +116663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f333e903fd12323d1b82de8bdc2679ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes: []
   sceneToGo: Level_3
-  scenesDirectory: Assets/Scenes/
-  scenesSubDirectories:
-  - Levels/
 --- !u!1 &2117442309
 GameObject:
   m_ObjectHideFlags: 0
@@ -126451,19 +126447,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4511777984491360928, guid: f3a1ea84564857d3c9d11446120357c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4511777984491360928, guid: f3a1ea84564857d3c9d11446120357c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4511777984491360928, guid: f3a1ea84564857d3c9d11446120357c6, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4511777984491360928, guid: f3a1ea84564857d3c9d11446120357c6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4511777984491360928, guid: f3a1ea84564857d3c9d11446120357c6, type: 3}
       propertyPath: m_SizeDelta.x

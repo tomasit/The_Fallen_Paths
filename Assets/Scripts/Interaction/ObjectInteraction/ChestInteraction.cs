@@ -26,13 +26,13 @@ public class ChestInteraction : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_isOpen), _isOpen);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_isOpen), _isOpen);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_isOpen)))
-            _isOpen = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_isOpen));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_isOpen)))
+        //     _isOpen = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_isOpen));
     }
 
     public override void Interact()

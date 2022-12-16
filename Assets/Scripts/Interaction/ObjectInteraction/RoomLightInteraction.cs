@@ -25,13 +25,13 @@ public class RoomLightInteraction : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_isAlight), _isAlight);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_isAlight), _isAlight);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_isAlight)))
-            _isAlight = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_isAlight));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_isAlight)))
+        //     _isAlight = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_isAlight));
     }
 
     public override void Interact()
