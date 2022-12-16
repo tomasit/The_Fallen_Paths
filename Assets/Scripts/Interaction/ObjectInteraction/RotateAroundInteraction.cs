@@ -18,13 +18,13 @@ public class RotateAroundInteraction : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_hasRotated), _hasRotated);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_hasRotated), _hasRotated);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_hasRotated)))
-            _hasRotated = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_hasRotated));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_hasRotated)))
+        //     _hasRotated = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_hasRotated));
     }
 
     public override void Interact()

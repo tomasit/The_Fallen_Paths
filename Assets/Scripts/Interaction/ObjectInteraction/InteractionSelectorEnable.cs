@@ -27,13 +27,13 @@ public class InteractionSelectorEnable : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_unlock), _unlock);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_unlock), _unlock);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_unlock)))
-            _unlock = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_unlock));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_unlock)))
+        //     _unlock = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_unlock));
     }
 
     public override void Interact()

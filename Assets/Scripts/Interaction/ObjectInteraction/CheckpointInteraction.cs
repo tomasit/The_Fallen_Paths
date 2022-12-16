@@ -81,6 +81,9 @@ public class CheckpointInteraction : AInteractable
     {
         SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_activated), _activated);
         SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_choosenByUser), _choosenByUser);
+
+        // replace after
+        SaveManager.DataInstance.Save();
     }
 
     private void Update()

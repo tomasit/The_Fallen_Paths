@@ -22,13 +22,13 @@ public class KeyLockedInteraction : AInteractable
 
     public override void Save()
     {
-        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_isLocked), _isLocked);
+        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_isLocked), _isLocked);
     }
 
     public override void Load()
     {
-        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_isLocked)))
-            _isLocked = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_isLocked));
+        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_isLocked)))
+        //     _isLocked = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_isLocked));
     }
 
     public override void Interact()
