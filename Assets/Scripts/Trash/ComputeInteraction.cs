@@ -52,6 +52,7 @@ public class ComputeInteraction : MonoBehaviour
                 _interactor.Trigger();
             }
             
+            //pas ouf en boucle comme ça
             var checkPoints = FindObjectsOfType<CheckpointInteraction>();
             
             if (checkPoints.Length == 0) {
