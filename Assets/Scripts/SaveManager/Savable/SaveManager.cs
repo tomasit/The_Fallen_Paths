@@ -24,6 +24,7 @@ public class SaveManager : MonoBehaviour
     private List<ObjectData> _levelData;
     private PlayerInfoSave _playerInfo;
     private Parameters _parameters;
+    private Powers _powers;
     private int _currentLevel = 0;
 
     private void Awake() {
@@ -38,6 +39,8 @@ public class SaveManager : MonoBehaviour
         _playerInfo = new PlayerInfoSave();
         _parameters = new Parameters();
         _parameters._subVolume = new Dictionary<SoundData.SoundEffectType, float>();
+        _powers = new Powers();
+        _powers._powersIndex = new List<int>();
         Load();
     }
 
@@ -112,6 +115,28 @@ public class SaveManager : MonoBehaviour
         {
             _levelData.Add(new ObjectData());
         }
+
+        if (SerializationManager.Exist("Powers"))
+        {
+            _powers = (Powers)SerializationManager.Load("Powers");
+        }
+        else
+        {
+            for (int i = 0; i < 6; ++i)
+            {
+                _powers._powersIndex.Add(-1);
+            }
+        }
+    }
+
+    public void SavePowers()
+    {
+        SerializationManager.Save("Powers", _powers);
+    }
+
+    public void GetPowers()
+    {
+        return _powers;
     }
 
     public void SaveParameters()
