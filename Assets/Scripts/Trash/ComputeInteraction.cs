@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ComputeInteraction : MonoBehaviour
 {
-    private TriggerProcessor _interactor;
+    [SerializeField] private TriggerProcessor _interactor;
     private PowerMenuManager _powerUiManager;
     private bool _blockInput = false;
 
@@ -52,15 +52,16 @@ public class ComputeInteraction : MonoBehaviour
                 _interactor.Trigger();
             }
             
-            //pas ouf en boucle comme ça
-            var checkPoints = FindObjectsOfType<CheckpointInteraction>();
-            
-            if (checkPoints.Length == 0) {
-                return;
-            }
-            if (_interactor.gameObject.GetComponent<CheckpointInteraction>() != null) {
-                if (Input.GetKeyDown(KeyCode.M)) 
-                {
+            if (Input.GetKeyDown(KeyCode.M))  {
+                //pas ouf en boucle comme ça
+                var checkPoints = FindObjectsOfType<CheckpointInteraction>();
+
+                if (checkPoints.Length == 0) {
+                    Debug.Log("Aucun checkpoint");
+                    return;
+                }
+                if (_interactor.gameObject.GetComponent<CheckpointInteraction>() != null) {
+                    Debug.Log("pas null le checkpoint");    
                     _powerUiManager.AblePowerMenu();
                 }
             }

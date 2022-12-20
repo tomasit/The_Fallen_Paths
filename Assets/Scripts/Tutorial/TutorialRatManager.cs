@@ -15,6 +15,7 @@ public class TutorialRatManager : MonoBehaviour
     private PowerManager _powerManager;
     private ComputeInteraction _interactor;
     private PlayerController _controller;
+    private Rigidbody2D _rigidBody;
 
     [SerializeField] private bool _startTutorial;
     [SerializeField] private bool _isDisable;
@@ -25,6 +26,7 @@ public class TutorialRatManager : MonoBehaviour
         _controller = (PlayerController)FindObjectOfType<PlayerController>();
         _powerManager = (PowerManager)FindObjectOfType<PowerManager>();
         _interactor = (ComputeInteraction)FindObjectOfType<ComputeInteraction>();
+        _rigidBody = (Rigidbody2D)_controller.gameObject.GetComponent<Rigidbody2D>();
     }
 
     private IEnumerator TutorialCoroutine()
@@ -45,6 +47,8 @@ public class TutorialRatManager : MonoBehaviour
         _dialogue.StartDialogue("PowerInstruction1");
         yield return StartCoroutine(WaitForDialogueToFinish());
         _glowOnTuchCup.Trigger(false);
+        _rigidBody.velocity = Vector2.zero;
+        _controller.Move(0);
         yield return StartCoroutine(WaitForMovingToRatHole());
         _dialogue.StartDialogue("PowerInstruction2");
         yield return StartCoroutine(WaitForDialogueToFinish());
@@ -73,16 +77,18 @@ public class TutorialRatManager : MonoBehaviour
         }
     }
 
-    //problèmes ici
     private IEnumerator WaitForMovingToRatHole()
     {
-        _controller.Move(-10);
-        _controller.AnimateMovement(false);
-        while (_controller.transform.position.x > _ratHole.position.x)
+        while (_controller.transform.position.x > _ratHole.position.x) {
+            _controller.Move(-1);
+            _controller.AnimateMovement(false);
             yield return null;
-        _controller.Move(0);
+        }
+        _controller.BlockInput(false);
         _controller.AnimateMovement(true);
-        _controller.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        _rigidBody.velocity = Vector2.zero;
+        _controller.Move(0);
+        _controller.BlockInput(true);
     }
 
     private IEnumerator WaitForDialogueToFinish()
