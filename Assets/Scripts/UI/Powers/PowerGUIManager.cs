@@ -92,23 +92,14 @@ public class PowerGUIManager : MonoBehaviour
                 ++idxPowerToAdd;
             }
         }*/
-        foreach (var pow in powersAssigned) {
-            Debug.Log("Set Save power : " + pow);
-        }
-        Debug.Log("_______________");
         SetPowers(powersAssigned.ToArray());
         SetUpGuiSlots();
     }
 
     public void AddPower(int indexPower, int slotNb)
     {
-        Debug.Log("Add power");
         List<int> powersAssigned = Load();
         powersAssigned[slotNb] = indexPower;
-        foreach (var pow in powersAssigned) {
-            Debug.Log("Save : " + pow);
-        }
-        Debug.Log("__________");
         Save();
 
         var idexesPowerToAdd = new int [maxSlots];

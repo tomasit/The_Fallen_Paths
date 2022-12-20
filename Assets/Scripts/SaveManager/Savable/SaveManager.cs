@@ -43,7 +43,7 @@ public class SaveManager : MonoBehaviour
         _parameters._subVolume = new Dictionary<SoundData.SoundEffectType, float>();
         _powers = new Powers();
         _powers._powersIndex = new List<int>();
-        _powers._powersUnlocked = new Dictionary<int, KeyCode>();
+        //_powers._powersUnlocked = new Dictionary<int, KeyCode>();
         _guiPowers = new PowersGui();
         _guiPowers._powersGuiIndex = new List<int>();
         Load();
@@ -130,7 +130,7 @@ public class SaveManager : MonoBehaviour
             for (int i = 0; i < 6; ++i)
             {
                 _powers._powersIndex.Add(-1);
-                _powers._powersUnlocked.Add(-1, KeyCode.None);
+                //_powers._powersUnlocked.Add(-1, KeyCode.None);
             }
         }
 

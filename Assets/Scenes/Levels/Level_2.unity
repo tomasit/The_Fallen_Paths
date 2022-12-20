@@ -53724,11 +53724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 113
+      value: 257.91
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 58
+      value: 29.11
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -112062,6 +112062,7 @@ GameObject:
   - component: {fileID: 1620356145}
   - component: {fileID: 1620356147}
   - component: {fileID: 1620356146}
+  - component: {fileID: 1620356149}
   m_Layer: 0
   m_Name: Tutorial Rat Power
   m_TagString: Untagged
@@ -112464,6 +112465,20 @@ MonoBehaviour:
   _addPowerInteraction: {fileID: 6841872052497398816}
   _startTutorial: 0
   _isDisable: 0
+--- !u!114 &1620356149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620356143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece941f3922a22d478106ccb33145e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id:
+    Value: 0ff5baf6-a4aa-4f91-a4b8-49654751a628
 --- !u!1 &1624920366
 GameObject:
   m_ObjectHideFlags: 0
