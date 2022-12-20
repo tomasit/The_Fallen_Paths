@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Events;
+using System;
 
 public class PowerManager : MonoBehaviour
 {
@@ -25,6 +26,56 @@ public class PowerManager : MonoBehaviour
     public bool canUseAnyPower = true;
     private UnityEvent<System.Type> _unlockPowerEvent;
 
+    /*private Dictionary<int, KeyCode> Load()
+    {
+        return SaveManager.DataInstance.GetPowers()._powersUnlocked;
+    }*/
+    private List<int> Load()
+    {
+        return SaveManager.DataInstance.GetPowers()._powersIndex;
+    }
+
+    private void Save()
+    {
+        SaveManager.DataInstance.SavePowers();
+    }
+
+    private void Start()
+    {
+        LoadPowersFromSave();
+    }
+
+    public void LoadPowersFromSave()
+    {
+        //Dictionary<int, KeyCode> listPowersSaved = Load();
+        List<int> listPowersSaved = Load();
+
+        for (int idx = 0; idx < listPowersSaved.Count; ++idx)
+        {
+            /*var keyValue = listPowersSaved.ElementAt(idx);
+            if (keyValue.key != -1) {
+                if (_powers.Count > keyValue.key) {
+                    _powers[keyValue.key].unlocked = true;
+                    _powers[keyValue.key].key = keyValue.value;         
+                }
+            }*/
+            if (listPowersSaved[idx] != -1) {
+                if (_powers.Count > listPowersSaved[idx]) {
+                    _powers[listPowersSaved[idx]].unlocked = true;
+                }
+            }
+        }
+    }
+
+    public void UnlockPower(int idx)
+    {
+        _powers[idx].unlocked = true;
+
+        List<int> indexPowerSaved = Load();
+        indexPowerSaved[idx] = idx;
+        Save();
+    }
+
     public void AssignKey(int powerIdx, KeyCode newKey) {
         if (powerIdx < _powers.Count) {
             _powers[powerIdx].key = newKey;
@@ -32,6 +83,7 @@ public class PowerManager : MonoBehaviour
             Debug.Log("Could not add key");
         }
     }
+
     public List<PowerData> GetPowers()
     {
         return _powers;

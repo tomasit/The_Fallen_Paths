@@ -22,4 +22,11 @@ public class Parameters
 public class Powers
 {
     public List<int> _powersIndex;
+    public Dictionary<int, KeyCode> _powersUnlocked;
+}
+
+[System.Serializable]
+public class PowersGui
+{
+    public List<int> _powersGuiIndex;
 }
