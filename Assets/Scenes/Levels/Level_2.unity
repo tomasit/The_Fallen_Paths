@@ -53918,7 +53918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[1].unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8239989130346938830, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: _powers.Array.data[2].unlocked
@@ -113524,6 +113524,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3321568182572843167, guid: f7871852ad5614547939e3b6a97a180a, type: 3}
       propertyPath: _tkt
+      value: 
+      objectReference: {fileID: 1815414790}
+    - target: {fileID: 3321568182572843167, guid: f7871852ad5614547939e3b6a97a180a, type: 3}
+      propertyPath: _subLevelRespawn
       value: 
       objectReference: {fileID: 1815414790}
     - target: {fileID: 3916857897183769728, guid: f7871852ad5614547939e3b6a97a180a, type: 3}

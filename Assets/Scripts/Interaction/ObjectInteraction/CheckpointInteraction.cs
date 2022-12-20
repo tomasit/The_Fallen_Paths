@@ -12,7 +12,7 @@ public class CheckpointInteraction : AInteractable
         public GameObject _particle;
         public int _rateOverTime;
     }
-    [SerializeField] private SubLevelChange _tkt;
+    [SerializeField] private SubLevelChange _subLevelRespawn;
     [SerializeField] private GameObject _fire;
     [SerializeField] private EmissionParticle[] _particles;
     private TMPDialogue _dialogue;
@@ -36,7 +36,7 @@ public class CheckpointInteraction : AInteractable
 
         if (_choosenByUser)
         {
-            _tkt.MoveTo();
+            _subLevelRespawn.MoveTo();
             FindObjectOfType<PlayerController>().transform.position = transform.position;
             FindObjectOfType<TransitionScreen>().StartDeadSemiTransition();
         }
