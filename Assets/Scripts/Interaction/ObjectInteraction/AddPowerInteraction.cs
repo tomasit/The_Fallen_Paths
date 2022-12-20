@@ -27,7 +27,7 @@ public class AddPowerInteraction : AInteractable
         for (int idx = 0; idx < _powerManager._powers.Count; ++idx) 
         {
             if (idx == _idxPowerToAdd) {
-                _powerManager._powers[idx].unlocked = true;
+                _powerManager.UnlockPower(idx);
             }
         }
         _powerUiManager.AblePowerMenu();
