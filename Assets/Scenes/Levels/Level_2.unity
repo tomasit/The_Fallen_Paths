@@ -30495,6 +30495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6eb604e65ea8c9eeb24e54a63b16d1a, type: 3}
+--- !u!4 &473307579 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8888758530696469213, guid: 6aff2c940189e2429a924c430462356f, type: 3}
+  m_PrefabInstance: {fileID: 1482121067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &474297786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4608646743074562, guid: 71bed58e76c3966488dc1e97957d65dd, type: 3}
@@ -53030,7 +53035,7 @@ MonoBehaviour:
   _soundType: 2
   _transitionScreen: {fileID: 54099199}
   _translateMoveTo: []
-  _fadeTpPosition: {fileID: 0}
+  _fadeTpPosition: {fileID: 473307579}
   _teleportPlayer: 0
   _translateTpPosition: {fileID: 0}
 --- !u!114 &864486865

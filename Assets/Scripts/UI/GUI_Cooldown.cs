@@ -6,24 +6,30 @@ using TMPro;
 
 public class GUI_Cooldown : MonoBehaviour
 {
-    public int PowerIdex;
+    public int PowerIndex;
 
     [SerializeField] private Image imageCD;
     [SerializeField] private TMP_Text textCD;
-    private PowerManager powerManager;
+    [SerializeField] private PowerManager _powerManager;
     private float cd = 0;
     private float maxDuration = 0;
 
     private void Start()
     {
-        powerManager = FindObjectOfType<PowerManager>();
+        _powerManager = FindObjectOfType<PowerManager>();
         textCD.gameObject.SetActive(false);
-        maxDuration= powerManager._powers[PowerIdex].cooldownDuration;
+        maxDuration = _powerManager._powers[PowerIndex].cooldownDuration;
     }
 
     private void Update()
     {
-        cd = powerManager._powers[PowerIdex].cooldown;
+        /*if (_powerManager == null) {
+            _powerManager = FindObjectOfType<PowerManager>();
+            maxDuration = _powerManager._powers[PowerIndex].cooldownDuration;
+        }*/
+
+        cd = _powerManager._powers[PowerIndex].cooldown;
+
         if(cd > 0) {
             textCD.gameObject.SetActive(true);
             ApplyCoolDown(cd);
