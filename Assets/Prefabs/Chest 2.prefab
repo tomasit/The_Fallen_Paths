@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 801304496440420626}
   - component: {fileID: 801304496440420625}
   - component: {fileID: 801304496440420624}
-  - component: {fileID: 801304496440420627}
   - component: {fileID: 801304496440420621}
   - component: {fileID: 801304496440420620}
   m_Layer: 0
@@ -121,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactions:
-  - {fileID: 801304496440420627}
+  - {fileID: 0}
   _stopOnInteract: 0
   _enabled: 1
   _interact: 0
@@ -142,7 +141,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.7291667, y: 0.47916666}
+    oldSize: {x: 0.7291667, y: 0.625}
     newSize: {x: 0.47916666, y: 0.3125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -183,23 +182,6 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &801304496440420627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 715118850432849880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4479a3c099e2c634a9a3efa701146d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isOpen: 0
-  _nbKeyContaining: 1
-  open: {fileID: 715930795281660092}
-  closed: {fileID: 715930794851656768}
-  keysManager: {fileID: 0}
 --- !u!82 &801304496440420621
 AudioSource:
   m_ObjectHideFlags: 0

@@ -15,18 +15,21 @@ public class TwoStateInteraction : AInteractable
         _soundEffectPlayer = GetComponent<SoundEffect>();
         Load();
         _descriptionHeight = AInteractable.DescriptionHeight.TWO_STATE_DESCRIPTION;
-        GetComponent<SpriteRenderer>().sprite = _stateSprite[_spriteIndex];
+        if (_spriteIndex >= _stateSprite.Length)
+            GetComponent<SpriteRenderer>().sprite = null;
+        else
+            GetComponent<SpriteRenderer>().sprite = _stateSprite[_spriteIndex];
     }
 
     public override void Save()
     {
-        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex), _spriteIndex);
+        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex), _spriteIndex);
     }
 
     public override void Load()
     {
-        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_spriteIndex)))
-        //     _spriteIndex = (int)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex));
+        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_spriteIndex)))
+            _spriteIndex = (int)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_spriteIndex));
     }
 
     public override string GetDescription()
@@ -37,7 +40,10 @@ public class TwoStateInteraction : AInteractable
     public override void Interact()
     {
         _spriteIndex = (_spriteIndex == 0 ? 1 : 0);
-        GetComponent<SpriteRenderer>().sprite = _stateSprite[_spriteIndex];
+        if (_spriteIndex >= _stateSprite.Length)
+            GetComponent<SpriteRenderer>().sprite = null;
+        else
+            GetComponent<SpriteRenderer>().sprite = _stateSprite[_spriteIndex];
         Save();
         if (_soundEffectPlayer != null)
             _soundEffectPlayer.PlaySound(_soundNames[_spriteIndex]);

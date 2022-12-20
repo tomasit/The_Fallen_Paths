@@ -61,12 +61,12 @@ public class InteractionProcessor : AInteractable
 
     public override void Save()
     {
-        // SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_interact), _interact);
+        SaveManager.DataInstance.ReferenceValue(GetComponent<PersistentId>().ID, nameof(_interact), _interact);
     }
 
     public override void Load()
     {
-        // if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_interact)))
-        //     _interact = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_interact));
+        if (SaveManager.DataInstance.IsReferenced(GetComponent<PersistentId>().ID, nameof(_interact)))
+            _interact = (bool)SaveManager.DataInstance.GetValue(GetComponent<PersistentId>().ID, nameof(_interact));
     }
 }
