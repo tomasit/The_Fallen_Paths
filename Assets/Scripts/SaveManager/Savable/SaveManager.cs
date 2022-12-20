@@ -134,7 +134,7 @@ public class SaveManager : MonoBehaviour
         SerializationManager.Save("Powers", _powers);
     }
 
-    public void GetPowers()
+    public Powers GetPowers()
     {
         return _powers;
     }
