@@ -4995,7 +4995,33 @@ MonoBehaviour:
     _setupOnStart: 1
     _isSetup: 0
     _partOfSide:
-    - _modifiableText: []
+    - _modifiableText:
+      - _text: 'M '
+        _textModifier: 4
+        _colorModifier: 1
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4278229759
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278204927
+        _colorSpeedRandomness: 1
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
+      - _text: Open power menu\n
+        _textModifier: 0
+        _colorModifier: 0
+        _solidColor:
+          serializedVersion: 2
+          rgba: 4294967295
+        _gradientColor:
+          serializedVersion: 2
+          rgba: 4278204927
+        _colorSpeedRandomness: 1
+        _firstIndex: 0
+        _lastIndex: 0
+        _colorRandomSpeed: []
       _fullText: 
   - dialogueName: ActiveCheckpoint
     _setupOnStart: 1
@@ -5065,7 +5091,7 @@ MonoBehaviour:
   _woodleAmplitude: {x: 1, y: 1}
   _popDuration: 0
   _handleByInput: 0
-  _target: {fileID: 3916857897183769734}
+  _target: {fileID: 0}
   _targetOffset: {x: 0, y: 3.5}
 --- !u!114 &3916857897183769735
 MonoBehaviour:

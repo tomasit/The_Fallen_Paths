@@ -37,6 +37,11 @@ public abstract class AEnemyMovement : MonoBehaviour
         target = transform;
     }
 
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
     public void Move()
     {
         agentMovement.SetTarget(target, detectionManager.rayCastOffset);

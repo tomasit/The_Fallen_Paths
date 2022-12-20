@@ -63,6 +63,9 @@ public class PowerMenuManager : MonoBehaviour
     [SerializeField] private TMPDialogue _descriptionDialogStory;
     [SerializeField] private TMPDialogue _descriptionDialogUsage;
     [SerializeField] private Transform _posSlotPowerDescription;
+    [Header("Instruction Quit")]
+    [SerializeField] private GameObject _backText;
+    [SerializeField] private GameObject _exitText;
 #endregion
 
     [Header("Description Animation")]
@@ -107,7 +110,7 @@ public class PowerMenuManager : MonoBehaviour
     {
         if (_isDisplay) {
             _powerUi.SetActive(true);
-            if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M)) && isOnBaseMenu() && !_blockExit) {
+            if (Input.GetKeyDown(KeyCode.Escape) && isOnBaseMenu() && !_blockExit) {
                 if (_isDisplayingDescription) {
                     UnAbleDescription();
                 }
@@ -181,6 +184,8 @@ public class PowerMenuManager : MonoBehaviour
     public void AbleChooseSlot()
     {
         _isDisplayingSlotChoosing = true;
+        _backText.SetActive(true);
+        _exitText.SetActive(false);
         UnAbleChooseKey();
 
         _instructionSlotText.SetActive(true);
@@ -198,6 +203,8 @@ public class PowerMenuManager : MonoBehaviour
     public void AbleChooseKey()
     {
         _isDisplayingKeyChoosing = true;
+        _backText.SetActive(true);
+        _exitText.SetActive(false);
         UnAbleChoose();
 
         _instructionKeyText.SetActive(true);
@@ -242,6 +249,8 @@ public class PowerMenuManager : MonoBehaviour
     private void AbleChoose()
     {
         _isDisplayingChoose = true;
+        _backText.SetActive(true);
+        _exitText.SetActive(false);
         
         //! fade
         _descriptionButton.SetActive(true);
@@ -257,6 +266,8 @@ public class PowerMenuManager : MonoBehaviour
 
     private void CenterPower()
     {
+        _backText.SetActive(true);
+        _exitText.SetActive(false);
         if (_moveIconDescription != null)
             StopCoroutine(_moveIconDescription);
         _moveIconDescription = StartCoroutine(MoveGUI(_posSlotPowerDescription.position, _currentPower.entity.transform));
@@ -269,6 +280,8 @@ public class PowerMenuManager : MonoBehaviour
     }
     private void UnCenterPower()
     {
+        _backText.SetActive(false);
+        _exitText.SetActive(true);
         if (_moveIconDescription != null)
             StopCoroutine(_moveIconDescription);
         //null ref la V jsp pq frr
@@ -284,6 +297,8 @@ public class PowerMenuManager : MonoBehaviour
     public void AblePowerMenu()
     {
         _pauseManager.Enable(false);
+        _backText.SetActive(false);
+        _exitText.SetActive(true);
         _isDisplay = true;
         LoadPowerIUSlots();
         if (_moveGuiCoroutine != null)
@@ -297,6 +312,8 @@ public class PowerMenuManager : MonoBehaviour
     public void UnAblePowerMenu()
     {
         _isDisplay = false;
+        _backText.SetActive(false);
+        _exitText.SetActive(true);
         if (_moveGuiCoroutine != null)
             StopCoroutine(_moveGuiCoroutine);
         _moveGuiCoroutine = StartCoroutine(MoveGUI(_guiGamePos.position, _powerGui.transform));
