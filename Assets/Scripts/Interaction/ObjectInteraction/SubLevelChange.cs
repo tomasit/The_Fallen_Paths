@@ -26,6 +26,8 @@ public class SubLevelChange : AInteractable
 
     private void Start()
     {
+        // Debug.Log(FindObjectsOfType<SubLevelChange>().Length);
+        Debug.Log("le lingala " + _interactOnStart);
         _soundEffectPlayer = GetComponent<SoundEffect>();
         if (!_camera)
             _camera = Camera.main;
@@ -37,6 +39,7 @@ public class SubLevelChange : AInteractable
 
     private void MoveAndResizeCamera()
     {
+        Debug.Log("ça parle en lingala");
         FitWithWorldSize camResize = _camera.GetComponent<FitWithWorldSize>();
         Vector3Int bounds = _grid.cellBounds.size;
         camResize.FitLevelSize(bounds.x, bounds.y);

@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _litDuration: 0.3
+  _isHide: 0
 --- !u!114 &5928635507966699341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPower: 0
-  rangeRadius: 4
+  rangeRadius: 3
   activated: 0
   _rangePrefab: {fileID: 1990342430478220552, guid: f96e6c13c4aa9ba1eaae5c5236807c5f, type: 3}
   _rangeColor:

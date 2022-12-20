@@ -28,6 +28,7 @@ public class Teleportation : AVisualCircleRangedPower
         var tempMain = tempParticles.main;
         tempMain.startColor = _rangeColor;
         firingPower = false;
+        _canCast = false;
     }
 
     protected override void Preview()
@@ -78,7 +79,7 @@ public class Teleportation : AVisualCircleRangedPower
 
         var yColliderOffset = new Vector2(0, (_collider.size.y * transform.localScale.y) / 2);
 
-        var ray = Physics2D.Raycast(newPosition - yColliderOffset, Vector3.down, 1.5f, (1 << 11));
+        var ray = Physics2D.Raycast(newPosition - yColliderOffset, Vector3.down, 1.5f, (1 << LayerMask.NameToLayer("Level")));
 
         if (ray)
         {
