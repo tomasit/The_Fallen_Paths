@@ -33,6 +33,7 @@ public class RatPower : APower
         _rescaleMask.alphaCutoff = 1.0f;
         _yellowSpr.enabled = true;
         firingPower = !firingPower;
+//        var oldRatHeight = GetComponent<SpriteRenderer>().bounds.size.y;
         while (_rescaleMask.transform.localScale != target)
         {
             _rescaleMask.transform.localScale = Vector3.MoveTowards(_rescaleMask.transform.localScale, target, _transformationSpeed * Time.deltaTime);
@@ -45,6 +46,12 @@ public class RatPower : APower
         transform.localScale = firingPower ? new Vector3(2 * Mathf.Sign(transform.localScale.x), 2, 1) : new Vector3(_playerBaseScale.x * Mathf.Sign(transform.localScale.x), _playerBaseScale.y, _playerBaseScale.z);
         GetComponent<Animator>().runtimeAnimatorController = (firingPower ? _ratAnimator : _baseAnimator);
         _ratCoroutine = null;
+        if (!firingPower)
+        {
+            var oldPos = transform.position;
+            oldPos.y += GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+            transform.position = oldPos;
+        }
     }
 
     public override void Use()

@@ -24,7 +24,7 @@ public class SubLevelChange : AInteractable
     public bool _teleportPlayer = false;
     public Transform _translateTpPosition;
 
-    private void Start()
+    private void Awake()
     {
         // Debug.Log(FindObjectsOfType<SubLevelChange>().Length);
         Debug.Log("le lingala " + _interactOnStart);
@@ -118,6 +118,7 @@ public class SubLevelChange : AInteractable
                 distance += _player.transform.position.x - oldP;
                 oldP = _player.transform.position.x;
             }
+
             // }
 
             //Debug.Log("distance = " + distance);
@@ -190,6 +191,16 @@ public class SubLevelChange : AInteractable
     public bool IsInTransition()
     {
         return _isTransitionning;
+    }
+
+    public void MoveTo()
+    {
+        FitWithWorldSize camResize = _camera.GetComponent<FitWithWorldSize>();
+        Vector3 target = _grid.transform.position + _grid.cellBounds.center;
+        target.z = _camera.transform.position.z;
+        float newOrthoSize = ((_grid.cellBounds.size.x > _grid.cellBounds.size.y * _camera.aspect) ? (float)_grid.cellBounds.size.x / (float)_camera.pixelWidth * _camera.pixelHeight : _grid.cellBounds.size.y) / 2;
+        camResize.SetPosition(target);
+        _camera.GetComponent<Camera>().orthographicSize = newOrthoSize;
     }
 
     public override void Interact()

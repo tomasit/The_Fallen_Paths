@@ -6,7 +6,7 @@ using static EnemyInfo;
 
 public class GuardMovement : AEnemyMovement
 {
-    void Start() 
+    void Start()
     {
         player = ((PlayerController)FindObjectOfType(typeof(PlayerController))).transform;
         detectionManager = GetComponent<EnemyDetectionManager>();

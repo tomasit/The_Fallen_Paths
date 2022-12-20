@@ -17,3 +17,9 @@ public class Parameters
     public bool _fullscreen = true;
     public Dictionary<SoundData.SoundEffectType, float> _subVolume;
 }
+
+[System.Serializable]
+public class Powers
+{
+    public List<int> _powersIndex;
+}

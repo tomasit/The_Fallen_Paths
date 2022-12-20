@@ -19,6 +19,7 @@ public class RespawnManager : MonoBehaviour
 
     private IEnumerator DeathCoroutine()
     {
+        yield return new WaitForSeconds(.8f);
         _screenTransition.StartBeginTransition("Death");
         while (_screenTransition.GetTransitionState() != TransitionScreen.TransitionState.END)
             yield return null;
