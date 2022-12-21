@@ -86,7 +86,6 @@ public class TutorialRatManager : MonoBehaviour
         }
         _controller.BlockInput(false);
         _controller.AnimateMovement(true);
-        _rigidBody.velocity = Vector2.zero;
         _controller.Move(0);
         _controller.BlockInput(true);
     }

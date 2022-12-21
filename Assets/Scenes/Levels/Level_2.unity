@@ -53724,11 +53724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 113
+      value: 255.3
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 58
+      value: 29.3
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53770,6 +53770,22 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7b7f57b739cbee1e9b3be78e9fa25d62, type: 2}
+    - target: {fileID: 5928635507966699356, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928635507966699356, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: m_Size.y
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928635507966699356, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928635507966699356, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699356, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.12
@@ -122172,6 +122188,10 @@ PrefabInstance:
     - target: {fileID: 2340155386023332169, guid: 13f2080d06ac21f2c89e62ad47c83a25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2486978351347046666, guid: 13f2080d06ac21f2c89e62ad47c83a25, type: 3}
+      propertyPath: _timeToWait
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2486978351347046666, guid: 13f2080d06ac21f2c89e62ad47c83a25, type: 3}
       propertyPath: _positionToTeleport

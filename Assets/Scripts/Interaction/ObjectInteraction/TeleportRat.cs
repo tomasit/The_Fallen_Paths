@@ -16,7 +16,6 @@ public class TeleportRat : AInteractable
     {
         _player = (PlayerController)FindObjectOfType(typeof(PlayerController));
         _animator = _player.gameObject.GetComponent<Animator>();
-
     }
 
     public override void Interact()
@@ -28,18 +27,34 @@ public class TeleportRat : AInteractable
     {
         //play sound rat dans canalisation
         _animator.SetTrigger("JumpInTube");
+        _player.BlockInput(true);
+        _player.gameObject.GetComponent<ComputeInteraction>().BlockInput(true);
         
         while (NTime < 1.0f) {
             _animStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
             NTime = _animStateInfo.normalizedTime;
             yield return null;
         }
-        _player.gameObject.SetActive(false);
+        // block input
+
+        // make player disappear withour set active false
+        _player.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        _player.gameObject.GetComponent<Collider2D>().isTrigger = true;
+        var color = _player.gameObject.GetComponent<SpriteRenderer>().material.color;
+        color.a = 0.0f;
+        _player.gameObject.GetComponent<SpriteRenderer>().material.color = color;
 
         yield return new WaitForSeconds(_timeToWait);
-        _animator.Play("Idle");
+        _player.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        _player.gameObject.GetComponent<Collider2D>().isTrigger = false;
+        color = _player.gameObject.GetComponent<SpriteRenderer>().material.color;
+        color.a = 1.0f;
+        _player.gameObject.GetComponent<SpriteRenderer>().material.color = color;
+
+        _player.BlockInput(false);
+        _player.gameObject.GetComponent<ComputeInteraction>().BlockInput(false);
+
         _player.transform.position = _positionToTeleport.position;
-        _player.gameObject.SetActive(true);
         NTime = 0f;
     }
 
