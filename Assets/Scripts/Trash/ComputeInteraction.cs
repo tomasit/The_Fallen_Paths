@@ -53,15 +53,12 @@ public class ComputeInteraction : MonoBehaviour
             }
             
             if (Input.GetKeyDown(KeyCode.M))  {
-                //pas ouf en boucle comme ça
                 var checkPoints = FindObjectsOfType<CheckpointInteraction>();
 
                 if (checkPoints.Length == 0) {
-                    Debug.Log("Aucun checkpoint");
                     return;
                 }
                 if (_interactor.gameObject.GetComponent<CheckpointInteraction>() != null) {
-                    Debug.Log("pas null le checkpoint");    
                     _powerUiManager.AblePowerMenu();
                 }
             }

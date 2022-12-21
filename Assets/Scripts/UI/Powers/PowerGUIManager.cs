@@ -43,6 +43,16 @@ public class PowerGUIManager : MonoBehaviour
         LoadGuiSlots();
     }
 
+    private List<int> Load()
+    {
+        return SaveManager.DataInstance.GetGuiPowers()._powersGuiIndex;
+    }
+
+    private void Save()
+    {
+        SaveManager.DataInstance.SaveGuiPowers();
+    }
+
     private void Update()
     {
         if (!_isDisplay) {
@@ -71,22 +81,27 @@ public class PowerGUIManager : MonoBehaviour
 
     public void LoadGuiSlots()
     {
-        var idexesPowerToAdd = new int [] {-1, -1, -1};
-        int idxPowerToAdd = 0;
+        List<int> powersAssigned = Load();
 
+        /*var idexesPowerToAdd = new int [] {-1, -1, -1};
+        int idxPowerToAdd = 0;
         foreach (var powerGui in _powersGui)
         {
             if (powerGui.exist) {
                 idexesPowerToAdd[idxPowerToAdd] = powerGui.powerIndex;
                 ++idxPowerToAdd;
             }
-        }
-        SetPowers(idexesPowerToAdd);
+        }*/
+        SetPowers(powersAssigned.ToArray());
         SetUpGuiSlots();
     }
 
     public void AddPower(int indexPower, int slotNb)
     {
+        List<int> powersAssigned = Load();
+        powersAssigned[slotNb] = indexPower;
+        Save();
+
         var idexesPowerToAdd = new int [maxSlots];
 
         int idx = 0;
@@ -132,7 +147,8 @@ public class PowerGUIManager : MonoBehaviour
             var power = _powerManager._powers[idx];
             var idxPowerToAssign = powersToAssign[idxArrayPowerToAssign];
 
-            if ((Array.IndexOf(powersToAssign, idx) != -1) && power.unlocked) {
+            //if ((Array.IndexOf(powersToAssign, idx) != -1) && power.unlocked) {
+            if ((powersToAssign[idxArrayPowerToAssign] != -1) /*&& power.unlocked*/) {
                 _powersGui[idxPowerGui].exist = true;
                 _powersGui[idxPowerGui].powerIndex = idxPowerToAssign;
                 //mettre la key qu'on nous donne sur _powerManager

@@ -25,6 +25,7 @@ public class SaveManager : MonoBehaviour
     private PlayerInfoSave _playerInfo;
     private Parameters _parameters;
     private Powers _powers;
+    private PowersGui _guiPowers;
     private int _currentLevel = 0;
     [HideInInspector] public uint _nbKey = 0;
 
@@ -42,6 +43,9 @@ public class SaveManager : MonoBehaviour
         _parameters._subVolume = new Dictionary<SoundData.SoundEffectType, float>();
         _powers = new Powers();
         _powers._powersIndex = new List<int>();
+        //_powers._powersUnlocked = new Dictionary<int, KeyCode>();
+        _guiPowers = new PowersGui();
+        _guiPowers._powersGuiIndex = new List<int>();
         Load();
     }
 
@@ -126,6 +130,19 @@ public class SaveManager : MonoBehaviour
             for (int i = 0; i < 6; ++i)
             {
                 _powers._powersIndex.Add(-1);
+                //_powers._powersUnlocked.Add(-1, KeyCode.None);
+            }
+        }
+
+        if (SerializationManager.Exist("PowersGui"))
+        {
+            _guiPowers = (PowersGui)SerializationManager.Load("PowersGui");
+        }
+        else
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                _guiPowers._powersGuiIndex.Add(-1);
             }
         }
 
@@ -143,6 +160,16 @@ public class SaveManager : MonoBehaviour
     public Powers GetPowers()
     {
         return _powers;
+    }
+
+    public void SaveGuiPowers()
+    {
+        SerializationManager.Save("PowersGui", _guiPowers);
+    }
+
+    public PowersGui GetGuiPowers()
+    {
+        return _guiPowers;
     }
 
     public void SaveParameters()
