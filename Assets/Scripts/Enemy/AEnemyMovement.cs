@@ -9,13 +9,18 @@ public abstract class AEnemyMovement : MonoBehaviour
     public Transform target;
     [SerializeField] protected Transform _targetPosition;
     public bool isAtDistanceToInteract = false;
-    public float speed = 1f;
+    [HideInInspector] public float speed = 1f;
+    public float speedFactor = 1f;
     private Vector3 _lastFramePosition;
     private int _hasMoved = 0;
 
     public Transform collisionObj = null;//pour moi ca sert a rien
     public bool isClimbing = false;
     public bool isEndClimbing = false;
+
+    public bool saveFacingPlayer = false;
+    public bool wasAtDistance = false;
+    public bool isFacingPlayer = false;
     
     protected Transform player;
 
@@ -45,8 +50,63 @@ public abstract class AEnemyMovement : MonoBehaviour
     public void Move()
     {
         agentMovement.SetTarget(target, detectionManager.rayCastOffset);
-        agentMovement.SetSpeed(speed);
+        agentMovement.SetSpeed(speed * speedFactor);
         CheckMovement();
+    }
+
+    public void Rotate()
+    {
+        IsFacingTarget();
+
+        if (HasMovedFromLastFrame()) {
+            //quand ils sont a distance de te tapper && qu'ils sont en face de toi : il ne rotate pas
+            if (wasAtDistance && isFacingPlayer)
+                return;
+            if (DirectionMovedFromLastFrame() < 0)
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            else
+                transform.eulerAngles = new Vector3(0, 0, 0);
+        } else {
+            //si jamais il bouge pas && qu'il est pas spot : il va pas rotate en fonction du player
+            if (detectionManager.GetState() != DetectionState.Spoted)
+                return;
+            if (detectionManager.direction.x < 0)
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            else if (detectionManager.direction.x > 0)
+                transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+    }
+
+    private void IsFacingTarget()
+    {
+        if (detectionManager.playerDetected) {
+            Vector3 targetDistance = FindTargetDirection(spritePos.position, target.position);
+
+            if (isAtDistanceToInteract)
+                wasAtDistance = true;
+            if (transform.eulerAngles.y == 0) {
+                if (targetDistance.x > 0) {
+                    isFacingPlayer = true;
+                } else if (targetDistance.x < 0) {
+                    isFacingPlayer = false;
+                }
+            } else if (transform.eulerAngles.y == 180) {
+                if (targetDistance.x > 0) {
+                    isFacingPlayer = false;
+                } else if (targetDistance.x < 0) {
+                    isFacingPlayer = true;
+                }
+            }
+            //si la target a changé de coté
+            if (saveFacingPlayer != isFacingPlayer) {
+                wasAtDistance = false;
+            }
+            saveFacingPlayer = isFacingPlayer;
+        } else {
+            saveFacingPlayer = false;
+            wasAtDistance = false;
+            isFacingPlayer = false;
+        }
     }
     
     private void CheckMovement()
@@ -97,6 +157,7 @@ public abstract class AEnemyMovement : MonoBehaviour
         //gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
+    //crois que il vont tous a la même vitesse quand ils climb
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other == null)

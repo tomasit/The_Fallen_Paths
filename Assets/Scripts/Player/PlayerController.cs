@@ -9,6 +9,11 @@ public enum PlayerType : int
     RAT = 1
 }
 
+//empecher le rat de : 
+// - utiliser des powers
+// - monter aux echelles
+// - trigger les collision
+
 // 4.5, 0, 6, 5.5
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
@@ -167,7 +172,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hit)
     {
-        _collideWithLadder = (hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder"));
+        _collideWithLadder = ((hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder")) && (GetPlayerType() == PlayerType.PLAYER));
+    }
+
+    private void OnTriggerStay2D(Collider2D hit)
+    {
+        _collideWithLadder = ((hit.gameObject.layer == LayerMask.NameToLayer("PlayerLadder")) && (GetPlayerType() == PlayerType.PLAYER));
+        if (!_collideWithLadder && _isClimbing)
+            ActiveLadder(false);
     }
 
     private void OnTriggerExit2D(Collider2D hit)
@@ -240,7 +252,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
         if (_animator.GetBool("Dead"))
             _movementValues[_currentValueIndex].playerSpeed = 0;
         else

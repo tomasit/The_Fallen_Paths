@@ -8,6 +8,7 @@ public class CoroutineProcessor : ACoroutine
 {
     public bool crRunning = false;
     public EnemyEventState enemyState = EnemyEventState.None;
+    private EnemyDetectionManager _detectionManager;
     //public List<GameObject> enemiesDiscovered;
     [SerializeField] private ACoroutine[] _coroutines;
     [SerializeField] private bool _execAllCoroutines = false;
@@ -20,6 +21,7 @@ public class CoroutineProcessor : ACoroutine
     {
         crRunning = false;
         _triggerInteractor = GetComponent<TriggerCoroutineProcessor>();
+        _detectionManager = GetComponent<EnemyDetectionManager>();
         if (_interact)
             DisableTriggerInteractor(true);
     }
@@ -125,18 +127,16 @@ public class CoroutineProcessor : ACoroutine
 
             newEnemyFound = true;
 
-            if (Mathf.Abs(enemyPosIte.y) < Mathf.Abs(enemySaved.pos.y)) {
-                if (Mathf.Abs(enemyPosIte.y) < Mathf.Abs(enemySaved.pos.x)) {
+            if (Mathf.Abs(enemyPosIte.y) <= Mathf.Abs(enemySaved.pos.y)) {
+                if (Mathf.Abs(enemyPosIte.y) <= Mathf.Abs(enemySaved.pos.x)) {
                     enemySaved = (enemyPosIte, obj.gameObject);
                 }
             }
 
-            if (Mathf.Abs(enemyPosIte.x) < Mathf.Abs(enemySaved.pos.x)) {
+            if (Mathf.Abs(enemyPosIte.x) <= Mathf.Abs(enemySaved.pos.x)) {
                 enemySaved = (enemyPosIte, obj.gameObject);
             }
         }
-
-        //Debug.Log("NewEnemyFound : " + newEnemyFound);
 
         return newEnemyFound ? enemySaved.obj.gameObject.transform : null;
     }

@@ -81,6 +81,9 @@ MonoBehaviour:
   collisionObj: {fileID: 0}
   isClimbing: 0
   isEndClimbing: 0
+  saveFacingPlayer: 0
+  wasAtDistance: 0
+  isFacingPlayer: 0
   spritePos: {fileID: 0}
 --- !u!114 &5685882759341170885
 MonoBehaviour:
@@ -98,6 +101,7 @@ MonoBehaviour:
   _detectionDistance: 0
   direction: {x: 1, y: 0}
   rayCastOffset: {x: 0.38, y: 0.63, z: 0}
+  _enabled: 1
   playerDetected: 0
   detectionState: 0
   timeToSpotPlayer: 3
@@ -106,6 +110,7 @@ MonoBehaviour:
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
+  _sourceBehavior: {fileID: 0}
   _detectionTarget: {fileID: 0}
   lastEventPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &5685882759341170906
@@ -584,12 +589,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs: {fileID: 0}
+  _enabled: 1
+  triggerDialog: 0
+  _dialogBoxReference: {fileID: 0}
   _timeRandomDialog: 10
   _probablityDialog: 4
   _clockDialog: 0
   _durationDialog: 10
-  triggerDialog: 0
-  _dialogBoxReference: {fileID: 0}
   popUpPrefab: {fileID: 6215648556488205372, guid: 9da7bc1beb11c95659936118e4ef68b1, type: 3}
   dialogPrefab: {fileID: 6302880752741300624, guid: c78abe282bfec92e6a4f70d4c50e509c, type: 3}
 --- !u!1 &5685882760249302617
@@ -663,9 +669,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: 75237751
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d5f4bb95e8d0c944fba1367d6eb5379a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

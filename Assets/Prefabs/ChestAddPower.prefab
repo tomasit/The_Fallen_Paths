@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c91d84fe57228746803b872635486a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 0.8370818, b: 0, a: 1}
-  _outlinethickness: 1
+  _color: {r: 4, g: 0.8, b: 0, a: 1}
+  _outlinethickness: 2
 --- !u!114 &6918598224776776297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!82 &6918598224776776308
 AudioSource:
   m_ObjectHideFlags: 0

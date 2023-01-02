@@ -17,10 +17,11 @@ public class CivilianMovement : AEnemyMovement
 
     void Update()
     {
-        if (isClimbing || isEndClimbing) {
-            speed = Speed[EnemyType.Random];
-        }
+        //if (isClimbing || isEndClimbing) {
+        //    speed = Speed[EnemyType.Random];
+        //}
         Move();
+        Rotate();
         AllowedMovement();
     }
     public override void BasicMovement()
@@ -57,12 +58,20 @@ public class CivilianMovement : AEnemyMovement
         NoNegative(speed = Speed[EnemyType.Random] - (Speed[EnemyType.Random] * 0.5f));
         if (targetDirection.x > 0) {
             if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
-                detectionManager.SetState(DetectionState.Spoted);
+                if (detectionManager.hasNobodyToAlert) {
+                    detectionManager.SetState(DetectionState.Flee);
+                } else {
+                    detectionManager.SetState(DetectionState.Spoted);
+                }
             }
         }
         if (targetDirection.x < 0) {
             if (RangeOf(FindDistanceToAttack(target).x, transform.position.x, 0.1f) && RangeOf(targetDirection.y, 0f, 0.80f)) {
-                detectionManager.SetState(DetectionState.Spoted);
+                if (detectionManager.hasNobodyToAlert) {
+                    detectionManager.SetState(DetectionState.Flee);
+                } else {
+                    detectionManager.SetState(DetectionState.Spoted);
+                }
             }
         }
     }

@@ -10,7 +10,9 @@ public class CollisionDetection : TriggerProcessor
     [SerializeField] private Vector3 _textOffset;
     [HideInInspector] public string _displayedText;
     [SerializeField] private LayerMask _triggerLayer;
+    [SerializeField] private PlayerType _triggerPlayerType = PlayerType.PLAYER;
     private InteractionDisplayText _UIDisplayedText = null;
+    private PlayerController player;
 
     private void Awake()
     {
@@ -19,6 +21,11 @@ public class CollisionDetection : TriggerProcessor
             Debug.Log("No InteractionDisplayText find in canvas. Think about add this to your project");
 
         GetComponent<Collider2D>().isTrigger = _isTrigger;
+    }
+
+    void Start()
+    {
+        player = (PlayerController)FindObjectOfType(typeof(PlayerController));
     }
 
     // this function is used to compute which interactable component has the
@@ -64,6 +71,9 @@ public class CollisionDetection : TriggerProcessor
 
     private void OnTriggerEnter2D(Collider2D hit)
     {
+         if (player.GetPlayerType() != _triggerPlayerType) {
+            return;
+        }
         if (!_isDisable)
         {
             if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
@@ -75,11 +85,29 @@ public class CollisionDetection : TriggerProcessor
 
     private void OnCollisionEnter2D(Collision2D hit)
     {
+        if (player.GetPlayerType() != _triggerPlayerType) {
+            return;
+        }
         if (!_isDisable)
         {
             if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
             {
                 GetComponent<GlowOnTouch>().Trigger(true);
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D hit)
+    {
+        if (!_isDisable)
+        {
+            if ((_triggerLayer & 1 << hit.gameObject.layer) == 1 << hit.gameObject.layer)
+            {
+                if (player.GetPlayerType() == _triggerPlayerType) {
+                    GetComponent<GlowOnTouch>().Trigger(true);
+                } else {
+                    GetComponent<GlowOnTouch>().Trigger(false);
+                }
             }
         }
     }

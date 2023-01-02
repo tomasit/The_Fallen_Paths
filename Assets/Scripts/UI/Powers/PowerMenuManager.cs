@@ -17,7 +17,6 @@ public struct PowerIUSlot
     public GameObject ImagePowerLocked;
     public GameObject ImagePowerHightLight;
     public bool unlocked;
-    //APower maybe
 }
 
 public class PowerMenuManager : MonoBehaviour

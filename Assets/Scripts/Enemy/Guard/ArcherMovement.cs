@@ -17,10 +17,11 @@ public class ArcherMovement : AEnemyMovement
 
     void Update()
     {
-        if (isClimbing || isEndClimbing) {
-            speed = Speed[EnemyType.Archer];
-        }
+        //if (isClimbing || isEndClimbing) {
+        //    speed = Speed[EnemyType.Archer];
+        //}
         Move();
+        Rotate();
         AllowedMovement();
     }
     public override void BasicMovement()

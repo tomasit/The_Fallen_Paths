@@ -43,7 +43,7 @@ public class Agent : MonoBehaviour
     public void SetTarget(Transform target, Vector3 offset)
     {
         if (target == null) {
-            //Debug.Log("Agent target is null");
+            Debug.Log("Agent target is null");
             return;
         }
         

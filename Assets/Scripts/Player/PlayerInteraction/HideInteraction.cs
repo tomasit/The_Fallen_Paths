@@ -10,6 +10,8 @@ public class HideInteraction : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _litDuration = 0.3f;
     [SerializeField] private bool _isHide = false;
+    [SerializeField] private string _baseSortingLayer = "Player";
+    [SerializeField] private string _hideSortingLayer = "PlayerHide";
 
     private void Start()
     {
@@ -28,6 +30,11 @@ public class HideInteraction : MonoBehaviour
         _isHide = hide;
         _controller.BlockInput(hide);
 
+        if (hide)
+            _spriteRenderer.sortingLayerName = _hideSortingLayer;
+        else
+            _spriteRenderer.sortingLayerName = _baseSortingLayer;
+        
         if (isLitPlace && !hide)
         {
             if (_litCoroutine != null)

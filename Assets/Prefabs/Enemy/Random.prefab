@@ -80,6 +80,9 @@ MonoBehaviour:
   collisionObj: {fileID: 0}
   isClimbing: 0
   isEndClimbing: 0
+  saveFacingPlayer: 0
+  wasAtDistance: 0
+  isFacingPlayer: 0
   spritePos: {fileID: 0}
 --- !u!114 &3015105738696057410
 MonoBehaviour:
@@ -106,6 +109,7 @@ MonoBehaviour:
   forgetAlertClock: 0
   timeToForgetSpoted: 20
   forgetSpotClock: 0
+  _sourceBehavior: {fileID: 0}
   _detectionTarget: {fileID: 0}
   lastEventPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &3015105738696057436
@@ -651,9 +655,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingLayerID: 75237751
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e6a4e21c3b81fa80a903e2432c470f6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

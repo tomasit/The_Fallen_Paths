@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4072014458964267738}
   - component: {fileID: 4072014458964267736}
   - component: {fileID: 4072014458964267743}
-  - component: {fileID: 4212599315710348049}
+  - component: {fileID: 3758342515751080876}
   - component: {fileID: 4212599315710348048}
   m_Layer: 0
   m_Name: Rat Tube 2
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c91d84fe57228746803b872635486a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 0.8370818, b: 0, a: 1}
-  _outlinethickness: 1.5
+  _color: {r: 4, g: 0.8, b: 0, a: 1}
+  _outlinethickness: 2
 --- !u!114 &4072014458964267736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     Value: 
---- !u!114 &4212599315710348049
+--- !u!114 &3758342515751080876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4072548104017880215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89fcd8402a80f65ab89aa35ef50b8b66, type: 3}
+  m_Script: {fileID: 11500000, guid: 85baecca6ed29ca449406f103bf2615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isTrigger: 1
@@ -179,6 +179,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 1
 --- !u!114 &4212599315710348048
 MonoBehaviour:
   m_ObjectHideFlags: 0

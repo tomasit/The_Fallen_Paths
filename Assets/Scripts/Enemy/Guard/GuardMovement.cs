@@ -17,10 +17,11 @@ public class GuardMovement : AEnemyMovement
 
     void Update()
     {
-        if (isClimbing || isEndClimbing) {
-            speed = Speed[EnemyType.Guard];
-        }
+        //if (isClimbing || isEndClimbing) {
+        //    speed = Speed[EnemyType.Guard];
+        //}
         Move();
+        Rotate();
         AllowedMovement();
 
         //Spot ou Alert : si t a la position de destinationfaire des gauche droite de direction de la tête

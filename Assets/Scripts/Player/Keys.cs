@@ -4,23 +4,40 @@ using UnityEngine;
 
 public class Keys : MonoBehaviour
 {
-    [SerializeField] private uint nbKeys;
+    [SerializeField] private uint _nbKey;
     //soundManager !
+
+    private void Start()
+    {
+        Load();
+    }
 
     public uint GetNbKeys()
     {
-        return nbKeys;
+        return _nbKey;
     }
     
     public void AddKeys(uint keysToAdd)
     {
-        nbKeys += keysToAdd;
-        SaveManager.DataInstance._nbKey += keysToAdd;
+        _nbKey += keysToAdd;
+        Save();
     }
 
     public void RemoveKeys(uint keysToRemove)
     {
-        nbKeys -= keysToRemove;
-        SaveManager.DataInstance._nbKey -= keysToRemove;
+        _nbKey -= keysToRemove;
+        Save();
+    }
+
+    public void Save()
+    {
+        SaveManager.DataInstance.SetNbKey(_nbKey);
+        //SaveManager.DataInstance.SaveKeys();
+    }
+
+    public void Load()
+    {
+        Debug.Log("Nb keys = " + _nbKey);
+        _nbKey = SaveManager.DataInstance.GetNbKey();
     }
 }

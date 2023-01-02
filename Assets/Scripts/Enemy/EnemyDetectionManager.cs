@@ -18,6 +18,7 @@ public class EnemyDetectionManager : MonoBehaviour
     [HideInInspector] public bool _enabled = true;
     public bool playerDetected = false;
     [SerializeField] private DetectionState detectionState = DetectionState.None;
+    public bool hasNobodyToAlert = false; 
     private RaycastHit2D raycast;
 
     [Header("Clocks")]
@@ -87,13 +88,18 @@ public class EnemyDetectionManager : MonoBehaviour
             if (LayerMask.NameToLayer("Player") == raycast.collider.gameObject.layer)
             {
                 float distanceToPoint = Vector2.Distance(raycast.point, transform.position + rayCastOffset);
+                
                 if (RangeOf(distance, distanceToPoint, 0.1f) || RangeOf(distanceToPoint, distance, 0.1f))
                 {
-                    if (!raycast.collider.gameObject.GetComponent<HideInteraction>().IsHide())
-                    {
-                        DebugRay(debug, distance, directionRay, Color.red);
-                        lastEventPosition = raycast.collider.gameObject.transform.position;
-                        return true;
+                    var hideInteractor = raycast.collider.gameObject.GetComponent<HideInteraction>();
+
+                    if (hideInteractor != null) {
+                        if (!hideInteractor.IsHide())
+                        {
+                            DebugRay(debug, distance, directionRay, Color.red);
+                            lastEventPosition = raycast.collider.gameObject.transform.position;
+                            return true;
+                        }
                     }
                 }
             }

@@ -27,7 +27,7 @@ public class SaveManager : MonoBehaviour
     private Powers _powers;
     private PowersGui _guiPowers;
     private int _currentLevel = 0;
-    [HideInInspector] public uint _nbKey = 0;
+    private uint _nbKey = 0;
 
     private void Awake() {
         Debug.Log("Singleton awake");
@@ -172,6 +172,16 @@ public class SaveManager : MonoBehaviour
         return _guiPowers;
     }
 
+    public uint GetNbKey()
+    {
+        return _nbKey;
+    }
+
+    public void SetNbKey(uint nbKey)
+    {
+        _nbKey = nbKey;
+    }
+
     public void SaveParameters()
     {
         SerializationManager.Save("Parameters", _parameters);
@@ -181,7 +191,12 @@ public class SaveManager : MonoBehaviour
     {
         // save current level
         SerializationManager.Save("Level_" + _currentLevel, _levelData[_currentLevel]);
-        SerializationManager.Save("Key", _nbKey);
+        SerializationManager.Save("Keys", _nbKey);
+    }
+
+    public void SaveKeys()
+    {
+        SerializationManager.Save("Keys", _nbKey);
     }
 
     private void Update()

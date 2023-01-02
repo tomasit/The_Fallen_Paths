@@ -17,10 +17,11 @@ public class MageMovement : AEnemyMovement
 
     void Update()
     {
-        if (isClimbing || isEndClimbing) {
-            speed = Speed[EnemyType.Mage];
-        }
+        //if (isClimbing || isEndClimbing) {
+        //    speed = Speed[EnemyType.Mage];
+        //}
         Move();
+        Rotate();
         AllowedMovement();
     }
     public override void BasicMovement()

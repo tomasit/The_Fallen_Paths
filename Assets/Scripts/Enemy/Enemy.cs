@@ -7,9 +7,9 @@ public class EnemyInfo
 {
     public static Dictionary<EnemyType, float> Speed = new Dictionary<EnemyType, float>()
     {
-        { EnemyType.Guard, 1.5f },
+        { EnemyType.Guard, 2f },
         { EnemyType.Archer, 1.5f },
-        { EnemyType.Mage, 1f },
+        { EnemyType.Mage, 1.5f },
         { EnemyType.RoyalGuard, 3f },
         { EnemyType.Random, 1f }
     };
