@@ -44,6 +44,12 @@ TagManager:
   - name: LightHide
     uniqueID: 989546703
     locked: 0
+  - name: PlayerHide
+    uniqueID: 567673805
+    locked: 0
+  - name: Enemy
+    uniqueID: 75237751
+    locked: 0
   - name: Player
     uniqueID: 3311460339
     locked: 0

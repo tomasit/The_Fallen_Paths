@@ -301,9 +301,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803a9f940d41bfb489540183a8a2c76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PowerIdex: 0
+  PowerIndex: 0
   imageCD: {fileID: 4991372848034740820}
   textCD: {fileID: 4991372848142066663}
+  _powerManager: {fileID: 0}
 --- !u!1 &4991372848034740822
 GameObject:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -983506957
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.96321607, g: 1, b: 0, a: 1}
@@ -258,7 +258,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -983506957
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1151535916, guid: 5e3e2259c9bd4dbdcbc4cd244578d513, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -443,8 +443,8 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 1, g: 1, b: 1, a: 1}
-  _enemyPreviewPrefab: {fileID: 0}
-  _linePreviewPrefab: {fileID: 0}
+  _enemyPreviewPrefab: {fileID: 8856858939196353508, guid: 972e6a1322ae7ccaea7c12c9f12a4e23, type: 3}
+  _linePreviewPrefab: {fileID: 7245415105210968470, guid: eda4880a869db04ac9bbd92fd85f3f6e, type: 3}
 --- !u!114 &5928635507966699352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99426419f39221a4fb82781abd00dece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactor: {fileID: 0}
 --- !u!114 &5928635507966699331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _litDuration: 0.3
   _isHide: 0
+  _baseSortingLayer: Player
+  _hideSortingLayer: PlayerHide
 --- !u!114 &5928635507966699341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad1766e3b2836bdd8d795a97e2c9200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbKeys: 0
+  _nbKey: 0
 --- !u!82 &-4771221974173837045
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5624,7 +5627,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -983506957
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

@@ -1068,6 +1068,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &35598188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6980,11 +6981,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8863794976786079538, guid: 16de2466e094ad2ed956eea17a789f98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.7564926
+      value: -8.500496
       objectReference: {fileID: 0}
     - target: {fileID: 8863794976786079538, guid: 16de2466e094ad2ed956eea17a789f98, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.676231
+      value: 23.796883
       objectReference: {fileID: 0}
     - target: {fileID: 8863794976786079538, guid: 16de2466e094ad2ed956eea17a789f98, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13802,6 +13803,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &253705091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58871,11 +58873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 258.44
+      value: 258.191
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 29.09
+      value: 29.102
       objectReference: {fileID: 0}
     - target: {fileID: 5928635507966699349, guid: ced05d7b6b50cbc508c95c51be53c211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -64417,6 +64419,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &864486868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68360,6 +68363,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &981009268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75206,6 +75210,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &1081194763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88998,11 +89003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8863794976786079538, guid: 16de2466e094ad2ed956eea17a789f98, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.7564926
+      value: -5.750496
       objectReference: {fileID: 0}
     - target: {fileID: 8863794976786079538, guid: 16de2466e094ad2ed956eea17a789f98, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.676231
+      value: 23.796883
       objectReference: {fileID: 0}
     - target: {fileID: 8863794976786079538, guid: 16de2466e094ad2ed956eea17a789f98, type: 3}
       propertyPath: m_LocalPosition.z
@@ -89193,6 +89198,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &1277699607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128346,6 +128352,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &1923995096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130059,6 +130066,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &2007299459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136597,6 +136605,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!1001 &2339372560486773673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141920,6 +141929,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!4 &3233987990095591847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4074714830399593299, guid: b32b18e3567c85fa49e40cceb56681f4, type: 3}
@@ -142216,6 +142226,7 @@ MonoBehaviour:
   _triggerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _triggerPlayerType: 0
 --- !u!114 &3775320448521420237
 MonoBehaviour:
   m_ObjectHideFlags: 0
